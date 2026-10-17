@@ -24,16 +24,9 @@ jobs:
         with:
           persist-credentials: false
 
-      - name: Set up Python
-        uses: actions/setup-python@v6
-        with:
-          python-version: '3.13'
-
-      - name: Install packaging and test tools
+      - name: Install packaging tools
         run: |
           choco install -y --no-progress xsltproc nsis
-          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
-          python -m pip install pytest pytest-xdist
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 
       - name: Install Qt
@@ -43,6 +36,15 @@ jobs:
           arch: win64_msvc2022_64
           modules: qtmultimedia
           cache: true
+
+      # install-qt-action sets up its own Python; select our test interpreter after it.
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.13'
+
+      - name: Install test tools
+        run: python -m pip install pytest pytest-xdist
 
       - name: Set up MSVC 2022
         uses: TheMrMilchmann/setup-msvc-dev@v4
@@ -99,6 +101,7 @@ jobs:
           }
           # Remove development Qt and dependency directories from the loader path.
           $env:PATH = "$installDir;$env:SystemRoot\System32;$env:SystemRoot"
+          Remove-Item Env:QT_PLUGIN_PATH, Env:QML2_IMPORT_PATH -ErrorAction SilentlyContinue
           $process = Start-Process (Join-Path $installDir 'Wireshark.exe') -ArgumentList '--version' -Wait -PassThru -NoNewWindow -RedirectStandardOutput build/windows-version.txt
           if ($process.ExitCode -ne 0) { throw "Installed Wireshark failed: $($process.ExitCode)" }
           if (-not (Select-String -Path build/windows-version.txt -Pattern 'Wireshark')) { throw 'Installed Wireshark did not report its version.' }
