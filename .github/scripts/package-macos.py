@@ -29,7 +29,7 @@ for required in (executables / "Wireshark", executables / "tshark",
                  app / "Contents/Resources/share/wireshark/coloring_rules.jsonc"):
     if not required.exists():
         raise SystemExit(f"Application bundle is missing {required}")
-run("lipo", "-verify_arch", "arm64", str(executables / "Wireshark"))
+run("/usr/bin/lipo", str(executables / "Wireshark"), "-verify_arch", "arm64")
 (app / "Contents/Resources/qt.conf").write_text("[Paths]\nPlugins = PlugIns\n")
 
 # Homebrew's split Qt prefixes can make osx-app.sh copy flattened Qt binaries
