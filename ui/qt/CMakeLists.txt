@@ -639,6 +639,7 @@ set(WIRESHARK_QT_SRC
 	packet_format_group_box.cpp
 	packet_format_stack.cpp
 	packet_list.cpp
+	packet_list_dynamic.cpp
 	packet_range_group_box.cpp
 	plot_action.cpp
 	marker_dialog.cpp

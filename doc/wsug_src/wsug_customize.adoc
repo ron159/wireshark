@@ -873,6 +873,21 @@ The _Width_ is the width of the column.
 
 The _Alignment_ is the alignment of the text in the column.
 
+===== Dynamic Decode Column
+
+Select menu:View[Dynamic Decode Column > Enable], or use the same submenu in a packet-list column's context menu, to add a custom column that follows the field you select in Packet Details.
+The heading shows the selected field's display-filter name, and each packet displays its values for that field.
+Packets without the field have an empty cell.
+The default display format is _Details_, matching Packet Details, and the default field occurrence is `0`, showing all occurrences.
+
+Choose _Pause Following_ to keep the current field while selecting other fields, or to sort the dynamic column.
+Sort another column before resuming following.
+Choose _Convert to Regular Column_ to keep the current field as an ordinary saved custom column.
+Entering a nonempty custom expression in the column editor or column preferences also converts it to a regular column.
+
+The profile saves whether the dynamic column is enabled, its title, occurrence, and display format.
+The current field and pause state are temporary: reopening a capture or changing profiles clears them, and the column remains empty until you select a field again.
+
 ==== Layout
 
 These preferences allow you to define the layout of the GUI once a capture file is loaded.

@@ -640,9 +640,18 @@ QVariant PacketListModel::headerData(int section, Qt::Orientation orientation,
         switch (role) {
         case Qt::DisplayRole:
         case Qt::AccessibleTextRole:
+            if (get_column_custom_dynamic(section) && (unsigned)section < cap_file_->cinfo.num_cols) {
+                return QString::fromUtf8(cap_file_->cinfo.columns[section].col_title);
+            }
             return QVariant::fromValue(QString(get_column_title(section)));
         case Qt::ToolTipRole:
         case Qt::AccessibleDescriptionRole:
+            if (get_column_custom_dynamic(section) && (unsigned)section < cap_file_->cinfo.num_cols) {
+                auto &item = cap_file_->cinfo.columns[section];
+                return tr("Follows the selected Packet Details field.\nField: %1\nOccurrence: %2 (0 = all)\nPause following before sorting, or convert to a regular column.")
+                    .arg(QString::fromUtf8(item.col_custom_fields ? item.col_custom_fields : ""))
+                    .arg(item.col_custom_occurrence);
+            }
             return QVariant::fromValue(gchar_free_to_qstring(get_column_tooltip(section)));
         case PacketListModel::HEADER_CAN_DISPLAY_STRINGS:
             return (bool)display_column_strings(section, cap_file_);

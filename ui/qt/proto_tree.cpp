@@ -55,6 +55,7 @@
 #include <QMessageBox>
 #include <QJsonDocument>
 #include <QJsonObject>
+#include <QPersistentModelIndex>
 
 // To do:
 // - Fix "apply as filter" behavior.
@@ -602,6 +603,17 @@ void ProtoTree::timerEvent(QTimerEvent *event)
     }
 }
 
+void ProtoTree::keyPressEvent(QKeyEvent *event)
+{
+    QPersistentModelIndex previous_index(currentIndex());
+    QTreeView::keyPressEvent(event);
+
+    const QModelIndex index = currentIndex();
+    if (index != previous_index && selectionModel()->isSelected(index)) {
+        emitUserFieldSelected(index);
+    }
+}
+
 // resizeColumnToContents checks 1000 items by default. The user might
 // have scrolled to an area with a different width at this point.
 void ProtoTree::keyReleaseEvent(QKeyEvent *event)
@@ -883,6 +895,21 @@ void ProtoTree::itemClicked(const QModelIndex &index)
             }
             emit fieldSelected(&finfo);
         }
+    }
+
+    if (selectionModel()->isSelected(index)) {
+        emitUserFieldSelected(index);
+    }
+}
+
+void ProtoTree::emitUserFieldSelected(const QModelIndex &index)
+{
+    FieldInformation finfo(proto_tree_model_->protoNodeFromIndex(index));
+    const FieldInformation::HeaderInfo header = finfo.headerInfo();
+    if (header.isValid && header.id >= 0 && header.id != hf_text_only && !header.abbreviation.isEmpty()) {
+        // Only user input reaches this helper. Automatic selection restoration
+        // and byte-view synchronization must not change the dynamic binding.
+        emit userFieldSelected(header.abbreviation);
     }
 }
 

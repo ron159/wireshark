@@ -80,7 +80,8 @@ bool ColumnEditorFrame::syntaxIsValid(void)
 {
     // Fields must be a valid filter.
     // Occurrence must be empty or valid.
-    return ((ui->fieldsNameLineEdit->syntaxState() == SyntaxLineEdit::Valid) &&
+    bool followsSelection = get_column_custom_dynamic(cur_column_) && ui->fieldsNameLineEdit->text().isEmpty();
+    return ((followsSelection || ui->fieldsNameLineEdit->syntaxState() == SyntaxLineEdit::Valid) &&
             (ui->occurrenceLineEdit->syntaxState() != SyntaxLineEdit::Invalid));
 }
 
@@ -134,6 +135,8 @@ void ColumnEditorFrame::typeChanged(int index)
 void ColumnEditorFrame::editColumn(int column)
 {
     cur_column_ = column;
+    ui->fieldsNameLineEdit->setPlaceholderText(get_column_custom_dynamic(column)
+        ? tr("Follows the selected field; enter an expression to make it fixed") : QString());
     ui->titleLineEdit->setText(get_column_title(column));
     saved_fields_ = get_column_custom_fields(column);
     saved_occurrence_ = QString::number(get_column_custom_occurrence(column));
@@ -196,6 +199,7 @@ void ColumnEditorFrame::on_buttonBox_accepted()
         set_column_format(cur_column_, ui->typeComboBox->currentIndex());
         if (ui->typeComboBox->currentIndex() == COL_CUSTOM) {
             col_str = ui->fieldsNameLineEdit->text().toUtf8();
+            if (!col_str.isEmpty()) set_column_custom_dynamic(cur_column_, false);
             set_column_custom_fields(cur_column_, col_str.constData());
             if (!ui->occurrenceLineEdit->text().isEmpty()) {
                 set_column_custom_occurrence(cur_column_, ui->occurrenceLineEdit->text().toInt());
@@ -236,6 +240,17 @@ void ColumnEditorFrame::keyPressEvent(QKeyEvent *event)
 void ColumnEditorFrame::checkCanResolve()
 {
     bool canResolve = false;
+
+    if (get_column_custom_dynamic(cur_column_) && ui->fieldsNameLineEdit->text().isEmpty()) {
+        if (ui->displayComboBox->findData(COLUMN_DISPLAY_STRINGS) == -1)
+            ui->displayComboBox->insertItem(1, tr("Strings"), QVariant(COLUMN_DISPLAY_STRINGS));
+        if (ui->displayComboBox->findData(COLUMN_DISPLAY_DETAILS) == -1)
+            ui->displayComboBox->addItem(tr("Details"), QVariant(COLUMN_DISPLAY_DETAILS));
+        ui->displayLabel->setEnabled(true);
+        ui->displayComboBox->setEnabled(true);
+        ui->displayComboBox->setCurrentIndex(ui->displayComboBox->findData(get_column_display_format(cur_column_)));
+        return;
+    }
 
     if (ui->fieldsNameLineEdit->syntaxState() == SyntaxLineEdit::Valid) {
         bool displayStrings = column_prefs_custom_display_strings(ui->fieldsNameLineEdit->text().toUtf8().constData());

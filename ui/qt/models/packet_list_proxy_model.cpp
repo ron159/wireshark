@@ -358,6 +358,11 @@ void PacketListProxyModel::sort(int column, Qt::SortOrder order)
     capture_file *cap_file = captureFile();
     if (!cap_file || visible_rows_.count() < 1) return;
     if (column < 0) return;
+    if ((unsigned)column < cap_file->cinfo.num_cols && cap_file->cinfo.columns[column].col_custom_dynamic) {
+        mainApp->pushStatus(MainApplication::TemporaryStatus,
+                           tr("Pause the Dynamic Decode column before sorting it."));
+        return;
+    }
 
     QString col_title = get_column_title(column);
 

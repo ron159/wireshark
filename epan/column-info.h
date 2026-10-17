@@ -46,6 +46,7 @@ typedef struct {
   char               *col_title;            /**< Column titles */
   char               *col_custom_fields;    /**< Custom column fields */
   int                 col_custom_occurrence;/**< Custom column field occurrence */
+  bool                col_custom_dynamic;   /**< Whether this column currently follows field selection */
   GSList             *col_custom_fields_ids;/**< Custom column fields id */
   struct epan_dfilter *col_custom_dfilter;  /**< Compiled custom column field */
   const char         *col_data;             /**< Column data */
@@ -123,6 +124,22 @@ WS_DLL_PUBLIC bool      col_data_changed(void);
  * @param cinfo Pointer to the column_info structure containing the column information.
  */
 void col_custom_set_edt(struct epan_dissect *edt, column_info *cinfo);
+
+/**
+ * Replace a custom column's runtime expression and occurrence.
+ *
+ * Compiles the expression before replacing the existing fields, filters, and
+ * field IDs. A failed compilation leaves the column unchanged. NULL or an
+ * empty expression clears the binding. This does not modify preferences.
+ *
+ * @param cinfo Column information whose custom column should be updated.
+ * @param col Zero-based custom column index.
+ * @param fields Display filter expression, or NULL to clear it.
+ * @param occurrence Field occurrence (0 selects all occurrences).
+ * @return true on success, or false for an invalid column or expression.
+ */
+WS_DLL_PUBLIC
+bool col_custom_set_fields(column_info *cinfo, int col, const char *fields, int occurrence);
 
 /**
  * @brief Prime custom columns in an epan_dissect structure.

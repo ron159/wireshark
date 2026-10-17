@@ -104,6 +104,9 @@ public:
      */
     bool pinnedRecordLessThan(int frame_num_a, int frame_num_b) const;
 
+    /** Last accepted sorting key; the header can also show a rejected request. */
+    int activeSortColumn() const { return sort_cap_file_ ? sort_column_ : -1; }
+
     /**
      * @brief Retrieves the frame data for a given model index.
      * @param idx The model index.

@@ -118,6 +118,14 @@ void PacketListHeader::dropEvent(QDropEvent *event)
 
 void PacketListHeader::mousePressEvent(QMouseEvent *e)
 {
+    if (e->button() == Qt::LeftButton) {
+        auto packetList = qobject_cast<PacketList *>(parent());
+        if (packetList && packetList->dynamicColumnFollowing(logicalIndexAt(e->position().toPoint()))) {
+            // Keep the current sort indicator as well as the row order.
+            // Still allow resizing and moving the section below.
+            setSectionsClickable(false);
+        }
+    }
     if (e->button() == Qt::LeftButton && sectionIdx < 0)
     {
         /* No move happening yet */
@@ -146,6 +154,7 @@ void PacketListHeader::mouseReleaseEvent(QMouseEvent *e)
 {
     press_active_ = false;
     QHeaderView::mouseReleaseEvent(e);
+    setSectionsClickable(true);
     setDragActive(false);
 }
 
@@ -214,6 +223,9 @@ void PacketListHeader::contextMenuEvent(QContextMenuEvent *event)
 
     action = contextMenu->addAction(tr("Column Preferences…"));
     connect(action, &QAction::triggered, this, &PacketListHeader::showColumnPrefs);
+    if (auto packetList = qobject_cast<PacketList *>(parent())) {
+        contextMenu->addMenu(packetList->createDynamicColumnMenu(contextMenu));
+    }
     action = contextMenu->addAction(tr("Edit Column"));
     connect(action, &QAction::triggered, this, &PacketListHeader::doEditColumn);
     action = contextMenu->addAction(tr("Resize to Contents"));

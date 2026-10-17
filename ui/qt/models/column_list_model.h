@@ -143,7 +143,8 @@ public:
      */
     enum {
         OriginalType = Qt::UserRole, /**< Role for the original, unmodified column type. */
-        DisplayedState               /**< Role for querying the internal displayed state. */
+        DisplayedState,              /**< Role for querying the internal displayed state. */
+        DynamicState                 /**< Role for querying whether a custom column follows field selection. */
     };
 
     /**

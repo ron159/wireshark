@@ -109,6 +109,12 @@ protected:
     virtual void timerEvent(QTimerEvent *event) override;
 
     /**
+     * @brief Handles field selection through keyboard navigation.
+     * @param event The key press event.
+     */
+    virtual void keyPressEvent(QKeyEvent *event) override;
+
+    /**
      * @brief Handles key release events.
      * @param event The key release event.
      */
@@ -178,6 +184,9 @@ private:
      */
     void saveSelectedField(QModelIndex &index);
 
+    /** Emits the abbreviation of a registered field explicitly selected by the user. */
+    void emitUserFieldSelected(const QModelIndex &index);
+
     /**
      * @brief Helper function to iterate over tree nodes.
      * @param node The current proto_node.
@@ -197,6 +206,12 @@ signals:
      * @param finfo Pointer to the FieldInformation.
      */
     void fieldSelected(FieldInformation *finfo);
+
+    /**
+     * @brief Signal emitted when the user selects a registered field.
+     * @param abbrev A copy of the field abbreviation, valid after redissection.
+     */
+    void userFieldSelected(const QString &abbrev);
 
     /**
      * @brief Signal emitted to open the packet in a new window.

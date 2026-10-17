@@ -432,6 +432,14 @@ set_target_properties(test_epan PROPERTIES
 	COMPILE_FLAGS "${WERROR_COMMON_FLAGS}"
 )
 
+add_executable(column_test EXCLUDE_FROM_ALL column_test.c)
+target_link_libraries(column_test epan ui)
+set_target_properties(column_test PROPERTIES
+	FOLDER "Tests"
+	EXCLUDE_FROM_DEFAULT_BUILD True
+	COMPILE_FLAGS "${WERROR_COMMON_FLAGS}"
+)
+
 CHECKAPI(
 	NAME
 	  epan

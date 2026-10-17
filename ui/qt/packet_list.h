@@ -34,6 +34,7 @@ class OverlayScrollBar;
 class ProfileSwitcher;
 
 class QAction;
+class QTimer;
 class QTimerEvent;
 
 //
@@ -101,6 +102,10 @@ public:
      * @param proto_tree Pointer to the protocol tree.
      */
     void setProtoTree(ProtoTree *proto_tree);
+
+    /** Menu for enabling, pausing, and fixing the dynamic custom column. */
+    QMenu *createDynamicColumnMenu(QWidget *parent);
+    bool dynamicColumnFollowing(int column) const;
 
     /**
      * @brief Disable and clear the packet list.
@@ -760,6 +765,19 @@ protected slots:
         const QModelIndex &index) const override;
 
 private:
+    int dynamicColumn() const;
+    void setDynamicColumnEnabled(bool enabled);
+    void setDynamicColumnPaused(bool paused);
+    void fixDynamicColumn();
+    void applyDynamicColumnField();
+    void restoreDynamicColumn();
+    void clearDynamicColumnTarget();
+    void refreshDynamicColumn();
+    QTimer *dynamic_column_timer_ = nullptr;
+    QString dynamic_column_field_;
+    QString pending_dynamic_column_field_;
+    bool dynamic_column_paused_ = false;
+
     /**
      * @brief The source PacketListModel indexes (column 0) of the packets
      * returned by selectedFrames().
@@ -1149,6 +1167,8 @@ signals:
     void fieldSelected(FieldInformation *finfo);
 
 public slots:
+    /** Receives an owned field abbreviation from an explicit tree selection. */
+    void setDynamicColumnField(const QString &field);
     /**
      * @brief Sets the active capture file.
      * @param cf Pointer to the capture file.

@@ -64,14 +64,14 @@ col_setup(column_info *cinfo, const int num_cols)
 
   col_decimal_point            = localeconv()->decimal_point;
   cinfo->num_cols              = num_cols;
-  cinfo->columns               = g_new(col_item_t, num_cols);
+  cinfo->columns               = g_new0(col_item_t, num_cols);
   cinfo->col_first             = g_new(int, NUM_COL_FMTS);
   cinfo->col_last              = g_new(int, NUM_COL_FMTS);
   for (i = 0; i < num_cols; i++) {
     cinfo->columns[i].col_custom_fields_ids = NULL;
   }
-  cinfo->col_expr.col_expr     = g_new(const char*, num_cols + 1);
-  cinfo->col_expr.col_expr_val = g_new(char*, num_cols + 1);
+  cinfo->col_expr.col_expr     = g_new0(const char*, num_cols + 1);
+  cinfo->col_expr.col_expr_val = g_new0(char*, num_cols + 1);
 
   for (i = 0; i < NUM_COL_FMTS; i++) {
     cinfo->col_first[i] = -1;
@@ -98,6 +98,65 @@ col_custom_fields_ids_free(GSList** custom_fields_id)
     g_slist_free_full(*custom_fields_id, col_custom_free_cb);
   }
   *custom_fields_id = NULL;
+}
+
+bool
+col_custom_set_fields(column_info *cinfo, int col, const char *fields, int occurrence)
+{
+  dfilter_t *dfilter = NULL;
+  GSList *field_ids = NULL;
+  char *new_fields = NULL;
+
+  if (!cinfo || col < 0 || (unsigned)col >= cinfo->num_cols ||
+      cinfo->columns[col].col_fmt != COL_CUSTOM)
+    return false;
+
+  if (fields && *fields) {
+    if (!dfilter_compile(fields, &dfilter, NULL))
+      return false;
+
+    char **expressions = g_regex_split(cinfo->prime_regex, fields, 0);
+    for (unsigned i = 0; expressions[i]; i++) {
+      if (*expressions[i]) {
+        dfilter_t *field_filter;
+        if (!dfilter_compile_full(expressions[i], &field_filter, NULL,
+                                 DF_EXPAND_MACROS | DF_OPTIMIZE | DF_RETURN_VALUES, __func__)) {
+          /* Preserve the existing custom-column behavior: the priming
+           * regex can split valid expressions inside quoted strings.
+           * The complete expression was already validated above.
+           */
+          continue;
+        }
+
+        col_custom_t *custom_info = g_new0(col_custom_t, 1);
+        custom_info->dftext = g_strdup(expressions[i]);
+        custom_info->dfilter = field_filter;
+        header_field_info *hfinfo = proto_registrar_get_byname(expressions[i]);
+        if (hfinfo)
+          custom_info->field_id = hfinfo->id;
+        field_ids = g_slist_append(field_ids, custom_info);
+      }
+    }
+    g_strfreev(expressions);
+    new_fields = g_strdup(fields);
+  }
+
+  col_item_t *col_item = &cinfo->columns[col];
+  g_free(col_item->col_custom_fields);
+  dfilter_free(col_item->col_custom_dfilter);
+  col_custom_fields_ids_free(&col_item->col_custom_fields_ids);
+  col_item->col_custom_fields = new_fields;
+  col_item->col_custom_dfilter = dfilter;
+  col_item->col_custom_fields_ids = field_ids;
+  col_item->col_custom_occurrence = new_fields ? occurrence : 0;
+  col_item->col_data = NULL;
+  col_item->col_fence = 0;
+  if (col_item->col_buf)
+    col_item->col_buf[0] = '\0';
+  cinfo->col_expr.col_expr[col] = "";
+  if (cinfo->col_expr.col_expr_val[col])
+    cinfo->col_expr.col_expr_val[col][0] = '\0';
+  return true;
 }
 
 /* Cleanup all the data structures for constructing column data; undoes

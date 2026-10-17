@@ -314,6 +314,7 @@ parse_column_format(fmt_data *cfmt, const char *fmt)
     char *col_custom_fields = NULL;
     long col_custom_occurrence = 0;
     char col_display = COLUMN_DISPLAY_STRINGS;
+    bool col_custom_dynamic = false;
 
     /*
      * Is this a custom column?
@@ -355,6 +356,7 @@ parse_column_format(fmt_data *cfmt, const char *fmt)
         if (cust_format_info->len > 2) {
             p = cust_format_info->pdata[2];
             col_display = p[0];
+            col_custom_dynamic = p[0] && strcmp(p + 1, "F") == 0;
         }
         g_free(fmt_copy);
         g_ptr_array_unref(cust_format_info);
@@ -367,6 +369,11 @@ parse_column_format(fmt_data *cfmt, const char *fmt)
     cfmt->fmt = col_fmt;
     cfmt->custom_fields = col_custom_fields;
     cfmt->custom_occurrence = (int)col_custom_occurrence;
+    cfmt->custom_dynamic = col_custom_dynamic;
+    if (col_custom_dynamic) {
+        g_free(cfmt->custom_fields);
+        cfmt->custom_fields = g_strdup("");
+    }
     cfmt->display = col_display;
     return true;
 }
@@ -378,12 +385,13 @@ column_fmt_data_to_str(const fmt_data *cfmt)
         return NULL;
     }
 
-    if ((cfmt->fmt == COL_CUSTOM) && (cfmt->custom_fields)) {
-        return ws_strdup_printf("%s:%s:%d:%c",
+    if ((cfmt->fmt == COL_CUSTOM) && (cfmt->custom_fields || cfmt->custom_dynamic)) {
+        return ws_strdup_printf("%s:%s:%d:%c%s",
             col_format_to_string(cfmt->fmt),
-            cfmt->custom_fields,
+            cfmt->custom_dynamic ? "" : cfmt->custom_fields,
             cfmt->custom_occurrence,
-            cfmt->display);
+            cfmt->display,
+            cfmt->custom_dynamic ? "F" : "");
     }
 
     return ws_strdup(col_format_to_string(cfmt->fmt));
@@ -929,6 +937,8 @@ set_column_format(const int col, const int fmt)
   cfmt = (fmt_data *) clp->data;
 
   cfmt->fmt = fmt;
+  if (fmt != COL_CUSTOM)
+    cfmt->custom_dynamic = false;
 }
 
 int
@@ -1059,6 +1069,34 @@ set_column_custom_fields(const int col, const char *custom_fields)
   cfmt->custom_fields = g_strdup (custom_fields);
 }
 
+bool
+get_column_custom_dynamic(const int col)
+{
+  GList *clp = g_list_nth(prefs.col_list, col);
+
+  if (!clp)
+    return false;
+
+  fmt_data *cfmt = (fmt_data *)clp->data;
+  return cfmt->fmt == COL_CUSTOM && cfmt->custom_dynamic;
+}
+
+void
+set_column_custom_dynamic(const int col, const bool dynamic)
+{
+  GList *clp = g_list_nth(prefs.col_list, col);
+
+  if (!clp)
+    return;
+
+  fmt_data *cfmt = (fmt_data *)clp->data;
+  cfmt->custom_dynamic = cfmt->fmt == COL_CUSTOM && dynamic;
+  if (cfmt->custom_dynamic) {
+    g_free(cfmt->custom_fields);
+    cfmt->custom_fields = g_strdup("");
+  }
+}
+
 int
 get_column_custom_occurrence(const int col)
 {
@@ -1176,39 +1214,15 @@ col_finalize(column_info *cinfo)
 {
   unsigned i;
   col_item_t* col_item;
-  dfilter_t *dfilter;
 
   for (i = 0; i < cinfo->num_cols; i++) {
     col_item = &cinfo->columns[i];
 
     if (col_item->col_fmt == COL_CUSTOM) {
-      if(!dfilter_compile(col_item->col_custom_fields, &col_item->col_custom_dfilter, NULL)) {
-        /* XXX: Should we issue a warning? */
-        g_free(col_item->col_custom_fields);
-        col_item->col_custom_fields = NULL;
-        col_item->col_custom_occurrence = 0;
-        col_item->col_custom_dfilter = NULL;
-      }
-      if (col_item->col_custom_fields) {
-        char **fields = g_regex_split(cinfo->prime_regex, col_item->col_custom_fields,
-                                       0);
-        unsigned i_field;
-
-        for (i_field = 0; i_field < g_strv_length(fields); i_field++) {
-          if (fields[i_field] && *fields[i_field]) {
-            if (dfilter_compile_full(fields[i_field], &dfilter, NULL, DF_EXPAND_MACROS|DF_OPTIMIZE|DF_RETURN_VALUES, __func__)) {
-              col_custom_t *custom_info = g_new0(col_custom_t, 1);
-              custom_info->dftext = g_strdup(fields[i_field]);
-              custom_info->dfilter = dfilter;
-              header_field_info *hfinfo = proto_registrar_get_byname(fields[i_field]);
-              if (hfinfo) {
-                custom_info->field_id = hfinfo->id;
-              }
-              col_item->col_custom_fields_ids = g_slist_append(col_item->col_custom_fields_ids, custom_info);
-            }
-          }
-        }
-        g_strfreev(fields);
+      if (!col_custom_set_fields(cinfo, i, col_item->col_custom_fields,
+                                 col_item->col_custom_occurrence)) {
+        /* Preserve the existing behavior for invalid saved expressions. */
+        col_custom_set_fields(cinfo, i, NULL, 0);
       }
     } else {
       col_item->col_custom_fields = NULL;
@@ -1264,7 +1278,8 @@ build_column_format_array(column_info *cinfo, const int num_cols, const bool res
     col_item->col_fmt = get_column_format(i);
     col_item->col_title = g_strdup(get_column_title(i));
     if (col_item->col_fmt == COL_CUSTOM) {
-      col_item->col_custom_fields = g_strdup(get_column_custom_fields(i));
+      col_item->col_custom_dynamic = get_column_custom_dynamic(i);
+      col_item->col_custom_fields = col_item->col_custom_dynamic ? NULL : g_strdup(get_column_custom_fields(i));
       col_item->col_custom_occurrence = get_column_custom_occurrence(i);
     }
     col_item->hf_id = proto_registrar_get_id_byname(col_format_abbrev(col_item->col_fmt));

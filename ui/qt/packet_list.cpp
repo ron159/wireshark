@@ -1512,7 +1512,7 @@ void PacketList::forwardWheelEvent(QWheelEvent *event)
 
 void PacketList::sortByColumnFromOverlay(int column)
 {
-    if (!isSortingEnabled()) {
+    if (!isSortingEnabled() || dynamicColumnFollowing(column)) {
         return;
     }
 
@@ -2193,6 +2193,7 @@ void PacketList::columnsChanged()
     prefs.num_cols = g_list_length(prefs.col_list);
     col_cleanup(&cap_file_->cinfo);
     build_column_format_array(&cap_file_->cinfo, prefs.num_cols, false);
+    restoreDynamicColumn();
     create_far_overlay_ = true;
     resetColumns();
     applyRecentColumnWidths();
@@ -2229,6 +2230,7 @@ void PacketList::fieldsChanged(capture_file *cf)
         prefs.num_cols = g_list_length(prefs.col_list);
         col_cleanup(&cf->cinfo);
         build_column_format_array(&cf->cinfo, prefs.num_cols, false);
+        restoreDynamicColumn();
         resetColumns();
     }
 }
@@ -2299,6 +2301,7 @@ void PacketList::preferencesChanged()
 
 void PacketList::freezePacketList(bool changing_profile)
 {
+    if (changing_profile) clearDynamicColumnTarget();
     changing_profile_ = changing_profile;
     freeze(true);
 }
@@ -2714,6 +2717,7 @@ void PacketList::deleteAllPacketComments()
 
 void PacketList::setCaptureFile(capture_file *cf)
 {
+    clearDynamicColumnTarget();
     cap_file_ = cf;
     // A different file (or none) is being shown, not a redissection.
     pinned_rows_model_->discardSavedPins();
@@ -2722,6 +2726,7 @@ void PacketList::setCaptureFile(capture_file *cf)
     if (cap_file_ && columns_changed_) {
         columnsChanged();
     }
+    restoreDynamicColumn();
     create_near_overlay_ = true;
     changing_profile_ = false;
     sortByColumn(-1, Qt::AscendingOrder);

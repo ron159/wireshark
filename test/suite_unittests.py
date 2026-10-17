@@ -14,6 +14,10 @@ import subprocess
 
 
 class TestUnitTests:
+    def test_unit_column_test(self, program, base_env):
+        '''custom-column binding and preferences'''
+        subprocess.check_call((program('column_test'), '--verbose'), env=base_env)
+
     def test_unit_exntest(self, program, base_env):
         '''exntest'''
         subprocess.check_call(program('exntest'), env=base_env)

@@ -231,6 +231,7 @@ column_prefs_add_custom(int fmt, const char *title, const char *custom_fields, i
     cfmt->fmt = fmt;
     cfmt->custom_fields = g_strdup(custom_fields);
     cfmt->custom_occurrence = 0;
+    cfmt->custom_dynamic = false;
     if (column_prefs_custom_display_strings(custom_fields)) {
         cfmt->display = COLUMN_DISPLAY_STRINGS;
     } else {

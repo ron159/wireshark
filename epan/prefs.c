@@ -2887,6 +2887,7 @@ column_format_init_cb(pref_t* pref, GList** value)
         dest_cfmt = g_new(fmt_data,1);
         dest_cfmt->title = g_strdup(src_cfmt->title);
         dest_cfmt->fmt = src_cfmt->fmt;
+        dest_cfmt->custom_dynamic = src_cfmt->fmt == COL_CUSTOM && src_cfmt->custom_dynamic;
         if (src_cfmt->custom_fields) {
             dest_cfmt->custom_fields = g_strdup(src_cfmt->custom_fields);
             dest_cfmt->custom_occurrence = src_cfmt->custom_occurrence;
@@ -2924,6 +2925,7 @@ column_format_reset_cb(pref_t* pref)
         dest_cfmt = g_new(fmt_data,1);
         dest_cfmt->title = g_strdup(src_cfmt->title);
         dest_cfmt->fmt = src_cfmt->fmt;
+        dest_cfmt->custom_dynamic = src_cfmt->fmt == COL_CUSTOM && src_cfmt->custom_dynamic;
         if (src_cfmt->custom_fields) {
             dest_cfmt->custom_fields = g_strdup(src_cfmt->custom_fields);
             dest_cfmt->custom_occurrence = src_cfmt->custom_occurrence;
@@ -3053,8 +3055,10 @@ column_format_is_default_cb(pref_t* pref)
             def_cfmt = (fmt_data *) def_col->data;
             if ((g_strcmp0(cfmt->title, def_cfmt->title) != 0) ||
                     (cfmt->fmt != def_cfmt->fmt) ||
-                    (((cfmt->fmt == COL_CUSTOM) && (cfmt->custom_fields)) &&
-                     ((g_strcmp0(cfmt->custom_fields, def_cfmt->custom_fields) != 0) ||
+                    ((cfmt->fmt == COL_CUSTOM) &&
+                     ((cfmt->custom_dynamic != def_cfmt->custom_dynamic) ||
+                      (g_strcmp0(cfmt->custom_fields, def_cfmt->custom_fields) != 0) ||
+                      (cfmt->custom_occurrence != def_cfmt->custom_occurrence) ||
                       (cfmt->display != def_cfmt->display)))) {
                 is_default = false;
                 break;
@@ -5250,6 +5254,11 @@ prefs_is_column_fmt_visible(const char *cols_hidden, fmt_data *cfmt)
                 continue;
             }
             if (cfmt->fmt == COL_CUSTOM) {
+                if (cfmt->custom_dynamic != cfmt_hidden.custom_dynamic) {
+                    g_free(cfmt_hidden.custom_fields);
+                    cfmt_hidden.custom_fields = NULL;
+                    continue;
+                }
                 /*
                  * A custom column has to have the same custom field
                  * and occurrence.

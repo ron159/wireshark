@@ -604,6 +604,9 @@ WiresharkMainWindow::WiresharkMainWindow(QWidget *parent) :
 
     connect(proto_tree_, &ProtoTree::fieldSelected,
             this, &WiresharkMainWindow::fieldSelected);
+    connect(proto_tree_, &ProtoTree::userFieldSelected,
+            packet_list_, &PacketList::setDynamicColumnField);
+    main_ui_->menuView->addMenu(packet_list_->createDynamicColumnMenu(main_ui_->menuView));
     connect(packet_list_, &PacketList::fieldSelected,
             this, &WiresharkMainWindow::fieldSelected);
     connect(this, &WiresharkMainWindow::fieldSelected,

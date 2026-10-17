@@ -33,6 +33,7 @@ typedef struct _fmt_data {
     int   fmt;              /**< Column format type (see COL_* constants), e.g. COL_NUMBER, COL_CUSTOM */
     char *custom_fields;    /**< Semicolon-separated display filter field names used when @p fmt is COL_CUSTOM */
     int   custom_occurrence;/**< Ordinal occurrence of the custom field to display (0 = all occurrences) */
+    bool  custom_dynamic;   /**< Follow the selected protocol-tree field instead of a saved expression */
     bool  visible;          /**< True if the column is shown in the packet list; false if hidden */
     char  display;          /**< Aggregation or display modifier for multi-occurrence custom field values */
 } fmt_data;
@@ -171,6 +172,14 @@ const char          *get_column_custom_fields(const int col);
  */
 WS_DLL_PUBLIC
 void                 set_column_custom_fields(const int col, const char *custom_fields);
+
+/** Return whether a custom column follows the selected protocol-tree field. */
+WS_DLL_PUBLIC
+bool                 get_column_custom_dynamic(const int col);
+
+/** Enable or disable following the selected protocol-tree field for a custom column. */
+WS_DLL_PUBLIC
+void                 set_column_custom_dynamic(const int col, const bool dynamic);
 
 /**
  * @brief Get the custom occurrence of a column.

@@ -34,6 +34,7 @@ struct ListElement
     int width;
     char xalign;
     bool displayed;
+    bool customDynamic;
     char display;
 };
 
@@ -128,6 +129,8 @@ QWidget *ColumnTypeDelegate::createEditor(QWidget *parent,
     else if (index.column() == ColumnListModel::COL_FIELDS)
     {
         DisplayFilterEdit * ff_editor = new DisplayFilterEdit(parent, CustomColumnToEnter);
+        if (index.data(ColumnListModel::DynamicState).toBool())
+            ff_editor->setPlaceholderText(tr("Follows the selected field; enter an expression to make it fixed"));
         connect(ff_editor, &DisplayFilterEdit::textChanged, ff_editor, &DisplayFilterEdit::checkCustomColumn);
         ff_editor->setText(index.data().toString());
         editor = ff_editor;
@@ -312,6 +315,10 @@ ColumnListModel::ColumnListModel(QObject * parent):
 
 bool ColumnListModel::displayEnabled(const QModelIndex &index, bool &displayStrings, bool &displayDetails)
 {
+    if (index.data(DynamicState).toBool()) {
+        displayStrings = displayDetails = true;
+        return true;
+    }
     if (get_column_format(index.row()) == COL_CUSTOM) {
         QModelIndex fieldsIndex = index.sibling(index.row(), ColumnListModel::COL_FIELDS);
 
@@ -380,6 +387,7 @@ void ColumnListModel::populate()
         ne.title = cfmt->title;
         ne.type = ne.originalType = cfmt->fmt;
         ne.customFields = cfmt->custom_fields;
+        ne.customDynamic = cfmt->custom_dynamic;
         ne.occurrence = cfmt->custom_occurrence;
         ne.display = cfmt->display;
 
@@ -445,6 +453,8 @@ QVariant ColumnListModel::data(const QModelIndex &index, int role) const
         return QVariant::fromValue(ne.originalType);
     else if (role == DisplayedState)
         return QVariant::fromValue(ne.displayed);
+    else if (role == DynamicState)
+        return QVariant::fromValue(ne.type == COL_CUSTOM && ne.customDynamic);
 
     return QVariant();
 }
@@ -550,8 +560,11 @@ bool ColumnListModel::setData(const QModelIndex &index, const QVariant &value, i
     {
         bool ok = false;
         int val = value.toInt(&ok);
-        if (ok)
+        if (ok) {
             store_[index.row()].type = val;
+            if (val != COL_CUSTOM)
+                store_[index.row()].customDynamic = false;
+        }
     }
     else if (index.column() == ColumnListModel::COL_TITLE)
     {
@@ -560,6 +573,8 @@ bool ColumnListModel::setData(const QModelIndex &index, const QVariant &value, i
     else if (index.column() == ColumnListModel::COL_FIELDS)
     {
         store_[index.row()].customFields = value.toString();
+        if (!value.toString().isEmpty())
+            store_[index.row()].customDynamic = false;
     }
     else if (index.column() == ColumnListModel::COL_OCCURRENCE)
     {
@@ -610,11 +625,16 @@ void ColumnListModel::saveColumns()
         cfmt->fmt = elem.type;
         if (cfmt->fmt == COL_CUSTOM)
         {
-            cfmt->custom_fields = qstring_strdup(elem.customFields);
+            cfmt->custom_dynamic = elem.customDynamic;
+            cfmt->custom_fields = qstring_strdup(elem.customDynamic ? QString() : elem.customFields);
             cfmt->custom_occurrence = elem.occurrence;
 
             // Check if display is allowed for the custom fields
-            if ((elem.display == COLUMN_DISPLAY_DETAILS) &&
+            if (elem.customDynamic)
+            {
+                cfmt->display = elem.display;
+            }
+            else if ((elem.display == COLUMN_DISPLAY_DETAILS) &&
                 !column_prefs_custom_display_details(cfmt->custom_fields))
             {
                 cfmt->display = COLUMN_DISPLAY_VALUES;
@@ -663,6 +683,7 @@ void ColumnListModel::addEntry()
     elem.type = elem.originalType = COL_CUSTOM;
     elem.occurrence = 0;
     elem.customFields = QString();
+    elem.customDynamic = false;
     elem.display = COLUMN_DISPLAY_VALUES;
     elem.width = -1;
     elem.xalign = COLUMN_XALIGN_DEFAULT;
