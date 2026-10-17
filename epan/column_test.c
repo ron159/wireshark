@@ -19,6 +19,7 @@
 #include <ui/failure_message.h>
 #include <wiretap/wtap.h>
 #include <wsutil/filesystem.h>
+#include <wsutil/privileges.h>
 #include <wsutil/value_string.h>
 #include <wsutil/wslog.h>
 
@@ -282,6 +283,7 @@ main(int argc, char **argv)
     g_set_prgname("column_test");
     ws_log_init(NULL, "Column Tests");
     g_test_init(&argc, &argv, NULL);
+    init_process_policies();
     char *error = configuration_init(argv[0], "wireshark");
     g_assert_null(error);
     init_report_failure_message("column_test");
