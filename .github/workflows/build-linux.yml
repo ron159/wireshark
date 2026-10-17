@@ -1,0 +1,133 @@
+name: Build Linux
+
+on:
+  workflow_call:
+
+permissions:
+  contents: read
+
+jobs:
+  linux:
+    name: Ubuntu 24.04 x86_64
+    runs-on: ubuntu-24.04
+    timeout-minutes: 180
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - name: Install build dependencies
+        run: sudo tools/os_setup/debian-setup.sh --install-all -y
+
+      # Use the upstream Debian packaging so library dependencies, plugins,
+      # resources, desktop integration and capture permissions stay together.
+      - name: Build Debian packages
+        env:
+          DPKG_GENSYMBOLS_CHECK_LEVEL: '0'
+          DH_QUIET: '1'
+          MAKEFLAGS: --silent
+          CC: /usr/lib/ccache/gcc
+          CXX: /usr/lib/ccache/g++
+        run: |
+          ln -s packaging/debian debian
+          # The setup script selects libssh-gcrypt-dev on Ubuntu < 25.04;
+          # validate every Debian build dependency before compilation starts.
+          dpkg-checkbuilddeps
+          tools/make-version.py --set-release .
+          DEB_BUILD_OPTIONS="nocheck parallel=$(nproc)"
+          export DEB_BUILD_OPTIONS
+          dpkg-buildpackage -b --no-sign -j"$(nproc)" -zfast
+
+      - name: Build regression test programs
+        id: tests
+        run: |
+          build_caches=(obj-*/CMakeCache.txt)
+          test "${#build_caches[@]}" -eq 1
+          test -f "${build_caches[0]}"
+          build_dir=$(dirname "${build_caches[0]}")
+          cmake --build "$build_dir" --parallel "$(nproc)" --target column_test dftest copy_data_files
+          echo "build_dir=$build_dir" >> "$GITHUB_OUTPUT"
+
+      - name: Test display filters and dynamic column bindings
+        run: |
+          build_dir="${{ steps.tests.outputs.build_dir }}"
+          python3 -m pytest -q --disable-capture --disable-gui \
+            --program-path "$PWD/$build_dir/run" \
+            --junitxml=linux-regression.xml \
+            test/suite_dfilter \
+            test/suite_unittests.py::TestUnitTests::test_unit_column_test
+
+      - name: Collect packages and build identity
+        run: |
+          mkdir -p artifacts
+          mv ../*.deb artifacts/
+          {
+            echo "Source: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY"
+            echo "Commit: $GITHUB_SHA"
+            echo "Build: $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID"
+            echo "Platform: Ubuntu 24.04 x86_64 (Qt 6)"
+            echo 'Install the runtime packages from this directory:'
+            echo 'sudo apt install ./wireshark_*.deb ./wireshark-common_*.deb ./tshark_*.deb ./libwireshark[0-9]*.deb ./libwiretap[0-9]*.deb ./libwsutil[0-9]*.deb ./libuiqt-plugin[0-9]*.deb ./libwireshark-data_*.deb'
+            echo 'Development and documentation packages are optional.'
+            echo 'Use your normal account to run Wireshark. Capture permissions can be configured with sudo dpkg-reconfigure wireshark-common.'
+          } > artifacts/BUILD-INFO.txt
+
+      - name: Install and smoke test in a clean Ubuntu container
+        run: |
+          docker run --rm -i \
+            --volume "$PWD:/workspace:ro" \
+            --workdir /tmp \
+            ubuntu:24.04 bash -s <<'CONTAINER'
+          set -euo pipefail
+          export DEBIAN_FRONTEND=noninteractive
+          apt-get update
+          apt-get install -y --no-install-recommends \
+            /workspace/artifacts/wireshark_*.deb \
+            /workspace/artifacts/wireshark-common_*.deb \
+            /workspace/artifacts/tshark_*.deb \
+            /workspace/artifacts/libwireshark[0-9]*.deb \
+            /workspace/artifacts/libwiretap[0-9]*.deb \
+            /workspace/artifacts/libwsutil[0-9]*.deb \
+            /workspace/artifacts/libuiqt-plugin[0-9]*.deb \
+            /workspace/artifacts/libwireshark-data_*.deb \
+            xvfb xauth
+          wireshark --version
+          tshark --version
+          tshark -r /workspace/test/captures/dhcp.pcap -c 1 -T fields -e frame.number | grep -x 1
+          tshark -G plugins | grep -F stats_tree.so
+          test -s /usr/share/wireshark/coloring_rules.jsonc
+          test -s /usr/share/applications/org.wireshark.Wireshark.desktop
+          useradd --create-home wireshark-test
+          # A timeout confirms the packaged GUI opened a capture and remained
+          # running. Early exit, a missing Qt plugin or a crash fails the job.
+          set +e
+          runuser -u wireshark-test -- xvfb-run -a timeout --signal=TERM 10s wireshark -r /workspace/test/captures/dhcp.pcap
+          gui_status=$?
+          set -e
+          test "$gui_status" -eq 124
+          CONTAINER
+
+      - name: Generate SHA-256 checksums
+        working-directory: artifacts
+        run: sha256sum -- *.deb BUILD-INFO.txt > SHA256SUMS
+
+      - name: Upload Linux packages
+        uses: actions/upload-artifact@v6
+        with:
+          name: linux-x86_64
+          path: artifacts/
+          if-no-files-found: error
+          retention-days: 30
+
+      - name: Upload regression report
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: linux-regression-report
+          path: linux-regression.xml
+          if-no-files-found: ignore
+          retention-days: 14

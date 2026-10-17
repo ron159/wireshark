@@ -1,3 +1,64 @@
+# Wireshark with Dynamic Decode
+
+[![Build packages](https://github.com/ron159/wireshark/actions/workflows/build.yml/badge.svg)](https://github.com/ron159/wireshark/actions/workflows/build.yml)
+
+This is an unofficial Wireshark fork with a packet-list column that follows the
+field selected in Packet Details. It reuses Custom Column extraction and keeps
+the selected target out of saved preferences.
+
+Use **View → Dynamic Decode Column → Enable**. Select fields with the mouse or
+keyboard to update the same column. **Pause Following** keeps the current field;
+**Convert to Regular Column** saves it as an ordinary custom column. Fields with
+multiple values show all occurrences by default. Changing packets preserves the
+target, and packets without that field show an empty cell.
+
+## Downloads and continuous builds
+
+Open [Build packages](https://github.com/ron159/wireshark/actions/workflows/build.yml),
+select a successful run, and download its Artifacts:
+
+| Artifact | Platform | Contents |
+| --- | --- | --- |
+| `windows-x64` | Windows x64 | NSIS installer with runtime dependencies |
+| `macos-arm64` | macOS 15+ Apple Silicon | App ZIP with bundled dependencies |
+| `linux-x86_64` | Ubuntu 24.04 x86_64 | Debian packages with runtime dependencies |
+
+Each artifact includes `BUILD-INFO.txt` with the source commit and `SHA256SUMS`.
+GitHub requires signing in to download Actions artifacts. Builds run on pushes
+and pull requests to `main`, and can also be started with **Run workflow**.
+The macOS app is ad-hoc signed and is not notarized; Windows packages are not
+Authenticode signed. These are development builds of this fork.
+
+## Iteration and upstream updates
+
+`main` contains this fork's features and packaging workflows. The upstream
+`master` history is preserved through the Fork relationship; GitHub's default
+**Sync fork** button does not replace the review process for this modified branch.
+
+To propose an official update, run
+[Sync upstream](https://github.com/ron159/wireshark/actions/workflows/sync-upstream.yml).
+It fetches official `wireshark/wireshark` master, merges it into a separate branch,
+and explicitly starts the three-platform build for that proposed commit. The run
+summary links to the comparison page, where you can create a pull request against
+`main`. Review the diff and build results before merging.
+Conflicts stop the workflow and list the files to resolve locally.
+
+For local development, use separate remotes:
+
+```sh
+git clone https://github.com/ron159/wireshark.git
+cd wireshark
+git remote add upstream https://github.com/wireshark/wireshark.git
+git switch -c feature/your-change main
+# Edit, test, commit, then push your branch to origin and open a PR to main.
+```
+
+The original upstream workflows stay in the tree for easier synchronization,
+but only run in the official repository. This fork uses **Build packages**.
+The original project information and license follow below.
+
+---
+
 General Information
 -------------------
 

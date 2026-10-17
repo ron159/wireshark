@@ -233,3 +233,6 @@ PROMPT.md
 *.conversation
 *.chat
 *.trace
+
+# Local tool scratch file.
+/:memory:

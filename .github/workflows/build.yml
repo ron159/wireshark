@@ -1,0 +1,50 @@
+name: Build packages
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: packages-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  windows:
+    uses: ./.github/workflows/build-windows.yml
+  macos:
+    uses: ./.github/workflows/build-macos.yml
+  linux:
+    uses: ./.github/workflows/build-linux.yml
+  verify:
+    name: Verify all packages
+    needs: [windows, macos, linux]
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/download-artifact@v7
+        with:
+          path: packages
+      - name: Verify checksums and source commit
+        env:
+          EXPECTED_SHA: ${{ github.sha }}
+        run: |
+          set -euo pipefail
+          for platform in windows-x64 macos-arm64 linux-x86_64; do
+            (
+              cd "packages/$platform"
+              sha256sum --check SHA256SUMS
+              grep -F "$EXPECTED_SHA" BUILD-INFO.txt
+            )
+          done
+          {
+            echo '## Packages verified'
+            echo "Source commit: \`$EXPECTED_SHA\`"
+            echo ''
+            echo 'Download windows-x64, macos-arm64, and linux-x86_64 from the Artifacts section of this run.'
+            echo 'Each artifact includes SHA256SUMS and BUILD-INFO.txt.'
+          } >> "$GITHUB_STEP_SUMMARY"

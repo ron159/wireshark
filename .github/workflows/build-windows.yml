@@ -1,0 +1,144 @@
+name: Windows x64 package
+
+on:
+  workflow_call:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Windows x64
+    runs-on: windows-2022
+    timeout-minutes: 120
+    defaults:
+      run:
+        shell: pwsh
+    env:
+      PLATFORM: x64
+      WIRESHARK_BASE_DIR: C:\wireshark-libs
+      WIRESHARK_VERSION_EXTRA: -DynamicColumns
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.13'
+
+      - name: Install packaging and test tools
+        run: |
+          choco install -y --no-progress xsltproc nsis
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          python -m pip install pytest pytest-xdist
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
+      - name: Install Qt
+        uses: jurplel/install-qt-action@v4
+        with:
+          version: '6.8.3'
+          arch: win64_msvc2022_64
+          modules: qtmultimedia
+          cache: true
+
+      - name: Set up MSVC 2022
+        uses: TheMrMilchmann/setup-msvc-dev@v4
+        with:
+          arch: x64
+
+      - name: Cache upstream dependency bundles
+        uses: actions/cache@v5
+        with:
+          path: C:\wireshark-libs
+          key: windows-x64-libs-${{ hashFiles('cmake/modules/FetchArtifacts.cmake') }}
+
+      - name: Configure
+        run: >-
+          cmake -S . -B build -G "Visual Studio 17 2022" -A x64
+          "-DCMAKE_PREFIX_PATH=$env:QT_ROOT_DIR"
+          -DBUILD_wireshark=ON -DBUILD_tshark=ON -DBUILD_dumpcap=ON
+          -DBUILD_stratoshark=OFF -DBUILD_strato=OFF
+          -DENABLE_SIGNED_NSIS=OFF
+
+      - name: Build applications, plugins, and test programs
+        run: |
+          cmake --build build --config RelWithDebInfo --parallel 2
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          cmake --build build --config RelWithDebInfo --parallel 2 --target column_test dftest copy_data_files
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
+      - name: Run custom-column and display-filter regression tests
+        run: >-
+          python -m pytest -v -n 2
+          --program-path build/run/RelWithDebInfo
+          --disable-capture --disable-gui
+          --junitxml build/test-results.xml
+          test/suite_unittests.py::TestUnitTests::test_unit_column_test
+          test/suite_dfilter
+
+      - name: Build NSIS installer with documentation and runtime dependencies
+        run: |
+          cmake --build build --config RelWithDebInfo --parallel 2 --target wireshark_nsis_prep
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          cmake --build build --config RelWithDebInfo --target wireshark_nsis
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
+      - name: Verify installed package
+        run: |
+          $installers = @(Get-ChildItem build/packaging/nsis/Wireshark-*-x64.exe)
+          if ($installers.Count -ne 1) { throw "Expected exactly one x64 installer, found $($installers.Count)." }
+          $installDir = Join-Path $env:RUNNER_TEMP 'wireshark-package-test'
+          # Silent installation skips Npcap/USBPcap driver installation upstream.
+          $process = Start-Process $installers[0].FullName -ArgumentList @('/S', "/D=$installDir") -Wait -PassThru
+          if ($process.ExitCode -ne 0) { throw "Installer failed: $($process.ExitCode)" }
+          foreach ($file in @('Wireshark.exe', 'tshark.exe', 'dumpcap.exe', 'platforms/qwindows.dll', 'COPYING.txt')) {
+            if (-not (Test-Path (Join-Path $installDir $file))) { throw "Package is missing $file" }
+          }
+          # Remove development Qt and dependency directories from the loader path.
+          $env:PATH = "$installDir;$env:SystemRoot\System32;$env:SystemRoot"
+          $process = Start-Process (Join-Path $installDir 'Wireshark.exe') -ArgumentList '--version' -Wait -PassThru -NoNewWindow -RedirectStandardOutput build/windows-version.txt
+          if ($process.ExitCode -ne 0) { throw "Installed Wireshark failed: $($process.ExitCode)" }
+          if (-not (Select-String -Path build/windows-version.txt -Pattern 'Wireshark')) { throw 'Installed Wireshark did not report its version.' }
+          & (Join-Path $installDir 'tshark.exe') -n -r test/captures/dhcp.pcap -T fields -e frame.number
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+
+      - name: Prepare package and SHA-256 checksums
+        run: |
+          New-Item -ItemType Directory -Force dist | Out-Null
+          Copy-Item build/packaging/nsis/Wireshark-*-x64.exe dist/
+          @(
+            "Repository: $env:GITHUB_REPOSITORY"
+            "Commit: $env:GITHUB_SHA"
+            "Run: https://github.com/$env:GITHUB_REPOSITORY/actions/runs/$env:GITHUB_RUN_ID"
+            'Platform: Windows x64 (MSVC 2022, Qt 6.8.3)'
+            'Package: NSIS installer, including Qt and third-party runtime dependencies'
+            'Signing: unsigned development build'
+          ) | Set-Content dist/BUILD-INFO.txt -Encoding utf8
+          $checksumLines = Get-ChildItem dist -File | Where-Object Name -ne 'SHA256SUMS' | Sort-Object Name | ForEach-Object {
+            $hash = (Get-FileHash $_.FullName -Algorithm SHA256).Hash.ToLowerInvariant()
+            "$hash  $($_.Name)"
+          }
+          [IO.File]::WriteAllText((Join-Path $PWD 'dist/SHA256SUMS'), ($checksumLines -join "`n") + "`n", [Text.Encoding]::ASCII)
+
+      - name: Upload Windows package
+        uses: actions/upload-artifact@v6
+        with:
+          name: windows-x64
+          path: dist/
+          if-no-files-found: error
+          compression-level: 0
+          retention-days: 14
+
+      - name: Upload test results
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: windows-x64-test-results
+          path: |
+            build/test-results.xml
+            build/windows-version.txt
+          if-no-files-found: ignore
+          retention-days: 14

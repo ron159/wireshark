@@ -4,6 +4,7 @@ on: [push]
 
 jobs:
   msys2-ucrt64:
+    if: github.repository == 'wireshark/wireshark'
     runs-on: windows-latest
     defaults:
       run:
@@ -36,6 +37,7 @@ jobs:
           path: build/packaging/nsis/wireshark-*-x64.exe
 
   install-nsis:
+    if: github.repository == 'wireshark/wireshark'
     runs-on: windows-latest
     needs: msys2-ucrt64
     steps:

@@ -4,6 +4,7 @@ on: [push]
 
 jobs:
   ubuntu:
+    if: github.repository == 'wireshark/wireshark'
     name: Build & Test
     runs-on: ubuntu-22.04
     steps:
@@ -35,7 +36,7 @@ jobs:
         working-directory: build
       - name: Build debian pkg
         run: |
-          ln --symbolic --no-dereference --force packaging/debian
+          ln --symbolic --no-dereference --force packaging/debian .
           # Ignore changed symbols (on development branch).
           export DPKG_GENSYMBOLS_CHECK_LEVEL=0
           tools/make-version.py --set-release .

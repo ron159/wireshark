@@ -1,0 +1,58 @@
+name: Sync upstream
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  actions: write
+
+concurrency:
+  group: sync-upstream
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    name: Propose official master updates
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: main
+          fetch-depth: 0
+      - name: Merge official changes into a review branch
+        id: sync
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+          git remote add upstream https://github.com/wireshark/wireshark.git
+          git fetch --no-tags upstream master
+          upstream_sha=$(git rev-parse FETCH_HEAD)
+          if git merge-base --is-ancestor "$upstream_sha" HEAD; then
+            echo 'Official master is already included.' >> "$GITHUB_STEP_SUMMARY"
+            exit 0
+          fi
+          branch="sync/upstream-${upstream_sha:0:12}-${GITHUB_RUN_ID}"
+          git switch -c "$branch"
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          if ! git merge --no-ff --no-edit "$upstream_sha"; then
+            git status --short
+            git diff --name-only --diff-filter=U
+            git merge --abort
+            echo '::error::Official changes conflict with the fork. Merge them locally and resolve the listed files.'
+            exit 1
+          fi
+          git push origin "HEAD:refs/heads/$branch"
+          # GITHUB_TOKEN pushes do not trigger another push/PR workflow.
+          # An explicit dispatch validates the exact proposed merge commit.
+          gh workflow run build.yml --ref "$branch"
+          branch_url=${branch//\//%2F}
+          {
+            echo "Official commit: $upstream_sha"
+            echo "Review branch: $branch"
+            echo "[Create pull request]($GITHUB_SERVER_URL/$GITHUB_REPOSITORY/compare/main...$branch_url?expand=1)"
+            echo 'Build packages was dispatched for this branch. Review its results before opening and merging a pull request.'
+          } >> "$GITHUB_STEP_SUMMARY"

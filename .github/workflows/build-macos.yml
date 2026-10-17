@@ -1,0 +1,84 @@
+name: Build macOS arm64
+
+on:
+  workflow_call:
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: macOS arm64
+    runs-on: macos-15
+    timeout-minutes: 120
+    env:
+      HOMEBREW_NO_AUTO_UPDATE: 1
+      QT_QPA_PLATFORM: offscreen
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+
+      - name: Install build dependencies
+        run: |
+          brew install cmake ninja pkgconf c-ares glib libgcrypt libxml2 pcre2 \
+            qtbase qtsvg qttools gnutls libssh lua lz4 snappy zstd xxhash \
+            libnghttp2 libnghttp3 libmaxminddb
+          python -m pip install pytest pytest-xdist
+
+      - name: Configure
+        run: |
+          qt_prefixes="$(brew --prefix qtbase);$(brew --prefix qtsvg);$(brew --prefix qttools)"
+          cmake -S . -B build -G Ninja \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DCMAKE_OSX_ARCHITECTURES=arm64 \
+            -DCMAKE_OSX_DEPLOYMENT_TARGET=15.0 \
+            -DCMAKE_PREFIX_PATH="$qt_prefixes;$(brew --prefix libxml2);$(brew --prefix)" \
+            -DQT_ADDITIONAL_PACKAGES_PREFIX_PATH="$qt_prefixes" \
+            -DBUILD_wireshark=ON -DBUILD_tshark=ON -DBUILD_dftest=ON \
+            -DBUILD_sharkd=OFF -DBUILD_stratoshark=OFF -DENABLE_SPARKLE=OFF
+
+      - name: Build application and test programs
+        run: cmake --build build --parallel 3 --target all test-programs
+
+      - name: Test columns and display filters
+        working-directory: build
+        run: >-
+          python -m pytest -q ../test/suite_dfilter ../test/suite_unittests.py::TestUnitTests
+          --disable-capture --disable-gui --junitxml=test-results.xml
+
+      - name: Bundle dependencies
+        run: LIBPREFIX="$(brew --prefix)" cmake --build build --parallel 3 --target wireshark_app_bundle
+
+      - name: Sign, verify, and package application
+        run: |
+          # macdeployqt includes Cocoa; keep the small offscreen plugin for GUI smoke tests.
+          install -m 755 "$(brew --prefix qtbase)/share/qt/plugins/platforms/libqoffscreen.dylib" \
+            build/run/Wireshark.app/Contents/PlugIns/platforms/
+          python .github/scripts/package-macos.py build/run/Wireshark.app dist
+
+      - name: Upload application
+        uses: actions/upload-artifact@v6
+        with:
+          name: macos-arm64
+          path: dist/*
+          if-no-files-found: error
+          compression-level: 0
+          retention-days: 30
+
+      - name: Upload test diagnostics
+        if: failure()
+        uses: actions/upload-artifact@v6
+        with:
+          name: macos-arm64-diagnostics
+          path: |
+            build/test-results.xml
+            build/CMakeFiles/CMakeConfigureLog.yaml
+          if-no-files-found: ignore
+          retention-days: 7

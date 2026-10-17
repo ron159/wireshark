@@ -4,6 +4,7 @@ on: [push]
 
 jobs:
   windows:
+    if: github.repository == 'wireshark/wireshark'
     name: Build & Test
     runs-on: windows-2022
     env:
