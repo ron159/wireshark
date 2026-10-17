@@ -21,7 +21,7 @@ jobs:
           persist-credentials: false
 
       - name: Install build dependencies
-        run: sudo tools/os_setup/debian-setup.sh --install-all -y
+        run: sudo tools/os_setup/debian-setup.sh --install-all build-essential -y
 
       # Use the upstream Debian packaging so library dependencies, plugins,
       # resources, desktop integration and capture permissions stay together.
