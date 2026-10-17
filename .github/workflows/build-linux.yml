@@ -53,13 +53,15 @@ jobs:
           echo "build_dir=$build_dir" >> "$GITHUB_OUTPUT"
 
       - name: Test display filters and dynamic column bindings
+        working-directory: test
         run: |
-          build_dir="${{ steps.tests.outputs.build_dir }}"
-          python3 -m pytest -q --disable-capture --disable-gui \
-            --program-path "$PWD/$build_dir/run" \
-            --junitxml=linux-regression.xml \
-            test/suite_dfilter \
-            test/suite_unittests.py::TestUnitTests::test_unit_column_test
+          # Pytest 7 discovers custom options from conftest after these paths.
+          python3 -m pytest \
+            suite_dfilter \
+            suite_unittests.py::TestUnitTests::test_unit_column_test \
+            -q --disable-capture --disable-gui \
+            --program-path "$GITHUB_WORKSPACE/${{ steps.tests.outputs.build_dir }}/run" \
+            --junitxml="$GITHUB_WORKSPACE/linux-regression.xml"
 
       - name: Collect packages and build identity
         run: |
