@@ -20278,7 +20278,7 @@ The first match wins, the order of entries in the table is important!.</source>
     </message>
     <message>
         <source>ALL</source>
-        <translation>ALL</translation>
+        <translation>全部</translation>
     </message>
     <message>
         <source>ALWAYS</source>
