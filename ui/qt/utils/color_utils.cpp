@@ -128,6 +128,7 @@ void ColorUtils::paintFlatCell(QPainter *painter, const QAbstractItemView *view,
     cell_option.palette.setColor(QPalette::Text, fg);
     cell_option.palette.setColor(QPalette::WindowText, fg);
     cell_option.palette.setColor(QPalette::HighlightedText, fg);
+    cell_option.palette.setColor(QPalette::Highlight, bg);
 
     QStyle *style = view->style() ? view->style() : QApplication::style();
     style->drawControl(QStyle::CE_ItemViewItem, &cell_option, painter, view);

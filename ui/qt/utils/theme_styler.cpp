@@ -9,7 +9,6 @@
 
 #include "ui/qt/utils/theme_styler.h"
 
-#include <ui/qt/utils/theme_manager.h>
 #include <ui/qt/utils/themes/color_math.h>
 
 #include <QColor>
@@ -17,6 +16,7 @@
 #include <QOperatingSystemVersion>
 #include <QPainter>
 #include <QStyleOptionViewItem>
+#include <QWidget>
 
 static QString base_style_name_;
 
@@ -35,6 +35,14 @@ QString ThemeStyler::baseStyleName()
     return base_style_name_;
 }
 
+bool ThemeStyler::usesFlatPacketListStyle(const QWidget *widget)
+{
+    return base_style_name_ == QStringLiteral("windows11") && widget
+            && (widget->inherits("PacketList")
+                || widget->inherits("PinnedColumnView")
+                || widget->inherits("PinnedRowView"));
+}
+
 int ThemeStyler::styleHint(StyleHint hint, const QStyleOption *option,
     const QWidget *widget, QStyleHintReturn *returnData) const
 {
@@ -43,9 +51,34 @@ int ThemeStyler::styleHint(StyleHint hint, const QStyleOption *option,
     return QProxyStyle::styleHint(hint, option, widget, returnData);
 }
 
+void ThemeStyler::drawControl(ControlElement element, const QStyleOption *option,
+    QPainter *painter, const QWidget *widget) const
+{
+    if (element == CE_ItemViewItem) {
+        const auto *item = qstyleoption_cast<const QStyleOptionViewItem *>(option);
+        const QWidget *view = widget ? widget : (item ? item->widget : nullptr);
+        if (usesFlatPacketListStyle(view)) {
+            // The Windows 11 style adds cell side borders and inset, rounded
+            // backgrounds. Use Qt's palette-based item renderer for packet
+            // rows while retaining the native style for every other control.
+            QCommonStyle::drawControl(element, option, painter, view);
+            return;
+        }
+    }
+    QProxyStyle::drawControl(element, option, painter, widget);
+}
+
 void ThemeStyler::drawPrimitive(PrimitiveElement element, const QStyleOption *option,
     QPainter *painter, const QWidget *widget) const
 {
+    if (element == PE_PanelItemViewRow || element == PE_PanelItemViewItem) {
+        const auto *item = qstyleoption_cast<const QStyleOptionViewItem *>(option);
+        const QWidget *view = widget ? widget : (item ? item->widget : nullptr);
+        if (usesFlatPacketListStyle(view)) {
+            QCommonStyle::drawPrimitive(element, option, painter, view);
+            return;
+        }
+    }
 #ifdef Q_OS_MACOS
     // With the Liquid Glass appearance (macOS 26+ SDK and runtime), the
     // macOS style ignores the position of the indicator rect and draws the

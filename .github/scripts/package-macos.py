@@ -71,7 +71,7 @@ run("codesign", "--force", "--sign", "-", "--timestamp=none", str(app))
 run("codesign", "--verify", "--deep", "--strict", str(app))
 
 output.mkdir(parents=True, exist_ok=True)
-archive = output / "Wireshark-dynamic-macos-arm64.zip"
+archive = output / "Wireshark-macos-arm64.zip"
 run("ditto", "-c", "-k", "--sequesterRsrc", "--keepParent", str(app), str(archive))
 
 # Test the extracted deliverable, including its Qt platform plugin and CLI data.

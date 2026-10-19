@@ -17,7 +17,6 @@ jobs:
     env:
       PLATFORM: x64
       WIRESHARK_BASE_DIR: C:\wireshark-libs
-      WIRESHARK_VERSION_EXTRA: -DynamicColumns
     steps:
       - name: Check out source
         uses: actions/checkout@v6
@@ -64,6 +63,15 @@ jobs:
           -DBUILD_wireshark=ON -DBUILD_tshark=ON -DBUILD_dumpcap=ON
           -DBUILD_stratoshark=OFF -DBUILD_strato=OFF
           -DENABLE_SIGNED_NSIS=OFF
+
+      - name: Test packet-list rendering
+        run: |
+          cmake -S test/qt -B build/packet-list-style-tests -G "Visual Studio 17 2022" -A x64 "-DCMAKE_PREFIX_PATH=$env:QT_ROOT_DIR"
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          cmake --build build/packet-list-style-tests --config RelWithDebInfo --parallel 2
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          ctest --test-dir build/packet-list-style-tests -C RelWithDebInfo --output-on-failure
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
 
       - name: Build applications, plugins, and test programs
         run: |
@@ -144,5 +152,43 @@ jobs:
           path: |
             build/test-results.xml
             build/windows-version.txt
+          if-no-files-found: ignore
+          retention-days: 14
+
+  style:
+    name: Native Windows 11 packet-list rendering
+    # Build 26100 exposes the Windows 11 style, unlike the packaging runner.
+    runs-on: windows-2025
+    timeout-minutes: 20
+    defaults:
+      run:
+        shell: pwsh
+    env:
+      QT_QPA_PLATFORM: windows
+      WS_REQUIRE_NATIVE_WINDOWS11_STYLE: '1'
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - name: Install Qt
+        uses: jurplel/install-qt-action@v4
+        with:
+          version: '6.8.3'
+          arch: win64_msvc2022_64
+          cache: true
+      - name: Build rendering regression tests
+        run: |
+          cmake -S test/qt -B style-tests -G "Visual Studio 17 2022" -A x64 "-DCMAKE_PREFIX_PATH=$env:QT_ROOT_DIR"
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          cmake --build style-tests --config Release --parallel 2
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Verify native style and themed packet rows
+        run: ctest --test-dir style-tests -C Release --output-on-failure --output-junit "$PWD/native-style-tests.xml"
+      - name: Upload rendering test results
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: windows-style-test-results
+          path: native-style-tests.xml
           if-no-files-found: ignore
           retention-days: 14

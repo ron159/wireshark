@@ -46,7 +46,8 @@ void PercentBarDelegate::paint(QPainter *painter, const QStyleOptionViewItem &op
         value = 100.0;
     }
 
-    if (ThemeStyler::baseStyleName().startsWith("windows")) { // windows11, windowsvista
+    if (ThemeStyler::baseStyleName().startsWith("windows")
+            && !ThemeStyler::usesFlatPacketListStyle(option_vi.widget)) {
         // QWindowsVistaStyle::drawControl does this internally. Unfortunately there
         // doesn't appear to be a more general way to do this.
         option_vi.palette.setColor(QPalette::All, QPalette::HighlightedText,
