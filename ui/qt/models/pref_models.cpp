@@ -119,7 +119,7 @@ QString PrefsItem::getModuleTitle() const
     if (module_ == NULL)
         return name_;
 
-    return QString(module_->title);
+    return prefs_ui_translation(module_->title);
 }
 
 QString PrefsItem::getModuleHelp() const
@@ -443,7 +443,7 @@ QVariant AdvancedPrefsModel::data(const QModelIndex &dataindex, int role) const
         {
         case colName:
             if (item->getPref() == NULL)
-                return item->getModule()->title;
+                return item->getModuleTitle();
 
             return sourceModel()->data(sourceModel()->index(modelIndex.row(), PrefsModel::colName, modelIndex.parent()), role);
         case colStatus:
@@ -475,9 +475,9 @@ QVariant AdvancedPrefsModel::data(const QModelIndex &dataindex, int role) const
         {
         case colName:
             if (item->getPref() == NULL)
-                return QStringLiteral("<span>%1</span>").arg(item->getModule()->description);
+                return QStringLiteral("<span>%1</span>").arg(prefs_ui_translation(item->getModule()->description));
 
-            return QStringLiteral("<span>%1</span>").arg(prefs_get_description(item->getPref()));
+            return QStringLiteral("<span>%1</span>").arg(prefs_ui_translation(prefs_get_description(item->getPref())));
         case colStatus:
             if (item->getPref() == NULL)
                 return QVariant();
@@ -681,12 +681,12 @@ bool AdvancedPrefsModel::filterAcceptItem(PrefsItem& item) const
 
     QString name, tooltip;
     if (item.getPref() == NULL) {
-        name = item.getModule()->title;
-        tooltip = item.getModule()->description;
+        name = item.getModuleTitle();
+        tooltip = prefs_ui_translation(item.getModule()->description);
     } else {
         name = QString(item.getModule()->name ? item.getModule()->name : item.getModule()->parent->name);
         name += QStringLiteral(".%1").arg(prefs_get_name(item.getPref()));
-        tooltip = prefs_get_description(item.getPref());
+        tooltip = prefs_ui_translation(prefs_get_description(item.getPref()));
     }
 
     if (show_changed_values_ && item.getPref()) {
@@ -702,6 +702,9 @@ bool AdvancedPrefsModel::filterAcceptItem(PrefsItem& item) const
     if (!(filter_.isEmpty() || (show_changed_values_ && !item.getPref())) &&
         (name.contains(filter_, Qt::CaseInsensitive) ||
          tooltip.contains(filter_, Qt::CaseInsensitive) ||
+         (item.getPref() && prefs_ui_translation(prefs_get_title(item.getPref())).contains(filter_, Qt::CaseInsensitive)) ||
+         (item.getPref() && QString::fromUtf8(prefs_get_description(item.getPref())).contains(filter_, Qt::CaseInsensitive)) ||
+         (!item.getPref() && QString::fromUtf8(item.getModule()->title).contains(filter_, Qt::CaseInsensitive)) ||
          item.getPrefTypeName().contains(filter_, Qt::CaseSensitive)))
     {
         return true;

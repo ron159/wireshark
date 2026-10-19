@@ -467,6 +467,7 @@ set(WIRESHARK_UTILS_SRCS
 	utils/plot_theme.cpp
 	utils/profile_switcher.cpp
 	utils/proto_node.cpp
+	utils/preference_translation.cpp
 	utils/qt_ui_utils.cpp
 	utils/rtp_audio_file.cpp
 	utils/rtp_audio_routing_filter.cpp
@@ -864,6 +865,12 @@ endif()
 set(WIRESHARK_QT_UI_SRCS
 	${WIRESHARK_QT_UI}
 	${WIRESHARK_QT_WIDGETS_UI}
+)
+
+list(APPEND WIRESHARK_QT_HEADERS
+	preference_translation_strings.h
+	preference_translation_extra.h
+	qtbase_translation_fallback.h
 )
 
 set(WIRESHARK_QT_TS

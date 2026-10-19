@@ -41,7 +41,7 @@ static constexpr const char *pref_prop_ = "pref_ptr";
 
 // Escape our ampersands so that Qt won't try to interpret them as
 // mnemonics.
-static const QString title_to_shortcut(const char *title) {
+static const QString title_to_shortcut(const QString &title) {
     QString shortcut_str(title);
     shortcut_str.replace('&', "&&");
     return shortcut_str;
@@ -67,7 +67,7 @@ pref_show(pref_t *pref, void *user_data)
     QVBoxLayout *vb = data->layout;
 
     // Convert the pref description from plain text to rich text.
-    QString description = html_escape(prefs_get_description(pref));
+    QString description = html_escape(prefs_ui_translation(prefs_get_description(pref)));
     QString name = QStringLiteral("%1.%2").arg(data->moduleName).arg(prefs_get_name(pref));
     description.replace('\n', "<br/>");
     QString tooltip = QStringLiteral("<span>%1</span><br/><br/>%2").arg(description).arg(name);
@@ -76,7 +76,7 @@ pref_show(pref_t *pref, void *user_data)
     case PREF_UINT:
     {
         QHBoxLayout *hb = new QHBoxLayout();
-        QLabel *label = new QLabel(prefs_get_title(pref));
+        QLabel *label = new QLabel(prefs_ui_translation(prefs_get_title(pref)));
         label->setToolTip(tooltip);
         hb->addWidget(label);
         SyntaxLineEdit *uint_le = new SyntaxLineEdit();
@@ -91,7 +91,7 @@ pref_show(pref_t *pref, void *user_data)
     case PREF_INT:
     {
         QHBoxLayout* hb = new QHBoxLayout();
-        QLabel* label = new QLabel(prefs_get_title(pref));
+        QLabel* label = new QLabel(prefs_ui_translation(prefs_get_title(pref)));
         label->setToolTip(tooltip);
         hb->addWidget(label);
         SyntaxLineEdit* int_le = new SyntaxLineEdit();
@@ -106,7 +106,7 @@ pref_show(pref_t *pref, void *user_data)
     case PREF_FLOAT:
     {
         QHBoxLayout* hb = new QHBoxLayout();
-        QLabel* label = new QLabel(prefs_get_title(pref));
+        QLabel* label = new QLabel(prefs_ui_translation(prefs_get_title(pref)));
         label->setToolTip(tooltip);
         hb->addWidget(label);
         SyntaxLineEdit* float_le = new SyntaxLineEdit();
@@ -121,7 +121,7 @@ pref_show(pref_t *pref, void *user_data)
     }
     case PREF_BOOL:
     {
-        QCheckBox *bool_cb = new QCheckBox(title_to_shortcut(prefs_get_title(pref)));
+        QCheckBox *bool_cb = new QCheckBox(title_to_shortcut(prefs_ui_translation(prefs_get_title(pref))));
         bool_cb->setToolTip(tooltip);
         bool_cb->setProperty(pref_prop_, VariantPointer<pref_t>::asQVariant(pref));
         vb->addWidget(bool_cb);
@@ -135,12 +135,12 @@ pref_show(pref_t *pref, void *user_data)
             return 0;
 
         if (prefs_get_enum_radiobuttons(pref)) {
-            QLabel *label = new QLabel(prefs_get_title(pref));
+            QLabel *label = new QLabel(prefs_ui_translation(prefs_get_title(pref)));
             label->setToolTip(tooltip);
             vb->addWidget(label);
             QButtonGroup *enum_bg = new QButtonGroup(vb);
             while (ev->description) {
-                QRadioButton *enum_rb = new QRadioButton(title_to_shortcut(ev->description));
+                QRadioButton *enum_rb = new QRadioButton(title_to_shortcut(prefs_ui_translation(ev->description)));
                 enum_rb->setToolTip(tooltip);
                 QStyleOption style_opt;
                 enum_rb->setProperty(pref_prop_, VariantPointer<pref_t>::asQVariant(pref));
@@ -160,9 +160,9 @@ pref_show(pref_t *pref, void *user_data)
             enum_cb->setToolTip(tooltip);
             enum_cb->setProperty(pref_prop_, VariantPointer<pref_t>::asQVariant(pref));
             for (ev = prefs_get_enumvals(pref); ev && ev->description; ev++) {
-                enum_cb->addItem(ev->description, QVariant(ev->value));
+                enum_cb->addItem(prefs_ui_translation(ev->description), QVariant(ev->value));
             }
-            QLabel * lbl = new QLabel(prefs_get_title(pref));
+            QLabel * lbl = new QLabel(prefs_ui_translation(prefs_get_title(pref)));
             lbl->setToolTip(tooltip);
             hb->addWidget(lbl);
             hb->addWidget(enum_cb);
@@ -174,7 +174,7 @@ pref_show(pref_t *pref, void *user_data)
     case PREF_STRING:
     {
         QHBoxLayout *hb = new QHBoxLayout();
-        QLabel *label = new QLabel(prefs_get_title(pref));
+        QLabel *label = new QLabel(prefs_ui_translation(prefs_get_title(pref)));
         label->setToolTip(tooltip);
         hb->addWidget(label);
         QLineEdit *string_le = new QLineEdit();
@@ -189,7 +189,7 @@ pref_show(pref_t *pref, void *user_data)
     case PREF_PASSWORD:
     {
         QHBoxLayout *hb = new QHBoxLayout();
-        QLabel *label = new QLabel(prefs_get_title(pref));
+        QLabel *label = new QLabel(prefs_ui_translation(prefs_get_title(pref)));
         label->setToolTip(tooltip);
         hb->addWidget(label);
         QLineEdit *string_le = new QLineEdit();
@@ -205,7 +205,7 @@ pref_show(pref_t *pref, void *user_data)
     case PREF_DISSECTOR:
     {
         QHBoxLayout *hb = new QHBoxLayout();
-        QLabel *label = new QLabel(prefs_get_title(pref));
+        QLabel *label = new QLabel(prefs_ui_translation(prefs_get_title(pref)));
         label->setToolTip(tooltip);
         hb->addWidget(label);
         QLineEdit *string_le = new DissectorSyntaxLineEdit();
@@ -221,7 +221,7 @@ pref_show(pref_t *pref, void *user_data)
     case PREF_RANGE:
     {
         QHBoxLayout *hb = new QHBoxLayout();
-        QLabel *label = new QLabel(prefs_get_title(pref));
+        QLabel *label = new QLabel(prefs_ui_translation(prefs_get_title(pref)));
         label->setToolTip(tooltip);
         hb->addWidget(label);
         SyntaxLineEdit *range_se = new SyntaxLineEdit();
@@ -235,7 +235,7 @@ pref_show(pref_t *pref, void *user_data)
     }
     case PREF_STATIC_TEXT:
     {
-        QLabel *label = new QLabel(prefs_get_title(pref));
+        QLabel *label = new QLabel(prefs_ui_translation(prefs_get_title(pref)));
         label->setToolTip(tooltip);
         label->setWordWrap(true);
         vb->addWidget(label);
@@ -244,7 +244,7 @@ pref_show(pref_t *pref, void *user_data)
     case PREF_UAT:
     {
         QHBoxLayout *hb = new QHBoxLayout();
-        QLabel *label = new QLabel(prefs_get_title(pref));
+        QLabel *label = new QLabel(prefs_ui_translation(prefs_get_title(pref)));
         label->setToolTip(tooltip);
         hb->addWidget(label);
         QPushButton *uat_pb = new QPushButton(QObject::tr("Edit…"));
@@ -259,7 +259,7 @@ pref_show(pref_t *pref, void *user_data)
     case PREF_OPEN_FILENAME:
     case PREF_DIRNAME:
     {
-        QLabel *label = new QLabel(prefs_get_title(pref));
+        QLabel *label = new QLabel(prefs_ui_translation(prefs_get_title(pref)));
         label->setToolTip(tooltip);
         vb->addWidget(label);
         QHBoxLayout *hb = new QHBoxLayout();
@@ -296,12 +296,12 @@ pref_show(pref_t *pref, void *user_data)
             return 0;
 
         if (prefs_get_enum_radiobuttons(pref)) {
-            QLabel *label = new QLabel(prefs_get_title(pref));
+            QLabel *label = new QLabel(prefs_ui_translation(prefs_get_title(pref)));
             label->setToolTip(tooltip);
             vb->addWidget(label);
             QButtonGroup *enum_bg = new QButtonGroup(vb);
             while (ev->description) {
-                QRadioButton *enum_rb = new QRadioButton(title_to_shortcut(ev->description));
+                QRadioButton *enum_rb = new QRadioButton(title_to_shortcut(prefs_ui_translation(ev->description)));
                 enum_rb->setToolTip(tooltip);
                 QStyleOption style_opt;
                 enum_rb->setProperty(pref_prop_, VariantPointer<pref_t>::asQVariant(pref));
@@ -321,9 +321,9 @@ pref_show(pref_t *pref, void *user_data)
             enum_cb->setToolTip(tooltip);
             enum_cb->setProperty(pref_prop_, VariantPointer<pref_t>::asQVariant(pref));
             for (ev = prefs_get_enumvals(pref); ev && ev->description; ev++) {
-                enum_cb->addItem(ev->description, QVariant(ev->value));
+                enum_cb->addItem(prefs_ui_translation(ev->description), QVariant(ev->value));
             }
-            QLabel * lbl = new QLabel(prefs_get_title(pref));
+            QLabel * lbl = new QLabel(prefs_ui_translation(prefs_get_title(pref)));
             lbl->setToolTip(tooltip);
             hb->addWidget(lbl);
             hb->addWidget(enum_cb);
@@ -352,7 +352,7 @@ ModulePreferencesScrollArea::ModulePreferencesScrollArea(module_t *module, QWidg
     /* Show the preference's description at the top of the page */
     QFont font;
     font.setBold(true);
-    QLabel *label = new QLabel(module->description);
+    QLabel *label = new QLabel(prefs_ui_translation(module->description));
     label->setFont(font);
     ui->verticalLayout->addWidget(label);
 
@@ -743,7 +743,7 @@ void ModulePreferencesScrollArea::saveFilenamePushButtonClicked()
     pref_t *pref = VariantPointer<pref_t>::asPtr(filename_pb->property(pref_prop_));
     if (!pref) return;
 
-    QString filename = WiresharkFileDialog::getSaveFileName(this, mainApp->windowTitleString(prefs_get_title(pref)),
+    QString filename = WiresharkFileDialog::getSaveFileName(this, mainApp->windowTitleString(prefs_ui_translation(prefs_get_title(pref))),
                                                     prefs_get_string_value(pref, pref_stashed));
 
     if (!filename.isEmpty()) {
@@ -760,7 +760,7 @@ void ModulePreferencesScrollArea::openFilenamePushButtonClicked()
     pref_t *pref = VariantPointer<pref_t>::asPtr(filename_pb->property(pref_prop_));
     if (!pref) return;
 
-    QString filename = WiresharkFileDialog::getOpenFileName(this, mainApp->windowTitleString(prefs_get_title(pref)),
+    QString filename = WiresharkFileDialog::getOpenFileName(this, mainApp->windowTitleString(prefs_ui_translation(prefs_get_title(pref))),
                                                     prefs_get_string_value(pref, pref_stashed));
     if (!filename.isEmpty()) {
         prefs_set_string_value(pref, QDir::toNativeSeparators(filename).toStdString().c_str(), pref_stashed);
@@ -776,7 +776,7 @@ void ModulePreferencesScrollArea::dirnamePushButtonClicked()
     pref_t *pref = VariantPointer<pref_t>::asPtr(dirname_pb->property(pref_prop_));
     if (!pref) return;
 
-    QString dirname = WiresharkFileDialog::getExistingDirectory(this, mainApp->windowTitleString(prefs_get_title(pref)),
+    QString dirname = WiresharkFileDialog::getExistingDirectory(this, mainApp->windowTitleString(prefs_ui_translation(prefs_get_title(pref))),
                                                  prefs_get_string_value(pref, pref_stashed));
 
     if (!dirname.isEmpty()) {

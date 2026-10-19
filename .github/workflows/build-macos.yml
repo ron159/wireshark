@@ -50,7 +50,7 @@ jobs:
       - name: Test columns and display filters
         working-directory: build
         run: >-
-          python -m pytest -q ../test/suite_dfilter ../test/suite_unittests.py::TestUnitTests
+          python -m pytest -q ../test/suite_dfilter ../test/suite_unittests.py::TestUnitTests ../test/suite_translation.py
           --disable-capture --disable-gui --junitxml=test-results.xml
 
       - name: Bundle dependencies

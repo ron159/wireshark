@@ -195,6 +195,13 @@ QVariant UatModel::data(const QModelIndex &index, int role) const
         case PT_TXTMOD_COLOR:
             g_free(str);
             return QVariant();
+        case PT_TXTMOD_ENUM:
+            if (role == Qt::DisplayRole) {
+                QString display = prefs_ui_translation(str);
+                g_free(str);
+                return display;
+            }
+            return gchar_free_to_qstring(str);
         default:
             return gchar_free_to_qstring(str);
         }
@@ -281,11 +288,11 @@ QVariant UatModel::headerData(int section, Qt::Orientation orientation, int role
     }
 
     if (role == Qt::ToolTipRole && uat_->fields[section].desc) {
-        return uat_->fields[section].desc;
+        return prefs_ui_translation(uat_->fields[section].desc);
     }
 
     if (role == Qt::DisplayRole) {
-        return uat_->fields[section].title;
+        return prefs_ui_translation(uat_->fields[section].title);
     }
 
     return QVariant();

@@ -94,7 +94,7 @@ void UatDialog::setUat(epan_uat *uat)
 
     if (uat_) {
         if (uat_->name) {
-            title = uat_->name;
+            title = prefs_ui_translation(uat_->name);
         }
 
         if (uat->from_profile) {

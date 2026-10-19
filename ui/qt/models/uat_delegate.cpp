@@ -11,6 +11,7 @@
  */
 
 #include <ui/qt/models/uat_delegate.h>
+#include <ui/qt/utils/qt_ui_utils.h>
 #include <epan/packet.h> // for get_dissector_names()
 #include <wsutil/value_string.h>
 #include <wsutil/ws_assert.h>
@@ -52,7 +53,7 @@ QWidget *UatDelegate::createEditor(QWidget *parent, const QStyleOptionViewItem &
     case PT_TXTMOD_FILENAME:
         if (index.isValid()) {
             QString filename_old = index.model()->data(index, Qt::EditRole).toString();
-            PathSelectionEdit * pathEdit = new PathSelectionEdit(field->title, QString(), field->mode != PT_TXTMOD_DIRECTORYNAME, parent);
+            PathSelectionEdit * pathEdit = new PathSelectionEdit(prefs_ui_translation(field->title), QString(), field->mode != PT_TXTMOD_DIRECTORYNAME, parent);
             connect(pathEdit, &PathSelectionEdit::pathChanged, this, &UatDelegate::pathHasChanged);
             return pathEdit;
         }
@@ -72,7 +73,7 @@ QWidget *UatDelegate::createEditor(QWidget *parent, const QStyleOptionViewItem &
         QComboBox *cb_editor = new QComboBox(parent);
         const value_string *enum_vals = (const value_string *)field->fld_data;
         for (int i = 0; enum_vals[i].strptr != nullptr; i++) {
-            cb_editor->addItem(enum_vals[i].strptr);
+            cb_editor->addItem(prefs_ui_translation(enum_vals[i].strptr), QString::fromUtf8(enum_vals[i].strptr));
         }
         editor = cb_editor;
         cb_editor->setMinimumWidth(cb_editor->minimumSizeHint().width());
@@ -146,7 +147,7 @@ void UatDelegate::setEditorData(QWidget *editor, const QModelIndex &index) const
     {
         QComboBox *combobox = static_cast<QComboBox *>(editor);
         const QString &data = index.model()->data(index, Qt::EditRole).toString();
-        combobox->setCurrentText(data);
+        combobox->setCurrentIndex(combobox->findData(data));
 
         break;
     }
@@ -179,7 +180,7 @@ void UatDelegate::setModelData(QWidget *editor, QAbstractItemModel *model,
     case PT_TXTMOD_ENUM:
     {
         QComboBox *combobox = static_cast<QComboBox *>(editor);
-        const QString &data = combobox->currentText();
+        const QString data = combobox->currentData().toString();
         model->setData(index, data, Qt::EditRole);
         break;
     }

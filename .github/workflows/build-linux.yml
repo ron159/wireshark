@@ -57,7 +57,7 @@ jobs:
         run: |
           # Pytest 7 discovers custom options from conftest after these paths.
           python3 -m pytest \
-            suite_dfilter \
+            suite_dfilter suite_translation.py \
             suite_unittests.py::TestUnitTests::test_unit_column_test \
             -q --disable-capture --disable-gui \
             --program-path "$GITHUB_WORKSPACE/${{ steps.tests.outputs.build_dir }}/run" \

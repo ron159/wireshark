@@ -86,9 +86,9 @@ void LearnCardWidget::loadLinksFromRessource()
         QJsonObject link_obj = link_value.toObject();
         LinkType link;
         link.url = link_obj.value(QStringLiteral("url")).toString();
-        link.label = link_obj.value(QStringLiteral("label")).toString();
-        link.short_label = link_obj.value(QStringLiteral("short_label")).toString();
-        link.tooltip = link_obj.value(QStringLiteral("tooltip")).toString();
+        link.label = tr(link_obj.value(QStringLiteral("label")).toString().toUtf8().constData());
+        link.short_label = tr(link_obj.value(QStringLiteral("short_label")).toString().toUtf8().constData());
+        link.tooltip = tr(link_obj.value(QStringLiteral("tooltip")).toString().toUtf8().constData());
         link.validity = LearnCardWidget::AllVersions;
         if (link_obj.contains(QStringLiteral("scheme"))) {
             QString scheme_str = link_obj.value(QStringLiteral("scheme")).toString();
@@ -106,8 +106,8 @@ void LearnCardWidget::loadLinksFromRessource()
         QJsonObject button_obj = button_value.toObject();
         ButtonType button;
         button.url = button_obj.value(QStringLiteral("url")).toString();
-        button.label = button_obj.value(QStringLiteral("label")).toString();
-        button.tooltip = button_obj.value(QStringLiteral("tooltip")).toString();
+        button.label = tr(button_obj.value(QStringLiteral("label")).toString().toUtf8().constData());
+        button.tooltip = tr(button_obj.value(QStringLiteral("tooltip")).toString().toUtf8().constData());
         button.color = button_obj.value(QStringLiteral("color")).toString();
         button.hover_color = button_obj.value(QStringLiteral("hover_color")).toString();
         button.validity = LearnCardWidget::AllVersions;
@@ -234,6 +234,9 @@ bool LearnCardWidget::event(QEvent *event)
         break;
     case QEvent::LanguageChange:
         ui_->retranslateUi(this);
+        loadLinksFromRessource();
+        setupLinks();
+        setupActionButtons();
         break;
     default:
         break;

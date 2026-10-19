@@ -40,7 +40,7 @@ public:
         QAction(parent),
         pref_(pref)
     {
-        setText(prefs_get_title(pref_));
+        setText(prefs_ui_translation(prefs_get_title(pref_)));
         setCheckable(true);
         setChecked(prefs_get_bool_value(pref_, pref_current));
     }
@@ -63,7 +63,7 @@ public:
         pref_(pref),
         enumval_(enumval)
     {
-        setText(title);
+        setText(prefs_ui_translation(title));
         setActionGroup(ag);
         setCheckable(true);
     }
@@ -87,7 +87,7 @@ public:
         pref_(pref),
         enumval_(enumval)
     {
-        setText(title);
+        setText(prefs_ui_translation(title));
         setActionGroup(ag);
         setCheckable(true);
     }
@@ -112,7 +112,7 @@ public:
         QAction(parent),
         pref_(pref)
     {
-        setText(QStringLiteral("%1%2").arg(prefs_get_title(pref_), UTF8_HORIZONTAL_ELLIPSIS));
+        setText(QStringLiteral("%1%2").arg(prefs_ui_translation(prefs_get_title(pref_)), UTF8_HORIZONTAL_ELLIPSIS));
     }
 
     void showUatDialog() {
@@ -137,7 +137,7 @@ public:
         QAction(parent),
         pref_(pref)
     {
-        QString title = prefs_get_title(pref_);
+        QString title = prefs_ui_translation(prefs_get_title(pref_));
 
         title.append(QStringLiteral(": %1%2").arg(gchar_free_to_qstring(prefs_pref_to_str(pref_, pref_current)), UTF8_HORIZONTAL_ELLIPSIS));
 
@@ -247,7 +247,7 @@ void ProtocolPreferencesMenu::addMenuItem(preference *pref)
     }
     case PREF_ENUM:
     {
-        QMenu *enum_menu = addMenu(prefs_get_title(pref));
+        QMenu *enum_menu = addMenu(prefs_ui_translation(prefs_get_title(pref)));
         const enum_val_t *enum_valp = prefs_get_enumvals(pref);
         if (enum_valp && enum_valp->name) {
             QActionGroup *ag = new QActionGroup(this);
@@ -307,7 +307,7 @@ void ProtocolPreferencesMenu::addMenuItem(preference *pref)
         }
 
         if (override_id != -1) {
-            QMenu *enum_menu = addMenu(prefs_get_title(pref));
+            QMenu *enum_menu = addMenu(prefs_ui_translation(prefs_get_title(pref)));
             const enum_val_t *enum_valp = prefs_get_enumvals(pref);
             if (enum_valp && enum_valp->name) {
                 QActionGroup *ag = new QActionGroup(this);
@@ -332,7 +332,7 @@ void ProtocolPreferencesMenu::addMenuItem(preference *pref)
     }
     default:
         // A type we currently don't handle. Just open the prefs dialog.
-        QString title = QStringLiteral("%1%2").arg(prefs_get_title(pref), UTF8_HORIZONTAL_ELLIPSIS);
+        QString title = QStringLiteral("%1%2").arg(prefs_ui_translation(prefs_get_title(pref)), UTF8_HORIZONTAL_ELLIPSIS);
         QAction *mpa = addAction(title);
         connect(mpa, &QAction::triggered, this, &ProtocolPreferencesMenu::modulePreferencesTriggered);
         break;

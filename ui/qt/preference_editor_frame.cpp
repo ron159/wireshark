@@ -68,13 +68,13 @@ void PreferenceEditorFrame::editPreference(preference *pref, pref_module *module
         return;
     }
 
-    ui->modulePreferencesToolButton->setText(tr("Open %1 preferences…").arg(module_->title));
+    ui->modulePreferencesToolButton->setText(tr("Open %1 preferences…").arg(prefs_ui_translation(module_->title)));
 
     pref_stash(pref_, NULL);
-    ui->preferenceTitleLabel->setText(QStringLiteral("%1:").arg(prefs_get_title(pref)));
+    ui->preferenceTitleLabel->setText(QStringLiteral("%1:").arg(prefs_ui_translation(prefs_get_title(pref))));
 
     // Convert the pref description from plain text to rich text.
-    QString description = html_escape(prefs_get_description(pref));
+    QString description = html_escape(prefs_ui_translation(prefs_get_description(pref)));
     description.replace('\n', "<br>");
     QString tooltip = QStringLiteral("<span>%1</span>").arg(description);
     ui->preferenceTitleLabel->setToolTip(tooltip);
@@ -170,7 +170,7 @@ void PreferenceEditorFrame::stringLineEditTextEdited(const QString &new_str)
 
 void PreferenceEditorFrame::browsePushButtonClicked()
 {
-    QString caption = mainApp->windowTitleString(prefs_get_title(pref_));
+    QString caption = mainApp->windowTitleString(prefs_ui_translation(prefs_get_title(pref_)));
     QString dir = prefs_get_string_value(pref_, pref_stashed);
     QString filename;
 

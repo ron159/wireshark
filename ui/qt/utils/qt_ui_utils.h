@@ -65,6 +65,11 @@ struct _e_guid_t;
  */
 char *qstring_strdup(QString q_string);
 
+/** Translate display text registered by the C preference and UAT APIs.
+ * Preference identifiers and stored values must remain untranslated.
+ */
+QString prefs_ui_translation(const char *text);
+
 /** Transfer ownership of a GLib character string to a newly constructed QString
  *
  * @param glib_string A string allocated with g_malloc() or NULL. Will be

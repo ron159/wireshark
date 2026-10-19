@@ -17,6 +17,7 @@
 #include <ui/qt/widgets/range_syntax_lineedit.h>
 #include "ui/qt/widgets/wireshark_file_dialog.h"
 #include <ui/qt/main_application.h>
+#include <ui/qt/utils/qt_ui_utils.h>
 #include <ui/qt/uat_dialog.h>
 
 #include <QDir>
@@ -132,7 +133,7 @@ public:
         const enum_val_t *ev;
         PrefsItem* pref = VariantPointer<PrefsItem>::asPtr(index.model()->data(index, Qt::UserRole));
         for (ev = prefs_get_enumvals(pref->getPref()); ev && ev->description; ev++) {
-            combo->addItem(ev->description, QVariant(ev->value));
+            combo->addItem(prefs_ui_translation(ev->description), QVariant(ev->value));
             if (prefs_get_enum_value(pref->getPref(), pref_stashed) == ev->value)
                 combo->setCurrentIndex(combo->count() - 1);
         }
