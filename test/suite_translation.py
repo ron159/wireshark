@@ -136,3 +136,26 @@ def test_preference_terminology():
         assert '密钥' in catalog[source]
     for target in catalog.values():
         assert '解剖' not in target and '尸体' not in target
+    for source, target in catalog.items():
+        if 'desegment' in source.lower():
+            assert '重组' in target, (source, target)
+        if 'trailer' in source.lower():
+            assert '拖车' not in target and '预告片' not in target, (source, target)
+        if 'carrier number' in source:
+            assert '载波编号' in target, (source, target)
+    assert catalog['Hide Magic'] == '隐藏魔数'
+    assert catalog['Thrift TLS port'] == 'Thrift TLS 端口'
+
+
+def test_preference_technical_identifiers():
+    for context, message, translation in messages():
+        if context != 'Preferences':
+            continue
+        source = message.findtext('source') or ''
+        target = translation.text or ''
+        identifiers = set(re.findall(r'\b[A-Za-z]*[a-z][A-Z][A-Za-z]+\b', source))
+        # A missing space in the original sentence is not an identifier.
+        identifiers.discard('packetsYou')
+        for identifier in identifiers:
+            assert identifier in target, (source, identifier, target)
+        assert '致电' not in target

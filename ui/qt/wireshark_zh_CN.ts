@@ -20792,11 +20792,11 @@ Relevant only when "TCP port" is the same as "TLS port", but normally should be 
     </message>
     <message>
         <source>AppKey</source>
-        <translation>应用密钥</translation>
+        <translation>AppKey</translation>
     </message>
     <message>
         <source>AppSKey</source>
-        <translation>应用密钥</translation>
+        <translation>AppSKey</translation>
     </message>
     <message>
         <source>Append GlobalIndex#&lt;absolute_index&gt; to Info</source>
@@ -20940,7 +20940,7 @@ Relevant only when "TCP port" is the same as "TLS port", but normally should be 
     </message>
     <message>
         <source>Assume padding for short frames with trailer</source>
-        <translation>假设带有拖车的短帧的填充</translation>
+        <translation>假定带尾部数据的短帧包含填充</translation>
     </message>
     <message>
         <source>Assume the connection uses tls-crypt</source>
@@ -21860,7 +21860,7 @@ Relevant only when "TCP port" is the same as "TLS port", but normally should be 
     </message>
     <message>
         <source>Call RLC dissector MTCH LCIDs</source>
-        <translation>致电 RLC 解析器 MTCH LCID</translation>
+        <translation>为 MTCH LCID 调用 RLC 解析器</translation>
     </message>
     <message>
         <source>Call RRC dissector for CCCH PDUs</source>
@@ -22788,7 +22788,7 @@ Relevant only when "TCP port" is the same as "TLS port", but normally should be 
     </message>
     <message>
         <source>Decode Gigamon HW timestamp and source id in trailer</source>
-        <translation>解码预告片中的 Gigamon HW 时间戳和源 ID</translation>
+        <translation>解码尾部数据中的 Gigamon HW 时间戳和源 ID</translation>
     </message>
     <message>
         <source>Decode HANC audio packets</source>
@@ -23180,71 +23180,71 @@ Relevant only when "TCP port" is the same as "TLS port", but normally should be 
     </message>
     <message>
         <source>Desegment H.248 messages that span more TCP segments</source>
-        <translation>对跨越更多 TCP 段的 H.248 消息进行分段</translation>
+        <translation>重组跨多个 TCP 分段的 H.248 消息</translation>
     </message>
     <message>
         <source>Desegment H.248 over TCP</source>
-        <translation>对 TCP 进行 H.248 分段</translation>
+        <translation>重组通过 TCP 传输的 H.248</translation>
     </message>
     <message>
         <source>Desegment H.501 messages that span more TCP segments</source>
-        <translation>对跨越更多 TCP 段的 H.501 消息进行分段</translation>
+        <translation>重组跨多个 TCP 分段的 H.501 消息</translation>
     </message>
     <message>
         <source>Desegment H.501 over TCP</source>
-        <translation>对 TCP 进行 H.501 分段</translation>
+        <translation>重组通过 TCP 传输的 H.501</translation>
     </message>
     <message>
         <source>Desegment all Bitcoin messages spanning multiple TCP segments</source>
-        <translation>对跨越多个 TCP 段的所有比特币消息进行分段</translation>
+        <translation>重组跨多个 TCP 分段的所有 Bitcoin 消息</translation>
     </message>
     <message>
         <source>Desegment all Bulk Leasequery messages spanning multiple TCP segments</source>
-        <translation>对跨越多个 TCP 段的所有 Bulk Leasequery 消息进行分段</translation>
+        <translation>重组跨多个 TCP 分段的所有 Bulk Leasequery 消息</translation>
     </message>
     <message>
         <source>Desegment all EtherNet/IP messages spanning multiple TCP segments</source>
-        <translation>对跨越多个 TCP 网段的所有 EtherNet/IP 消息进行分段</translation>
+        <translation>重组跨多个 TCP 分段的所有 EtherNet/IP 消息</translation>
     </message>
     <message>
         <source>Desegment all Gearman messages spanning multiple TCP segments</source>
-        <translation>对跨越多个 TCP 段的所有 Gearman 消息进行分段</translation>
+        <translation>重组跨多个 TCP 分段的所有 Gearman 消息</translation>
     </message>
     <message>
         <source>Desegment all Gryphon messages spanning multiple TCP segments</source>
-        <translation>对跨越多个 TCP 段的所有 Gryphon 消息进行分段</translation>
+        <translation>重组跨多个 TCP 分段的所有 Gryphon 消息</translation>
     </message>
     <message>
         <source>Desegment all HART-IP messages spanning multiple TCP segments</source>
-        <translation>对跨越多个 TCP 段的所有 HART-IP 消息进行分段</translation>
+        <translation>重组跨多个 TCP 分段的所有 HART-IP 消息</translation>
     </message>
     <message>
         <source>Desegment all L&amp;G 8979 Protocol packets spanning multiple TCP segments</source>
-        <translation>对跨越多个 TCP 网段的所有 L&amp;G 8979 协议数据包进行分段</translation>
+        <translation>重组跨多个 TCP 分段的所有 L&amp;G 8979 Protocol 数据包</translation>
     </message>
     <message>
         <source>Desegment all M3UA messages spanning multiple TCP segments</source>
-        <translation>对跨越多个 TCP 段的所有 M3UA 消息进行分段</translation>
+        <translation>重组跨多个 TCP 分段的所有 M3UA 消息</translation>
     </message>
     <message>
         <source>Desegment all Modbus RTU packets spanning multiple TCP segments</source>
-        <translation>对跨越多个 TCP 网段的所有 Modbus RTU 数据包进行分段</translation>
+        <translation>重组跨多个 TCP 分段的所有 Modbus RTU 数据包</translation>
     </message>
     <message>
         <source>Desegment all Monero messages spanning multiple TCP segments</source>
-        <translation>对跨越多个 TCP 段的所有门罗币消息进行反分段</translation>
+        <translation>重组跨多个 TCP 分段的所有 Monero 消息</translation>
     </message>
     <message>
         <source>Desegment all RADIUS messages spanning multiple TCP segments</source>
-        <translation>对跨越多个 TCP 段的所有 RADIUS 消息进行分段</translation>
+        <translation>重组跨多个 TCP 分段的所有 RADIUS 消息</translation>
     </message>
     <message>
         <source>Desegment all Scylla messages spanning multiple TCP segments</source>
-        <translation>对跨越多个 TCP 段的所有 Scylla 消息进行分段</translation>
+        <translation>重组跨多个 TCP 分段的所有 Scylla 消息</translation>
     </message>
     <message>
         <source>Desegment packets spanning multiple TCP segments</source>
-        <translation>对跨越多个 TCP 段的数据包进行分段</translation>
+        <translation>重组跨多个 TCP 分段的数据包</translation>
     </message>
     <message>
         <source>Dest IP</source>
@@ -23336,11 +23336,11 @@ Relevant only when "TCP port" is the same as "TLS port", but normally should be 
     </message>
     <message>
         <source>DevAddr</source>
-        <translation>开发地址</translation>
+        <translation>DevAddr</translation>
     </message>
     <message>
         <source>DevEUI</source>
-        <translation>开发EUI</translation>
+        <translation>DevEUI</translation>
     </message>
     <message>
         <source>Device ID</source>
@@ -23372,7 +23372,7 @@ Relevant only when "TCP port" is the same as "TLS port", but normally should be 
     </message>
     <message>
         <source>DeviceType</source>
-        <translation>设备类型</translation>
+        <translation>DeviceType</translation>
     </message>
     <message>
         <source>Devices</source>
@@ -23784,7 +23784,7 @@ Relevant only when "TCP port" is the same as "TLS port", but normally should be 
     </message>
     <message>
         <source>Dissect GTP over TCP</source>
-        <translation>剖析 GTP 和 TCP</translation>
+        <translation>解析通过 TCP 传输的 GTP</translation>
     </message>
     <message>
         <source>Dissect IPMB commands</source>
@@ -23812,7 +23812,7 @@ Relevant only when "TCP port" is the same as "TLS port", but normally should be 
     </message>
     <message>
         <source>Dissect LTE TransparentContainer as</source>
-        <translation>将 LTE 透明容器剖析为</translation>
+        <translation>将 LTE TransparentContainer 解析为</translation>
     </message>
     <message>
         <source>Dissect LTE container as</source>
@@ -23828,11 +23828,11 @@ Relevant only when "TCP port" is the same as "TLS port", but normally should be 
     </message>
     <message>
         <source>Dissect New Netware Information Structure</source>
-        <translation>剖析新的网络软件信息结构</translation>
+        <translation>解析 New Netware Information Structure</translation>
     </message>
     <message>
         <source>Dissect Option 18 (Interface-Id) as CableLab option</source>
-        <translation>将选项 18（接口 ID）剖析为 CableLab 选项</translation>
+        <translation>将选项 18（Interface-Id）解析为 CableLab 选项</translation>
     </message>
     <message>
         <source>Dissect PDU as</source>
@@ -23872,15 +23872,15 @@ Relevant only when "TCP port" is the same as "TLS port", but normally should be 
     </message>
     <message>
         <source>Dissect TransparentContainer</source>
-        <translation>剖析透明容器</translation>
+        <translation>解析 TransparentContainer</translation>
     </message>
     <message>
         <source>Dissect TransparentContainers that are opaque to NGAP</source>
-        <translation>剖析对 NGAP 不透明的透明容器</translation>
+        <translation>解析对 NGAP 不透明的 TransparentContainers</translation>
     </message>
     <message>
         <source>Dissect TransparentContainers that are opaque to S1AP</source>
-        <translation>剖析对 S1AP 不透明的透明容器</translation>
+        <translation>解析对 S1AP 不透明的 TransparentContainers</translation>
     </message>
     <message>
         <source>Dissect WrappedCpmContainers as extendable</source>
@@ -24004,7 +24004,7 @@ Relevant only when "TCP port" is the same as "TLS port", but normally should be 
     </message>
     <message>
         <source>Dissect trailers with only port stamping</source>
-        <translation>仅通过端口盖章即可剖析拖车</translation>
+        <translation>解析仅包含端口标记的尾部数据</translation>
     </message>
     <message>
         <source>Dissect transport data</source>
@@ -24060,7 +24060,7 @@ Relevant only when "TCP port" is the same as "TLS port", but normally should be 
     </message>
     <message>
         <source>Dissector to be used for the trailer (empty = data)</source>
-        <translation>用于预告片的解析器（空=数据）</translation>
+        <translation>用于尾部数据的解析器（留空 = data）</translation>
     </message>
     <message>
         <source>Dissector used for UICC APDU decoding</source>
@@ -24464,7 +24464,7 @@ Relevant only when "TCP port" is the same as "TLS port", but normally should be 
     </message>
     <message>
         <source>Enable desegmentation of UCI packets over TCP</source>
-        <translation>通过 TCP 启用 UCI 数据包的解分段</translation>
+        <translation>启用通过 TCP 传输的 UCI 数据包重组</translation>
     </message>
     <message>
         <source>Enable detailed PROFIsafe dissection</source>
@@ -24952,7 +24952,7 @@ P4RPC over TLS is always auto-detected when "Decrypt TLS before P4RPC" is enable
     </message>
     <message>
         <source>FlexRay</source>
-        <translation>弗莱克斯雷</translation>
+        <translation>FlexRay</translation>
     </message>
     <message>
         <source>FlexRay Addressing</source>
@@ -25396,11 +25396,11 @@ P4RPC over TLS is always auto-detected when "Decrypt TLS before P4RPC" is enable
     </message>
     <message>
         <source>Heuristic: Bounds of the seconds value in the trailer timestamp</source>
-        <translation>启发式：预告片时间戳中秒值的界限</translation>
+        <translation>启发式：尾部数据时间戳中秒值的界限</translation>
     </message>
     <message>
         <source>Heuristic: Max. number of days difference between capture and trailer timestamps</source>
-        <translation>启发式：最大。捕获时间戳和预告片时间戳之间的天数差异</translation>
+        <translation>启发式：捕获时间戳与尾部时间戳的最大相差天数</translation>
     </message>
     <message>
         <source>Heuristically determine if an RTP header is present in the CES payload.</source>
@@ -25432,7 +25432,7 @@ P4RPC over TLS is always auto-detected when "Decrypt TLS before P4RPC" is enable
     </message>
     <message>
         <source>Hide Magic</source>
-        <translation>隐藏魔法</translation>
+        <translation>隐藏魔数</translation>
     </message>
     <message>
         <source>Hide a dataset if it is all zeros</source>
@@ -25970,15 +25970,15 @@ A comma-separated string of interface type values (e.g. 5,9).
     </message>
     <message>
         <source>ISMACrypDeltaIVLength (bytes)</source>
-        <translation>ISMACrypDeltaIV 长度（字节）</translation>
+        <translation>ISMACrypDeltaIVLength（字节）</translation>
     </message>
     <message>
         <source>ISMACrypIVLength (bytes)</source>
-        <translation>ISMACrypIV长度（字节）</translation>
+        <translation>ISMACrypIVLength（字节）</translation>
     </message>
     <message>
         <source>ISMACrypKeyIndicatorLength (bytes)</source>
-        <translation>ISMACrypKeyIndi​​catorLength（字节）</translation>
+        <translation>ISMACrypKeyIndicatorLength（字节）</translation>
     </message>
     <message>
         <source>ISMACrypKeyIndicatorPerAU (T/F)</source>
@@ -25990,11 +25990,11 @@ A comma-separated string of interface type values (e.g. 5,9).
     </message>
     <message>
         <source>ISMACrypSelectiveEncryption (T/F)</source>
-        <translation>ISMACryp选择性加密 (T/F)</translation>
+        <translation>ISMACrypSelectiveEncryption（T/F）</translation>
     </message>
     <message>
         <source>ISMACrypSliceIndication (T/F)</source>
-        <translation>ISMACrypSlice指示（T/F）</translation>
+        <translation>ISMACrypSliceIndication（T/F）</translation>
     </message>
     <message>
         <source>ISO 7816</source>
@@ -26262,11 +26262,11 @@ The value must be between 20 (160 bits) and 64 (512 bits).</source>
     </message>
     <message>
         <source>If the trailer is found using heuristics, then the trailer may or may not be added and the FCS may or may not be captured. One of the heuristics is the number of days difference between the capture (PCAP) timestamp and the Ethernet trailer timestamp. Set an upper bound (in days) to adjust this particular heuristic.</source>
-        <translation>如果使用启发式找到预告片，则可能会或可能不会添加预告片，并且可能会或可能不会捕获 FCS。启发式方法之一是捕获 (PCAP) 时间戳和以太网预告片时间戳之间的天数差异。设置上限（以天为单位）来调整此特定启发式。</translation>
+        <translation>如果使用启发式找到尾部数据，则可能会或可能不会添加尾部数据，并且可能会或可能不会捕获 FCS。启发式方法之一是捕获 (PCAP) 时间戳和以太网尾部数据时间戳之间的天数差异。设置上限（以天为单位）来调整此特定启发式。</translation>
     </message>
     <message>
         <source>If the trailer is found using heuristics, then the trailer may or may not be added and the FCS may or may not be captured. One of the heuristics is the timestamp seconds value being within specified bounds. Set ranges of valid seconds to adjust this particular heuristic.</source>
-        <translation>如果使用启发式找到预告片，则可能会或可能不会添加预告片，并且可能会或可能不会捕获 FCS。其中一种启发方法是时间戳秒值在指定范围内。设置有效秒数的范围来调整这个特定的启发式。</translation>
+        <translation>如果使用启发式找到尾部数据，则可能会或可能不会添加尾部数据，并且可能会或可能不会捕获 FCS。其中一种启发方法是时间戳秒值在指定范围内。设置有效秒数的范围来调整这个特定的启发式。</translation>
     </message>
     <message>
         <source>If tls-auth detection fails, you can choose to override detection and set tls-auth yourself</source>
@@ -26502,7 +26502,7 @@ to calculate NWK keys during Key Exchange procedure.</source>
     </message>
     <message>
         <source>InstanceToInstance UDP Port</source>
-        <translation>实例到实例 UDP 端口</translation>
+        <translation>InstanceToInstance UDP 端口</translation>
     </message>
     <message>
         <source>Integer identifying the secret. Use the '*' character to match any Id.</source>
@@ -27334,7 +27334,7 @@ to calculate NWK keys during Key Exchange procedure.</source>
     </message>
     <message>
         <source>Load basic set of comIDs and dataset definitions from IEC 61375-2-3</source>
-        <translation>从 IEC 61375-2-3 加载 comID 和数据集定义的基本集</translation>
+        <translation>从 IEC 61375-2-3 加载 comIDs 和数据集定义的基本集</translation>
     </message>
     <message>
         <source>Local</source>
@@ -28416,7 +28416,7 @@ If the missing field is 'required' in a 'proto2' file, a warning item will be ad
     </message>
     <message>
         <source>NodeId Length</source>
-        <translation>节点 ID 长度</translation>
+        <translation>NodeId 长度</translation>
     </message>
     <message>
         <source>Non IP</source>
@@ -28584,7 +28584,7 @@ If the missing field is 'required' in a 'proto2' file, a warning item will be ad
     </message>
     <message>
         <source>NwkSKey</source>
-        <translation>网络密钥</translation>
+        <translation>NwkSKey</translation>
     </message>
     <message>
         <source>OC-12</source>
@@ -29498,7 +29498,7 @@ Changing the path requires a Wireshark restart to take effect.</source>
     </message>
     <message>
         <source>ProductCode</source>
-        <translation>产品代码</translation>
+        <translation>ProductCode</translation>
     </message>
     <message>
         <source>Profile Path</source>
@@ -31406,7 +31406,7 @@ Changing the path requires a Wireshark restart to take effect.</source>
     </message>
     <message>
         <source>Select whether LTE TransparentContainer should be dissected as NB-IOT or legacy LTE</source>
-        <translation>选择 LTE 透明容器是否应剖析为 NB-IOT 还是旧版 LTE</translation>
+        <translation>选择将 LTE TransparentContainer 解析为 NB-IOT 还是传统 LTE</translation>
     </message>
     <message>
         <source>Select whether LTE container should be dissected as NB-IOT or legacy LTE</source>
@@ -31956,7 +31956,7 @@ with a 1-byte payload of 0x00 and the ACK flag set</source>
     </message>
     <message>
         <source>Should the dissector automatically hide the magic fields?</source>
-        <translation>解析器应该自动隐藏魔法场吗？</translation>
+        <translation>解析器是否应自动隐藏魔数字段？</translation>
     </message>
     <message>
         <source>Should the dissector automatically register port numbers based on Routing Info?</source>
@@ -32420,7 +32420,7 @@ It is highly recommended to enable this, because this is required to enable filt
     </message>
     <message>
         <source>Show trailer summary in protocol tree</source>
-        <translation>在协议树中显示预告片摘要</translation>
+        <translation>在协议树中显示尾部数据摘要</translation>
     </message>
     <message>
         <source>Show transaction ID direction bit</source>
@@ -32584,7 +32584,7 @@ It is highly recommended to enable this, because this is required to enable filt
     </message>
     <message>
         <source>Size of an eventual trailer that follows the actual payload, 0 means none</source>
-        <translation>跟随实际有效负载的最终拖车的大小，0 表示无</translation>
+        <translation>跟随实际有效负载的最终尾部数据的大小，0 表示无</translation>
     </message>
     <message>
         <source>Size of encoded address (0, 1, 2 bytes)</source>
@@ -33064,7 +33064,7 @@ for ZigBee 2004 and unsecured networks.</source>
     </message>
     <message>
         <source>TCP desegment</source>
-        <translation>TCP 分段</translation>
+        <translation>TCP 重组</translation>
     </message>
     <message>
         <source>TCP flags: Decode first two bits of 1 byte TCP flags</source>
@@ -33484,7 +33484,7 @@ for ZigBee 2004 and unsecured networks.</source>
     </message>
     <message>
         <source>The data include carrier numbers</source>
-        <translation>数据包括运营商号码</translation>
+        <translation>数据包含载波编号</translation>
     </message>
     <message>
         <source>The date format: (DD/MM) or (MM/DD)</source>
@@ -33787,7 +33787,7 @@ PMS_CLIENT_RANDOM &lt;CRAND&gt; &lt;PMS&gt;
     </message>
     <message>
         <source>The trailer detection includes additional validation through time verification, which provides extra accuracy.</source>
-        <translation>拖车检测包括通过时间验证进行的额外验证，这提供了额外的准确性。</translation>
+        <translation>尾部数据检测包括通过时间验证进行的额外验证，这提供了额外的准确性。</translation>
     </message>
     <message>
         <source>The type of CHDLC frame checksum (none, 16-bit, 32-bit)</source>
@@ -33877,7 +33877,7 @@ one or more of the conditions are checked.</source>
     </message>
     <message>
         <source>This option can override the trailer detection heuristic so that the Metamako trailer is either never or always present.</source>
-        <translation>此选项可以覆盖拖车检测启发式，以便 Metamako 拖车永远不存在或始终存在。</translation>
+        <translation>此选项可以覆盖尾部数据检测启发式，以便 Metamako 尾部数据永远不存在或始终存在。</translation>
     </message>
     <message>
         <source>This option only makes sense if dissection of sampled headers is enabled and probably not even then.</source>
@@ -33905,7 +33905,7 @@ one or more of the conditions are checked.</source>
     </message>
     <message>
         <source>Thrift TLS port</source>
-        <translation>节俭 TLS 端口</translation>
+        <translation>Thrift TLS 端口</translation>
     </message>
     <message>
         <source>Thrift nested types depth</source>
@@ -34005,11 +34005,11 @@ one or more of the conditions are checked.</source>
     </message>
     <message>
         <source>Trailer dissector</source>
-        <translation>拖车解析器</translation>
+        <translation>尾部数据解析器</translation>
     </message>
     <message>
         <source>Trailer size</source>
-        <translation>拖车尺寸</translation>
+        <translation>尾部大小</translation>
     </message>
     <message>
         <source>Transaction ID Source and Destination</source>
@@ -34081,7 +34081,7 @@ one or more of the conditions are checked.</source>
     </message>
     <message>
         <source>Trust the "Content-length:" header when desegmenting</source>
-        <translation>反分段时信任“Content-length:”头部</translation>
+        <translation>重组时信任“Content-length:”头部</translation>
     </message>
     <message>
         <source>Try JSON on string data</source>
@@ -34369,7 +34369,7 @@ one or more of the conditions are checked.</source>
     </message>
     <message>
         <source>UANodeSet XML file with custom datatypes. Used to decode ExtensionObjects of these types in OPC UA client/server and PubSub messages.</source>
-        <translation>具有自定义数据类型的 UANodeSet XML 文件。用于解码 OPC UA 客户端/服务器和 PubSub 消息中这些类型的 ExtensionObject。</translation>
+        <translation>具有自定义数据类型的 UANodeSet XML 文件。用于解码 OPC UA 客户端/服务器和 PubSub 消息中这些类型的 ExtensionObjects。</translation>
     </message>
     <message>
         <source>UCS2</source>
@@ -35015,7 +35015,7 @@ This is needed until there's a reliable way to determine the contents of the tra
     </message>
     <message>
         <source>User mode: RandomAccessIndication (T/F)</source>
-        <translation>用户模式：随机访问指示（T/F）</translation>
+        <translation>用户模式：RandomAccessIndication（T/F）</translation>
     </message>
     <message>
         <source>User mode: SizeLength (bits)</source>
@@ -35023,7 +35023,7 @@ This is needed until there's a reliable way to determine the contents of the tra
     </message>
     <message>
         <source>User mode: StreamStateIndication (number of bits)</source>
-        <translation>用户模式：StreamStateInduction（位数）</translation>
+        <translation>用户模式：StreamStateIndication（比特数）</translation>
     </message>
     <message>
         <source>User protocol</source>
@@ -35195,7 +35195,7 @@ This is needed until there's a reliable way to determine the contents of the tra
     </message>
     <message>
         <source>VendorId</source>
-        <translation>供应商ID</translation>
+        <translation>VendorId</translation>
     </message>
     <message>
         <source>Verify SMB2 Signatures</source>
@@ -35563,7 +35563,7 @@ MyPassword[:MyAP] (WPA + 明文密码[+ SSID]),
     </message>
     <message>
         <source>Whether Scylla dissector should desegment all messages spanning multiple TCP segments</source>
-        <translation>Scylla 解析器是否应对跨多个 TCP 段的所有消息进行取消分段</translation>
+        <translation>Scylla 解析器是否应重组跨多个 TCP 分段的所有消息</translation>
     </message>
     <message>
         <source>Whether T.38 is used with TPKT for TCP</source>
@@ -35799,11 +35799,11 @@ MyPassword[:MyAP] (WPA + 明文密码[+ SSID]),
     </message>
     <message>
         <source>Whether the Bitcoin dissector should desegment all messages spanning multiple TCP segments</source>
-        <translation>比特币解析器是否应对跨多个 TCP 段的所有消息进行取消分段</translation>
+        <translation>Bitcoin 解析器是否应重组跨多个 TCP 分段的所有消息</translation>
     </message>
     <message>
         <source>Whether the Bulk Leasequery dissector should desegment all messages spanning multiple TCP segments</source>
-        <translation>Bulk Leasequery 解析器是否应对跨多个 TCP 段的所有消息进行取消分段</translation>
+        <translation>Bulk Leasequery 解析器是否应重组跨多个 TCP 分段的所有消息</translation>
     </message>
     <message>
         <source>Whether the C12.22 dissector should interpret procedure numbers as big-endian</source>
@@ -35907,7 +35907,7 @@ MyPassword[:MyAP] (WPA + 明文密码[+ SSID]),
     </message>
     <message>
         <source>Whether the EtherNet/IP dissector should desegment all messages spanning multiple TCP segments</source>
-        <translation>EtherNet/IP 解析器是否应对跨多个 TCP 段的所有消息进行取消分段</translation>
+        <translation>EtherNet/IP 解析器是否应重组跨多个 TCP 分段的所有消息</translation>
     </message>
     <message>
         <source>Whether the FCIP dissector should reassemble messages spanning multiple TCP segments. To use this option, you must also enable "Allow subdissectors to reassemble TCP streams" in the TCP protocol settings.</source>
@@ -35931,7 +35931,7 @@ MyPassword[:MyAP] (WPA + 明文密码[+ SSID]),
     </message>
     <message>
         <source>Whether the GED125 dissector should desegment all messages spanning multiple TCP segments</source>
-        <translation>GED125 解析器是否应对跨多个 TCP 段的所有消息进行反分段</translation>
+        <translation>GED125 解析器是否应重组跨多个 TCP 分段的所有消息</translation>
     </message>
     <message>
         <source>Whether the GIOP dissector should reassemble messages spanning multiple TCP segments. To use this option, you must also enable "Allow subdissectors to reassemble TCP streams" in the TCP protocol settings.</source>
@@ -35947,7 +35947,7 @@ MyPassword[:MyAP] (WPA + 明文密码[+ SSID]),
     </message>
     <message>
         <source>Whether the Gearman dissector should desegment all messages spanning multiple TCP segments</source>
-        <translation>Gearman 解析器是否应对跨多个 TCP 段的所有消息进行取消分段</translation>
+        <translation>Gearman 解析器是否应重组跨多个 TCP 分段的所有消息</translation>
     </message>
     <message>
         <source>Whether the Gigamon Trailer summary line should be shown in the protocol tree</source>
@@ -35959,11 +35959,11 @@ MyPassword[:MyAP] (WPA + 明文密码[+ SSID]),
     </message>
     <message>
         <source>Whether the Gigamon trailer containing HW timestamp, source id and original CRC should be decoded</source>
-        <translation>是否应解码包含 HW 时间戳、源 ID 和原始 CRC 的 Gigamon 预告片</translation>
+        <translation>是否应解码包含 HW 时间戳、源 ID 和原始 CRC 的 Gigamon 尾部数据</translation>
     </message>
     <message>
         <source>Whether the Gryphon dissector should desegment all messages spanning multiple TCP segments</source>
-        <translation>Gryphon 解析器是否应对跨多个 TCP 段的所有消息进行取消分段</translation>
+        <translation>Gryphon 解析器是否应重组跨多个 TCP 分段的所有消息</translation>
     </message>
     <message>
         <source>Whether the H.225 dissector should reassemble messages spanning multiple TCP segments. To use this option, you must also enable "Allow subdissectors to reassemble TCP streams" in the TCP protocol settings.</source>
@@ -35975,7 +35975,7 @@ MyPassword[:MyAP] (WPA + 明文密码[+ SSID]),
     </message>
     <message>
         <source>Whether the HART-IP dissector should desegment all messages spanning multiple TCP segments</source>
-        <translation>HART-IP 解析器是否应对跨多个 TCP 段的所有消息进行反分段</translation>
+        <translation>HART-IP 解析器是否应重组跨多个 TCP 分段的所有消息</translation>
     </message>
     <message>
         <source>Whether the HPFEEDS dissector should reassemble messages spanning multiple TCP segments. To use this option, you must also enable "Allow subdissectors to reassemble TCP streams" in the TCP protocol settings.</source>
@@ -36043,7 +36043,7 @@ MyPassword[:MyAP] (WPA + 明文密码[+ SSID]),
     </message>
     <message>
         <source>Whether the L&amp;G 8979 dissector should desegment all messages spanning multiple TCP segments</source>
-        <translation>L&amp;G 8979 解析器是否应对跨多个 TCP 段的所有消息进行反分段</translation>
+        <translation>L&amp;G 8979 解析器是否应重组跨多个 TCP 分段的所有消息</translation>
     </message>
     <message>
         <source>Whether the LAN sync dissector should reassemble PDUs spanning multiple TCP segments. To use this option, you must also enable "Allow subdissectors to reassemble TCP streams" in the TCP protocol settings.</source>
@@ -36071,7 +36071,7 @@ MyPassword[:MyAP] (WPA + 明文密码[+ SSID]),
     </message>
     <message>
         <source>Whether the M3UA dissector should desegment all messages spanning multiple TCP segments</source>
-        <translation>M3UA 解析器是否应对跨多个 TCP 段的所有消息进行反分段</translation>
+        <translation>M3UA 解析器是否应重组跨多个 TCP 分段的所有消息</translation>
     </message>
     <message>
         <source>Whether the MEMCACHE dissector should reassemble headers of a request spanning multiple TCP segments. To use this option, you must also enable "Allow subdissectors to reassemble TCP streams" in the TCP protocol settings.</source>
@@ -36095,11 +36095,11 @@ MyPassword[:MyAP] (WPA + 明文密码[+ SSID]),
     </message>
     <message>
         <source>Whether the Modbus RTU dissector should desegment all messages spanning multiple TCP segments</source>
-        <translation>Modbus RTU 解析器是否应对跨越多个 TCP 段的所有消息进行分段</translation>
+        <translation>Modbus RTU 解析器是否应重组跨多个 TCP 分段的所有消息</translation>
     </message>
     <message>
         <source>Whether the Monero dissector should desegment all messages spanning multiple TCP segments</source>
-        <translation>门罗币解析器是否应对跨多个 TCP 段的所有消息进行反分段</translation>
+        <translation>Monero 解析器是否应重组跨多个 TCP 分段的所有消息</translation>
     </message>
     <message>
         <source>Whether the MySQL dissector should assume that the MYSQL_DEPRECATE_EOF capability is negotiated when the login handshake is not captured. This capability was introduced with MySQL 5.5.7 to enable session state tracking but is not supported by all connectors because of backwards compatibility issues.</source>
@@ -36211,7 +36211,7 @@ MyPassword[:MyAP] (WPA + 明文密码[+ SSID]),
     </message>
     <message>
         <source>Whether the OPSI dissector should desegment all messages spanning multiple TCP segments</source>
-        <translation>OPSI 解析器是否应对跨多个 TCP 段的所有消息进行反分段</translation>
+        <translation>OPSI 解析器是否应重组跨多个 TCP 分段的所有消息</translation>
     </message>
     <message>
         <source>Whether the OpenFlow dissector should reassemble messages spanning multiple TCP segments. To use this option, you must also enable "Allow subdissectors to reassemble TCP streams" in the TCP protocol settings.</source>
@@ -36251,7 +36251,7 @@ MyPassword[:MyAP] (WPA + 明文密码[+ SSID]),
     </message>
     <message>
         <source>Whether the RADIUS dissector should desegment all messages spanning multiple TCP segments</source>
-        <translation>RADIUS 解析器是否应对跨多个 TCP 段的所有消息进行反分段</translation>
+        <translation>RADIUS 解析器是否应重组跨多个 TCP 分段的所有消息</translation>
     </message>
     <message>
         <source>Whether the RESP dissector should reassemble command and response lines spanning multiple TCP segments. To use this option, you must also enable "Allow subdissectors to reassemble TCP streams" in the TCP protocol settings.</source>
@@ -36291,7 +36291,7 @@ MyPassword[:MyAP] (WPA + 明文密码[+ SSID]),
     </message>
     <message>
         <source>Whether the RTSP dissector should use the "Content-length:" value to desegment the body of a request spanning multiple TCP segments</source>
-        <translation>RTSP 解析器是否应使用“Content-length:”值对跨越多个 TCP 段的请求正文进行分段</translation>
+        <translation>RTSP 解析器是否应使用“Content-length:”值重组跨多个 TCP 分段的请求正文</translation>
     </message>
     <message>
         <source>Whether the S5066 SIS dissector should dissect this edition of the STANAG. This edition was never formally approved and is very rare. The common edition is edition 1.2.</source>
@@ -36363,7 +36363,7 @@ MyPassword[:MyAP] (WPA + 明文密码[+ SSID]),
     </message>
     <message>
         <source>Whether the SEL Protocol dissector should desegment all messages spanning multiple TCP segments</source>
-        <translation>SEL 协议解析器是否应对跨越多个 TCP 段的所有消息进行分段</translation>
+        <translation>SEL Protocol 解析器是否应重组跨多个 TCP 分段的所有消息</translation>
     </message>
     <message>
         <source>Whether the SIP dissector should reassemble headers of a request spanning multiple TCP segments. To use this option, you must also enable "Allow subdissectors to reassemble TCP streams" in the TCP protocol settings.</source>
@@ -36551,7 +36551,7 @@ MyPassword[:MyAP] (WPA + 明文密码[+ SSID]),
     </message>
     <message>
         <source>Whether the VSS Monitoring dissector should attempt to dissect trailers with no timestamp, only port stamping.  Note that this can result in a large number of false positives.</source>
-        <translation>VSS 监控解析器是否应尝试解析没有时间戳、仅端口标记的拖车。  请注意，这可能会导致大量误报。</translation>
+        <translation>VSS 监控解析器是否应尝试解析没有时间戳、仅端口标记的尾部数据。  请注意，这可能会导致大量误报。</translation>
     </message>
     <message>
         <source>Whether the WINS-Replication dissector should reassemble messages spanning multiple TCP segments. To use this option, you must also enable "Allow subdissectors to reassemble TCP streams" in the TCP protocol settings.</source>
@@ -36591,7 +36591,7 @@ MyPassword[:MyAP] (WPA + 明文密码[+ SSID]),
     </message>
     <message>
         <source>Whether the captured data include carrier number</source>
-        <translation>抓取的数据是否包含运营商号</translation>
+        <translation>捕获的数据是否包含载波编号</translation>
     </message>
     <message>
         <source>Whether the checksum of all messages should be validated or not</source>
@@ -36775,7 +36775,7 @@ MyPassword[:MyAP] (WPA + 明文密码[+ SSID]),
     </message>
     <message>
         <source>Whether the trailer summary line should be shown in the protocol tree</source>
-        <translation>预告片摘要行是否应显示在协议树中</translation>
+        <translation>尾部数据摘要行是否应显示在协议树中</translation>
     </message>
     <message>
         <source>Whether the vlan summary line should be shown in the protocol tree</source>
@@ -37151,7 +37151,7 @@ MyPassword[:MyAP] (WPA + 明文密码[+ SSID]),
     </message>
     <message>
         <source>asAOT</source>
-        <translation>作为AOT</translation>
+        <translation>asAOT</translation>
     </message>
     <message>
         <source>assume tls-crypt</source>
@@ -37171,7 +37171,7 @@ MyPassword[:MyAP] (WPA + 明文密码[+ SSID]),
     </message>
     <message>
         <source>consist UUID for Safety Trailer calculation. Leave empty for consist-local. Insert only valid UUIDs-strings copied, e.g., from some UUID-field in the format 00112233-4455-6677-8899-aabbccddeeff. Invalid values will be ignored w/o warning.</source>
-        <translation>包括用于安全拖车计算的 UUID。对于本地组成，留空。仅插入从某些 UUID-field 复制的有效 UUID 字符串 e.g，格式为 00112233-4455-6677-8899-aabbccddeeff。无效值将被忽略且不发出警告。</translation>
+        <translation>用于 Safety Trailer 计算的编组 UUID。编组内部可留空。仅输入有效 UUID 字符串，例如从 UUID 字段复制的 00112233-4455-6677-8899-aabbccddeeff。无效值将被忽略，不发出警告。</translation>
     </message>
     <message>
         <source>cstUUID used for VDP_TRAILER check</source>
