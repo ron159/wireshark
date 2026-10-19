@@ -117,7 +117,19 @@ void FilterEdit::insertFilter(const QString &filter)
 
 void FilterEdit::onTextChanged()
 {
+    // An emptied field has nothing to validate. Resolve it right away so a stale
+    // Invalid/Valid state doesn't linger (tint behind removed buttons) for the
+    // debounce interval.
+    if (text().isEmpty()) {
+        validateNow();
+        return;
+    }
     debounce_->start();
+}
+
+bool FilterEdit::isValidationPending() const
+{
+    return debounce_->isActive();
 }
 
 void FilterEdit::setState(SyntaxState state)
@@ -148,11 +160,13 @@ void FilterEdit::setState(SyntaxState state)
 
 void FilterEdit::validateNow()
 {
+    debounce_->stop();
     const QString current = text();
 
     // No validator, or nothing typed: never tinted.
     if (!validator_ || current.isEmpty()) {
         setState(SyntaxState::Empty);
+        emit validated();
         return;
     }
 
@@ -180,6 +194,7 @@ void FilterEdit::validateNow()
         break;
     }
     setState(mapped);
+    emit validated();
 }
 
 // invalid indicator
@@ -202,8 +217,11 @@ void FilterEdit::paintEvent(QPaintEvent *event)
     QStyleOptionFrame opt;
     initStyleOption(&opt);
 
-    // get rect
-    const QRect cr = style()->subElementRect(QStyle::SE_LineEditContents, &opt, this);
+    // Contents rect minus the reserved text margins: subclasses such as
+    // FilterExpressionEdit reserve those for inline buttons and paint an opaque
+    // neutral strip over them after this runs, which would hide the icon.
+    const QRect cr = style()->subElementRect(QStyle::SE_LineEditContents, &opt, this)
+                         .marginsRemoved(textMargins());
     QRect sir(0, 0, 14, 14); 
     const int textWidth = fontMetrics().boundingRect(text()).width();
     const int margin = 2 * 6 + 1;
