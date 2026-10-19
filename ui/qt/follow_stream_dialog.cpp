@@ -368,7 +368,7 @@ void FollowStreamDialog::backButton()
     if (terminating_)
         return;
 
-    output_filter_ = previous_filter_;
+    emit updateFilter(previous_filter_, true);
 
     close();
 }
@@ -376,11 +376,6 @@ void FollowStreamDialog::backButton()
 void FollowStreamDialog::close()
 {
     terminating_ = true;
-
-    // Update filter - Use:
-    //     previous_filter if 'Back' (passed in constructor)
-    //     leave filter alone if window closed. (current stream)
-    emit updateFilter(output_filter_, true);
 
     WiresharkDialog::close();
 }
@@ -1129,6 +1124,9 @@ bool FollowStreamDialog::follow(bool use_stream_index, unsigned stream_num, unsi
     setWindowSubtitle(tr("Follow %1 Stream (%2)").arg(proto_get_protocol_short_name(find_protocol_by_id(get_follow_proto_id(follower_))),
                                                 follow_filter_));
     cap_file_.retapPackets();
+
+    // Apply after retapping so the stream listener is removed before filtering.
+    emit updateFilter(follow_filter_, true);
 
     return true;
 }

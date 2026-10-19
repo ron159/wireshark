@@ -350,9 +350,6 @@ private:
     /** The display filter active before the dialog was opened. */
     QString                 previous_filter_;
 
-    /** The display string applied, if any, when closing the dialog. */
-    QString                 output_filter_;
-
     /** The filter string representing this specific stream. */
     QString                 follow_filter_;
 
