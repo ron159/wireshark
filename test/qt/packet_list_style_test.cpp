@@ -14,6 +14,7 @@
 #include <QTreeView>
 
 #include <cstdio>
+#include <cstdlib>
 #include <memory>
 
 // Keep the same QObject class identities as the three packet-list views,
@@ -30,8 +31,16 @@ class PinnedRowView : public QTreeView {
 
 // ColorMath's translucent-button helper links these methods, but item-view
 // rendering must not consult the global theme manager.
-ThemeManager *ThemeManager::instance() { qFatal("Unexpected ThemeManager access"); }
-bool ThemeManager::isDarkMode() const { qFatal("Unexpected ThemeManager access"); }
+ThemeManager *ThemeManager::instance()
+{
+    qFatal("Unexpected ThemeManager access");
+    std::abort();
+}
+bool ThemeManager::isDarkMode() const
+{
+    qFatal("Unexpected ThemeManager access");
+    std::abort();
+}
 
 static const QColor untouched(255, 0, 255);
 static const QRect cell(8, 6, 72, 16);

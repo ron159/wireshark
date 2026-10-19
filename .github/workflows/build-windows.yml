@@ -158,7 +158,7 @@ jobs:
   style:
     name: Native Windows 11 packet-list rendering
     # Build 26100 exposes the Windows 11 style, unlike the packaging runner.
-    runs-on: windows-2025
+    runs-on: windows-2025-vs2026
     timeout-minutes: 20
     defaults:
       run:
@@ -178,7 +178,7 @@ jobs:
           cache: true
       - name: Build rendering regression tests
         run: |
-          cmake -S test/qt -B style-tests -G "Visual Studio 17 2022" -A x64 "-DCMAKE_PREFIX_PATH=$env:QT_ROOT_DIR"
+          cmake -S test/qt -B style-tests -G "Visual Studio 18 2026" -A x64 "-DCMAKE_PREFIX_PATH=$env:QT_ROOT_DIR"
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           cmake --build style-tests --config Release --parallel 2
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
