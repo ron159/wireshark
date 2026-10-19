@@ -33,9 +33,9 @@ public:
     // has a useful objectName().
     static QString baseStyleName();
 
-    // Packet rows need continuous, palette-based backgrounds even when
+    // All item views need continuous, palette-based backgrounds even when
     // the application's other controls use the Windows 11 style.
-    static bool usesFlatPacketListStyle(const QWidget *widget);
+    static bool usesFlatItemViewStyle(const QWidget *widget);
 
     static QString buttonStyleSheet(const QString &objectname, const QColor &baseColor);
 };

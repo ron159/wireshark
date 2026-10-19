@@ -97,7 +97,7 @@ DIAG_ON(array-bounds=)
     style->drawControl(QStyle::CE_ItemViewItem, &option_vi, painter, option_vi.widget);
 
     if (ThemeStyler::baseStyleName().startsWith("windows")
-            && !ThemeStyler::usesFlatPacketListStyle(option_vi.widget)) {
+            && !ThemeStyler::usesFlatItemViewStyle(option_vi.widget)) {
         // QWindowsVistaStyle::drawControl does this internally. Unfortunately there
         // doesn't appear to be a more general way to do this.
         option_vi.palette.setColor(QPalette::All, QPalette::HighlightedText,

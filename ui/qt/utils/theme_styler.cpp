@@ -11,6 +11,7 @@
 
 #include <ui/qt/utils/themes/color_math.h>
 
+#include <QAbstractItemView>
 #include <QColor>
 #include <QDebug>
 #include <QOperatingSystemVersion>
@@ -35,12 +36,10 @@ QString ThemeStyler::baseStyleName()
     return base_style_name_;
 }
 
-bool ThemeStyler::usesFlatPacketListStyle(const QWidget *widget)
+bool ThemeStyler::usesFlatItemViewStyle(const QWidget *widget)
 {
-    return base_style_name_ == QStringLiteral("windows11") && widget
-            && (widget->inherits("PacketList")
-                || widget->inherits("PinnedColumnView")
-                || widget->inherits("PinnedRowView"));
+    return base_style_name_ == QStringLiteral("windows11")
+            && qobject_cast<const QAbstractItemView *>(widget);
 }
 
 int ThemeStyler::styleHint(StyleHint hint, const QStyleOption *option,
@@ -57,14 +56,17 @@ void ThemeStyler::drawControl(ControlElement element, const QStyleOption *option
     if (element == CE_ItemViewItem) {
         const auto *item = qstyleoption_cast<const QStyleOptionViewItem *>(option);
         const QWidget *view = widget ? widget : (item ? item->widget : nullptr);
-        if (item && usesFlatPacketListStyle(view)) {
+        if (item && usesFlatItemViewStyle(view)) {
             // The Windows 11 style adds cell side borders and inset, rounded
-            // backgrounds. Use Qt's palette-based item renderer for packet
-            // rows while retaining the native style for every other control.
+            // backgrounds. Use Qt's palette-based renderer for all item views,
+            // including packet details and dialogs, and keep other controls native.
             QStyleOptionViewItem flat_item(*item);
             // Packet views use outline: 0. The common renderer's proxy calls
             // bypass that stylesheet rule when drawing unselected cells.
-            flat_item.state &= ~State_HasFocus;
+            if (view->inherits("PacketList") || view->inherits("PinnedColumnView")
+                    || view->inherits("PinnedRowView")) {
+                flat_item.state &= ~State_HasFocus;
+            }
             QCommonStyle::drawControl(element, &flat_item, painter, view);
             return;
         }
@@ -78,7 +80,7 @@ void ThemeStyler::drawPrimitive(PrimitiveElement element, const QStyleOption *op
     if (element == PE_PanelItemViewRow || element == PE_PanelItemViewItem) {
         const auto *item = qstyleoption_cast<const QStyleOptionViewItem *>(option);
         const QWidget *view = widget ? widget : (item ? item->widget : nullptr);
-        if (usesFlatPacketListStyle(view)) {
+        if (usesFlatItemViewStyle(view)) {
             QCommonStyle::drawPrimitive(element, option, painter, view);
             return;
         }

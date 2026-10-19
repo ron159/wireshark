@@ -110,7 +110,7 @@ void SparkLineDelegate::paint(QPainter *painter, const QStyleOptionViewItem &opt
     painter->save();
 
     if (ThemeStyler::baseStyleName().startsWith("windows")
-            && !ThemeStyler::usesFlatPacketListStyle(option_vi.widget))
+            && !ThemeStyler::usesFlatItemViewStyle(option_vi.widget))
     {
         // QWindowsVistaStyle::drawControl (and the Windows 11 style, which derives
         // from it) do this internally: selected items keep the normal text color
