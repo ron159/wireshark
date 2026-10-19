@@ -57,11 +57,15 @@ void ThemeStyler::drawControl(ControlElement element, const QStyleOption *option
     if (element == CE_ItemViewItem) {
         const auto *item = qstyleoption_cast<const QStyleOptionViewItem *>(option);
         const QWidget *view = widget ? widget : (item ? item->widget : nullptr);
-        if (usesFlatPacketListStyle(view)) {
+        if (item && usesFlatPacketListStyle(view)) {
             // The Windows 11 style adds cell side borders and inset, rounded
             // backgrounds. Use Qt's palette-based item renderer for packet
             // rows while retaining the native style for every other control.
-            QCommonStyle::drawControl(element, option, painter, view);
+            QStyleOptionViewItem flat_item(*item);
+            // Packet views use outline: 0. The common renderer's proxy calls
+            // bypass that stylesheet rule when drawing unselected cells.
+            flat_item.state &= ~State_HasFocus;
+            QCommonStyle::drawControl(element, &flat_item, painter, view);
             return;
         }
     }

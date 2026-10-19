@@ -64,6 +64,22 @@ public:
         QCommonStyle::drawControl(element, option, painter, widget);
     }
 
+    void drawPrimitive(PrimitiveElement element, const QStyleOption *option,
+        QPainter *painter, const QWidget *widget = nullptr) const override
+    {
+        // Make leaked focus outlines observable even on platforms and styles
+        // that omit the native focus frame.
+        if (element == PE_FrameFocusRect) {
+            painter->save();
+            painter->setPen(Qt::black);
+            painter->setBrush(Qt::NoBrush);
+            painter->drawRect(option->rect.adjusted(0, 0, -1, -1));
+            painter->restore();
+            return;
+        }
+        QCommonStyle::drawPrimitive(element, option, painter, widget);
+    }
+
 private:
     static void drawInset(const QStyleOption *option, QPainter *painter)
     {
@@ -185,9 +201,10 @@ int main(int argc, char **argv)
         for (const QWidget *view : QList<const QWidget *>{&packets, &columns, &rows, &ordinary}) {
             const bool flat = key == "windows11" && view != &ordinary;
             for (bool dark : {false, true}) {
-                for (int variant = 0; variant < 24; ++variant) {
+                for (int variant = 0; variant < 48; ++variant) {
                     auto option = itemOption(view, dark, variant % 6);
-                    option.viewItemPosition = positions[variant / 6];
+                    option.viewItemPosition = positions[(variant % 24) / 6];
+                    if (variant >= 24) option.state |= QStyle::State_HasFocus;
                     const auto group = option.state & QStyle::State_Active ? QPalette::Active : QPalette::Inactive;
                     const QColor expected = option.state & QStyle::State_Selected
                         ? option.palette.color(group, QPalette::Highlight) : option.backgroundBrush.color();
@@ -195,9 +212,9 @@ int main(int argc, char **argv)
                         for (qreal scale : flat ? QList<qreal>{1.0, 1.25, 1.5, 2.0} : QList<qreal>{1.0})
                         for (int element = 0; element < 3; ++element) {
                             const auto image = render(style, option, useOptionWidget ? nullptr : view, element, scale);
-                            const QString name = QString("%1/%2/dark=%3/variant=%4/optionWidget=%5/element=%6/scale=%7")
+                            const QString name = QString("%1/%2/dark=%3/variant=%4/optionWidget=%5/element=%6/scale=%7/focus=%8")
                                 .arg(styleName, view->metaObject()->className()).arg(dark)
-                                .arg(variant).arg(useOptionWidget).arg(element).arg(scale);
+                                .arg(variant).arg(useOptionWidget).arg(element).arg(scale).arg(variant >= 24);
                             ++checks;
                             if (flat) {
                                 failures += !uniformCell(image, expected, name);
