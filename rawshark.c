@@ -930,6 +930,7 @@ raw_pipe_read(wtap_rec *rec, int *err, char **err_info, int64_t *data_offset) {
         return false;
     }
 
+    ws_buffer_clean(&rec->data);
     ws_buffer_assure_space(&rec->data, bytes_needed);
     ptr = ws_buffer_start_ptr(&rec->data);
     while (bytes_needed > 0) {
@@ -946,6 +947,7 @@ raw_pipe_read(wtap_rec *rec, int *err, char **err_info, int64_t *data_offset) {
         bytes_needed -= (unsigned int)bytes_read;
         *data_offset += bytes_read;
         ptr += bytes_read;
+        ws_buffer_increase_length(&rec->data, bytes_read);
     }
     return true;
 }
