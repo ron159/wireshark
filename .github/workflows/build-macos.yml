@@ -51,7 +51,25 @@ jobs:
         working-directory: build
         run: >-
           python -m pytest -q ../test/suite_dfilter ../test/suite_unittests.py::TestUnitTests ../test/suite_translation.py
+          ../test/suite_follow.py ../test/suite_follow_dccp.py ../test/suite_follow_multistream.py
           --disable-capture --disable-gui --junitxml=test-results.xml
+
+      - name: Verify Follow Stream uses a single scan
+        shell: bash
+        run: |
+          # The driver reuses the GUI's library paths; keep it out of the app archive.
+          trap 'rm -f build/run/Wireshark.app/Contents/MacOS/follow_stream_filter_test' EXIT
+          python test/qt/run_follow_stream_filter_test.py --build-dir build 2>&1 | tee build/follow-stream-filter-test.log
+
+      - name: Test packet comparison and item-view rendering
+        shell: bash
+        run: |
+          cmake -S test/qt -B build/qt-tests -G Ninja -DCMAKE_PREFIX_PATH="$(brew --prefix qtbase)"
+          cmake --build build/qt-tests --parallel 3
+          ctest --test-dir build/qt-tests --output-on-failure
+          trap 'rm -f build/run/Wireshark.app/Contents/MacOS/packet_comparison_integration' EXIT
+          python test/qt/run_packet_comparison_test.py --build-dir build --large-source --language zh_CN --theme light --screenshot-dir build/comparison-light 2>&1 | tee build/packet-comparison-test.log
+          QT_QPA_PLATFORM=cocoa python test/qt/run_packet_comparison_test.py --build-dir build --no-build --pcapng --language zh_CN --theme dark --screenshot-dir build/comparison-dark 2>&1 | tee -a build/packet-comparison-test.log
 
       - name: Bundle dependencies
         run: LIBPREFIX="$(brew --prefix)" cmake --build build --parallel 3 --target wireshark_app_bundle
@@ -79,6 +97,10 @@ jobs:
           name: macos-arm64-diagnostics
           path: |
             build/test-results.xml
+            build/follow-stream-filter-test.log
+            build/packet-comparison-test.log
+            build/comparison-light/*.png
+            build/comparison-dark/*.png
             build/CMakeFiles/CMakeConfigureLog.yaml
           if-no-files-found: ignore
           retention-days: 7

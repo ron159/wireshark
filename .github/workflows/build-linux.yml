@@ -60,10 +60,17 @@ jobs:
           # Pytest 7 discovers custom options from conftest after these paths.
           python3 -m pytest \
             suite_dfilter suite_translation.py \
+            suite_follow.py suite_follow_dccp.py suite_follow_multistream.py \
             suite_unittests.py::TestUnitTests::test_unit_column_test \
             -q --disable-capture --disable-gui \
             --program-path "$GITHUB_WORKSPACE/${{ steps.tests.outputs.build_dir }}/run" \
             --junitxml="$GITHUB_WORKSPACE/linux-regression.xml"
+
+      - name: Test packet comparison logic
+        run: |
+          cmake -S test/qt -B qt-tests
+          cmake --build qt-tests --parallel 2 --target packet_comparison_test
+          ctest --test-dir qt-tests -R '^packet_comparison$' --output-on-failure
 
       - name: Collect packages and build identity
         run: |

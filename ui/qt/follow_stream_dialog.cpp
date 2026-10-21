@@ -43,6 +43,7 @@
 #include <QPrintDialog>
 #include <QPrinter>
 #include <QScrollBar>
+#include <QTimer>
 #include <glib.h>
 
 // To do:
@@ -69,6 +70,9 @@ FollowStreamDialog::FollowStreamDialog(QWidget &parent, CaptureFile &cf, int pro
     follower_(NULL),
     previous_filter_(previous_filter),
     follow_filter_(),
+    follow_filter_pending_(false),
+    rescan_active_(false),
+    follow_generation_(0),
     client_buffer_count_(0),
     server_buffer_count_(0),
     client_packet_count_(0),
@@ -82,6 +86,30 @@ FollowStreamDialog::FollowStreamDialog(QWidget &parent, CaptureFile &cf, int pro
 {
     ui->setupUi(this);
     loadGeometry(parent.width() * 2 / 3, parent.height());
+
+    // The display-filter scan also collects our tap data. WiresharkDialog
+    // tracks standalone retaps, so account for rescans here as well.
+    connect(&cap_file_, &CaptureFile::captureEvent, this,
+            [this, scan_generation = 0U](CaptureEvent event) mutable {
+        if (event.captureContext() != CaptureEvent::Rescan) {
+            return;
+        }
+        if (event.eventType() == CaptureEvent::Started) {
+            rescan_active_ = true;
+            scan_generation = follow_generation_;
+            beginRetapPackets();
+        } else if (event.eventType() == CaptureEvent::Finished && rescan_active_) {
+            rescan_active_ = false;
+            // A filter or preference change can interrupt and restart a scan.
+            // Keep collecting until its final pass, rather than showing a
+            // partial stream and removing the listener before that pass.
+            capture_file *cf = cap_file_.capFile();
+            if (scan_generation == follow_generation_) {
+                follow_filter_pending_ = cf && cf->redissection_queued != RESCAN_NONE;
+            }
+            endRetapPackets();
+        }
+    });
 
     ui->streamNumberSpinBox->setStyleSheet("QSpinBox { min-width: 2em; }");
     ui->subStreamNumberSpinBox->setStyleSheet("QSpinBox { min-width: 2em; }");
@@ -1119,13 +1147,15 @@ bool FollowStreamDialog::follow(bool use_stream_index, unsigned stream_num, unsi
         ui->subStreamNumberLabel->setVisible(false);
     }
 
+    follow_filter_pending_ = true;
+    follow_generation_++;
     updateWidgets(true);
 
     setWindowSubtitle(tr("Follow %1 Stream (%2)").arg(proto_get_protocol_short_name(find_protocol_by_id(get_follow_proto_id(follower_))),
                                                 follow_filter_));
-    cap_file_.retapPackets();
 
-    // Apply after retapping so the stream listener is removed before filtering.
+    // Filter the main list and collect the stream in the same pass. Completion
+    // is handled by the rescan event, since filter actions can be queued.
     emit updateFilter(follow_filter_, true);
 
     return true;
@@ -1133,20 +1163,37 @@ bool FollowStreamDialog::follow(bool use_stream_index, unsigned stream_num, unsi
 
 void FollowStreamDialog::endRetapPackets()
 {
-    if (listening()) {
+    // A dialog opened during a scan can receive its finish without its start.
+    if (retapDepth() < 1) {
+        return;
+    }
+
+    if (listening() && !follow_filter_pending_) {
         removeTapListeners();
 
-        ui->cbDirections->blockSignals(true);
-        ui->cbDirections->clear();
-        ui->cbDirections->addItem(bothDirectionsString());
-        ui->cbDirections->addItem(clientToServerString());
-        ui->cbDirections->addItem(serverToClientString());
-        ui->cbDirections->blockSignals(false);
+        // Rescan Finished is emitted before file.c restores the selected frame.
+        // Render after that stack unwinds: large streams process UI events.
+        const unsigned generation = follow_generation_;
+        QTimer::singleShot(0, this, [this, generation]() {
+            if (generation != follow_generation_ || file_closed_ || dialogClosed()) {
+                return;
+            }
+            beginRetapPackets();
 
-        followStream();
-        fillHintLabel();
+            ui->cbDirections->blockSignals(true);
+            ui->cbDirections->clear();
+            ui->cbDirections->addItem(bothDirectionsString());
+            ui->cbDirections->addItem(clientToServerString());
+            ui->cbDirections->addItem(serverToClientString());
+            ui->cbDirections->blockSignals(false);
 
-        updateWidgets(false);
+            followStream();
+            if (generation == follow_generation_ && !file_closed_ && !dialogClosed()) {
+                fillHintLabel();
+                updateWidgets(false);
+            }
+            WiresharkDialog::endRetapPackets();
+        });
     }
 
     WiresharkDialog::endRetapPackets();

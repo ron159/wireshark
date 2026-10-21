@@ -1120,6 +1120,11 @@ void PacketList::showContextMenuForSourceIndex(const QModelIndex &source_index, 
         ctx_menu->addAction(window()->findChild<QAction *>("actionViewUnpinAllRows"));
     }
     ctx_menu->addMenu(window()->findChild<QMenu *>("menuPacketComment"));
+    ctx_menu->addSeparator();
+    ctx_menu->addAction(window()->findChild<QAction *>("actionCompareSelectedPackets"));
+    ctx_menu->addAction(window()->findChild<QAction *>("actionSetComparisonBaseline"));
+    ctx_menu->addAction(window()->findChild<QAction *>("actionCompareWithBaseline"));
+    ctx_menu->addAction(window()->findChild<QAction *>("actionClearComparisonBaseline"));
 
     ctx_menu->addSeparator();
 

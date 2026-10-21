@@ -253,6 +253,9 @@ private:
     };
 
     Ui::WiresharkMainWindow   *main_ui_;              /**< Qt Designer-generated UI object. */
+    unsigned comparison_baseline_ = 0;
+    void updatePacketComparisonActions();
+    void comparePackets(bool baseline);
     QFont                      mono_font_;             /**< Monospace font used for hex/byte displays. */
 #if defined(HAVE_LIBNL) && defined(HAVE_NL80211)
     WirelessFrame             *wireless_frame_;        /**< Wireless toolbar frame for 802.11 channel control. */

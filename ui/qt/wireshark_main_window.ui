@@ -461,6 +461,11 @@
     <property name="title">
      <string>&amp;Analyze</string>
     </property>
+    <addaction name="actionCompareSelectedPackets"/>
+    <addaction name="actionSetComparisonBaseline"/>
+    <addaction name="actionCompareWithBaseline"/>
+    <addaction name="actionClearComparisonBaseline"/>
+    <addaction name="separator"/>
     <widget class="QMenu" name="menuApplyAsFilter">
      <property name="title">
       <string>Apply as Filter</string>
@@ -2896,6 +2901,19 @@
    <property name="toolTip">
     <string>Show this packet in a separate window.</string>
    </property>
+  </action>
+  <action name="actionCompareSelectedPackets">
+   <property name="text"><string>Compare Selected Packets…</string></property>
+   <property name="toolTip"><string>Select exactly two packets to compare their protocol fields and bytes</string></property>
+  </action>
+  <action name="actionSetComparisonBaseline">
+   <property name="text"><string>Set as Comparison Baseline</string></property>
+  </action>
+  <action name="actionCompareWithBaseline">
+   <property name="text"><string>Compare with Baseline…</string></property>
+  </action>
+  <action name="actionClearComparisonBaseline">
+   <property name="text"><string>Clear Comparison Baseline</string></property>
   </action>
   <action name="actionContextShowLinkedPacketInNewWindow">
    <property name="text">

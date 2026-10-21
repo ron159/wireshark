@@ -14,6 +14,24 @@ target, and packets without that field show an empty cell.
 
 ## Downloads and continuous builds
 
+### 5.1.2
+
+Following a stream now collects its contents while applying the main display
+filter, using one scan instead of a separate retap followed by filtering. Queued
+filter changes, cancellation, and closing the dialog during a scan retain their
+normal behavior.
+
+Select two packets, then use **Analyze → Compare Selected Packets…** (also in
+the packet-list context menu). Alternatively, set one packet as the comparison
+baseline and compare another packet against it. The snapshot window aligns typed
+protocol fields, highlights offset differences in two Hex/ASCII views, and offers
+search, difference navigation, swapping, copying and reversible ignore rules.
+Capture metadata and generated fields are excluded by default; raw TCP sequence
+and acknowledgment values remain included. Field rules never hide byte changes.
+Snapshots survive filtering and closing/reloading the source. The first version
+compares packets from the same capture; byte comparison uses offsets, with a
+clear warning for truncated captures. See [the implementation plan](tasks/plan.md).
+
 Open [Build packages](https://github.com/ron159/wireshark/actions/workflows/build.yml),
 select a successful run, and download its Artifacts:
 

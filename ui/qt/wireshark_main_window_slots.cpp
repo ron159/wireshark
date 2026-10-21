@@ -19,6 +19,7 @@
 #include <ui/qt/manager/interface_list_manager.h>
 #include <ui/qt/widgets/capture_card_widget.h>
 #include "packet_dialog.h"
+#include "packet_comparison_dialog.h"
 #include "search_frame.h"
 
 /*
@@ -661,6 +662,8 @@ void WiresharkMainWindow::captureEventHandler(CaptureEvent ev)
     case CaptureEvent::Reload:
         switch (ev.eventType()) {
         case CaptureEvent::Started:
+            comparison_baseline_ = 0;
+            updatePacketComparisonActions();
             captureFileReadStarted(tr("Reloading"));
             break;
         case CaptureEvent::Finished:
@@ -826,6 +829,8 @@ void WiresharkMainWindow::captureFileReadFinished() {
 }
 
 void WiresharkMainWindow::captureFileClosing() {
+    comparison_baseline_ = 0;
+    updatePacketComparisonActions();
     setMenusForCaptureFile(true);
     setTitlebarForCaptureFile();
     setForCapturedPackets(false);
@@ -1124,6 +1129,7 @@ void WiresharkMainWindow::setEditCommentsMenu()
 
 void WiresharkMainWindow::setMenusForSelectedPacket()
 {
+    updatePacketComparisonActions();
     bool is_ip = false, is_tcp = false, is_udp = false, is_sctp = false, is_tls = false, is_rtp = false, is_lte_rlc = false,
              is_quic = false, is_exported_pdu = false;
 
@@ -2632,6 +2638,19 @@ void WiresharkMainWindow::connectViewMenuActions()
     connect(main_ui_->actionViewShowPacketInNewWindow, &QAction::triggered, this,
             [this]() { openPacketDialog(); });
 
+    connect(main_ui_->actionCompareSelectedPackets, &QAction::triggered, this, [this] { comparePackets(false); });
+    connect(main_ui_->actionCompareWithBaseline, &QAction::triggered, this, [this] { comparePackets(true); });
+    connect(main_ui_->actionSetComparisonBaseline, &QAction::triggered, this, [this] {
+        const auto frames = selectedFrames();
+        if (frames.size() == 1) comparison_baseline_ = frames.first()->num;
+        updatePacketComparisonActions();
+    });
+    connect(main_ui_->actionClearComparisonBaseline, &QAction::triggered, this, [this] {
+        comparison_baseline_ = 0;
+        updatePacketComparisonActions();
+    });
+    updatePacketComparisonActions();
+
     // This is only used in ProtoTree. Defining it here makes more sense.
     connect(main_ui_->actionContextShowLinkedPacketInNewWindow, &QAction::triggered, this,
             [this]() { openPacketDialog(true); });
@@ -2902,6 +2921,41 @@ void WiresharkMainWindow::colorizeWithFilter(QByteArray filter, int color_number
         coloring_rules_dialog.exec();
     }
     main_ui_->actionViewColorizeResetColorization->setEnabled(tmp_color_filters_used());
+}
+
+void WiresharkMainWindow::updatePacketComparisonActions()
+{
+    const auto frames = selectedFrames();
+    auto *cf = capture_file_.capFile();
+    bool ready = cf && !cf->read_lock && cf->state != FILE_READ_PENDING;
+    main_ui_->actionCompareSelectedPackets->setEnabled(ready && frames.size() == 2);
+    main_ui_->actionSetComparisonBaseline->setEnabled(ready && frames.size() == 1);
+    main_ui_->actionCompareWithBaseline->setEnabled(ready && comparison_baseline_ && frames.size() == 1 &&
+                                                  frames.first()->num != comparison_baseline_);
+    main_ui_->actionClearComparisonBaseline->setEnabled(comparison_baseline_ != 0);
+    main_ui_->actionCompareWithBaseline->setText(comparison_baseline_ ?
+        tr("Compare with Baseline #%1…").arg(comparison_baseline_) : tr("Compare with Baseline…"));
+}
+
+void WiresharkMainWindow::comparePackets(bool baseline)
+{
+    const auto frames = selectedFrames();
+    unsigned left = 0, right = 0;
+    if (baseline && comparison_baseline_ && frames.size() == 1) {
+        left = comparison_baseline_; right = frames.first()->num;
+    } else if (!baseline && frames.size() == 2) {
+        left = std::min(frames[0]->num, frames[1]->num);
+        right = std::max(frames[0]->num, frames[1]->num);
+    }
+    if (!left || !right || left == right) return;
+    QString error;
+    auto *dialog = PacketComparisonDialog::create(this, capture_file_, left, right, error);
+    if (!dialog) {
+        QMessageBox::warning(this, tr("Compare Packets"), error);
+        return;
+    }
+    connect(dialog, &PacketComparisonDialog::goToPacket, this, [this](unsigned number) { packet_list_->goToPacket(number); });
+    dialog->show();
 }
 
 void WiresharkMainWindow::openPacketDialog(bool from_reference)

@@ -135,6 +135,13 @@ void HexDataSourceView::setAnnotations(const QVector<ByteViewAnnotation> &annota
     viewport()->update();
 }
 
+QPair<int, int> HexDataSourceView::visibleByteRange() const
+{
+    const int first = verticalScrollBar()->value() * row_width_;
+    const int rows = viewport()->height() / qMax(1, line_height_) + 2;
+    return {first, rows * row_width_};
+}
+
 bool HexDataSourceView::selectionRange(int *start, int *length) const
 {
     if (selection_start_ < 0 || selection_end_ < 0) {

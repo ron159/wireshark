@@ -19437,6 +19437,34 @@ Preferences → Protocols → TCP to use this table.</source>
         <source>Rescanning</source>
         <translation>正在重新扫描</translation>
     </message>
+    <message>
+        <source>Compare Selected Packets…</source>
+        <translation>比较选中的两个包…</translation>
+    </message>
+    <message>
+        <source>Select exactly two packets to compare their protocol fields and bytes</source>
+        <translation>选择恰好两个包，比较协议字段和字节</translation>
+    </message>
+    <message>
+        <source>Set as Comparison Baseline</source>
+        <translation>设为对比基准包</translation>
+    </message>
+    <message>
+        <source>Compare with Baseline…</source>
+        <translation>与基准包比较…</translation>
+    </message>
+    <message>
+        <source>Clear Comparison Baseline</source>
+        <translation>清除对比基准包</translation>
+    </message>
+    <message>
+        <source>Compare with Baseline #%1…</source>
+        <translation>与基准包 #%1 比较…</translation>
+    </message>
+    <message>
+        <source>Compare Packets</source>
+        <translation>比较数据包</translation>
+    </message>
 </context>
 <context>
     <name>WlanStatisticsDialog</name>
@@ -38811,6 +38839,177 @@ Please turn one of those options off.</source>
     <message>
         <source>Cancel</source>
         <translation>取消</translation>
+    </message>
+</context>
+<context>
+    <name>PacketComparisonDialog</name>
+    <message>
+        <source> This data source is absent on one side.</source>
+        <translation> 一侧没有此数据源。</translation>
+    </message>
+    <message>
+        <source> Truncated capture: uncaptured bytes cannot be compared.</source>
+        <translation> 抓包已截断：无法比较未捕获的字节。</translation>
+    </message>
+    <message>
+        <source> · uncertain match</source>
+        <translation> · 匹配不确定</translation>
+    </message>
+    <message>
+        <source>Capture metadata</source>
+        <translation>采集元数据</translation>
+    </message>
+    <message>
+        <source>Changed</source>
+        <translation>修改</translation>
+    </message>
+    <message>
+        <source>Changed: %1 · Left only: %2 · Right only: %3 · Ignored differences: %4 · Custom rules: %5</source>
+        <translation>修改：%1 · 仅左侧：%2 · 仅右侧：%3 · 已忽略差异：%4 · 自定义规则：%5</translation>
+    </message>
+    <message>
+        <source>Compare Packets — %1</source>
+        <translation>比较数据包 — %1</translation>
+    </message>
+    <message>
+        <source>Copy result</source>
+        <translation>复制结果</translation>
+    </message>
+    <message>
+        <source>Could not read packet %1.</source>
+        <translation>无法读取数据包 %1。</translation>
+    </message>
+    <message>
+        <source>Data sources are paired by name and occurrence. Select Frame for original bytes.</source>
+        <translation>数据源按名称及出现顺序配对。选择 Frame 查看原始字节。</translation>
+    </message>
+    <message>
+        <source>Equal</source>
+        <translation>相同</translation>
+    </message>
+    <message>
+        <source>Exact field abbreviations, separated by commas. Empty the list to reset. Raw byte differences remain visible.</source>
+        <translation>输入完整字段 abbreviation，以逗号分隔。清空列表可重置。原始字节差异仍然显示。</translation>
+    </message>
+    <message>
+        <source>Field</source>
+        <translation>字段</translation>
+    </message>
+    <message>
+        <source>Find a field or value…</source>
+        <translation>查找字段或值…</translation>
+    </message>
+    <message>
+        <source>Generated fields</source>
+        <translation>计算字段</translation>
+    </message>
+    <message>
+        <source>Generated values can depend on conversation state and relative sequence numbers.</source>
+        <translation>计算字段的值可能依赖会话状态及相对序列号。</translation>
+    </message>
+    <message>
+        <source>Go to left packet</source>
+        <translation>跳转至左包</translation>
+    </message>
+    <message>
+        <source>Go to right packet</source>
+        <translation>跳转至右包</translation>
+    </message>
+    <message>
+        <source>Ignore dynamic fields</source>
+        <translation>忽略动态字段</translation>
+    </message>
+    <message>
+        <source>Ignore field %1</source>
+        <translation>忽略字段 %1</translation>
+    </message>
+    <message>
+        <source>Ignore rules</source>
+        <translation>忽略规则</translation>
+    </message>
+    <message>
+        <source>Ignore rules…</source>
+        <translation>忽略规则…</translation>
+    </message>
+    <message>
+        <source>Ignored</source>
+        <translation>已忽略</translation>
+    </message>
+    <message>
+        <source>Left #%1</source>
+        <translation>左包 #%1</translation>
+    </message>
+    <message>
+        <source>Left only</source>
+        <translation>仅左侧</translation>
+    </message>
+    <message>
+        <source>Next difference</source>
+        <translation>下一个差异</translation>
+    </message>
+    <message>
+        <source>Offset comparison · %1 changed ranges · Left: %2/%3 captured bytes · Right: %4/%5 captured bytes. Field ignore rules do not hide byte differences.</source>
+        <translation>按偏移比较 · %1 个差异范围 · 左包已捕获 %2/%3 字节 · 右包已捕获 %4/%5 字节。字段忽略规则不隐藏字节差异。</translation>
+    </message>
+    <message>
+        <source>Only differences</source>
+        <translation>只看差异</translation>
+    </message>
+    <message>
+        <source>Packet comparison: #%1 ↔ #%2</source>
+        <translation>双包对比：#%1 ↔ #%2</translation>
+    </message>
+    <message>
+        <source>Packet data sources exceed the 64 MiB comparison limit.</source>
+        <translation>数据包的数据源超过 64 MiB 对比上限。</translation>
+    </message>
+    <message>
+        <source>Previous difference</source>
+        <translation>上一个差异</translation>
+    </message>
+    <message>
+        <source>Right #%1</source>
+        <translation>右包 #%1</translation>
+    </message>
+    <message>
+        <source>Right only</source>
+        <translation>仅右侧</translation>
+    </message>
+    <message>
+        <source>Snapshot: %1</source>
+        <translation>快照来源：%1</translation>
+    </message>
+    <message>
+        <source>Source closed or reloaded. This snapshot remains available.</source>
+        <translation>源文件已关闭或重新加载，此快照仍可查看。</translation>
+    </message>
+    <message>
+        <source>State</source>
+        <translation>状态</translation>
+    </message>
+    <message>
+        <source>Swap</source>
+        <translation>交换左右</translation>
+    </message>
+    <message>
+        <source>The capture file is busy. Try again after processing finishes.</source>
+        <translation>抓包文件正在处理，请等待完成后重试。</translation>
+    </message>
+    <message>
+        <source>The protocol tree exceeds the comparison limit (50,000 fields or 256 levels).</source>
+        <translation>协议树超过对比上限（50,000 个字段或 256 层）。</translation>
+    </message>
+    <message>
+        <source>Type changed</source>
+        <translation>类型变化</translation>
+    </message>
+    <message>
+        <source>Unavailable on the right (truncated)</source>
+        <translation>右侧不可用（抓包截断）</translation>
+    </message>
+    <message>
+        <source>Unavailable on the left (truncated)</source>
+        <translation>左侧不可用（抓包截断）</translation>
     </message>
 </context>
 </TS>

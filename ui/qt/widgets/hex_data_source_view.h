@@ -78,6 +78,8 @@ public:
      * @param annotations The new annotation list.
      */
     void setAnnotations(const QVector<ByteViewAnnotation> &annotations);
+    /** Return the first visible byte and the visible byte count (including a partial row). */
+    QPair<int, int> visibleByteRange() const;
 
     // ── Selection accessors ───────────────────────────────────────────────
 

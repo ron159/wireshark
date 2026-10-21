@@ -89,6 +89,9 @@ jobs:
           test/suite_unittests.py::TestUnitTests::test_unit_column_test
           test/suite_dfilter
           test/suite_translation.py
+          test/suite_follow.py
+          test/suite_follow_dccp.py
+          test/suite_follow_multistream.py
 
       - name: Build NSIS installer with documentation and runtime dependencies
         run: |

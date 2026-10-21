@@ -310,6 +310,23 @@ void CaptureFile::captureFileEvent(int event, void *data)
         /* Flush any pending tapped packet before emitting captureFileRetapFinished() */
         emit captureEvent(CaptureEvent(CaptureEvent::Retap, CaptureEvent::Finished));
         emit captureEvent(CaptureEvent(CaptureEvent::Retap, CaptureEvent::Flushed));
+        // Unlike a rescan, a standalone retap does not consume a display-filter
+        // or preference change queued while it held read_lock. Handle all Qt
+        // retap callers here, after the tap and its callers have unwound.
+        QTimer::singleShot(0, this, [this]() {
+            if (!cap_file_ || cap_file_->read_lock ||
+                    cap_file_->state == FILE_CLOSED || cap_file_->state == FILE_READ_PENDING ||
+                    cap_file_->redissection_queued == RESCAN_NONE) {
+                return;
+            }
+            const rescan_type queued = cap_file_->redissection_queued;
+            cap_file_->redissection_queued = RESCAN_NONE;
+            if (queued == RESCAN_REDISSECT) {
+                cf_redissect_packets(cap_file_);
+            } else {
+                cf_filter_packets(cap_file_, cap_file_->dfilter, true);
+            }
+        });
         break;
     case(cf_cb_file_merge_started):
         emit captureEvent(CaptureEvent(CaptureEvent::Merge, CaptureEvent::Started));

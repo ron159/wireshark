@@ -280,6 +280,8 @@ set(WIRESHARK_QT_HEADERS
 	packet_comment_dialog.h
 	packet_diagram.h
 	packet_dialog.h
+	packet_comparison_dialog.h
+	utils/packet_comparison.h
 	packet_format_group_box.h
 	packet_format_stack.h
 	packet_list.h
@@ -637,6 +639,8 @@ set(WIRESHARK_QT_SRC
 	packet_comment_dialog.cpp
 	packet_diagram.cpp
 	packet_dialog.cpp
+	packet_comparison_dialog.cpp
+	utils/packet_comparison.cpp
 	packet_format_group_box.cpp
 	packet_format_stack.cpp
 	packet_list.cpp

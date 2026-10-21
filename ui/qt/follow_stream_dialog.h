@@ -86,7 +86,7 @@ protected:
 
 
     /**
-     * @brief Called when retap is complete.
+     * @brief Finish collecting the stream after a display-filter scan.
      */
     void endRetapPackets() override;
 
@@ -352,6 +352,15 @@ private:
 
     /** The filter string representing this specific stream. */
     QString                 follow_filter_;
+
+    /** Keep the tap attached until the final display-filter scan completes. */
+    bool                    follow_filter_pending_;
+
+    /** Whether this dialog received the start of the current rescan. */
+    bool                    rescan_active_;
+
+    /** Invalidate a queued render when a newer stream is requested. */
+    unsigned                follow_generation_;
 
     /** Counter for buffers received from the client. */
     int                     client_buffer_count_;
