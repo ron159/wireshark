@@ -1,5 +1,7 @@
 # Wireshark with Dynamic Decode
 
+[![Latest fork release](https://img.shields.io/github/v/release/ron159/wireshark?display_name=tag&sort=date)](https://github.com/ron159/wireshark/releases/latest)
+
 [![Build packages](https://github.com/ron159/wireshark/actions/workflows/build.yml/badge.svg)](https://github.com/ron159/wireshark/actions/workflows/build.yml)
 
 This is an unofficial Wireshark fork with a packet-list column that follows the
