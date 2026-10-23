@@ -16,6 +16,21 @@ target, and packets without that field show an empty cell.
 
 ## Downloads and continuous builds
 
+### 5.1.3
+
+Open **Follow Stream** while capturing to keep receiving new stream data.
+**Pause updates** freezes the display while collection continues; resuming catches
+up. **Auto-scroll** follows the tail when you are already at the bottom, preserving
+your position and selection when reading earlier data. Each window keeps its own
+display format, and UTF-8 characters can span packets in either direction.
+
+Incremental updates do not rescan the capture. Stop/close retains collected data;
+filter changes and retaps rebuild it without duplicates. A live window stops
+collecting at 64 MiB of matched captured bytes or stream output, or 100,000 matched
+packets, with an explicit status. The threshold is checked at record boundaries;
+capture itself continues. Reopen Follow after stopping capture to inspect the
+complete offline stream. See [live tracking behavior and validation](tasks/live-follow.md).
+
 ### 5.1.2
 
 Following a stream now collects its contents while applying the main display

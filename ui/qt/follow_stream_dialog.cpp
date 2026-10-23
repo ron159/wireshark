@@ -39,7 +39,6 @@
 #include <QKeyEvent>
 #include <QMenu>
 #include <QMessageBox>
-#include <QMutex>
 #include <QPrintDialog>
 #include <QPrinter>
 #include <QScrollBar>
@@ -47,7 +46,6 @@
 #include <glib.h>
 
 // To do:
-// - Show text while tapping.
 // - Instead of calling QMessageBox, display the error message in the text
 //   box and disable the appropriate controls.
 // - Add a progress bar and connect captureCaptureUpdateContinue to it
@@ -55,11 +53,9 @@
 // Matches SplashOverlay.
 static int info_update_freq_ = 100;
 
-// Handle the loop breaking notification properly
-static QMutex loop_break_mutex;
-
-// Indicates that a Follow Stream is currently running
-static bool isReadRunning;
+// Bound long-running live collectors, including out-of-order TCP fragments.
+static constexpr uint64_t live_byte_limit_ = 64 * 1024 * 1024;
+static constexpr unsigned live_packet_limit_ = 100000;
 
 Q_DECLARE_METATYPE(bytes_show_type)
 
@@ -86,6 +82,15 @@ FollowStreamDialog::FollowStreamDialog(QWidget &parent, CaptureFile &cf, int pro
 {
     ui->setupUi(this);
     loadGeometry(parent.width() * 2 / 3, parent.height());
+    live_capture_ = cf.capFile() && cf.capFile()->state == FILE_READ_IN_PROGRESS;
+    live_window_ = live_capture_;
+    live_timer_.setInterval(100);
+    connect(&live_timer_, &QTimer::timeout, this, &FollowStreamDialog::appendStream);
+    connect(ui->pauseLiveCheckBox, &QCheckBox::toggled, this, [this](bool paused) {
+        if (!paused) appendStream();
+        updateLiveWidgets();
+    });
+    updateLiveWidgets();
 
     // The display-filter scan also collects our tap data. WiresharkDialog
     // tracks standalone retaps, so account for rescans here as well.
@@ -124,6 +129,18 @@ FollowStreamDialog::FollowStreamDialog(QWidget &parent, CaptureFile &cf, int pro
     memset(&follow_info_, 0, sizeof(follow_info_));
     follow_info_.show_stream = BOTH_HOSTS;
     follow_info_.substream_id = SUBSTREAM_UNUSED;
+    follow_info_.gui_data = this;
+
+#ifdef HAVE_LIBPCAP
+    connect(&cap_file_, &CaptureFile::captureEvent, this, [this](CaptureEvent event) {
+        if (event.captureContext() == CaptureEvent::Update && event.eventType() == CaptureEvent::Finished) {
+            live_capture_ = false;
+            // Let a pending rescan finish before removing its listener. The
+            // timer also drains any final records after the capture stops.
+            QTimer::singleShot(0, this, &FollowStreamDialog::appendStream);
+        }
+    });
+#endif
 
     nstime_set_zero(&last_ts_);
 
@@ -208,8 +225,9 @@ FollowStreamDialog::FollowStreamDialog(QWidget &parent, CaptureFile &cf, int pro
 
 FollowStreamDialog::~FollowStreamDialog()
 {
+    removeTapListeners();
     delete ui;
-    resetStream(); // Frees payload
+    follow_reset_stream(&follow_info_);
 }
 
 void FollowStreamDialog::addCodecs(const QMap<QString, const char *> &codecMap)
@@ -310,6 +328,11 @@ void FollowStreamDialog::updateWidgets(bool follow_in_progress)
     b_filter_apply_->setEnabled(enable);
     b_print_->setEnabled(enable);
     b_save_->setEnabled(enable);
+    // Owned payload remains available after closing the capture, including
+    // records that arrived while the display was paused.
+    ui->pauseLiveCheckBox->setEnabled(!follow_in_progress);
+    ui->autoScrollCheckBox->setEnabled(!follow_in_progress);
+    updateLiveWidgets();
 
     WiresharkDialog::updateWidgets();
 }
@@ -375,7 +398,7 @@ void FollowStreamDialog::saveAs()
     // XXX: What if truncated_ is true? We should save the entire stream.
     // Unconditionally save data as UTF-8 (even if data is decoded otherwise).
     QByteArray bytes = ui->teStreamContent->toPlainText().toUtf8();
-    if (recent.gui_follow_show == SHOW_RAW) {
+    if (ui->cbCharset->currentData().value<bytes_show_type>() == SHOW_RAW) {
         // The "Raw" format is currently displayed as hex data and needs to be
         // converted to binary data. fromHex() skips over non hex characters
         // including line breaks, which is what we want.
@@ -433,7 +456,7 @@ void FollowStreamDialog::cbCharsetCurrentIndexChanged(int idx)
     if (idx < 0) return;
     recent.gui_follow_show = ui->cbCharset->currentData().value<bytes_show_type>();
 
-    switch (recent.gui_follow_show) {
+    switch (ui->cbCharset->currentData().value<bytes_show_type>()) {
     case SHOW_EBCDIC:
     case SHOW_ASCII:
     case SHOW_CODEC:
@@ -578,23 +601,122 @@ void FollowStreamDialog::removeStreamControls()
 void FollowStreamDialog::resetStream(void *tap_data)
 {
     follow_info_t *follow_info = static_cast<follow_info_t*>(tap_data);
+    auto *dialog = static_cast<FollowStreamDialog *>(follow_info->gui_data);
+    dialog->rendered_head_ = nullptr;
+    dialog->render_reset_ = true;
+    dialog->render_generation_++;
+    dialog->collection_limited_ = false;
+    dialog->collected_capture_bytes_ = dialog->collected_payload_bytes_ = 0;
+    dialog->collected_packets_ = 0;
+    dialog->collected_last_packet_ = 0;
     follow_reset_stream(follow_info);
-    // If we ever draw the text while tapping (instead of only after
-    // the tap finishes), reset the GUI here too.
 }
 
-void FollowStreamDialog::resetStream()
+tap_packet_status FollowStreamDialog::collectStream(void *tap_data, packet_info *pinfo,
+        epan_dissect_t *edt, const void *data, tap_flags_t flags)
 {
-    FollowStreamDialog::resetStream(&follow_info_);
+    auto *info = static_cast<follow_info_t *>(tap_data);
+    auto *dialog = static_cast<FollowStreamDialog *>(info->gui_data);
+    if (dialog->collection_limited_) return TAP_PACKET_FAILED;
+    GList *old_head = info->payload;
+    const tap_packet_status status = get_follow_tap_handler(dialog->follower_)(info, pinfo, edt, data, flags);
+    if (dialog->live_window_) {
+        if (dialog->collected_last_packet_ != pinfo->num) {
+            dialog->collected_capture_bytes_ += pinfo->fd->cap_len;
+            dialog->collected_packets_++;
+            dialog->collected_last_packet_ = pinfo->num;
+        }
+        for (GList *node = info->payload; node != old_head; node = node->next) {
+            dialog->collected_payload_bytes_ += static_cast<follow_record_t *>(node->data)->data->len;
+        }
+        dialog->collection_limited_ = dialog->collected_capture_bytes_ >= live_byte_limit_ ||
+                dialog->collected_payload_bytes_ >= live_byte_limit_ ||
+                dialog->collected_packets_ >= live_packet_limit_;
+    }
+    return status;
+}
+
+void FollowStreamDialog::updateLiveWidgets()
+{
+    ui->liveStatusLabel->setVisible(live_window_);
+    ui->pauseLiveCheckBox->setVisible(live_window_);
+    ui->autoScrollCheckBox->setVisible(live_window_);
+    if (file_closed_) {
+        ui->liveStatusLabel->setText(tr("Capture file closed"));
+    } else if (collection_limited_) {
+        ui->liveStatusLabel->setText(tr("Live tracking limit reached (64 MiB or 100,000 packets). Capture continues."));
+    } else if (ui->pauseLiveCheckBox->isChecked()) {
+        ui->liveStatusLabel->setText(live_capture_ ? tr("Display paused — still collecting") : tr("Capture stopped — display paused"));
+    } else {
+        ui->liveStatusLabel->setText(live_capture_ ? tr("Live tracking") : tr("Capture stopped"));
+    }
+}
+
+void FollowStreamDialog::updateStreamCounters()
+{
+    ui->cbDirections->blockSignals(true);
+    if (ui->cbDirections->count() == 0) {
+        ui->cbDirections->addItems({QString(), QString(), QString()});
+    }
+    ui->cbDirections->setItemText(0, bothDirectionsString());
+    ui->cbDirections->setItemText(1, clientToServerString());
+    ui->cbDirections->setItemText(2, serverToClientString());
+    ui->cbDirections->blockSignals(false);
+    if (!file_closed_) {
+        if (auto count = get_follow_stream_count_func(follower_)) {
+            ui->streamNumberSpinBox->blockSignals(true);
+            ui->streamNumberSpinBox->setMaximum(qMax(0, static_cast<int>(count()) - 1));
+            ui->streamNumberSpinBox->blockSignals(false);
+        }
+    }
+}
+
+void FollowStreamDialog::appendStream()
+{
+    capture_file *cf = cap_file_.capFile();
+    if (dialogClosed() || follow_filter_pending_ || retapDepth() || (cf && cf->read_lock)) {
+        return;
+    }
+    if (!live_capture_ || collection_limited_) removeTapListeners();
+    updateLiveWidgets();
+    if (ui->pauseLiveCheckBox->isChecked()) return;
+    QScrollBar *bar = ui->teStreamContent->verticalScrollBar();
+    const QTextCursor cursor = ui->teStreamContent->textCursor();
+    // QTextCursor positions track document edits, including an anchor at the
+    // old end. Save numeric positions so appending cannot extend a selection.
+    const int cursor_position = cursor.position();
+    const int cursor_anchor = cursor.anchor();
+    const int scroll = bar->value();
+    const bool at_bottom = bar->value() >= bar->maximum() - 1;
+    const bool reset = render_reset_;
+    if (reset) {
+        readStream();
+    } else if (rendered_head_ != follow_info_.payload) {
+        readFollowStream();
+        QTextCursor restored(ui->teStreamContent->document());
+        restored.setPosition(cursor_anchor);
+        restored.setPosition(cursor_position, QTextCursor::KeepAnchor);
+        ui->teStreamContent->setTextCursor(restored);
+    }
+    if (ui->autoScrollCheckBox->isChecked() && at_bottom && cursor_position == cursor_anchor) {
+        bar->setValue(bar->maximum());
+    } else if (!reset) {
+        bar->setValue(scroll);
+    }
+    updateStreamCounters();
+    fillHintLabel();
+    if (!live_capture_ && rendered_head_ == follow_info_.payload) live_timer_.stop();
 }
 
 void FollowStreamDialog::readStream()
 {
 
-    // interrupt any reading already running
-    loop_break_mutex.lock();
-    isReadRunning = false;
-    loop_break_mutex.unlock();
+    if (dialogClosed()) return;
+    if (live_window_ && ui->pauseLiveCheckBox->isChecked()) {
+        render_reset_ = true;
+        return;
+    }
+    render_generation_++;
 
     double scroll_ratio = 0.0;
     int doc_length = ui->teStreamContent->verticalScrollBar()->maximum() + ui->teStreamContent->verticalScrollBar()->pageStep();
@@ -603,7 +725,7 @@ void FollowStreamDialog::readStream()
     }
 
     ui->teStreamContent->clear();
-    switch (recent.gui_follow_show) {
+    switch (ui->cbCharset->currentData().value<bytes_show_type>()) {
 
     case SHOW_CARRAY:
     case SHOW_HEXDUMP:
@@ -626,12 +748,18 @@ void FollowStreamDialog::readStream()
     server_packet_count_ = 0;
     last_packet_ = 0;
     turns_ = 0;
+    rendered_head_ = nullptr;
+    global_client_pos_ = global_server_pos_ = 0;
+    render_reset_ = false;
+    nstime_set_zero(&last_ts_);
+    for (auto &decoder : utf8_decoders_) decoder.resetState();
 
     if (!follower_) {
         ws_assert_not_reached();
     }
 
     readFollowStream();
+    if (live_window_ && rendered_head_ != follow_info_.payload) live_timer_.start();
 
     ui->teStreamContent->moveCursor(QTextCursor::Start);
 
@@ -648,7 +776,8 @@ FollowStreamDialog::followStream()
 void FollowStreamDialog::addText(QString text, bool is_from_server, uint32_t packet_num, bool colorize)
 {
     bool marked = false;
-    frame_data *fdata = frame_data_sequence_find(cap_file_.capFile()->provider.frames, packet_num);
+    capture_file *cf = cap_file_.capFile();
+    frame_data *fdata = cf && !file_closed_ ? frame_data_sequence_find(cf->provider.frames, packet_num) : nullptr;
     if (fdata) {
         if (fdata->marked) {
             marked = true;
@@ -729,8 +858,9 @@ void FollowStreamDialog::showBuffer(QByteArray &buffer, size_t nchars, bool is_f
     if (last_packet_ == 0) {
         last_from_server_ = is_from_server;
     } else {
-        if (recent.gui_follow_delta == FOLLOW_DELTA_ALL ||
-            (recent.gui_follow_delta == FOLLOW_DELTA_TURN && last_from_server_ != is_from_server)) {
+        const auto delta_type = static_cast<follow_delta_type>(ui->deltaComboBox->currentIndex());
+        if (delta_type == FOLLOW_DELTA_ALL ||
+            (delta_type == FOLLOW_DELTA_TURN && last_from_server_ != is_from_server)) {
                 show_delta = true;
         }
     }
@@ -745,7 +875,7 @@ void FollowStreamDialog::showBuffer(QByteArray &buffer, size_t nchars, bool is_f
         last_ts_ = abs_ts;
     }
 
-    switch (recent.gui_follow_show) {
+    switch (ui->cbCharset->currentData().value<bytes_show_type>()) {
 
     case SHOW_EBCDIC:
     {
@@ -786,7 +916,11 @@ void FollowStreamDialog::showBuffer(QByteArray &buffer, size_t nchars, bool is_f
         if (show_delta || last_from_server_ != is_from_server) {
             addText("\n", is_from_server, packet_num);
         }
-        // This assumes that multibyte characters don't span packets in the
+        if (ui->cbCharset->currentText() == QStringLiteral("UTF-8")) {
+            addText(utf8_decoders_[is_from_server](buffer), is_from_server, packet_num);
+            break;
+        }
+        // For other codecs this assumes that multibyte characters don't span packets in the
         // stream. To handle that case properly (which might occur with fixed
         // block sizes, e.g. transferring over TFTP, we would need to create
         // two stateful decoders, one for each direction.
@@ -1098,10 +1232,15 @@ bool FollowStreamDialog::follow(bool use_stream_index, unsigned stream_num, unsi
     follow_info_.substream_id = sub_stream_num;
 
     /* data will be passed via tap callback*/
+    removeTapListeners();
+    live_timer_.stop();
+    ui->pauseLiveCheckBox->blockSignals(true);
+    ui->pauseLiveCheckBox->setChecked(false);
+    ui->pauseLiveCheckBox->blockSignals(false);
     if (!registerTapListener(get_follow_tap_string(follower_), &follow_info_,
                                 follow_filter_.toUtf8().constData(),
                                 0, FollowStreamDialog::resetStream,
-                                get_follow_tap_handler(follower_), NULL)) {
+                                FollowStreamDialog::collectStream, NULL)) {
         return false;
     }
 
@@ -1169,28 +1308,30 @@ void FollowStreamDialog::endRetapPackets()
     }
 
     if (listening() && !follow_filter_pending_) {
-        removeTapListeners();
+        if (!live_capture_) {
+            removeTapListeners();
+        }
 
         // Rescan Finished is emitted before file.c restores the selected frame.
         // Render after that stack unwinds: large streams process UI events.
         const unsigned generation = follow_generation_;
         QTimer::singleShot(0, this, [this, generation]() {
-            if (generation != follow_generation_ || file_closed_ || dialogClosed()) {
+            if (generation != follow_generation_ || file_closed_ || dialogClosed() ||
+                    follow_filter_pending_ || retapDepth() ||
+                    (cap_file_.capFile() && cap_file_.capFile()->read_lock)) {
                 return;
             }
             beginRetapPackets();
 
-            ui->cbDirections->blockSignals(true);
-            ui->cbDirections->clear();
-            ui->cbDirections->addItem(bothDirectionsString());
-            ui->cbDirections->addItem(clientToServerString());
-            ui->cbDirections->addItem(serverToClientString());
-            ui->cbDirections->blockSignals(false);
+            updateStreamCounters();
 
             followStream();
             if (generation == follow_generation_ && !file_closed_ && !dialogClosed()) {
                 fillHintLabel();
                 updateWidgets(false);
+                if (live_window_) {
+                    live_timer_.start();
+                }
             }
             WiresharkDialog::endRetapPackets();
         });
@@ -1201,6 +1342,11 @@ void FollowStreamDialog::endRetapPackets()
 
 void FollowStreamDialog::captureFileClosed()
 {
+    live_capture_ = false;
+    follow_filter_pending_ = false;
+    // Payload and addresses are owned by follow_info_, so queued display work
+    // can finish after the source file closes without accessing its frames.
+    if (live_window_) live_timer_.start();
     QString tooltip = tr("File closed.");
     ui->streamNumberSpinBox->setToolTip(tooltip);
     ui->streamNumberLabel->setToolTip(tooltip);
@@ -1209,7 +1355,6 @@ void FollowStreamDialog::captureFileClosed()
 
 void FollowStreamDialog::readFollowStream()
 {
-    uint32_t global_client_pos = 0, global_server_pos = 0;
     uint32_t *global_pos;
     bool skip;
     GList* cur;
@@ -1219,22 +1364,21 @@ void FollowStreamDialog::readFollowStream()
 
     elapsed_timer.start();
 
-    loop_break_mutex.lock();
-    isReadRunning = true;
-    loop_break_mutex.unlock();
+    const unsigned generation = render_generation_;
 
-    for (cur = g_list_last(follow_info_.payload); cur; cur = g_list_previous(cur)) {
-        if (dialogClosed() || !isReadRunning) break;
+    for (cur = rendered_head_ ? g_list_previous(rendered_head_) : g_list_last(follow_info_.payload);
+            cur; cur = g_list_previous(cur)) {
+        if (dialogClosed() || generation != render_generation_) return;
 
         follow_record = (follow_record_t *)cur->data;
         skip = false;
         if (!follow_record->is_server) {
-            global_pos = &global_client_pos;
+            global_pos = &global_client_pos_;
             if (follow_info_.show_stream == FROM_SERVER) {
                 skip = true;
             }
         } else {
-            global_pos = &global_server_pos;
+            global_pos = &global_server_pos_;
             if (follow_info_.show_stream == FROM_CLIENT) {
                 skip = true;
             }
@@ -1252,16 +1396,17 @@ void FollowStreamDialog::readFollowStream()
                     follow_record->packet_num,
                     follow_record->abs_ts,
                     global_pos);
-            if (elapsed_timer.elapsed() > info_update_freq_) {
+            rendered_head_ = cur;
+            if (live_window_ && elapsed_timer.elapsed() >= 8) break;
+            if (!live_window_ && elapsed_timer.elapsed() > info_update_freq_) {
                 fillHintLabel(ui->teStreamContent->currentPacket());
                 mainApp->processEvents();
+                if (dialogClosed() || generation != render_generation_) return;
                 elapsed_timer.start();
             }
         }
+        rendered_head_ = cur;
     }
 
-    loop_break_mutex.lock();
-    isReadRunning = false;
-    loop_break_mutex.unlock();
 }
 

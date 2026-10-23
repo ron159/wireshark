@@ -4259,6 +4259,46 @@ Relative to reference: n/a (outside reference range)</source>
 <context>
     <name>FollowStreamDialog</name>
     <message>
+        <source>Live tracking</source>
+        <translation>实时追踪中</translation>
+    </message>
+    <message>
+        <source>Pause updates</source>
+        <translation>暂停刷新</translation>
+    </message>
+    <message>
+        <source>Pause the display while continuing to collect stream data.</source>
+        <translation>暂停显示刷新，同时继续收集流数据。</translation>
+    </message>
+    <message>
+        <source>Auto-scroll</source>
+        <translation>自动滚动</translation>
+    </message>
+    <message>
+        <source>Follow new data when at the bottom. Scroll up to read earlier data.</source>
+        <translation>位于底部时跟随新数据；向上滚动可阅读历史内容。</translation>
+    </message>
+    <message>
+        <source>Capture file closed</source>
+        <translation>抓包文件已关闭</translation>
+    </message>
+    <message>
+        <source>Live tracking limit reached (64 MiB or 100,000 packets). Capture continues.</source>
+        <translation>已达到实时追踪上限（64 MiB 或 100,000 个包）；抓包继续。</translation>
+    </message>
+    <message>
+        <source>Display paused — still collecting</source>
+        <translation>显示已暂停，仍在收集数据</translation>
+    </message>
+    <message>
+        <source>Capture stopped — display paused</source>
+        <translation>抓包已停止，显示仍暂停</translation>
+    </message>
+    <message>
+        <source>Capture stopped</source>
+        <translation>抓包已停止</translation>
+    </message>
+    <message>
         <source>Print</source>
         <translation>打印</translation>
     </message>

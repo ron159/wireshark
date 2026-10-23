@@ -93,6 +93,28 @@ The driver executable sits beside Wireshark inside the build output's app bundle
 to reuse its resources and runtime paths. Remove this test executable before
 packaging that output; it is not a product executable.
 
+## Live Follow Stream
+
+After building `wireshark` and `dumpcap` with Ninja on macOS or Linux:
+
+```sh
+python3 test/qt/run_follow_stream_live_test.py --build-dir build --limits
+```
+
+This starts real capture through a local FIFO and dumpcap, without accessing a
+physical network interface or requiring capture privileges. The producer sends
+deterministic TCP/UDP traffic in batches coordinated with the GUI driver.
+Assertions cover incremental updates with no rescans, retransmission and
+out-of-order handling, pause/resume, scroll and selection preservation, stream
+switching, independent windows and encodings, split UTF-8 characters, filtering
+and unrelated retaps, closure, capture EOF, and all formats compared with a fresh
+offline Follow. `--limits` adds a 100,000-packet collector-limit check while the
+main capture continues. `--language zh_CN --theme dark --screenshot-dir PATH`
+records the localized UI; use `QT_QPA_PLATFORM=cocoa` for native macOS rendering.
+
+The executable is `follow_stream_live_test` beside Wireshark in the build output;
+remove it before packaging. The macOS CI does this with an EXIT trap.
+
 ## Packet comparison
 
 The standalone target also tests typed-value matching independently of display

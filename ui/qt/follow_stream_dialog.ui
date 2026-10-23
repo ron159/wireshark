@@ -31,6 +31,35 @@
     </widget>
    </item>
    <item>
+    <layout class="QHBoxLayout" name="liveLayout">
+     <item>
+      <widget class="QLabel" name="liveStatusLabel">
+       <property name="text"><string>Live tracking</string></property>
+       <property name="wordWrap"><bool>true</bool></property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="liveSpacer">
+       <property name="orientation"><enum>Qt::Horizontal</enum></property>
+       <property name="sizeHint" stdset="0"><size><width>20</width><height>20</height></size></property>
+      </spacer>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="pauseLiveCheckBox">
+       <property name="text"><string>Pause updates</string></property>
+       <property name="toolTip"><string>Pause the display while continuing to collect stream data.</string></property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="autoScrollCheckBox">
+       <property name="text"><string>Auto-scroll</string></property>
+       <property name="toolTip"><string>Follow new data when at the bottom. Scroll up to read earlier data.</string></property>
+       <property name="checked"><bool>true</bool></property>
+      </widget>
+     </item>
+    </layout>
+   </item>
+   <item>
     <widget class="QLabel" name="hintLabel">
      <property name="text">
       <string>Hint.</string>

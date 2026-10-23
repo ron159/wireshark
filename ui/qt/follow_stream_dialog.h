@@ -27,6 +27,8 @@
 #include <QFile>
 #include <QMap>
 #include <QPushButton>
+#include <QTimer>
+#include <QStringDecoder>
 
 namespace Ui {
 class FollowStreamDialog;
@@ -260,16 +262,16 @@ private:
      * @param tapData Pointer to the tap data.
      */
     static void resetStream(void *tapData);
+    static tap_packet_status collectStream(void *tap_data, packet_info *pinfo,
+            epan_dissect_t *edt, const void *data, tap_flags_t flags);
+    void appendStream();
+    void updateLiveWidgets();
+    void updateStreamCounters();
 
     /**
      * @brief Hides or removes UI controls related to stream selection if not applicable.
      */
     void removeStreamControls();
-
-    /**
-     * @brief Resets the internal state of the stream display.
-     */
-    void resetStream(void);
 
     /**
      * @brief Updates the states of the dialog widgets based on processing status.
@@ -361,6 +363,24 @@ private:
 
     /** Invalidate a queued render when a newer stream is requested. */
     unsigned                follow_generation_;
+
+    // The follower prepends records. Keep the last rendered head so updates
+    // only visit new records, in their original stream order.
+    bool                    live_capture_ = false;
+    bool                    live_window_ = false;
+    bool                    collection_limited_ = false;
+    bool                    render_reset_ = true;
+    unsigned                render_generation_ = 0;
+    uint64_t                collected_capture_bytes_ = 0;
+    uint64_t                collected_payload_bytes_ = 0;
+    unsigned                collected_packets_ = 0;
+    uint32_t                collected_last_packet_ = 0;
+    GList                  *rendered_head_ = nullptr;
+    uint32_t                global_client_pos_ = 0;
+    uint32_t                global_server_pos_ = 0;
+    QTimer                  live_timer_;
+    QStringDecoder          utf8_decoders_[2] = { QStringDecoder(QStringDecoder::Utf8),
+                                                  QStringDecoder(QStringDecoder::Utf8) };
 
     /** Counter for buffers received from the client. */
     int                     client_buffer_count_;

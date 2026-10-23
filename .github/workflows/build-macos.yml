@@ -71,6 +71,13 @@ jobs:
           python test/qt/run_packet_comparison_test.py --build-dir build --large-source --language zh_CN --theme light --screenshot-dir build/comparison-light 2>&1 | tee build/packet-comparison-test.log
           QT_QPA_PLATFORM=cocoa python test/qt/run_packet_comparison_test.py --build-dir build --no-build --pcapng --language zh_CN --theme dark --screenshot-dir build/comparison-dark 2>&1 | tee -a build/packet-comparison-test.log
 
+      - name: Verify live Follow Stream with real pipe capture
+        shell: bash
+        run: |
+          trap 'rm -f build/run/Wireshark.app/Contents/MacOS/follow_stream_live_test' EXIT
+          python test/qt/run_follow_stream_live_test.py --build-dir build --limits 2>&1 | tee build/follow-stream-live-test.log
+          QT_QPA_PLATFORM=cocoa python test/qt/run_follow_stream_live_test.py --build-dir build --no-build --language zh_CN --theme dark --screenshot-dir build/follow-live-dark 2>&1 | tee -a build/follow-stream-live-test.log
+
       - name: Bundle dependencies
         run: LIBPREFIX="$(brew --prefix)" cmake --build build --parallel 3 --target wireshark_app_bundle
 
@@ -98,6 +105,8 @@ jobs:
           path: |
             build/test-results.xml
             build/follow-stream-filter-test.log
+            build/follow-stream-live-test.log
+            build/follow-live-dark/*.png
             build/packet-comparison-test.log
             build/comparison-light/*.png
             build/comparison-dark/*.png

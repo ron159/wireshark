@@ -1,3 +1,10 @@
+wireshark (5.1.3) UNRELEASED; urgency=low
+
+  * Add incremental live Follow Stream updates, pause/resume, tail scrolling,
+    independent window formats, and bounded live collection.
+
+ -- ron <ron159@users.noreply.github.com>  Fri, 23 Oct 2026 22:55:00 +0800
+
 wireshark (5.1.2) UNRELEASED; urgency=low
 
   * Collect Follow Stream data and filter the packet list in a single scan.
