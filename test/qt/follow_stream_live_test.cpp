@@ -98,9 +98,18 @@ void run()
         feed("2");
         check(waitUntil([&] { return capture->count > previous; }), "main capture continues after the follow collector reaches its limit");
         check(rescans == scans_before && retaps == 0, "collection limit requires no additional scan");
-        QMetaObject::invokeMethod(dialog, "reject", Qt::DirectConnection);
         feed("stop");
         waitUntil([] { return capture->state == FILE_READ_DONE; });
+        settle();
+        check(status->text() == QCoreApplication::translate("FollowStreamDialog",
+                "Live tracking limit reached (64 MiB or 100,000 packets). Capture stopped."),
+              "collector limit remains visible with an accurate stopped state");
+        cf_close(capture);
+        settle();
+        check(status->text() == QCoreApplication::translate("FollowStreamDialog",
+                "Live tracking limit reached (64 MiB or 100,000 packets). Capture file closed."),
+              "closing the source does not hide the collector limit warning");
+        QMetaObject::invokeMethod(dialog, "reject", Qt::DirectConnection);
         settle();
         fprintf(stderr, "LIVE LIMIT RESULT: %d failure(s)\n", failures);
         QCoreApplication::exit(failures ? 1 : 0);

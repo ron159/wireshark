@@ -16,7 +16,7 @@ target, and packets without that field show an empty cell.
 
 ## Downloads and continuous builds
 
-### 5.1.3
+### 5.1.4
 
 Open **Follow Stream** while capturing to keep receiving new stream data.
 **Pause updates** freezes the display while collection continues; resuming catches

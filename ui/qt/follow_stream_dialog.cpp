@@ -641,10 +641,13 @@ void FollowStreamDialog::updateLiveWidgets()
     ui->liveStatusLabel->setVisible(live_window_);
     ui->pauseLiveCheckBox->setVisible(live_window_);
     ui->autoScrollCheckBox->setVisible(live_window_);
-    if (file_closed_) {
+    if (collection_limited_) {
+        ui->liveStatusLabel->setText(live_capture_ ?
+                tr("Live tracking limit reached (64 MiB or 100,000 packets). Capture continues.") :
+                file_closed_ ? tr("Live tracking limit reached (64 MiB or 100,000 packets). Capture file closed.") :
+                tr("Live tracking limit reached (64 MiB or 100,000 packets). Capture stopped."));
+    } else if (file_closed_) {
         ui->liveStatusLabel->setText(tr("Capture file closed"));
-    } else if (collection_limited_) {
-        ui->liveStatusLabel->setText(tr("Live tracking limit reached (64 MiB or 100,000 packets). Capture continues."));
     } else if (ui->pauseLiveCheckBox->isChecked()) {
         ui->liveStatusLabel->setText(live_capture_ ? tr("Display paused — still collecting") : tr("Capture stopped — display paused"));
     } else {

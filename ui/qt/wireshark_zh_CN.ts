@@ -4287,6 +4287,14 @@ Relative to reference: n/a (outside reference range)</source>
         <translation>已达到实时追踪上限（64 MiB 或 100,000 个包）；抓包继续。</translation>
     </message>
     <message>
+        <source>Live tracking limit reached (64 MiB or 100,000 packets). Capture stopped.</source>
+        <translation>已达到实时追踪上限（64 MiB 或 100,000 个包）；抓包已停止。</translation>
+    </message>
+    <message>
+        <source>Live tracking limit reached (64 MiB or 100,000 packets). Capture file closed.</source>
+        <translation>已达到实时追踪上限（64 MiB 或 100,000 个包）；抓包文件已关闭。</translation>
+    </message>
+    <message>
         <source>Display paused — still collecting</source>
         <translation>显示已暂停，仍在收集数据</translation>
     </message>
