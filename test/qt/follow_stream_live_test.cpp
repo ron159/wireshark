@@ -153,10 +153,10 @@ void run()
     const QString before_rescan = text->toPlainText();
     window->filterPackets("frame.number > 0");
     settle();
-    check(text->toPlainText() == before_rescan, "changing the main filter rebuilds without duplicated data");
+    check(waitUntil([&] { return text->toPlainText() == before_rescan; }), "changing the main filter rebuilds without duplicated data");
     window->captureFile()->retapPackets();
     settle();
-    check(text->toPlainText() == before_rescan, "unrelated retap rebuilds without duplicated data");
+    check(waitUntil([&] { return text->toPlainText() == before_rescan; }), "unrelated retap rebuilds without duplicated data");
 
     dialog->follow(true, 1, 0);
     settle();

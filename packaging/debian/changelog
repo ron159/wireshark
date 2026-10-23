@@ -1,3 +1,9 @@
+wireshark (5.1.5) UNRELEASED; urgency=low
+
+  * Wait for asynchronous live stream rendering in the integration regression.
+
+ -- ron <ron159@users.noreply.github.com>  Fri, 23 Oct 2026 23:40:00 +0800
+
 wireshark (5.1.4) UNRELEASED; urgency=low
 
   * Preserve the live collection limit warning after capture stops or closes.
