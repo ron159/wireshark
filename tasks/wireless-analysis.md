@@ -48,10 +48,29 @@ Do not change WLAN Statistics or the existing graph implementation.
 - Capture adapter and both windows implemented. Native integration fixture passes:
   radiotap metadata, exclusions, two handoffs (100 ms and 300 ms), menu windows,
   packet navigation, STA/range transfer, health grouping, shared range, reopen.
-- First light-style screenshots inspected in build/wireless-screenshots/.
-- Remaining: broader fixtures (PCAPNG interfaces, missing metadata, live append,
-  non-WLAN), real mouse interactions, scale/performance checks, Chinese/dark UI,
-  documentation, CI and release validation. Full objective remains active.
+- Deterministic PCAPNG coverage verifies out-of-order timestamps, cross-interface
+  transitions, and separate 2.4/6 GHz channel-1 groups. Raw 802.11, empty and
+  Ethernet inputs retain unknown measurements without inventing radio data.
+- GUI regressions verify real drag/wheel/double-click and numeric range controls,
+  entity-specific plotted values, multiple independent windows, exact navigation
+  behind a main display filter, refresh and source close/reopen.
+- A real dumpcap pipe fixture verifies live append, fixed versus all-time ranges,
+  closing one window while another continues, stop and retained snapshots.
+  An unchanged time field losing focus preserves all-time tracking; this defect
+  was reproduced by observing collected roam events hidden by a frozen range.
+- Review regressions exclude uplink broadcast/multicast destinations, preserve a
+  selected STA during partial rescans, and sort globally before 500-row pagination.
+  The latter two defects were first reproduced with failing GUI assertions.
+- Numeric aggregation replaced per-packet string formatting: a local optimized
+  2-million-sample benchmark measured 11 ms for health and 8 ms for trend aggregation.
+  The sample boundary/incomplete-state/reset contract has a standalone regression.
+- Chinese translations and user documentation cover both windows. The chart uses
+  Wireshark graph theme colors; native macOS light/dark checks accompany the GUI
+  regressions. Standalone Qt tests and the translation suite pass locally.
+- CI includes wireless model tests on Windows/macOS/Linux and full native/live
+  wireless integration on macOS. Terminal build results and downloaded-package
+  verification are release gates; their evidence belongs to the GitHub release
+  so the source commit can remain immutable.
 - Local GUI test requires sandbox escalation on this Mac (otherwise process
   aborts before the Qt application starts). Command:
   `python3 test/qt/run_wireless_analysis_test.py --build-dir build`.

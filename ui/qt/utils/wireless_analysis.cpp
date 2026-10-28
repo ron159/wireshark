@@ -1,9 +1,28 @@
 /* SPDX-License-Identifier: GPL-2.0-or-later */
 #include "wireless_analysis.h"
+#include <QCoreApplication>
+#include <QHash>
 #include <algorithm>
 #include <cmath>
 
 namespace WirelessAnalysis {
+namespace {
+constexpr quint64 UnknownBand = quint64(1) << 32;
+quint64 identity(const Sample &sample, Group group)
+{
+    if (group == Group::AccessPoint) return sample.bssid;
+    if (group == Group::Station) return sample.sta;
+    return sample.frequency ? static_cast<quint64>(sample.frequency)
+                            : (sample.channel ? UnknownBand | sample.channel : 0);
+}
+QString identityLabel(quint64 id, Group group)
+{
+    if (group != Group::Channel) return id ? macString(id) : QString();
+    if (!id) return QCoreApplication::translate("WirelessAnalysis", "Unknown");
+    if (id & UnknownBand) return QCoreApplication::translate("WirelessAnalysis", "Channel %1 (band unknown)").arg(id & ~UnknownBand);
+    return QString::number(id) + QStringLiteral(" MHz");
+}
+}
 QString macString(Mac address)
 {
     QStringList bytes;
@@ -52,7 +71,7 @@ QVector<Roam> Model::roaming() const
     std::sort(ordered.begin(), ordered.end(), [](const Sample *a, const Sample *b) {
         return a->timeNs == b->timeNs ? a->frame < b->frame : a->timeNs < b->timeNs;
     });
-    QMap<Mac, const Sample *> last;
+    QHash<Mac, const Sample *> last;
     QVector<Roam> result;
     for (const auto *p : ordered) {
         const auto *old = last.value(p->sta, nullptr);
@@ -75,20 +94,19 @@ Range Model::extent() const
 }
 QString Model::groupKey(const Sample &p, Group group)
 {
-    if (group == Group::AccessPoint) return p.bssid ? macString(p.bssid) : QString();
-    if (group == Group::Station) return p.sta ? macString(p.sta) : QString();
-    if (p.frequency) return QString::number(p.frequency) + QStringLiteral(" MHz");
-    if (p.channel) return QStringLiteral("Channel %1 (band unknown)").arg(p.channel);
-    return QStringLiteral("Unknown");
+    return identityLabel(identity(p, group), group);
 }
 QMap<QString, Stats> Model::health(Group group, Range range) const
 {
-    QMap<QString, Stats> result;
+    QHash<quint64, Stats> totals;
     for (const auto &p : samples_) {
         if (!range.contains(p.timeNs)) continue;
-        const auto key = groupKey(p, group);
-        if (!key.isEmpty()) result[key].add(p);
+        const auto key = identity(p, group);
+        if (key || group == Group::Channel) totals[key].add(p);
     }
+    QMap<QString, Stats> result;
+    for (auto it = totals.cbegin(); it != totals.cend(); ++it)
+        result.insert(identityLabel(it.key(), group), it.value());
     return result;
 }
 QVector<Bucket> Model::trend(Group group, const QString &key, Range range, int bins) const
@@ -99,10 +117,25 @@ QVector<Bucket> Model::trend(Group group, const QString &key, Range range, int b
     QVector<Bucket> result;
     for (int i = 0; i < bins; ++i)
         result.append(Bucket{range.first + static_cast<qint64>(span * i / bins), {}});
+    // Resolve a displayed label once. Never format MAC strings per packet in
+    // the hot path: large captures must stay responsive during range changes.
+    std::optional<quint64> selected;
+    if (!key.isEmpty()) {
+        QHash<quint64, bool> seen;
+        for (const auto &p : samples_) {
+            const auto id = identity(p, group);
+            if (seen.contains(id)) continue;
+            seen.insert(id, true);
+            if (identityLabel(id, group) == key) { selected = id; break; }
+        }
+        if (!selected) return result;
+    }
     for (const auto &p : samples_) {
-        if (!range.contains(p.timeNs) || (!key.isEmpty() && groupKey(p, group) != key)) continue;
+        if (!range.contains(p.timeNs)) continue;
+        const auto id = identity(p, group);
+        if (selected && *selected != id) continue;
         // Unknown BSSID/STA packets are not part of that grouping's total.
-        if (groupKey(p, group).isEmpty()) continue;
+        if (!id && group != Group::Channel) continue;
         const int index = span > 0 ? std::min(bins - 1, static_cast<int>(
                     (static_cast<long double>(p.timeNs) - range.first) * bins / span)) : 0;
         result[index].stats.add(p);

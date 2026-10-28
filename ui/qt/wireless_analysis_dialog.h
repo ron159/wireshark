@@ -8,6 +8,7 @@ class QDoubleSpinBox;
 class QLabel;
 class QPushButton;
 class QTreeWidget;
+class QSpinBox;
 class WirelessTrend;
 
 class WirelessAnalysisDialog : public GeometryStateDialog
@@ -34,6 +35,8 @@ private:
     QDoubleSpinBox *first_, *last_;
     QLabel *status_, *selection_;
     QTreeWidget *table_;
+    QSpinBox *page_;
+    QLabel *pageCount_;
     WirelessTrend *trend_ = nullptr;
     QPushButton *oldPacket_ = nullptr, *newPacket_ = nullptr, *health_ = nullptr, *refresh_;
     QTimer redraw_;

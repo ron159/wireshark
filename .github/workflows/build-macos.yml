@@ -85,6 +85,13 @@ jobs:
           python test/qt/run_analysis_session_test.py --build-dir build 2>&1 | tee build/analysis-session-test.log
           QT_QPA_PLATFORM=cocoa python test/qt/run_analysis_session_test.py --build-dir build --no-build --language zh_CN --screenshot-dir build/analysis-session-ui 2>&1 | tee -a build/analysis-session-test.log
 
+      - name: Verify wireless analysis windows and live capture
+        shell: bash
+        run: |
+          trap 'rm -f build/run/Wireshark.app/Contents/MacOS/wireless_analysis_integration' EXIT
+          python test/qt/run_wireless_analysis_test.py --build-dir build --live 2>&1 | tee build/wireless-analysis-test.log
+          QT_QPA_PLATFORM=cocoa python test/qt/run_wireless_analysis_test.py --build-dir build --no-build --live --language zh_CN --theme dark --screenshot-dir build/wireless-dark 2>&1 | tee -a build/wireless-analysis-test.log
+
       - name: Bundle dependencies
         run: LIBPREFIX="$(brew --prefix)" cmake --build build --parallel 3 --target wireshark_app_bundle
 
@@ -115,6 +122,8 @@ jobs:
             build/follow-stream-live-test.log
             build/analysis-session-test.log
             build/analysis-session-ui/*.png
+            build/wireless-analysis-test.log
+            build/wireless-dark/*.png
             build/follow-live-dark/*.png
             build/packet-comparison-test.log
             build/comparison-light/*.png

@@ -17,7 +17,7 @@ const char *fields[] = {
     "wlan.bssid", "wlan.ta", "wlan.ra", "wlan_radio.signal_dbm",
     "wlan_radio.data_rate", "wlan_radio.frequency", "wlan_radio.channel",
     "wlan.fcs.status", "radiotap.flags.badfcs", "eapol", "_ws.malformed",
-    "frame.interface_id"
+    "frame.interface_id", "wlan.da"
 };
 struct Reader {
     epan_dissect_t edt;
@@ -128,7 +128,7 @@ void WirelessCapture::scan()
             if (auto *f = reader.field(8)) p.rateMbps = fvalue_get_floating(f->value);
             const bool badFcs = reader.number(12) || (reader.field(11) && reader.number(11) == PROTO_CHECKSUM_E_BAD);
             p.roamingEligible = type == 2 && !(subtype & 4) && toDS != fromDS
-                    && ta && ra && p.sta && p.bssid && !badFcs && !reader.field(13) && !reader.field(14);
+                    && ta && ra && reader.mac(16) && p.sta && p.bssid && !badFcs && !reader.field(13) && !reader.field(14);
             model_.append(p);
         }
         epan_dissect_reset(&reader.edt);

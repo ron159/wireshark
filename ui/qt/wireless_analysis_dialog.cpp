@@ -10,20 +10,25 @@
 #include <QPushButton>
 #include <QSignalBlocker>
 #include <QSplitter>
+#include <QSpinBox>
 #include <QTreeWidget>
 #include <QVBoxLayout>
 #include <algorithm>
 #include <cmath>
+#include <limits>
 
 using namespace WirelessAnalysis;
 namespace {
+constexpr int PageSize = 500;
 class StatisticItem : public QTreeWidgetItem {
 public:
     using QTreeWidgetItem::QTreeWidgetItem;
     bool operator<(const QTreeWidgetItem &other) const override {
         int column = treeWidget()->sortColumn();
         const auto a = data(column, Qt::UserRole), b = other.data(column, Qt::UserRole);
-        if (a.isValid() && b.isValid()) return a.toDouble() < b.toDouble();
+        if (a.isValid() || b.isValid())
+            return (a.isValid() ? a.toDouble() : -std::numeric_limits<double>::infinity())
+                    < (b.isValid() ? b.toDouble() : -std::numeric_limits<double>::infinity());
         return QTreeWidgetItem::operator<(other);
     }
 };
@@ -73,7 +78,7 @@ WirelessAnalysisDialog::WirelessAnalysisDialog(QWidget &parent, CaptureFile &cap
     for (auto *spin : {first_, last_}) {
         spin->setDecimals(9); spin->setRange(-9e9, 9e9); spin->setSingleStep(0.1);
         spin->setKeyboardTracking(false); times->addWidget(spin);
-        connect(spin, &QDoubleSpinBox::editingFinished, this, [this] { setRange(first_->value(), last_->value()); });
+        connect(spin, &QDoubleSpinBox::valueChanged, this, [this] { setRange(first_->value(), last_->value()); });
     }
     auto *reset = new QPushButton(tr("All time"), this); reset->setObjectName("wirelessAllTime");
     times->addWidget(reset); times->addStretch();
@@ -81,7 +86,7 @@ WirelessAnalysisDialog::WirelessAnalysisDialog(QWidget &parent, CaptureFile &cap
     layout->addLayout(times);
     selection_ = new QLabel(this); selection_->setTextFormat(Qt::PlainText); layout->addWidget(selection_);
     table_ = new QTreeWidget(this); table_->setObjectName("wirelessTable");
-    table_->setRootIsDecorated(false); table_->setAlternatingRowColors(true);
+    table_->setRootIsDecorated(false);
     table_->setSelectionMode(QAbstractItemView::SingleSelection);
     table_->setUniformRowHeights(true);
     if (roaming) {
@@ -121,8 +126,19 @@ WirelessAnalysisDialog::WirelessAnalysisDialog(QWidget &parent, CaptureFile &cap
             updateTrend();
         });
     }
+    auto *pages = new QHBoxLayout;
+    pages->addWidget(new QLabel(tr("Page:"), this));
+    page_ = new QSpinBox(this); page_->setObjectName("wirelessPage"); page_->setMinimum(1);
+    pageCount_ = new QLabel(this); pages->addWidget(page_); pages->addWidget(pageCount_); pages->addStretch();
+    layout->addLayout(pages);
+    connect(page_, &QSpinBox::valueChanged, this, &WirelessAnalysisDialog::rebuild);
     table_->setSortingEnabled(true);
     table_->sortByColumn(0, Qt::AscendingOrder);
+    connect(table_->header(), &QHeaderView::sortIndicatorChanged, this, [this] {
+        const QSignalBlocker block(page_);
+        page_->setValue(1);
+        rebuild();
+    });
     auto *note = new QLabel(roaming
         ? tr("Observed BSSID changes between non-retry data frames. Data gap is not measured application downtime. Cross-interface timestamps require aligned capture clocks.")
         : tr("Signal is measured at the capture location. PHY rate is not throughput. Retry percentage uses captured management/data frames. Drag the chart to focus all three trends; double-click for all time."), this);
@@ -159,6 +175,7 @@ void WirelessAnalysisDialog::selectStation(Mac sta, Range selected)
     group_->setCurrentIndex(1); selectedKey_ = macString(sta);
     // The new window may still be collecting data. Preserve the requested range.
     allTime_ = false;
+    const QSignalBlocker firstBlock(first_), lastBlock(last_);
     first_->setValue(selected.first / 1e9); last_->setValue(selected.last / 1e9);
     rebuild();
 }
@@ -179,6 +196,9 @@ void WirelessAnalysisDialog::rebuild()
         first_->setValue(extent.first / 1e9); last_->setValue(extent.last / 1e9);
     }
     const QSignalBlocker block(table_);
+    const QSignalBlocker headerBlock(table_->header());
+    const int sortColumn = table_->header()->sortIndicatorSection();
+    const bool descending = table_->header()->sortIndicatorOrder() == Qt::DescendingOrder;
     quint32 selectedFrame = table_->selectedItems().isEmpty() ? 0 : table_->selectedItems().first()->data(6, Qt::UserRole).toUInt();
     table_->setSortingEnabled(false); table_->clear();
     if (view_ == View::Roaming) {
@@ -188,10 +208,37 @@ void WirelessAnalysisDialog::rebuild()
         station_->clear(); station_->addItem(tr("All stations"), QString());
         const auto stations = model.health(Group::Station, model.extent());
         for (auto it = stations.cbegin(); it != stations.cend(); ++it) station_->addItem(it.key(), it.key());
+        // Keep a selection that has not been reached by a partial rescan yet.
+        if (!selected.isEmpty() && station_->findData(selected) < 0) station_->addItem(selected, selected);
         station_->setCurrentIndex(std::max(0, station_->findData(selected)));
+        QVector<int> matches;
         for (qsizetype i = 0; i < roams_.size(); ++i) {
             const auto &event = roams_[i];
             if (!range().contains(event.newTimeNs) || (!selected.isEmpty() && macString(event.sta) != selected)) continue;
+            matches.append(static_cast<int>(i));
+        }
+        const auto sortValue = [sortColumn](const Roam &event) -> qint64 {
+            switch (sortColumn) {
+            case 1: return event.sta;
+            case 2: return event.oldBssid;
+            case 3: return event.newBssid;
+            case 4: return event.gapNs();
+            case 5: return event.oldFrame;
+            case 6: return event.newFrame;
+            case 7: return event.crossInterface;
+            default: return event.newTimeNs;
+            }
+        };
+        std::stable_sort(matches.begin(), matches.end(), [&](int a, int b) {
+            return descending ? sortValue(roams_[a]) > sortValue(roams_[b]) : sortValue(roams_[a]) < sortValue(roams_[b]);
+        });
+        const QSignalBlocker pageBlock(page_);
+        page_->setMaximum(std::max(1, static_cast<int>((matches.size() + PageSize - 1) / PageSize)));
+        pageCount_->setText(tr("of %1 · %2 rows · up to %3 per page").arg(page_->maximum()).arg(matches.size()).arg(PageSize));
+        const int start = (page_->value() - 1) * PageSize;
+        for (int row = start; row < std::min(start + PageSize, static_cast<int>(matches.size())); ++row) {
+            const int i = matches[row];
+            const auto &event = roams_[i];
             auto *item = new StatisticItem(table_);
             setMetric(item, 0, event.newTimeNs / 1e9, 6);
             item->setData(0, Qt::UserRole + 1, static_cast<int>(i));
@@ -199,12 +246,33 @@ void WirelessAnalysisDialog::rebuild()
             setMetric(item, 4, event.gapNs() / 1e6, 3);
             setMetric(item, 5, event.oldFrame, 0); setMetric(item, 6, event.newFrame, 0);
             item->setText(7, event.crossInterface ? tr("Multiple interfaces") : tr("Same interface"));
+            item->setData(7, Qt::UserRole, event.crossInterface);
             if (event.newFrame == selectedFrame) item->setSelected(true);
         }
-        selection_->setText(tr("%1 transitions in range · %2 stations in capture").arg(table_->topLevelItemCount()).arg(stations.size()));
+        selection_->setText(tr("%1 transitions in range · %2 stations in capture").arg(matches.size()).arg(stations.size()));
     } else {
         const auto stats = model.health(group(), range());
-        for (auto it = stats.cbegin(); it != stats.cend(); ++it) {
+        QVector<QMap<QString, Stats>::const_iterator> rows;
+        for (auto it = stats.cbegin(); it != stats.cend(); ++it) rows.append(it);
+        const auto sortValue = [sortColumn](const Stats &s) -> double {
+            switch (sortColumn) {
+            case 1: return s.packets;
+            case 2: return s.retries;
+            case 3: return s.retryPercent().value_or(-std::numeric_limits<double>::infinity());
+            case 4: return s.signal().value_or(-std::numeric_limits<double>::infinity());
+            default: return s.rate().value_or(-std::numeric_limits<double>::infinity());
+            }
+        };
+        std::stable_sort(rows.begin(), rows.end(), [&](auto a, auto b) {
+            if (sortColumn == 0) return descending ? a.key() > b.key() : a.key() < b.key();
+            return descending ? sortValue(a.value()) > sortValue(b.value()) : sortValue(a.value()) < sortValue(b.value());
+        });
+        const QSignalBlocker pageBlock(page_);
+        page_->setMaximum(std::max(1, static_cast<int>((stats.size() + PageSize - 1) / PageSize)));
+        pageCount_->setText(tr("of %1 · %2 rows · up to %3 per page").arg(page_->maximum()).arg(stats.size()).arg(PageSize));
+        const int start = (page_->value() - 1) * PageSize;
+        for (int row = start; row < std::min(start + PageSize, static_cast<int>(rows.size())); ++row) {
+            const auto it = rows[row];
             auto *item = new StatisticItem(table_); item->setText(0, it.key());
             const auto &s = it.value();
             setMetric(item, 1, s.packets, 0); setMetric(item, 2, s.retries, 0);

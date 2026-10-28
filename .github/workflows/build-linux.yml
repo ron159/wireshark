@@ -67,11 +67,11 @@ jobs:
             --program-path "$GITHUB_WORKSPACE/${{ steps.tests.outputs.build_dir }}/run" \
             --junitxml="$GITHUB_WORKSPACE/linux-regression.xml"
 
-      - name: Test packet comparison logic
+      - name: Test packet comparison, analysis sessions and wireless analysis
         run: |
           cmake -S test/qt -B qt-tests
-          cmake --build qt-tests --parallel 2 --target packet_comparison_test analysis_session_test
-          ctest --test-dir qt-tests -R '^(packet_comparison|analysis_session)$' --output-on-failure
+          cmake --build qt-tests --parallel 2 --target packet_comparison_test analysis_session_test wireless_analysis_test
+          ctest --test-dir qt-tests -R '^(packet_comparison|analysis_session|wireless_analysis)$' --output-on-failure
 
       - name: Collect packages and build identity
         run: |

@@ -72,4 +72,56 @@ This window will be updated frequently, so it will be useful, even if you open
 it before (or while) you are doing a live capture.
 ====
 
+[#ChWirelessRoaming]
+=== Roaming Analyzer
+
+menu:Wireless[Roaming Analyzer] opens an independent window showing observed
+STA transitions between BSSIDs. Select a station to inspect its history. Each row
+contains the previous and new BSSID, the last eligible data packet on the previous
+AP, the first eligible data packet on the new AP, and the interval between them.
+Double-click a row to navigate to the new packet, or use either packet button.
+If the main display filter hides that packet, it opens in a packet-details window
+without changing the filter.
+The btn:[Station health…] button opens a separate health window for that station
+and interval.
+
+Transitions are inferred from unicast infrastructure data frames with payload.
+Retries, null-data frames, recognizable EAPOL, bad-FCS and malformed frames do not
+establish a transition. Management frames alone do not establish data continuity.
+This interval is an observed data gap, not measured application downtime or an
+authentication duration. Missing packets, channel scanning and unsynchronized
+capture clocks can affect the result. Cross-interface transitions are identified
+in the clock-source column. A STA is identified by its link MAC address; this
+view does not combine multiple Wi-Fi 7 MLO links into a single MLD identity.
+
+[#ChWirelessHealth]
+=== Wireless Health
+
+menu:Wireless[Wireless Health] opens an independent window with captured retry,
+signal and PHY-rate trends. Group the table by access point (BSSID), station
+(STA), or observed frequency/channel. Selecting an entity focuses the trends;
+btn:[All entities] restores the group total.
+
+All three plots and the table share the time range. Enter start/end seconds,
+drag horizontally on the chart, or use the mouse wheel to zoom around the pointer.
+Double-click the chart or click btn:[All time] to restore the capture extent.
+Time is relative to the first timestamped capture record and does not depend on
+packet-list time references. Hover over a plotted interval to inspect its values.
+
+The retry percentage counts retry-flagged management/data frames divided by all
+captured management/data frames in the group and range. Signal and PHY rate are
+arithmetic averages of available measurements. Signal describes reception at the
+capture location; a BSSID group includes traffic in both directions. PHY rate is
+not application throughput. Missing measurements display as a dash and empty
+chart intervals remain gaps. Frequencies are kept separate across bands; unknown
+channel metadata is retained in its own group.
+
+Both windows analyze independently of the main display filter and update as new
+packets arrive. Ignored frames are excluded. They retain snapshots when the
+capture closes or reloads, with packet navigation disabled. Refresh rescans the
+current capture. Analysis retains at most two million WLAN samples and explicitly
+reports incomplete results if this limit is reached or a packet cannot be read.
+Tables display up to 500 rows per page. Click a column heading to sort the entire
+result before pagination; the page control provides access to the remaining rows.
+
 // End of WSUG Chapter Wireless

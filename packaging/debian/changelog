@@ -1,3 +1,10 @@
+wireshark (5.1.7) UNRELEASED; urgency=low
+
+  * Add independent roaming and wireless health windows, live analysis,
+    linked time ranges, native charts and precise related-packet navigation.
+
+ -- ron <ron159@users.noreply.github.com>  Thu, 29 Oct 2026 02:00:00 +0800
+
 wireshark (5.1.6) UNRELEASED; urgency=low
 
   * Add portable analysis sessions and persistent packet bookmarks with notes,

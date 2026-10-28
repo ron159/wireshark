@@ -770,6 +770,8 @@ Each menu item shows specific Bluetooth and IEEE 802.11 statistics.
 |menu:Bluetooth Devices[]||See <<ChWirelessBluetoothDevices>>
 |menu:Bluetooth HCI Summary[]||See <<ChWirelessBluetoothHCISummary>>
 |menu:WLAN Traffic[]||See <<ChWirelessWLANTraffic>>
+|menu:Roaming Analyzer[]||See <<ChWirelessRoaming>>
+|menu:Wireless Health[]||See <<ChWirelessHealth>>
 
 |===
 

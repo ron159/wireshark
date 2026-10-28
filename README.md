@@ -16,6 +16,23 @@ target, and packets without that field show an empty cell.
 
 ## Downloads and continuous builds
 
+### 5.1.7
+
+Open **Wireless → Roaming Analyzer** for a station's BSSID transition history,
+the old/new data packets, observed data gap, and direct packet navigation.
+**Station health…** opens the selected station and interval in a separate window.
+
+Open **Wireless → Wireless Health** for AP, STA or channel statistics and shared
+retry, signal and PHY-rate trends. Select an entity, drag a time range, scroll to
+zoom, or edit the time fields. Both windows support live capture and retain a
+snapshot when the source closes. Their filters are independent of the main
+packet list; existing WLAN statistics and graphs are unchanged.
+
+Data gaps are observations, not measured application downtime. Signal is measured
+at the capture location, PHY rate is not throughput, and missing metadata stays
+unknown. Cross-interface roaming warns about clock alignment. See
+[wireless analysis behavior and verification](tasks/wireless-analysis.md).
+
 ### 5.1.6
 
 Use **File → Save Analysis Session…** to save the capture reference, read/display

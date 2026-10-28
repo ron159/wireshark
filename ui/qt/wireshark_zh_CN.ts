@@ -19557,6 +19557,14 @@ Preferences → Protocols → TCP to use this table.</source>
         <source>Compare Packets</source>
         <translation>比较数据包</translation>
     </message>
+    <message>
+        <source>Roaming Analyzer</source>
+        <translation>漫游分析器</translation>
+    </message>
+    <message>
+        <source>Wireless Health</source>
+        <translation>无线健康面板</translation>
+    </message>
 </context>
 <context>
     <name>WlanStatisticsDialog</name>
@@ -39277,6 +39285,246 @@ Please turn one of those options off.</source>
     <message>
         <source>Wireshark Analysis (*.wsanalysis)</source>
         <translation>Wireshark 分析现场 (*.wsanalysis)</translation>
+    </message>
+</context>
+<context>
+    <name>WirelessAnalysisDialog</name>
+    <message>
+        <source>%1 — %2</source>
+        <translation>%1 — %2</translation>
+    </message>
+    <message>
+        <source>Roaming Analyzer</source>
+        <translation>漫游分析器</translation>
+    </message>
+    <message>
+        <source>Wireless Health</source>
+        <translation>无线健康面板</translation>
+    </message>
+    <message>
+        <source>Access points (BSSID)</source>
+        <translation>接入点（BSSID）</translation>
+    </message>
+    <message>
+        <source>Stations (STA)</source>
+        <translation>终端（STA）</translation>
+    </message>
+    <message>
+        <source>Channels</source>
+        <translation>信道</translation>
+    </message>
+    <message>
+        <source>Station:</source>
+        <translation>终端：</translation>
+    </message>
+    <message>
+        <source>All stations</source>
+        <translation>所有终端</translation>
+    </message>
+    <message>
+        <source>All entities</source>
+        <translation>全部对象</translation>
+    </message>
+    <message>
+        <source>Refresh</source>
+        <translation>刷新</translation>
+    </message>
+    <message>
+        <source>Time range (s):</source>
+        <translation>时间范围（秒）：</translation>
+    </message>
+    <message>
+        <source>All time</source>
+        <translation>全部时间</translation>
+    </message>
+    <message>
+        <source>Time (s)</source>
+        <translation>时间（秒）</translation>
+    </message>
+    <message>
+        <source>Station</source>
+        <translation>终端</translation>
+    </message>
+    <message>
+        <source>Old BSSID</source>
+        <translation>原 BSSID</translation>
+    </message>
+    <message>
+        <source>New BSSID</source>
+        <translation>新 BSSID</translation>
+    </message>
+    <message>
+        <source>Data gap (ms)</source>
+        <translation>数据间隔（毫秒）</translation>
+    </message>
+    <message>
+        <source>Old packet</source>
+        <translation>原 AP 数据包</translation>
+    </message>
+    <message>
+        <source>New packet</source>
+        <translation>新 AP 数据包</translation>
+    </message>
+    <message>
+        <source>Clock source</source>
+        <translation>时钟来源</translation>
+    </message>
+    <message>
+        <source>Go to old packet</source>
+        <translation>跳转到原 AP 数据包</translation>
+    </message>
+    <message>
+        <source>Go to new packet</source>
+        <translation>跳转到新 AP 数据包</translation>
+    </message>
+    <message>
+        <source>Station health…</source>
+        <translation>终端健康…</translation>
+    </message>
+    <message>
+        <source>Entity</source>
+        <translation>对象</translation>
+    </message>
+    <message>
+        <source>Packets</source>
+        <translation>数据包</translation>
+    </message>
+    <message>
+        <source>Retries</source>
+        <translation>重试数</translation>
+    </message>
+    <message>
+        <source>Retry (%)</source>
+        <translation>重试率（%）</translation>
+    </message>
+    <message>
+        <source>Signal (dBm)</source>
+        <translation>信号（dBm）</translation>
+    </message>
+    <message>
+        <source>PHY rate (Mb/s)</source>
+        <translation>PHY 速率（Mb/s）</translation>
+    </message>
+    <message>
+        <source>Observed BSSID changes between non-retry data frames. Data gap is not measured application downtime. Cross-interface timestamps require aligned capture clocks.</source>
+        <translation>根据非重试数据帧观察 BSSID 变化。数据间隔不代表实测应用中断时间；跨接口分析需要对齐捕获时钟。</translation>
+    </message>
+    <message>
+        <source>Signal is measured at the capture location. PHY rate is not throughput. Retry percentage uses captured management/data frames. Drag the chart to focus all three trends; double-click for all time.</source>
+        <translation>信号测量位置为抓包端；PHY 速率不等于吞吐量。重试率基于捕获的管理帧和数据帧。拖选图表可同时聚焦三条趋势，双击恢复全部时间。</translation>
+    </message>
+    <message>
+        <source>Multiple interfaces</source>
+        <translation>多个接口</translation>
+    </message>
+    <message>
+        <source>Same interface</source>
+        <translation>同一接口</translation>
+    </message>
+    <message>
+        <source>%1 transitions in range · %2 stations in capture</source>
+        <translation>范围内 %1 次切换 · 抓包中共 %2 个终端</translation>
+    </message>
+    <message>
+        <source>%1 signal measurements</source>
+        <translation>%1 个信号测量值</translation>
+    </message>
+    <message>
+        <source>%1 PHY rate measurements</source>
+        <translation>%1 个 PHY 速率测量值</translation>
+    </message>
+    <message>
+        <source>%1 WLAN frames · %2 / %3 capture packets scanned · independent of the main display filter</source>
+        <translation>%1 个 WLAN 帧 · 已扫描 %2 / %3 个数据包 · 独立于主窗口显示过滤器</translation>
+    </message>
+    <message>
+        <source> · Capture closed or reloaded; snapshot retained, navigation disabled</source>
+        <translation> · 抓包已关闭或重新加载；保留分析快照，已禁用包跳转</translation>
+    </message>
+    <message>
+        <source> · Sample limit reached; results are incomplete</source>
+        <translation> · 已达到样本数量上限，分析结果不完整</translation>
+    </message>
+    <message>
+        <source>All entities in selected group</source>
+        <translation>当前分组中的全部对象</translation>
+    </message>
+    <message>
+        <source>Selected: %1</source>
+        <translation>已选择：%1</translation>
+    </message>
+    <message>
+        <source>of %1 · %2 rows · up to %3 per page</source>
+        <translation>共 %1 页 · %2 行 · 每页最多 %3 行</translation>
+    </message>
+    <message>
+        <source>Page:</source>
+        <translation>页码：</translation>
+    </message>
+</context>
+<context>
+    <name>WirelessCapture</name>
+    <message>
+        <source>Could not read packet %1. Results are incomplete.</source>
+        <translation>无法读取第 %1 个数据包，分析结果不完整。</translation>
+    </message>
+</context>
+<context>
+    <name>WirelessTrend</name>
+    <message>
+        <source>Wireless retry, signal and PHY rate trends</source>
+        <translation>无线重试率、信号与 PHY 速率趋势</translation>
+    </message>
+    <message>
+        <source>Drag to select a time range. Scroll to zoom. Double-click to show all time.</source>
+        <translation>拖动选择时间范围，滚轮缩放，双击显示全部时间。</translation>
+    </message>
+    <message>
+        <source>Retry (%)</source>
+        <translation>重试率（%）</translation>
+    </message>
+    <message>
+        <source>Signal (dBm)</source>
+        <translation>信号（dBm）</translation>
+    </message>
+    <message>
+        <source>PHY rate (Mb/s)</source>
+        <translation>PHY 速率（Mb/s）</translation>
+    </message>
+    <message>
+        <source>No measurements in this range</source>
+        <translation>该时间范围内没有测量值</translation>
+    </message>
+    <message>
+        <source>%1 s</source>
+        <translation>%1 秒</translation>
+    </message>
+    <message>
+        <source>Unknown</source>
+        <translation>未知</translation>
+    </message>
+    <message>
+        <source>%1 s
+%2 packets
+Retry: %3%
+Signal: %4 dBm
+PHY rate: %5 Mb/s</source>
+        <translation>%1 秒
+%2 个数据包
+重试率：%3%
+信号：%4 dBm
+PHY 速率：%5 Mb/s</translation>
+    </message>
+</context>
+<context>
+    <name>WirelessAnalysis</name>
+    <message>
+        <source>Unknown</source>
+        <translation>未知</translation>
+    </message>
+    <message>
+        <source>Channel %1 (band unknown)</source>
+        <translation>信道 %1（频段未知）</translation>
     </message>
 </context>
 </TS>

@@ -58,5 +58,17 @@ int main(int argc, char **argv)
     check(model.health(Group::Station, {5, 4}).isEmpty(), "reversed ranges produce no statistics");
     model.clear();
     check(model.samples().isEmpty() && model.roaming().isEmpty(), "capture reset clears all state");
+    for (quint32 frame = 1; frame <= Model::SampleLimit; ++frame) {
+        p.frame = frame;
+        model.append(p);
+    }
+    check(!model.limited() && model.samples().size() == Model::SampleLimit,
+          "capture reaching the sample boundary remains complete");
+    ++p.frame;
+    check(!model.append(p) && model.limited() && model.samples().size() == Model::SampleLimit,
+          "additional samples are bounded and incomplete results explicitly flagged");
+    model.clear();
+    p.frame = 1;
+    check(!model.limited() && model.append(p), "refresh clears collection limit and frame identity");
     return failures ? 1 : 0;
 }

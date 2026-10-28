@@ -3507,14 +3507,31 @@ void WiresharkMainWindow::statCommandWlanStatistics(const char *arg, void *)
 
 void WiresharkMainWindow::showWirelessAnalysis(bool roaming)
 {
+    auto jump = [this](unsigned number) {
+        auto *cf = capture_file_.capFile();
+        if (!cf || cf->read_lock) return;
+        auto *frame = frame_data_sequence_find(cf->provider.frames, number);
+        if (!frame) return;
+        if (frame->passed_dfilter) {
+            cf_goto_frame(cf, number, true);
+        } else {
+            auto *packet = new PacketDialog(*this, capture_file_, frame);
+            packet->setObjectName("wirelessRelatedPacket");
+            connect(packet, &PacketDialog::showProtocolPreferences, this, &WiresharkMainWindow::showPreferencesDialog);
+            connect(packet, SIGNAL(editProtocolPreference(pref_t*,module_t*)),
+                    main_ui_->preferenceEditorFrame, SLOT(editPreference(pref_t*,module_t*)));
+            connect(this, &WiresharkMainWindow::closePacketDialogs, packet, &PacketDialog::close);
+            packet->show();
+        }
+    };
     auto *dialog = new WirelessAnalysisDialog(*this, capture_file_, roaming
                      ? WirelessAnalysisDialog::View::Roaming : WirelessAnalysisDialog::View::Health);
-    connect(dialog, &WirelessAnalysisDialog::goToPacket, this, [this](unsigned frame) { packet_list_->goToPacket(frame); });
+    connect(dialog, &WirelessAnalysisDialog::goToPacket, this, jump);
     connect(dialog, &WirelessAnalysisDialog::showStationHealth, this,
-            [this](WirelessAnalysis::Mac sta, WirelessAnalysis::Range range) {
+            [this, jump](WirelessAnalysis::Mac sta, WirelessAnalysis::Range range) {
         auto *health = new WirelessAnalysisDialog(*this, capture_file_, WirelessAnalysisDialog::View::Health);
         health->selectStation(sta, range);
-        connect(health, &WirelessAnalysisDialog::goToPacket, this, [this](unsigned frame) { packet_list_->goToPacket(frame); });
+        connect(health, &WirelessAnalysisDialog::goToPacket, this, jump);
         health->show();
     });
     dialog->show();

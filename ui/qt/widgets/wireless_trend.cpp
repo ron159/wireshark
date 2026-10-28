@@ -1,5 +1,6 @@
 /* SPDX-License-Identifier: GPL-2.0-or-later */
 #include "wireless_trend.h"
+#include "ui/qt/utils/theme_manager.h"
 #include <QMouseEvent>
 #include <QPainter>
 #include <QPainterPath>
@@ -20,6 +21,7 @@ WirelessTrend::WirelessTrend(QWidget *parent) : QWidget(parent)
     setMouseTracking(true);
     setAccessibleName(tr("Wireless retry, signal and PHY rate trends"));
     setToolTip(tr("Drag to select a time range. Scroll to zoom. Double-click to show all time."));
+    connect(ThemeManager::instance(), &ThemeManager::themeChanged, this, [this] { update(); });
 }
 void WirelessTrend::setData(const QVector<Bucket> &buckets, Range range)
 {
@@ -42,7 +44,8 @@ void WirelessTrend::paintEvent(QPaintEvent *)
     painter.fillRect(rect(), palette().base());
     const auto r = plotRect();
     const QStringList titles{tr("Retry (%)"), tr("Signal (dBm)"), tr("PHY rate (Mb/s)")};
-    const QColor colors[]{palette().highlight().color(), QColor(25, 155, 120), QColor(205, 130, 30)};
+    auto *theme = ThemeManager::instance();
+    const QColor colors[]{theme->graphColor(0), theme->graphColor(1), theme->graphColor(2)};
     for (int m = 0; m < 3; ++m) {
         QRectF track(r.left(), r.top() + m * r.height() / 3, r.width(), r.height() / 3 - 32);
         double low = m == 1 ? -100 : 0, high = m == 0 ? 100 : (m == 1 ? -20 : 1);
@@ -57,7 +60,8 @@ void WirelessTrend::paintEvent(QPaintEvent *)
         painter.drawText(QRectF(track.left(), track.top() - 22, track.width(), 20), titles[m]);
         for (int tick = 0; tick <= 2; ++tick) {
             const double y = track.bottom() - tick * track.height() / 2;
-            painter.setPen(palette().mid().color());
+            auto grid = palette().text().color(); grid.setAlpha(45);
+            painter.setPen(grid);
             painter.drawLine(QPointF(track.left(), y), QPointF(track.right(), y));
             painter.setPen(palette().text().color());
             painter.drawText(QRectF(0, y - 10, r.left() - 8, 20), Qt::AlignRight | Qt::AlignVCenter,
