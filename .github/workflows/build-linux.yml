@@ -69,8 +69,8 @@ jobs:
       - name: Test packet comparison logic
         run: |
           cmake -S test/qt -B qt-tests
-          cmake --build qt-tests --parallel 2 --target packet_comparison_test
-          ctest --test-dir qt-tests -R '^packet_comparison$' --output-on-failure
+          cmake --build qt-tests --parallel 2 --target packet_comparison_test analysis_session_test
+          ctest --test-dir qt-tests -R '^(packet_comparison|analysis_session)$' --output-on-failure
 
       - name: Collect packages and build identity
         run: |

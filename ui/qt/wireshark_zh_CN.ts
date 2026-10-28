@@ -12119,6 +12119,50 @@ This will restart all Lua scripts and may affect capture analysis.</source>
         <translation>单击以停用所有断点
 %1：在编辑器当前行添加或移除断点</translation>
     </message>
+    <message>
+        <source>Analysis file exceeds 16 MiB.</source>
+        <translation>分析现场文件超过 16 MiB。</translation>
+    </message>
+    <message>
+        <source>Bookmarks are being saved by another window. Try again.</source>
+        <translation>另一个窗口正在保存书签，请重试。</translation>
+    </message>
+    <message>
+        <source>Cannot create the bookmark storage directory.</source>
+        <translation>无法创建书签存储目录。</translation>
+    </message>
+    <message>
+        <source>Cannot read capture file: %1</source>
+        <translation>无法读取抓包文件：%1</translation>
+    </message>
+    <message>
+        <source>Could not read analysis file safely.</source>
+        <translation>无法完整读取分析现场文件。</translation>
+    </message>
+    <message>
+        <source>Invalid analysis file: %1</source>
+        <translation>分析现场文件无效：%1</translation>
+    </message>
+    <message>
+        <source>Invalid column layout data.</source>
+        <translation>列布局数据无效。</translation>
+    </message>
+    <message>
+        <source>Invalid or oversized analysis data. No state was restored.</source>
+        <translation>分析数据无效或超出限制，未恢复任何状态。</translation>
+    </message>
+    <message>
+        <source>Saved bookmarks belong to a different capture or read filter.</source>
+        <translation>已保存的书签属于其他抓包或读取过滤器。</translation>
+    </message>
+    <message>
+        <source>The capture file changed while its identity was being checked. Reload it and try again.</source>
+        <translation>校验期间抓包文件发生了变化，请重新加载后重试。</translation>
+    </message>
+    <message>
+        <source>Unsupported analysis file format or version.</source>
+        <translation>不支持此分析现场文件的格式或版本。</translation>
+    </message>
 </context>
 <context>
     <name>RecentCaptureFilesListModel</name>
@@ -39058,6 +39102,181 @@ Please turn one of those options off.</source>
     <message>
         <source>Unavailable on the left (truncated)</source>
         <translation>左侧不可用（抓包截断）</translation>
+    </message>
+</context>
+<context>
+    <name>AnalysisSessionController</name>
+    <message>
+        <source>%1 bookmarks · Saved automatically</source>
+        <translation>%1 个书签 · 自动保存</translation>
+    </message>
+    <message>
+        <source>Add</source>
+        <translation>添加</translation>
+    </message>
+    <message>
+        <source>Add or Edit Packet Bookmark…</source>
+        <translation>添加或编辑数据包书签…</translation>
+    </message>
+    <message>
+        <source>Analysis Session</source>
+        <translation>分析现场</translation>
+    </message>
+    <message>
+        <source>Analysis restored; column layout was skipped because column definitions differ.</source>
+        <translation>分析现场已恢复；列定义不同，已保留当前列布局。</translation>
+    </message>
+    <message>
+        <source>Analysis restored; the saved selection is hidden by its display filter.</source>
+        <translation>分析现场已恢复；保存的选中包被该显示过滤器隐藏。</translation>
+    </message>
+    <message>
+        <source>Analysis session saved: %1</source>
+        <translation>分析现场已保存：%1</translation>
+    </message>
+    <message>
+        <source>Cannot restore analysis filter: %1</source>
+        <translation>无法恢复分析过滤器：%1</translation>
+    </message>
+    <message>
+        <source>Capture contents do not match this analysis session. The current analysis was left unchanged.</source>
+        <translation>抓包内容与此分析现场不匹配，当前分析保持不变。</translation>
+    </message>
+    <message>
+        <source>Capture file is missing. Locate the original capture to restore this session.</source>
+        <translation>抓包文件不存在，请定位原始抓包文件以恢复现场。</translation>
+    </message>
+    <message>
+        <source>Capture identity check was cancelled.</source>
+        <translation>抓包内容校验已取消。</translation>
+    </message>
+    <message>
+        <source>Checking capture identity… You can continue reading packets.</source>
+        <translation>正在校验抓包内容… 可继续查看数据包。</translation>
+    </message>
+    <message>
+        <source>Choose a separate analysis file; the capture file cannot be overwritten.</source>
+        <translation>请另选分析现场文件，不能覆盖抓包文件。</translation>
+    </message>
+    <message>
+        <source>Edit</source>
+        <translation>编辑</translation>
+    </message>
+    <message>
+        <source>Finish the current capture or file operation before opening an analysis session.</source>
+        <translation>请先结束当前抓包或文件操作，再打开分析现场。</translation>
+    </message>
+    <message>
+        <source>Go to Packet</source>
+        <translation>跳转到数据包</translation>
+    </message>
+    <message>
+        <source>Locate Capture File</source>
+        <translation>定位抓包文件</translation>
+    </message>
+    <message>
+        <source>Next Bookmark</source>
+        <translation>下一个书签</translation>
+    </message>
+    <message>
+        <source>Note</source>
+        <translation>备注</translation>
+    </message>
+    <message>
+        <source>Open Analysis Session</source>
+        <translation>打开分析现场</translation>
+    </message>
+    <message>
+        <source>Open Analysis Session…</source>
+        <translation>打开分析现场…</translation>
+    </message>
+    <message>
+        <source>Open a saved capture to use persistent bookmarks. Stop and save live captures first.</source>
+        <translation>打开已保存的抓包文件即可使用持久书签。实时抓包请先停止并保存。</translation>
+    </message>
+    <message>
+        <source>Packet</source>
+        <translation>数据包</translation>
+    </message>
+    <message>
+        <source>Packet %1</source>
+        <translation>数据包 %1</translation>
+    </message>
+    <message>
+        <source>Packet Bookmark</source>
+        <translation>数据包书签</translation>
+    </message>
+    <message>
+        <source>Packet Bookmark — %1</source>
+        <translation>数据包书签 — %1</translation>
+    </message>
+    <message>
+        <source>Packet Bookmarks</source>
+        <translation>数据包书签</translation>
+    </message>
+    <message>
+        <source>Previous Bookmark</source>
+        <translation>上一个书签</translation>
+    </message>
+    <message>
+        <source>Remove</source>
+        <translation>移除</translation>
+    </message>
+    <message>
+        <source>Restoring analysis session…</source>
+        <translation>正在恢复分析现场…</translation>
+    </message>
+    <message>
+        <source>Save Analysis Session</source>
+        <translation>保存分析现场</translation>
+    </message>
+    <message>
+        <source>Save Analysis Session…</source>
+        <translation>保存分析现场…</translation>
+    </message>
+    <message>
+        <source>Save changes to the capture file before saving the analysis session.</source>
+        <translation>请先保存抓包文件的修改，再保存分析现场。</translation>
+    </message>
+    <message>
+        <source>Saved bookmarks do not match this capture.</source>
+        <translation>已保存的书签与此抓包不匹配。</translation>
+    </message>
+    <message>
+        <source>Search packet number, title or note</source>
+        <translation>搜索包号、标题或备注</translation>
+    </message>
+    <message>
+        <source>Stop and save the capture, then wait for its identity check to finish.</source>
+        <translation>请先停止并保存抓包，然后等待内容校验完成。</translation>
+    </message>
+    <message>
+        <source>The analysis display filter could not be applied.</source>
+        <translation>无法应用现场中的显示过滤器。</translation>
+    </message>
+    <message>
+        <source>The bookmarked packet was added to the current display filter.</source>
+        <translation>已将书签数据包加入当前显示过滤器。</translation>
+    </message>
+    <message>
+        <source>The capture file changed. Reload it before saving analysis.</source>
+        <translation>抓包文件已改变，请重新加载后再保存分析。</translation>
+    </message>
+    <message>
+        <source>The opened capture does not match the saved packet sequence. Analysis state was not applied.</source>
+        <translation>打开的抓包与保存的数据包序列不匹配，未应用分析状态。</translation>
+    </message>
+    <message>
+        <source>The saved column layout could not be restored.</source>
+        <translation>无法恢复保存的列布局。</translation>
+    </message>
+    <message>
+        <source>Title</source>
+        <translation>标题</translation>
+    </message>
+    <message>
+        <source>Wireshark Analysis (*.wsanalysis)</source>
+        <translation>Wireshark 分析现场 (*.wsanalysis)</translation>
     </message>
 </context>
 </TS>

@@ -78,6 +78,13 @@ jobs:
           python test/qt/run_follow_stream_live_test.py --build-dir build --limits 2>&1 | tee build/follow-stream-live-test.log
           QT_QPA_PLATFORM=cocoa python test/qt/run_follow_stream_live_test.py --build-dir build --no-build --language zh_CN --theme dark --screenshot-dir build/follow-live-dark 2>&1 | tee -a build/follow-stream-live-test.log
 
+      - name: Verify analysis sessions and persistent bookmarks
+        shell: bash
+        run: |
+          trap 'rm -f build/run/Wireshark.app/Contents/MacOS/analysis_session_integration' EXIT
+          python test/qt/run_analysis_session_test.py --build-dir build 2>&1 | tee build/analysis-session-test.log
+          QT_QPA_PLATFORM=cocoa python test/qt/run_analysis_session_test.py --build-dir build --no-build --language zh_CN --screenshot-dir build/analysis-session-ui 2>&1 | tee -a build/analysis-session-test.log
+
       - name: Bundle dependencies
         run: LIBPREFIX="$(brew --prefix)" cmake --build build --parallel 3 --target wireshark_app_bundle
 
@@ -106,6 +113,8 @@ jobs:
             build/test-results.xml
             build/follow-stream-filter-test.log
             build/follow-stream-live-test.log
+            build/analysis-session-test.log
+            build/analysis-session-ui/*.png
             build/follow-live-dark/*.png
             build/packet-comparison-test.log
             build/comparison-light/*.png

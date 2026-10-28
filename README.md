@@ -16,6 +16,23 @@ target, and packets without that field show an empty cell.
 
 ## Downloads and continuous builds
 
+### 5.1.6
+
+Use **File → Save Analysis Session…** to save the capture reference, read/display
+filters, selected packet, marked/ignored packets, time references, column order,
+widths, visibility, sorting and a portable bookmark copy in a `.wsanalysis` file.
+**Open Analysis Session…** verifies the complete capture SHA-256 before restoring
+it; locate the original capture if it moved. The capture itself is not embedded.
+
+Use the packet-list context menu to **Add or Edit Packet Bookmark…**, and
+**View → Packet Bookmarks** to search titles/notes, edit, remove or navigate.
+Bookmarks save automatically in the user configuration directory and survive
+restarts and capture renames. Reading filters and their accepted packet sequence
+have separate bookmark identities. Opening an old session preserves newer local
+bookmark edits and deletions; its bookmark copy is imported when no local store
+exists. Stop and save live captures before using these features.
+See [analysis session behavior and validation](tasks/analysis-session.md).
+
 ### 5.1.5
 
 Open **Follow Stream** while capturing to keep receiving new stream data.

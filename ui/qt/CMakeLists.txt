@@ -93,6 +93,7 @@ set(WIRESHARK_MANAGER_HEADERS
 )
 
 set(WIRESHARK_UTILS_HEADERS
+	utils/analysis_session.h
 	utils/byte_view_text_cells.h
 	utils/color_utils.h
 	utils/data_printer.h
@@ -281,6 +282,7 @@ set(WIRESHARK_QT_HEADERS
 	packet_diagram.h
 	packet_dialog.h
 	packet_comparison_dialog.h
+	analysis_session_controller.h
 	utils/packet_comparison.h
 	packet_format_group_box.h
 	packet_format_stack.h
@@ -460,6 +462,7 @@ else()
 endif()
 
 set(WIRESHARK_UTILS_SRCS
+	utils/analysis_session.cpp
 	utils/byte_view_text_cells.cpp
 	utils/color_utils.cpp
 	utils/data_printer.cpp
@@ -640,6 +643,7 @@ set(WIRESHARK_QT_SRC
 	packet_diagram.cpp
 	packet_dialog.cpp
 	packet_comparison_dialog.cpp
+	analysis_session_controller.cpp
 	utils/packet_comparison.cpp
 	packet_format_group_box.cpp
 	packet_format_stack.cpp

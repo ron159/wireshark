@@ -85,6 +85,7 @@ DIAG_ON(frame-larger-than=)
 #include <ui/qt/utils/themes/themed_icon.h>
 #include <ui/qt/utils/variant_pointer.h>
 #include <ui/qt/utils/workspace_state.h>
+#include "analysis_session_controller.h"
 #include <ui/qt/utils/software_update.h>
 
 #include <QAction>
@@ -641,6 +642,8 @@ WiresharkMainWindow::WiresharkMainWindow(QWidget *parent) :
     connect(&capture_file_, &CaptureFile::captureEvent, mainApp, &WiresharkApplication::captureEventHandler);
     connect(&capture_file_, &CaptureFile::captureEvent, main_ui_->statusBar, &MainStatusBar::captureEventHandler);
     connect(&capture_file_, &CaptureFile::captureEvent, profile_switcher_, &ProfileSwitcher::captureEventHandler);
+
+    new AnalysisSessionController(this, packet_list_);
 
     connect(mainApp, &MainApplication::freezePacketList, packet_list_, &PacketList::freezePacketList);
     connect(mainApp, &MainApplication::columnsChanged, packet_list_, &PacketList::columnsChanged);

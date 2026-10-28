@@ -36,13 +36,16 @@ int main(int argc, char **argv)
     state.displayFilter = "tcp.port == 443";
     state.marked = {1, 3}; state.ignored = {4}; state.timeReferences = {2};
     state.bookmarks = {{3, QString::fromUtf8("握手"), QString::fromUtf8("检查证书\n第二行")}};
-    state.headerState = QByteArray::fromHex("00ff0203");
+    state.columns = {{QString::fromLatin1(identity.hash), 240, false}};
+    state.sortColumn = 0;
+    state.sortDescending = true;
     QString error;
     check(write(path, state, error), "atomic session save succeeds");
     State loaded;
     check(read(path, loaded, error) && loaded.bookmarks.size() == 1 && loaded.bookmarks[0].note == state.bookmarks[0].note
           && loaded.marked == state.marked && loaded.ignored == state.ignored && loaded.timeReferences == state.timeReferences
-          && loaded.displayFilter == state.displayFilter && loaded.headerState == state.headerState && loaded.selectedFrame == 3,
+          && loaded.displayFilter == state.displayFilter && loaded.columns.size() == 1 && loaded.columns[0].width == 240
+          && !loaded.columns[0].visible && loaded.sortColumn == 0 && loaded.sortDescending && loaded.selectedFrame == 3,
           "analysis state and Unicode multiline notes round trip");
     const auto key = bookmarkFileName(state);
     state.capturePath = directory.filePath("renamed.pcap");
@@ -57,6 +60,11 @@ int main(int argc, char **argv)
           "another window's unrelated bookmark survives an update");
     check(updateBookmarks(bookmarks, state, {}, {3}, merged, error) && merged.size() == 1 && merged[0].frame == 7,
           "bookmark removal preserves other entries");
+    check(updateBookmarks(bookmarks, state, state.bookmarks, {}, merged, error, true) && merged.size() == 1 && merged[0].frame == 7,
+          "snapshot import checks existing edits and deletions under the lock");
+    auto same_filter = state;
+    same_filter.frameSequence = QByteArray(64, 'a');
+    check(bookmarkFileName(same_filter) != bookmarkFileName(state), "different accepted frame sequences have separate bookmark identities");
     auto corrupt = [&](const char *key, QJsonValue value) {
         QFile file(path);
         if (!file.open(QIODevice::ReadOnly)) return false;
@@ -70,7 +78,7 @@ int main(int argc, char **argv)
     check(corrupt("selected_frame", 9), "out of range frame rejected");
     check(corrupt("selected_frame", 1.5), "fractional frame rejected");
     check(corrupt("sha256", QString(64, 'z')), "invalid identity rejected");
-    check(corrupt("header_state", "not base64"), "invalid layout encoding rejected");
+    check(corrupt("sort_column", 1000000000), "out of range layout index rejected");
     check(corrupt("display_filter", QString(65537, 'x')), "oversized filter rejected");
     check(put(bookmarks, "broken"), "corrupt bookmark fixture written");
     check(!updateBookmarks(bookmarks, state, state.bookmarks, {}, merged, error), "corrupt bookmark file is not overwritten");

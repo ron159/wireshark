@@ -1095,6 +1095,8 @@ void PacketList::showContextMenuForSourceIndex(const QModelIndex &source_index, 
     // XXX We might want to reimplement setParent() and fill in the context
     // menu there.
     ctx_menu->addAction(window()->findChild<QAction *>("actionEditMarkSelected"));
+    if (auto *bookmark = window()->findChild<QAction *>("actionAddPacketBookmark"))
+        ctx_menu->addAction(bookmark);
     ctx_menu->addAction(window()->findChild<QAction *>("actionEditIgnoreSelected"));
     ctx_menu->addAction(window()->findChild<QAction *>("actionEditSetTimeReference"));
     ctx_menu->addAction(window()->findChild<QAction *>("actionEditTimeShift"));

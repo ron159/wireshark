@@ -1,5 +1,24 @@
 # Windows item-view rendering regression
 
+## Analysis sessions and persistent packet bookmarks
+
+`analysis_session_test` runs with the standalone CMake/CTest project below.
+It verifies strict JSON bounds, capture identity, atomic writes and locked merges.
+After building Wireshark with Ninja, run:
+
+```sh
+python test/qt/run_analysis_session_test.py --build-dir build
+QT_QPA_PLATFORM=cocoa python test/qt/run_analysis_session_test.py --build-dir build --no-build --language zh_CN --screenshot-dir build/analysis-session-ui
+```
+
+The integration driver runs two real GUI processes with an isolated profile.
+It exercises the bookmark editor, Unicode notes/search, selection/filter/flag/column
+restoration, hidden-packet navigation, moved/mismatched files, newer local edits,
+deletions, read-filter isolation, and persistence across application restarts.
+The driver is excluded from release packages.
+
+## Item-view rendering
+
 This standalone test builds the production `ThemeStyler` with Qt Widgets,
 without a complete Wireshark build or a Qt Test dependency:
 

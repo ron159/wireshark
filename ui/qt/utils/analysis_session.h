@@ -5,6 +5,7 @@
 #include <QByteArray>
 #include <QList>
 #include <QString>
+#include <QStringList>
 #include <atomic>
 #include <memory>
 
@@ -16,16 +17,25 @@ struct Bookmark {
     QString note;
 };
 
+struct Column {
+    QString key;
+    unsigned width = 100;
+    bool visible = true;
+};
+
 struct State {
     QString capturePath;
     QByteArray captureHash;
     QString readFilter;
+    QByteArray frameSequence;
     QString displayFilter;
     unsigned packetCount = 0;
     unsigned selectedFrame = 0;
     QList<unsigned> marked, ignored, timeReferences;
     QList<Bookmark> bookmarks;
-    QByteArray columnSignature, headerState;
+    QList<Column> columns;
+    int sortColumn = -1;
+    bool sortDescending = false;
 };
 
 struct Fingerprint {
@@ -45,7 +55,8 @@ QString bookmarkFileName(const State &state);
 
 // Reload under a lock before merging, so other windows' unrelated edits survive.
 bool updateBookmarks(const QString &path, const State &identity, const QList<Bookmark> &updates,
-                     const QList<unsigned> &removed, QList<Bookmark> &result, QString &error);
+                     const QList<unsigned> &removed, QList<Bookmark> &result, QString &error,
+                     bool importIfMissing = false);
 
 } // namespace AnalysisSession
 #endif
