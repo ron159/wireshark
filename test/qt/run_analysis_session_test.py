@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Exercise analysis snapshots and persistent bookmarks in two real GUI processes."""
+"""Exercise analysis snapshots and persistent bookmarks in three real GUI processes."""
 import argparse
 import os
 from pathlib import Path
