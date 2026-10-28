@@ -27,3 +27,11 @@ add_executable(packet_comparison_test
 target_include_directories(packet_comparison_test PRIVATE "${WIRESHARK_SOURCE_DIR}")
 target_link_libraries(packet_comparison_test PRIVATE Qt6::Core)
 add_test(NAME packet_comparison COMMAND packet_comparison_test)
+
+add_executable(analysis_session_test
+    analysis_session_test.cpp
+    "${WIRESHARK_SOURCE_DIR}/ui/qt/utils/analysis_session.cpp"
+)
+target_include_directories(analysis_session_test PRIVATE "${WIRESHARK_SOURCE_DIR}")
+target_link_libraries(analysis_session_test PRIVATE Qt6::Core)
+add_test(NAME analysis_session COMMAND analysis_session_test)
