@@ -35,3 +35,11 @@ add_executable(analysis_session_test
 target_include_directories(analysis_session_test PRIVATE "${WIRESHARK_SOURCE_DIR}")
 target_link_libraries(analysis_session_test PRIVATE Qt6::Core)
 add_test(NAME analysis_session COMMAND analysis_session_test)
+
+add_executable(wireless_analysis_test
+    wireless_analysis_test.cpp
+    "${WIRESHARK_SOURCE_DIR}/ui/qt/utils/wireless_analysis.cpp"
+)
+target_include_directories(wireless_analysis_test PRIVATE "${WIRESHARK_SOURCE_DIR}")
+target_link_libraries(wireless_analysis_test PRIVATE Qt6::Core)
+add_test(NAME wireless_analysis COMMAND wireless_analysis_test)
