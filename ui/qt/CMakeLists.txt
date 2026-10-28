@@ -76,6 +76,7 @@ set(WIRESHARK_WIDGET_HEADERS
 	widgets/traffic_types_list.h
 	widgets/welcome_header_widget.h
 	widgets/wireless_timeline.h
+	widgets/wireless_trend.h
 	widgets/wireshark_file_dialog.h
 	widgets/customplot.h
 )
@@ -94,6 +95,7 @@ set(WIRESHARK_MANAGER_HEADERS
 
 set(WIRESHARK_UTILS_HEADERS
 	utils/analysis_session.h
+	utils/wireless_analysis.h
 	utils/byte_view_text_cells.h
 	utils/color_utils.h
 	utils/data_printer.h
@@ -282,6 +284,8 @@ set(WIRESHARK_QT_HEADERS
 	packet_diagram.h
 	packet_dialog.h
 	packet_comparison_dialog.h
+	wireless_capture.h
+	wireless_analysis_dialog.h
 	analysis_session_controller.h
 	utils/packet_comparison.h
 	packet_format_group_box.h
@@ -425,6 +429,7 @@ set(WIRESHARK_WIDGET_SRCS
 	widgets/traffic_types_list.cpp
 	widgets/welcome_header_widget.cpp
 	widgets/wireless_timeline.cpp
+	widgets/wireless_trend.cpp
 	widgets/wireshark_file_dialog.cpp
 	widgets/customplot.cpp
 )
@@ -463,6 +468,7 @@ endif()
 
 set(WIRESHARK_UTILS_SRCS
 	utils/analysis_session.cpp
+	utils/wireless_analysis.cpp
 	utils/byte_view_text_cells.cpp
 	utils/color_utils.cpp
 	utils/data_printer.cpp
@@ -643,6 +649,8 @@ set(WIRESHARK_QT_SRC
 	packet_diagram.cpp
 	packet_dialog.cpp
 	packet_comparison_dialog.cpp
+	wireless_capture.cpp
+	wireless_analysis_dialog.cpp
 	analysis_session_controller.cpp
 	utils/packet_comparison.cpp
 	packet_format_group_box.cpp

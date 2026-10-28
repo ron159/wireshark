@@ -1222,6 +1222,7 @@ private slots:
      * @brief Opens the WLAN Statistics dialog via the stat-command mechanism.
      */
     void statCommandWlanStatistics(const char *, void *);
+    void showWirelessAnalysis(bool roaming);
 
     /**
      * @brief Opens a registered statistics tree dialog by abbreviation.

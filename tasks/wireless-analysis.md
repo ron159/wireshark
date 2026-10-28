@@ -44,4 +44,14 @@ Do not change WLAN Statistics or the existing graph implementation.
 ## Progress
 
 - Baseline: clean main at 4a7f714, fetched origin; current local build is available.
-- Design and measurement contract recorded. Implementation in progress.
+- Core model committed as 66d4ec3; standalone semantic tests pass.
+- Capture adapter and both windows implemented. Native integration fixture passes:
+  radiotap metadata, exclusions, two handoffs (100 ms and 300 ms), menu windows,
+  packet navigation, STA/range transfer, health grouping, shared range, reopen.
+- First light-style screenshots inspected in build/wireless-screenshots/.
+- Remaining: broader fixtures (PCAPNG interfaces, missing metadata, live append,
+  non-WLAN), real mouse interactions, scale/performance checks, Chinese/dark UI,
+  documentation, CI and release validation. Full objective remains active.
+- Local GUI test requires sandbox escalation on this Mac (otherwise process
+  aborts before the Qt application starts). Command:
+  `python3 test/qt/run_wireless_analysis_test.py --build-dir build`.

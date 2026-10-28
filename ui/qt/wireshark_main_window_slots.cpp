@@ -178,6 +178,7 @@ DIAG_ON(frame-larger-than=)
 #include "voip_calls_dialog.h"
 #include "imsi_list_dialog.h"
 #include "wlan_statistics_dialog.h"
+#include "wireless_analysis_dialog.h"
 #include <ui/qt/widgets/wireless_timeline.h>
 #include <ui/qt/utils/workspace_state.h>
 #include <ui/qt/interface_frame.h>
@@ -3504,6 +3505,21 @@ void WiresharkMainWindow::statCommandWlanStatistics(const char *arg, void *)
     connect(wlan_stats_dlg, &WlanStatisticsDialog::filterAction, this, &WiresharkMainWindow::filterAction);
 }
 
+void WiresharkMainWindow::showWirelessAnalysis(bool roaming)
+{
+    auto *dialog = new WirelessAnalysisDialog(*this, capture_file_, roaming
+                     ? WirelessAnalysisDialog::View::Roaming : WirelessAnalysisDialog::View::Health);
+    connect(dialog, &WirelessAnalysisDialog::goToPacket, this, [this](unsigned frame) { packet_list_->goToPacket(frame); });
+    connect(dialog, &WirelessAnalysisDialog::showStationHealth, this,
+            [this](WirelessAnalysis::Mac sta, WirelessAnalysis::Range range) {
+        auto *health = new WirelessAnalysisDialog(*this, capture_file_, WirelessAnalysisDialog::View::Health);
+        health->selectStation(sta, range);
+        connect(health, &WirelessAnalysisDialog::goToPacket, this, [this](unsigned frame) { packet_list_->goToPacket(frame); });
+        health->show();
+    });
+    dialog->show();
+}
+
 // -z expert
 void WiresharkMainWindow::statCommandExpertInfo(const char *, void *)
 {
@@ -4116,6 +4132,8 @@ void WiresharkMainWindow::connectWirelessMenuActions()
     });
 
     connect(main_ui_->actionWirelessWlanStatistics, &QAction::triggered, this, [=]() { statCommandWlanStatistics(NULL, NULL); });
+    connect(main_ui_->actionWirelessRoaming, &QAction::triggered, this, [this]() { showWirelessAnalysis(true); });
+    connect(main_ui_->actionWirelessHealth, &QAction::triggered, this, [this]() { showWirelessAnalysis(false); });
 }
 
 // Tools Menu
