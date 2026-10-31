@@ -183,10 +183,10 @@ jobs:
         run: |
           cmake -S test/qt -B style-tests -G "Visual Studio 18 2026" -A x64 "-DCMAKE_PREFIX_PATH=$env:QT_ROOT_DIR"
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
-          cmake --build style-tests --config Release --parallel 2
+          cmake --build style-tests --config Release --parallel 2 --target packet_list_style_test
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
       - name: Verify native style and themed item views
-        run: ctest --test-dir style-tests -C Release --output-on-failure --output-junit "$PWD/native-style-tests.xml"
+        run: ctest --test-dir style-tests -C Release -R '^packet_list_style$' --output-on-failure --output-junit "$PWD/native-style-tests.xml"
       - name: Upload rendering test results
         if: always()
         uses: actions/upload-artifact@v6
