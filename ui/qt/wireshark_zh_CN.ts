@@ -14109,6 +14109,26 @@ Pause following before sorting, or convert to a regular column.</source>
 <context>
     <name>PreferencesDialog</name>
     <message>
+        <source>Preference pages</source>
+        <translation>首选项页面</translation>
+    </message>
+    <message>
+        <source>Show the list of preference pages</source>
+        <translation>显示首选项页面列表</translation>
+    </message>
+    <message>
+        <source>Show preference pages</source>
+        <translation>显示首选项页面</translation>
+    </message>
+    <message>
+        <source>Pages</source>
+        <translation>页面</translation>
+    </message>
+    <message>
+        <source>Current preference page</source>
+        <translation>当前首选项页面</translation>
+    </message>
+    <message>
         <source>Search:</source>
         <translation>搜索:</translation>
     </message>
