@@ -107,7 +107,8 @@ jobs:
             /workspace/artifacts/libuiqt-plugin[0-9]*.deb \
             /workspace/artifacts/libwireshark-data_*.deb \
             xvfb xauth
-          wireshark --version
+          wireshark --version | tee /tmp/wireshark-version.txt
+          grep -F "+GitHub Releases" /tmp/wireshark-version.txt
           tshark --version
           tshark -r /workspace/test/captures/dhcp.pcap -c 1 -T fields -e frame.number | grep -x 1
           tshark -G plugins | grep -F stats_tree.so
