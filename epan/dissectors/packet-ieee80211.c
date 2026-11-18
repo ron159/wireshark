@@ -43816,7 +43816,7 @@ proto_register_ieee80211(void)
     {&hf_ieee80211_fc_protected,
      {"Protected flag", "wlan.fc.protected",
       FT_BOOLEAN, 8, TFS(&protected_flags), FLAG_PROTECTED,
-      NULL, HFILL }},
+      "Indicates whether the frame body is protected using a cryptographic mechanism", HFILL }},
 
     {&hf_ieee80211_fc_order,
      {"+HTC/Order flag", "wlan.fc.order",
@@ -44919,7 +44919,7 @@ proto_register_ieee80211(void)
     {&hf_ieee80211_ff_request_mode_pref_cand,
      {"Preferred Candidate List Included", "wlan.fixed.request_mode.pref_cand",
       FT_UINT8, BASE_DEC, NULL, 0x01,
-      NULL, HFILL }},
+      "Indicates whether the BSS Transition Management Request includes a preferred candidate list", HFILL }},
 
     {&hf_ieee80211_ff_request_mode_abridged,
      {"Abridged", "wlan.fixed.request_mode.abridged",
@@ -44929,7 +44929,7 @@ proto_register_ieee80211(void)
     {&hf_ieee80211_ff_request_mode_disassoc_imminent,
      {"Disassociation Imminent", "wlan.fixed.request_mode.disassoc_imminent",
       FT_UINT8, BASE_DEC, NULL, 0x04,
-      NULL, HFILL }},
+      "Indicates that the AP intends to end the association soon", HFILL }},
 
     {&hf_ieee80211_ff_request_mode_bss_term_included,
      {"BSS Termination Included", "wlan.fixed.request_mode.bss_term_included",
@@ -44954,7 +44954,7 @@ proto_register_ieee80211(void)
     {&hf_ieee80211_ff_disassoc_timer,
      {"Disassociation Timer", "wlan.fixed.disassoc_timer",
       FT_UINT16, BASE_DEC, NULL, 0,
-      NULL, HFILL }},
+      "Number of beacon intervals until the AP disassociates the STA", HFILL }},
 
     {&hf_ieee80211_ff_bss_termination_delay,
      {"BSS Termination Delay", "wlan.fixed.bss_termination_delay",
@@ -44964,7 +44964,7 @@ proto_register_ieee80211(void)
     {&hf_ieee80211_ff_bss_transition_status_code,
      {"BSS Transition Status Code", "wlan.fixed.bss_transition_status_code",
       FT_UINT8, BASE_DEC, NULL, 0,
-      NULL, HFILL }},
+      "Result reported in the BSS Transition Management Response", HFILL }},
 
     {&hf_ieee80211_ff_validity_interval,
      {"Validity Interval", "wlan.fixed.validity_interval",
@@ -44985,7 +44985,7 @@ proto_register_ieee80211(void)
     {&hf_ieee80211_ff_target_bss,
      {"BSS Transition Target BSS", "wlan.fixed.bss_transition_target_bss",
       FT_ETHER, BASE_NONE, NULL, 0,
-      NULL, HFILL }},
+      "BSSID of the target BSS in the BSS Transition Management Response", HFILL }},
 
     {&hf_ieee80211_ff_bss_transition_query_reason,
      {"BSS Transition Query Reason", "wlan.fixed.bss_transition_query_reason",
@@ -44995,7 +44995,7 @@ proto_register_ieee80211(void)
     {&hf_ieee80211_ff_bss_transition_candidate_list_entries,
      {"BSS Transition Candidate List Entries", "wlan.fixed.bss_transition_candidate_list_entries",
       FT_BYTES, BASE_NONE, NULL, 0,
-      NULL, HFILL }},
+      "Candidate BSS entries for the transition", HFILL }},
 
 /* 802.11ai */
 
@@ -46831,17 +46831,17 @@ proto_register_ieee80211(void)
     {&hf_ieee80211_ff_timestamp,
      {"Timestamp", "wlan.fixed.timestamp",
       FT_UINT64, BASE_DEC, NULL, 0,
-      NULL, HFILL }},
+      "TSF timer value reported by the transmitting station", HFILL }},
 
     {&hf_ieee80211_ff_auth_alg,
      {"Authentication Algorithm", "wlan.fixed.auth.alg",
       FT_UINT16, BASE_DEC, VALS(auth_alg), 0,
-      NULL, HFILL }},
+      "Authentication algorithm used for this exchange", HFILL }},
 
     {&hf_ieee80211_ff_beacon_interval,
      {"Beacon Interval", "wlan.fixed.beacon",
       FT_UINT32, BASE_CUSTOM, CF_FUNC(beacon_interval_base_custom), 0,
-      NULL, HFILL }},
+      "Interval between Beacon transmissions in time units (TU)", HFILL }},
 
     {&hf_ieee80211_fixed_parameters,
      {"Fixed parameters", "wlan.fixed.all",
@@ -47918,12 +47918,12 @@ proto_register_ieee80211(void)
     {&hf_ieee80211_ff_assoc_id,
      {"Association ID", "wlan.fixed.aid",
       FT_UINT16, BASE_HEX, NULL, 0x3FFF,
-      NULL, HFILL }},
+      "Association identifier assigned by the AP to the STA", HFILL }},
 
     {&hf_ieee80211_ff_listen_ival,
      {"Listen Interval", "wlan.fixed.listen_ival",
       FT_UINT16, BASE_HEX, NULL, 0,
-      NULL, HFILL }},
+      "Beacon intervals between wakeups declared by a power-saving STA", HFILL }},
 
     {&hf_ieee80211_ff_current_ap,
      {"Current AP", "wlan.fixed.current_ap",
@@ -49332,7 +49332,7 @@ proto_register_ieee80211(void)
     {&hf_ieee80211_tag_cfp_count,
      {"CFP Count", "wlan.cfp.count",
       FT_UINT8, BASE_DEC, NULL, 0,
-      "Indicates how many delivery traffic indication messages (DTIMs)", HFILL }},
+      "Number of DTIMs until the next contention-free period (CFP)", HFILL }},
 
     {&hf_ieee80211_tag_cfp_period,
      {"CFP Period", "wlan.cfp.period",
@@ -49422,7 +49422,7 @@ proto_register_ieee80211(void)
     {&hf_ieee80211_tim_partial_virtual_bitmap,
      {"Partial Virtual Bitmap", "wlan.tim.partial_virtual_bitmap",
       FT_BYTES, BASE_NONE, NULL, 0x0,
-      NULL, HFILL }},
+      "Portion of the TIM bitmap indicating which associated stations have buffered traffic", HFILL }},
 
     {&hf_ieee80211_tim_aid,
      {"Association ID", "wlan.tim.aid",
@@ -49618,7 +49618,7 @@ proto_register_ieee80211(void)
     {&hf_ieee80211_tclas_src_mac_addr,
      {"Source address", "wlan.tclas.src_mac_addr",
       FT_ETHER, BASE_NONE, NULL, 0,
-      "Classifier Parameters Ethernet Type", HFILL }},
+      "Source MAC address matched by the TCLAS classifier", HFILL }},
 
     {&hf_ieee80211_tclas_dst_mac_addr,
      {"Destination address", "wlan.tclas.dat_mac_addr",
@@ -50398,12 +50398,12 @@ proto_register_ieee80211(void)
     {&hf_ieee80211_rsn_cap_mfpr,
      {"Management Frame Protection Required", "wlan.rsn.capabilities.mfpr",
       FT_BOOLEAN, 16, TFS(&tfs_required_not_required), 0x0040,
-      NULL, HFILL }},
+      "Indicates that Protected Management Frames (PMF) are required", HFILL }},
 
     {&hf_ieee80211_rsn_cap_mfpc,
      {"Management Frame Protection Capable", "wlan.rsn.capabilities.mfpc",
       FT_BOOLEAN, 16, TFS(&tfs_capable_not_capable), 0x0080,
-      NULL, HFILL }},
+      "Indicates support for Protected Management Frames (PMF)", HFILL }},
 
     {&hf_ieee80211_rsn_cap_jmr,
      {"Joint Multi-band RSNA", "wlan.rsn.capabilities.jmr",
@@ -50448,7 +50448,7 @@ proto_register_ieee80211(void)
     {&hf_ieee80211_rsn_pmkid_list,
      {"PMKID List", "wlan.rsn.pmkid.list",
       FT_NONE, BASE_NONE, NULL, 0,
-      "Contains a series of cipher suite selectors that indicate the AKM suites", HFILL }},
+      "PMK identifiers included in the RSN element", HFILL }},
 
     {&hf_ieee80211_rsn_pmkid,
      {"PMKID", "wlan.pmkid.akms",
@@ -52537,7 +52537,7 @@ proto_register_ieee80211(void)
     {&hf_ieee80211_hta_non_gf_devices,
      {"Non Greenfield (GF) devices Present", "wlan.hta.capabilities.non_gf_devices",
       FT_BOOLEAN, 16, TFS(&hta_non_gf_devices_flag), 0x0004,
-      "on Greenfield (GF) devices Present", HFILL }},
+      "Indicates whether non-Greenfield (GF) devices are present", HFILL }},
 
     {&hf_ieee80211_hta_basic_stbc_mcs,
      {"Basic STB Modulation and Coding Scheme (MCS)", "wlan.hta.capabilities.basic_stbc_mcs",
@@ -52911,7 +52911,7 @@ proto_register_ieee80211(void)
     {&hf_ieee80211_tag_rm_enabled_capabilities_b1,
      {"Neighbor Report", "wlan.rmcap.b1",
       FT_BOOLEAN, 8, TFS(&tfs_enabled_disabled), 0x02,
-      NULL, HFILL }},
+      "Indicates support for Neighbor Report", HFILL }},
 
     {&hf_ieee80211_tag_rm_enabled_capabilities_b2,
      {"Parallel Measurements", "wlan.rmcap.b2",
@@ -57826,18 +57826,18 @@ proto_register_ieee80211(void)
     {&hf_ieee80211_tag_mobility_domain_mdid,
      {"Mobility Domain Identifier", "wlan.mobility_domain.mdid",
       FT_UINT16, BASE_HEX, NULL, 0,
-      NULL, HFILL }},
+      "Identifies the mobility domain used for 802.11r Fast BSS Transition", HFILL }},
 
     {&hf_ieee80211_tag_mobility_domain_ft_capab,
      {"FT Capability and Policy", "wlan.mobility_domain.ft_capab",
       FT_UINT8, BASE_HEX, NULL, 0,
-      NULL, HFILL }},
+      "Fast BSS Transition capability and policy for this mobility domain", HFILL }},
 
     {&hf_ieee80211_tag_mobility_domain_ft_capab_ft_over_ds,
      {"Fast BSS Transition over DS",
       "wlan.mobility_domain.ft_capab.ft_over_ds",
       FT_UINT8, BASE_HEX, NULL, 0x01,
-      NULL, HFILL }},
+      "Indicates support for Fast BSS Transition over the distribution system", HFILL }},
 
     {&hf_ieee80211_tag_mobility_domain_ft_capab_resource_req,
      {"Resource Request Protocol Capability",
@@ -61191,7 +61191,8 @@ proto_register_ieee80211(void)
 
     {&hf_ieee80211_eht_multi_link_control_type,
      {"Type", "wlan.eht.multi_link.control.type",
-      FT_UINT16, BASE_DEC, VALS(multi_link_type_vals), 0x0007, NULL, HFILL }},
+      FT_UINT16, BASE_DEC, VALS(multi_link_type_vals), 0x0007,
+      "Variant of the Multi-Link element", HFILL }},
 
     {&hf_ieee80211_eht_multi_link_control_reserved,
      {"Reserved", "wlan.eht.multi_link.control.reserved",
@@ -61200,7 +61201,8 @@ proto_register_ieee80211(void)
     {&hf_ieee80211_eht_multi_link_control_link_id_present,
      {"Link ID Info Present",
       "wlan.eht.multi_link.control.basic.link_id_info_present",
-      FT_BOOLEAN, 16, NULL, 0x0010, NULL, HFILL }},
+      FT_BOOLEAN, 16, NULL, 0x0010,
+      "Indicates whether the Link ID subfield is present in the Common Info field", HFILL }},
 
     {&hf_ieee80211_eht_multi_link_control_bss_parms_ch_count,
      {"BSS Parameters Change Count Present",
@@ -61289,7 +61291,8 @@ proto_register_ieee80211(void)
 
     {&hf_ieee80211_eht_common_field_mld_mac,
      {"MLD MAC Address", "wlan.eht.multi_link.common_info.mld_mac_address",
-      FT_ETHER, BASE_NONE, NULL, 0x0, NULL, HFILL }},
+      FT_ETHER, BASE_NONE, NULL, 0x0,
+      "MAC address identifying the multi-link device (MLD)", HFILL }},
 
     {&hf_ieee80211_eht_common_field_link_id_field,
      {"Link ID subfield", "wlan.eht.multi_link.common_info.link_id_subfield",
@@ -61297,7 +61300,8 @@ proto_register_ieee80211(void)
 
     {&hf_ieee80211_eht_common_info_link_id,
      {"Link ID", "wlan.eht.multi_link.common_info.link_id_subfield.link_id",
-      FT_UINT8, BASE_HEX, NULL, 0x0F, NULL, HFILL }},
+      FT_UINT8, BASE_HEX, NULL, 0x0F,
+      "Identifies a link within the multi-link device (MLD)", HFILL }},
 
     {&hf_ieee80211_eht_common_info_link_id_reserved,
      {"Reserved", "wlan.eht.multi_link.common_info.link_id_subfield.reserved",
@@ -62636,7 +62640,7 @@ proto_register_ieee80211(void)
     {&hf_ieee80211_ff_encap_len,
      {"Encapsulation Length", "wlan.fixed.encapsulation_len",
       FT_UINT16, BASE_DEC, NULL, 0,
-      "NULL", HFILL }},
+      "Length in bytes of the encapsulated 802.1X authentication data", HFILL }},
 
     {&hf_ieee80211_ff_encap_data,
      {"Encapsulation Data", "wlan.fixed.encapsulation_data",
@@ -63610,12 +63614,12 @@ proto_register_wlan_rsna_eapol(void)
     {&hf_wlan_rsna_eapol_wpa_keydes_msgnr,
      {"Message number", "wlan_rsna_eapol.keydes.msgnr",
       FT_UINT8, BASE_DEC, NULL, 0x0,
-      NULL, HFILL }},
+      "Message number within the four-way EAPOL-Key handshake", HFILL }},
 
     {&hf_wlan_rsna_eapol_wpa_keydes_keyinfo,
      {"Key Information", "wlan_rsna_eapol.keydes.key_info",
       FT_UINT16, BASE_HEX, NULL, 0x0,
-      NULL, HFILL }},
+      "Flags describing the EAPOL-Key message", HFILL }},
 
     {&hf_wlan_rsna_eapol_wpa_keydes_keyinfo_keydes_version,
      {"Key Descriptor Version", "wlan_rsna_eapol.keydes.key_info.keydes_version",
@@ -63625,7 +63629,7 @@ proto_register_wlan_rsna_eapol(void)
     {&hf_wlan_rsna_eapol_wpa_keydes_keyinfo_key_type,
      {"Key Type", "wlan_rsna_eapol.keydes.key_info.key_type",
       FT_BOOLEAN, 16, TFS(&keyinfo_key_type_tfs), KEY_INFO_KEY_TYPE_MASK,
-      NULL, HFILL }},
+      "Indicates whether this EAPOL-Key message is for a pairwise or group key", HFILL }},
 
     {&hf_wlan_rsna_eapol_wpa_keydes_keyinfo_key_index,
      {"Key Index", "wlan_rsna_eapol.keydes.key_info.key_index",
@@ -63635,17 +63639,17 @@ proto_register_wlan_rsna_eapol(void)
     {&hf_wlan_rsna_eapol_wpa_keydes_keyinfo_install,
      {"Install", "wlan_rsna_eapol.keydes.key_info.install",
       FT_BOOLEAN, 16, TFS(&tfs_set_notset), KEY_INFO_INSTALL_MASK,
-      NULL, HFILL }},
+      "Indicates whether the receiver is asked to install the key", HFILL }},
 
     {&hf_wlan_rsna_eapol_wpa_keydes_keyinfo_key_ack,
      {"Key ACK", "wlan_rsna_eapol.keydes.key_info.key_ack",
       FT_BOOLEAN, 16, TFS(&tfs_set_notset), KEY_INFO_KEY_ACK_MASK,
-      NULL, HFILL }},
+      "Indicates that the sender expects a response to this EAPOL-Key message", HFILL }},
 
     {&hf_wlan_rsna_eapol_wpa_keydes_keyinfo_key_mic,
      {"Key MIC", "wlan_rsna_eapol.keydes.key_info.key_mic",
       FT_BOOLEAN, 16, TFS(&tfs_set_notset), KEY_INFO_KEY_MIC_MASK,
-      NULL, HFILL }},
+      "Indicates whether the EAPOL-Key message carries a message integrity code", HFILL }},
 
     {&hf_wlan_rsna_eapol_wpa_keydes_keyinfo_secure,
      {"Secure", "wlan_rsna_eapol.keydes.key_info.secure",
@@ -63665,7 +63669,7 @@ proto_register_wlan_rsna_eapol(void)
     {&hf_wlan_rsna_eapol_wpa_keydes_keyinfo_encrypted_key_data,
      {"Encrypted Key Data", "wlan_rsna_eapol.keydes.key_info.encrypted_key_data",
       FT_BOOLEAN, 16, TFS(&tfs_set_notset), KEY_INFO_ENCRYPTED_KEY_DATA_MASK,
-      NULL, HFILL }},
+      "Indicates whether the Key Data field is encrypted", HFILL }},
 
     {&hf_wlan_rsna_eapol_wpa_keydes_keyinfo_smk_message,
      {"SMK Message", "wlan_rsna_eapol.keydes.key_info.smk_message",
@@ -63680,7 +63684,7 @@ proto_register_wlan_rsna_eapol(void)
     {&hf_wlan_rsna_eapol_keydes_replay_counter,
      {"Replay Counter", "eapol.keydes.replay_counter",
       FT_UINT64, BASE_DEC, NULL, 0x0,
-      NULL, HFILL }},
+      "Counter used to detect replayed EAPOL-Key messages", HFILL }},
 
     {&hf_wlan_rsna_eapol_keydes_key_iv,
      {"Key IV", "eapol.keydes.key_iv",

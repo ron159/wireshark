@@ -4633,7 +4633,7 @@ void proto_register_radiotap(void)
 		{&hf_radiotap_present_flags,
 		 {"Flags", "radiotap.present.flags",
 		  FT_BOOLEAN, 32, TFS(&tfs_present_absent), RADIOTAP_MASK(FLAGS),
-		  "Specifies if the channel flags field is present", HFILL}},
+		  "Specifies if the Radiotap Flags field is present", HFILL}},
 
 		{&hf_radiotap_present_rate,
 		 {"Rate", "radiotap.present.rate",
@@ -4693,7 +4693,7 @@ void proto_register_radiotap(void)
 		{&hf_radiotap_present_db_antnoise,
 		 {"dB Antenna Noise", "radiotap.present.db_antnoise",
 		  FT_BOOLEAN, 32, TFS(&tfs_present_absent), RADIOTAP_MASK(DB_ANTNOISE),
-		  "Specifies if the RF signal power at antenna in dBm field is present", HFILL}},
+		  "Specifies if the RF noise power at antenna in dB field is present", HFILL}},
 
 		{&hf_radiotap_present_rxflags,
 		 {"RX flags", "radiotap.present.rxflags",
@@ -4753,7 +4753,7 @@ void proto_register_radiotap(void)
 		{&hf_radiotap_present_he_mu,
 		 {"HE-MU information", "radiotap.present.he_mu",
 		  FT_BOOLEAN, 32, TFS(&tfs_present_absent), RADIOTAP_MASK(HE_MU),
-		  "Specifies if the HE field is present", HFILL}},
+		  "Specifies if the HE-MU field is present", HFILL}},
 
 		{&hf_radiotap_present_reserved25,
 		 {"Reserved bit25", "radiotap.present.reserved25",

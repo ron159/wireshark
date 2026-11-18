@@ -9570,8 +9570,32 @@ Shift+单击：在空行添加禁用的断点；
         <translation>数据包的有效载荷，可能已加密</translation>
     </message>
     <message>
+        <source>(not interpreted)</source>
+        <translation>尚未解析</translation>
+    </message>
+    <message>
         <source>1-RTT protected payload</source>
         <translation>受 1-RTT 密钥保护的有效载荷</translation>
+    </message>
+    <message>
+        <source>12 least significant bits of the AID of the target STA</source>
+        <translation>目标 STA 的 AID 的最低 12 位</translation>
+    </message>
+    <message>
+        <source>26-tone RU end index  of the target STA</source>
+        <translation>目标 STA 的 26 子载波 RU 结束索引</translation>
+    </message>
+    <message>
+        <source>26-tone RU start index of the target STA</source>
+        <translation>目标 STA 的 26 子载波 RU 起始索引</translation>
+    </message>
+    <message>
+        <source>802.11 channel number that this frame was sent/received on</source>
+        <translation>发送或接收此帧所用的 802.11 信道编号</translation>
+    </message>
+    <message>
+        <source>802.1D Tag</source>
+        <translation>802.1D 优先级标记</translation>
     </message>
     <message>
         <source>A frame that is part of this capture-level duplicate group</source>
@@ -9586,6 +9610,14 @@ Shift+单击：在空行添加禁用的断点；
         <translation>用于匹配 Echo Request 和对应 Echo Reply 的序列号</translation>
     </message>
     <message>
+        <source>A-MPDU status flags</source>
+        <translation>A-MPDU 状态标志位</translation>
+    </message>
+    <message>
+        <source>A-MSDU Permitted in QoS Data MPDUs</source>
+        <translation>指示 QoS Data MPDU 中是否允许携带 A-MSDU</translation>
+    </message>
+    <message>
         <source>Absolute time when this frame was captured, in Coordinated Universal Time (UTC)</source>
         <translation>捕获此帧的协调世界时（UTC）</translation>
     </message>
@@ -9598,8 +9630,36 @@ Shift+单击：在空行添加禁用的断点；
         <translation>捕获此帧的本地时间</translation>
     </message>
     <message>
+        <source>Access Network Query Protocol Capability</source>
+        <translation>ANQP 能力信息</translation>
+    </message>
+    <message>
+        <source>Access Network Query Protocol Info ID</source>
+        <translation>ANQP 信息元素的 ID</translation>
+    </message>
+    <message>
+        <source>Access Network Query Protocol Information</source>
+        <translation>ANQP 信息元素的内容</translation>
+    </message>
+    <message>
+        <source>Access Network Query Protocol Length</source>
+        <translation>ANQP 信息元素的长度</translation>
+    </message>
+    <message>
+        <source>Access Network Query Protocol Query ID</source>
+        <translation>ANQP 查询 ID</translation>
+    </message>
+    <message>
+        <source>Action Code</source>
+        <translation>Action Code，表示操作类型</translation>
+    </message>
+    <message>
         <source>Action for unrecognized option type</source>
         <translation>遇到无法识别的选项类型时要执行的操作</translation>
+    </message>
+    <message>
+        <source>Additional Step Required for Access</source>
+        <translation>指示接入是否需要额外步骤（ASRA）</translation>
     </message>
     <message>
         <source>Address Organizationally Unique Identifier</source>
@@ -9608,6 +9668,10 @@ Shift+单击：在空行添加禁用的断点；
     <message>
         <source>Address Organizationally Unique Identifier (resolved)</source>
         <translation>地址的组织唯一标识符（OUI，已解析）</translation>
+    </message>
+    <message>
+        <source>Aggregate MAC Service Data Unit (MSDU) Subframe</source>
+        <translation>聚合 MAC 服务数据单元（A-MSDU）的子帧</translation>
     </message>
     <message>
         <source>Alert message description</source>
@@ -9630,8 +9694,44 @@ Shift+单击：在空行添加禁用的断点；
         <translation>用于匹配请求和应答的标识符</translation>
     </message>
     <message>
+        <source>Antenna number this frame was sent/received over (starting at 0)</source>
+        <translation>发送或接收此帧所用的天线编号，从 0 开始</translation>
+    </message>
+    <message>
+        <source>AP supports QAB</source>
+        <translation>AP 支持 QAB</translation>
+    </message>
+    <message>
+        <source>Aruba Management</source>
+        <translation>Aruba 管理信息</translation>
+    </message>
+    <message>
+        <source>Association identifier assigned by the AP to the STA</source>
+        <translation>AP 为 STA 分配的关联标识符（AID）</translation>
+    </message>
+    <message>
         <source>At least one tagging rule matched this frame</source>
         <translation>此帧匹配至少一条标记规则</translation>
+    </message>
+    <message>
+        <source>Authentication algorithm used for this exchange</source>
+        <translation>此次认证交换使用的算法</translation>
+    </message>
+    <message>
+        <source>Authentication Sequence Number</source>
+        <translation>认证交换中的序列号</translation>
+    </message>
+    <message>
+        <source>Average SNR + 22</source>
+        <translation>平均信噪比（SNR）加 22</translation>
+    </message>
+    <message>
+        <source>Bandwidth for recommended VHT-MCS</source>
+        <translation>建议的 VHT-MCS 所用的带宽</translation>
+    </message>
+    <message>
+        <source>Bandwidth information present</source>
+        <translation>指示带宽信息是否可用</translation>
     </message>
     <message>
         <source>Basic Service Set ID</source>
@@ -9642,6 +9742,38 @@ Shift+单击：在空行添加禁用的断点；
         <translation>基本服务集标识符（BSSID，已解析）</translation>
     </message>
     <message>
+        <source>Beacon Interval in TUs</source>
+        <translation>Beacon 间隔，以 TU 为单位</translation>
+    </message>
+    <message>
+        <source>Beacon intervals between wakeups declared by a power-saving STA</source>
+        <translation>省电 STA 声明的两次唤醒之间的 Beacon 间隔数</translation>
+    </message>
+    <message>
+        <source>Bit 0 of number of extension spatial streams information</source>
+        <translation>扩展空间流数量（Ness）的第 0 位</translation>
+    </message>
+    <message>
+        <source>Bit 1 of number of extension spatial streams information</source>
+        <translation>扩展空间流数量（Ness）的第 1 位</translation>
+    </message>
+    <message>
+        <source>Bit mask indicating what MCS information is present</source>
+        <translation>标明哪些 MCS 信息可用的位图</translation>
+    </message>
+    <message>
+        <source>Bit mask indicating what VHT information is present</source>
+        <translation>标明哪些 VHT 信息可用的位图</translation>
+    </message>
+    <message>
+        <source>Bitmask indicating which fields are present</source>
+        <translation>标明哪些字段实际存在的位图</translation>
+    </message>
+    <message>
+        <source>Block Ack Request (BAR) Ack Policy</source>
+        <translation>Block Ack Request（BAR）的确认策略</translation>
+    </message>
+    <message>
         <source>BSS Id Organizationally Unique Identifier</source>
         <translation>BSSID 的组织唯一标识符（OUI）</translation>
     </message>
@@ -9650,12 +9782,32 @@ Shift+单击：在空行添加禁用的断点；
         <translation>BSSID 的组织唯一标识符（OUI，已解析）</translation>
     </message>
     <message>
+        <source>BSS-ID</source>
+        <translation>此请求对应的 BSS 标识符（BSSID）</translation>
+    </message>
+    <message>
+        <source>BSSID of the target BSS in the BSS Transition Management Response</source>
+        <translation>BSS Transition Management Response 中目标 BSS 的 BSSID</translation>
+    </message>
+    <message>
         <source>Cache flush flag</source>
         <translation>Cache flush 标志位，指示是否刷新缓存中的对应记录</translation>
     </message>
     <message>
+        <source>Calculated end time of the frame</source>
+        <translation>计算得出的帧结束时间</translation>
+    </message>
+    <message>
+        <source>Calculated start time of the frame</source>
+        <translation>计算得出的帧开始时间</translation>
+    </message>
+    <message>
         <source>Can the server do recursive queries?</source>
         <translation>指示服务器是否支持递归查询</translation>
+    </message>
+    <message>
+        <source>Candidate BSS entries for the transition</source>
+        <translation>建议切换到的候选 BSS 条目</translation>
     </message>
     <message>
         <source>Canonical Format Identifier</source>
@@ -9666,6 +9818,74 @@ Shift+单击：在空行添加禁用的断点；
         <translation>设备的能力信息</translation>
     </message>
     <message>
+        <source>CCMP Extended Initialization Vector</source>
+        <translation>CCMP 扩展初始化向量（Extended IV）</translation>
+    </message>
+    <message>
+        <source>Center frequency of the 802.11 channel that this frame was sent/received on</source>
+        <translation>发送或接收此帧所用的 802.11 信道中心频率</translation>
+    </message>
+    <message>
+        <source>Channel Flags 2 GHz spectrum</source>
+        <translation>信道标志位，指示 2 GHz 频段</translation>
+    </message>
+    <message>
+        <source>Channel Flags 5 GHz spectrum</source>
+        <translation>信道标志位，指示 5 GHz 频段</translation>
+    </message>
+    <message>
+        <source>Channel Flags Complementary Code Keying (CCK) Modulation</source>
+        <translation>信道标志位，指示 CCK 调制</translation>
+    </message>
+    <message>
+        <source>Channel Flags Dynamic CCK-OFDM Channel</source>
+        <translation>信道标志位，指示动态 CCK-OFDM 信道</translation>
+    </message>
+    <message>
+        <source>Channel Flags Gaussian Frequency Shift Keying (GFSK) Modulation</source>
+        <translation>信道标志位，指示 GFSK 调制</translation>
+    </message>
+    <message>
+        <source>Channel Flags GSM</source>
+        <translation>信道标志位，指示 GSM</translation>
+    </message>
+    <message>
+        <source>Channel Flags Half Rate</source>
+        <translation>信道标志位，指示半速率（Half Rate）</translation>
+    </message>
+    <message>
+        <source>Channel Flags HT/20</source>
+        <translation>信道标志位，指示 HT/20</translation>
+    </message>
+    <message>
+        <source>Channel Flags HT/40+</source>
+        <translation>信道标志位，指示 HT/40+</translation>
+    </message>
+    <message>
+        <source>Channel Flags HT/40-</source>
+        <translation>信道标志位，指示 HT/40-</translation>
+    </message>
+    <message>
+        <source>Channel Flags Orthogonal Frequency-Division Multiplexing (OFDM)</source>
+        <translation>信道标志位，指示 OFDM</translation>
+    </message>
+    <message>
+        <source>Channel Flags Passive</source>
+        <translation>信道标志位，指示被动信道（Passive）</translation>
+    </message>
+    <message>
+        <source>Channel Flags Quarter Rate</source>
+        <translation>信道标志位，指示四分之一速率（Quarter Rate）</translation>
+    </message>
+    <message>
+        <source>Channel Flags Status Turbo</source>
+        <translation>信道标志位，指示 Status Turbo</translation>
+    </message>
+    <message>
+        <source>Channel Flags Turbo</source>
+        <translation>信道标志位，指示 Turbo 模式</translation>
+    </message>
+    <message>
         <source>Channel frequency in megahertz that this frame was sent/received on</source>
         <translation>发送或接收此帧所用的信道频率，以 MHz 为单位</translation>
     </message>
@@ -9674,8 +9894,16 @@ Shift+单击：在空行添加禁用的断点；
         <translation>字符编码（ASCII、EBCDIC 等）</translation>
     </message>
     <message>
+        <source>Class mask is reserved</source>
+        <translation>保留的分类掩码</translation>
+    </message>
+    <message>
         <source>Client Machine Identifier (UUID)</source>
         <translation>客户端设备标识符（UUID）</translation>
+    </message>
+    <message>
+        <source>Coding</source>
+        <translation>编码方式</translation>
     </message>
     <message>
         <source>Command line of the process, its arguments separated by spaces</source>
@@ -9688,6 +9916,42 @@ Shift+单击：在空行添加禁用的断点；
     <message>
         <source>Connection identifier within this capture file</source>
         <translation>此捕获文件内的连接标识</translation>
+    </message>
+    <message>
+        <source>Contains a series of cipher suite selectors that indicate the AKM suites</source>
+        <translation>指定认证和密钥管理（AKM）套件的一组选择器</translation>
+    </message>
+    <message>
+        <source>Contains a series of cipher suite selectors that indicate the pairwisecipher suites</source>
+        <translation>指定成对密码套件的一组选择器</translation>
+    </message>
+    <message>
+        <source>Contains a series of cipher suite selectors that indicate the Unicast cipher suites</source>
+        <translation>指定单播密码套件的一组选择器</translation>
+    </message>
+    <message>
+        <source>Contains selected capability information for the AP indicated by this BSSID</source>
+        <translation>包含此 BSSID 对应 AP 的部分能力信息</translation>
+    </message>
+    <message>
+        <source>Contains the ATIM Window length in TU</source>
+        <translation>ATIM Window 的长度，以 TU 为单位</translation>
+    </message>
+    <message>
+        <source>Contains the cipher suite selector used by the BSS to protect broadcast/multicast traffic</source>
+        <translation>BSS 用于保护广播和组播流量的密码套件选择器</translation>
+    </message>
+    <message>
+        <source>Contains the cipher suite selector used by the BSS to protect broadcast/multicasttraffic</source>
+        <translation>BSS 用于保护广播和组播流量的密码套件选择器</translation>
+    </message>
+    <message>
+        <source>Contains the Traffic Indicator bit associated with Association ID 0</source>
+        <translation>与 Association ID 0 对应的 Traffic Indicator 位</translation>
+    </message>
+    <message>
+        <source>Contains the value of the UP of the associated MSDUs</source>
+        <translation>关联 MSDU 的用户优先级（UP）</translation>
     </message>
     <message>
         <source>Conversation has a FIN packet</source>
@@ -9712,6 +9976,18 @@ Shift+单击：在空行添加禁用的断点；
     <message>
         <source>Conversation has payload DATA</source>
         <translation>此会话包含有效载荷（DATA）</translation>
+    </message>
+    <message>
+        <source>Counter used to detect replayed EAPOL-Key messages</source>
+        <translation>用于检测 EAPOL-Key 消息重放的计数器（Replay Counter）</translation>
+    </message>
+    <message>
+        <source>Data 1 of the HE Info field</source>
+        <translation>HE Info 字段中的 Data 1</translation>
+    </message>
+    <message>
+        <source>Data Interpretation of tag</source>
+        <translation>信息元素数据的解析结果</translation>
     </message>
     <message>
         <source>Data offset in 32-bit words</source>
@@ -9790,6 +10066,10 @@ Shift+单击：在空行添加禁用的断点；
         <translation>目的 IPv6 主机名</translation>
     </message>
     <message>
+        <source>Destination MAC address</source>
+        <translation>目的 MAC 地址</translation>
+    </message>
+    <message>
         <source>Destination Organizationally Unique Identifier</source>
         <translation>目的地址的组织唯一标识符（OUI）</translation>
     </message>
@@ -9800,6 +10080,10 @@ Shift+单击：在空行添加禁用的断点；
     <message>
         <source>Destination process command name</source>
         <translation>目的进程的命令名</translation>
+    </message>
+    <message>
+        <source>Destination Sequence Number</source>
+        <translation>目的序列号</translation>
     </message>
     <message>
         <source>Details at: https://www.wireshark.org/docs/wsug_html_chunked/ChAdvChecksums.html</source>
@@ -9822,6 +10106,22 @@ Shift+单击：在空行添加禁用的断点；
         <translation>指示同一次查询是否收到多个响应</translation>
     </message>
     <message>
+        <source>Difference between the reported signal and noise levels in decibels</source>
+        <translation>报告的信号与噪声之差，即信噪比（SNR），以 dB 为单位</translation>
+    </message>
+    <message>
+        <source>DLS timeout value</source>
+        <translation>DLS 超时值</translation>
+    </message>
+    <message>
+        <source>DMG Destination Hardware Address</source>
+        <translation>DMG 目的硬件地址</translation>
+    </message>
+    <message>
+        <source>DMG Source Hardware Address</source>
+        <translation>DMG 源硬件地址</translation>
+    </message>
+    <message>
         <source>DNSSEC OK</source>
         <translation>DNSSEC OK，指示是否接受 DNSSEC 记录</translation>
     </message>
@@ -9834,6 +10134,26 @@ Shift+单击：在空行添加禁用的断点；
         <translation>DEI，指示发生拥塞时是否可优先丢弃该帧</translation>
     </message>
     <message>
+        <source>DS Parameter Set - Current Channel</source>
+        <translation>DS Parameter Set 中的当前信道</translation>
+    </message>
+    <message>
+        <source>DSCP Exception - DSCP Value</source>
+        <translation>DSCP 映射例外项指定的 DSCP 值</translation>
+    </message>
+    <message>
+        <source>DSCP Exception - User Priority</source>
+        <translation>DSCP 映射例外项对应的用户优先级</translation>
+    </message>
+    <message>
+        <source>DSCP Range description - DSCP High Value</source>
+        <translation>DSCP 范围的上限</translation>
+    </message>
+    <message>
+        <source>DSCP Range description - DSCP Low Value</source>
+        <translation>DSCP 范围的下限</translation>
+    </message>
+    <message>
         <source>Duplicate SACK Left Edge</source>
         <translation>重复 SACK 块的左边界</translation>
     </message>
@@ -9842,8 +10162,28 @@ Shift+单击：在空行添加禁用的断点；
         <translation>重复 SACK 块的右边界</translation>
     </message>
     <message>
+        <source>Duration of the PLCP or preamble in microseconds, calculated from PHY data</source>
+        <translation>PLCP 或前导码的时长，以微秒为单位，按 PHY 数据计算</translation>
+    </message>
+    <message>
         <source>Echoed timestamp from remote machine</source>
         <translation>对端回显的时间戳</translation>
+    </message>
+    <message>
+        <source>Element ID</source>
+        <translation>信息元素的编号（Element ID）</translation>
+    </message>
+    <message>
+        <source>Emergency services reachable</source>
+        <translation>指示是否可以访问紧急服务（ESR）</translation>
+    </message>
+    <message>
+        <source>Enhanced Distributed Channel Access (EDCA) Parameter Set Update Count</source>
+        <translation>EDCA 参数集的更新计数</translation>
+    </message>
+    <message>
+        <source>EOSP Field</source>
+        <translation>EOSP 字段，指示服务周期是否结束</translation>
     </message>
     <message>
         <source>Ethernet checksum</source>
@@ -9860,6 +10200,38 @@ Shift+单击：在空行添加禁用的断点；
     <message>
         <source>Ethertype</source>
         <translation>EtherType，标识封装的协议</translation>
+    </message>
+    <message>
+        <source>Fast BSS Transition capability and policy for this mobility domain</source>
+        <translation>此移动域的 Fast BSS Transition（FT）能力和策略</translation>
+    </message>
+    <message>
+        <source>Flag indicating whether STAs may doze during TXOP</source>
+        <translation>指示 STA 在 TXOP 期间是否可休眠</translation>
+    </message>
+    <message>
+        <source>Flags 1 of the HE-MU Info field</source>
+        <translation>HE-MU Info 字段中的 Flags 1</translation>
+    </message>
+    <message>
+        <source>Flags 2 of the HE-MU Info field</source>
+        <translation>HE-MU Info 字段中的 Flags 2</translation>
+    </message>
+    <message>
+        <source>Flags describing the EAPOL-Key message</source>
+        <translation>EAPOL-Key 消息的标志位</translation>
+    </message>
+    <message>
+        <source>Format information present</source>
+        <translation>指示帧格式信息是否可用</translation>
+    </message>
+    <message>
+        <source>Forward error correction type</source>
+        <translation>前向纠错（FEC）的类型</translation>
+    </message>
+    <message>
+        <source>Forward error correction type information present</source>
+        <translation>指示前向纠错（FEC）类型是否可用</translation>
     </message>
     <message>
         <source>Fragment contained data past end of packet</source>
@@ -9882,8 +10254,16 @@ Shift+单击：在空行添加禁用的断点；
         <translation>用于检验帧完整性的帧校验序列（FCS）</translation>
     </message>
     <message>
+        <source>Frame check sequence of this frame</source>
+        <translation>此帧的帧校验序列（FCS）</translation>
+    </message>
+    <message>
         <source>Frame has padding between 802.11 header and payload</source>
         <translation>指示 802.11 帧头和有效载荷之间是否存在填充</translation>
+    </message>
+    <message>
+        <source>Frame includes a pre-configured sequence number</source>
+        <translation>此帧使用预先配置的序列号</translation>
     </message>
     <message>
         <source>Frame includes FCS at end</source>
@@ -9906,6 +10286,10 @@ Shift+单击：在空行添加禁用的断点；
         <translation>捕获文件实际保存的帧长度</translation>
     </message>
     <message>
+        <source>Frame must not be reordered relative to others with this flag</source>
+        <translation>此帧和同样设置此标志位的其他帧必须保持原有顺序</translation>
+    </message>
+    <message>
         <source>Frame received with bad FCS</source>
         <translation>指示接收到的帧是否存在 FCS 校验错误</translation>
     </message>
@@ -9922,16 +10306,44 @@ Shift+单击：在空行添加禁用的断点；
         <translation>帧类型</translation>
     </message>
     <message>
+        <source>Frame with bad PLCP</source>
+        <translation>此帧的 PLCP 有误</translation>
+    </message>
+    <message>
+        <source>Frequency Hopping Spread Spectrum hop pattern</source>
+        <translation>跳频扩频（FHSS）所用的跳频模式</translation>
+    </message>
+    <message>
+        <source>Frequency Hopping Spread Spectrum hopset</source>
+        <translation>跳频扩频（FHSS）所用的跳频集合</translation>
+    </message>
+    <message>
         <source>From DS flag</source>
         <translation>指示该帧是否来自 DS（From DS）</translation>
+    </message>
+    <message>
+        <source>FTM action trigger</source>
+        <translation>FTM 操作的触发字段</translation>
     </message>
     <message>
         <source>Full path of the executable image of the process</source>
         <translation>进程可执行文件的完整路径</translation>
     </message>
     <message>
+        <source>Generic container User Data</source>
+        <translation>通用容器中的用户数据</translation>
+    </message>
+    <message>
         <source>Handshake protocol message</source>
         <translation>握手协议消息</translation>
+    </message>
+    <message>
+        <source>Hardware Organizationally Unique Identifier</source>
+        <translation>硬件地址的组织唯一标识符（OUI）</translation>
+    </message>
+    <message>
+        <source>Hardware Organizationally Unique Identifier (resolved)</source>
+        <translation>硬件地址的组织唯一标识符（OUI，已解析）</translation>
     </message>
     <message>
         <source>Header length in 32-bit words</source>
@@ -9948,6 +10360,106 @@ Shift+单击：在空行添加禁用的断点；
     <message>
         <source>Hello extension type</source>
         <translation>Hello 消息中的扩展类型</translation>
+    </message>
+    <message>
+        <source>High Efficiency Control HE flag</source>
+        <translation>HE Control 的 HE 标志位</translation>
+    </message>
+    <message>
+        <source>High Throughput Control (+HTC)</source>
+        <translation>高吞吐量控制字段（+HTC）</translation>
+    </message>
+    <message>
+        <source>High Throughput Control AC Constraint</source>
+        <translation>+HTC 的 AC Constraint 接入类别限制</translation>
+    </message>
+    <message>
+        <source>High Throughput Control Calibration Position</source>
+        <translation>+HTC 的校准位置</translation>
+    </message>
+    <message>
+        <source>High Throughput Control Calibration Sequence Identifier</source>
+        <translation>+HTC 的校准序列标识符</translation>
+    </message>
+    <message>
+        <source>High Throughput Control CSI/Steering</source>
+        <translation>+HTC 的 CSI/Steering 字段</translation>
+    </message>
+    <message>
+        <source>High Throughput Control HT/VHT flag</source>
+        <translation>+HTC 的 HT/VHT 格式标志位</translation>
+    </message>
+    <message>
+        <source>High Throughput Control Link Adaptation Control (LAC)</source>
+        <translation>+HTC 中的链路自适应控制（LAC）字段</translation>
+    </message>
+    <message>
+        <source>High Throughput Control Link Adaptation Control Antenna Selection (ASEL) Command</source>
+        <translation>+HTC 链路自适应控制中的天线选择（ASEL）命令</translation>
+    </message>
+    <message>
+        <source>High Throughput Control Link Adaptation Control Antenna Selection (ASEL) Data</source>
+        <translation>+HTC 链路自适应控制中的天线选择（ASEL）数据</translation>
+    </message>
+    <message>
+        <source>High Throughput Control Link Adaptation Control MAI Antenna Selection Indication</source>
+        <translation>+HTC 链路自适应控制中 MAI 的天线选择指示</translation>
+    </message>
+    <message>
+        <source>High Throughput Control Link Adaptation Control MAI MCS Request</source>
+        <translation>+HTC 链路自适应控制中 MAI 的 MCS 请求</translation>
+    </message>
+    <message>
+        <source>High Throughput Control Link Adaptation Control MAI MCS Request Sequence Identifier</source>
+        <translation>+HTC 链路自适应控制中 MAI 的 MCS 请求序列标识符</translation>
+    </message>
+    <message>
+        <source>High Throughput Control Link Adaptation Control MAI Reserved</source>
+        <translation>+HTC 链路自适应控制中 MAI 的保留字段</translation>
+    </message>
+    <message>
+        <source>High Throughput Control Link Adaptation Control MCS Feedback</source>
+        <translation>+HTC 链路自适应控制中的 MCS 反馈</translation>
+    </message>
+    <message>
+        <source>High Throughput Control Link Adaptation Control MCS Feedback Sequence Identifier (MSI)</source>
+        <translation>+HTC 链路自适应控制中的 MCS 反馈序列标识符（MFSI）</translation>
+    </message>
+    <message>
+        <source>High Throughput Control Link Adaptation Control Training Request (TRQ)</source>
+        <translation>+HTC 链路自适应控制中的训练请求（TRQ）</translation>
+    </message>
+    <message>
+        <source>High Throughput Control NDP Announcement</source>
+        <translation>+HTC 的 NDP Announcement</translation>
+    </message>
+    <message>
+        <source>High Throughput Control RDG/More PPDU</source>
+        <translation>+HTC 的 RDG/More PPDU 字段</translation>
+    </message>
+    <message>
+        <source>High Throughput Control Reserved</source>
+        <translation>+HTC 的保留字段</translation>
+    </message>
+    <message>
+        <source>High Throughput Control Unsolicited MFB</source>
+        <translation>+HTC 中未经请求的 MFB</translation>
+    </message>
+    <message>
+        <source>Homogeneous ESS identifier</source>
+        <translation>同构 ESS 的标识符（HESSID）</translation>
+    </message>
+    <message>
+        <source>Hotspot 2.0 ANQP Payload</source>
+        <translation>Hotspot 2.0 ANQP 的有效载荷</translation>
+    </message>
+    <message>
+        <source>Hotspot 2.0 ANQP Subtype</source>
+        <translation>Hotspot 2.0 ANQP 的子类型</translation>
+    </message>
+    <message>
+        <source>Hotspot 2.0 ANQP Subtype Capability</source>
+        <translation>支持的 Hotspot 2.0 ANQP 子类型</translation>
     </message>
     <message>
         <source>How long it took for the SYN to ACK handshake (iRTT)</source>
@@ -9974,8 +10486,36 @@ Shift+单击：在空行添加禁用的断点；
         <translation>上一个 PSH 标志位之后已发送的字节数</translation>
     </message>
     <message>
+        <source>HT Action Code</source>
+        <translation>HT Action Code，表示 HT 操作类型</translation>
+    </message>
+    <message>
+        <source>HT Additional Capability information</source>
+        <translation>HT 附加能力信息</translation>
+    </message>
+    <message>
+        <source>HT Capabilities information</source>
+        <translation>HT 能力信息</translation>
+    </message>
+    <message>
         <source>HT Control present/strictly ordered flag</source>
         <translation>指示是否携带 HT Control 字段，或是否要求严格按序传送</translation>
+    </message>
+    <message>
+        <source>HT DSS/CCK mode in 40MHz</source>
+        <translation>HT 在 40 MHz 信道上的 DSS/CCK 模式</translation>
+    </message>
+    <message>
+        <source>HT Extended Capability information</source>
+        <translation>HT 扩展能力信息</translation>
+    </message>
+    <message>
+        <source>HT Information Exchange Support</source>
+        <translation>指示是否支持 HT 信息交换</translation>
+    </message>
+    <message>
+        <source>HT Information Fixed Field</source>
+        <translation>HT Information 固定字段</translation>
     </message>
     <message>
         <source>HTTP Authorization header</source>
@@ -10086,6 +10626,10 @@ Shift+单击：在空行添加禁用的断点；
         <translation>标识符（小端字节序）</translation>
     </message>
     <message>
+        <source>Identifier of a peer-to-peer operation for which participating HE STAs might transmit frames</source>
+        <translation>允许参与的 HE STA 发送帧的对等通信操作标识符</translation>
+    </message>
+    <message>
         <source>Identifier of the parent of the process</source>
         <translation>父进程 ID</translation>
     </message>
@@ -10096,6 +10640,14 @@ Shift+单击：在空行添加禁用的断点；
     <message>
         <source>Identifier of the thread associated with the packet; 0 if not available</source>
         <translation>此包关联的线程 ID，无法获取时为 0</translation>
+    </message>
+    <message>
+        <source>Identifies a link within the multi-link device (MLD)</source>
+        <translation>标识多链路设备（MLD）中的一条链路</translation>
+    </message>
+    <message>
+        <source>Identifies the mobility domain used for 802.11r Fast BSS Transition</source>
+        <translation>标识用于 802.11r Fast BSS Transition（FT）的移动域</translation>
     </message>
     <message>
         <source>Identifies the octet offset within the invoking packet where the error was detected</source>
@@ -10122,24 +10674,224 @@ Shift+单击：在空行添加禁用的断点；
         <translation>置位时服务器不应执行 DDNS 更新</translation>
     </message>
     <message>
+        <source>in dB</source>
+        <translation>以 dB 为单位</translation>
+    </message>
+    <message>
+        <source>in dBm</source>
+        <translation>以 dBm 为单位</translation>
+    </message>
+    <message>
+        <source>In Mbit/sec, (B) for Basic Rates</source>
+        <translation>速率以 Mbit/s 为单位，(B) 表示基本速率</translation>
+    </message>
+    <message>
+        <source>In Octets unit</source>
+        <translation>以字节为单位</translation>
+    </message>
+    <message>
+        <source>In Time Unit (TU)</source>
+        <translation>以时间单位（TU）表示</translation>
+    </message>
+    <message>
+        <source>in TU (1 TU = 1024 us)</source>
+        <translation>以 TU 为单位（1 TU = 1024 微秒）</translation>
+    </message>
+    <message>
+        <source>Indicate that the Rx NSS subfield carries the maximum number of spatial streams that the STA can receive</source>
+        <translation>指示 Rx NSS 子字段表示 STA 可接收的最大空间流数量</translation>
+    </message>
+    <message>
+        <source>Indicate the values to be used in the equations to create a hopping sequence from the Random Table information</source>
+        <translation>根据 Random Table 计算跳频序列所用的参数值</translation>
+    </message>
+    <message>
+        <source>Indicates any restrictions on transmission until a channel switch</source>
+        <translation>指示切换信道前是否限制发送</translation>
+    </message>
+    <message>
+        <source>Indicates how many Beacon frames (including the current frame) appear before the next DTIM</source>
+        <translation>距离下次 DTIM 还有多少个 Beacon 帧（含当前帧）</translation>
+    </message>
+    <message>
+        <source>Indicates support for Fast BSS Transition over the distribution system</source>
+        <translation>指示是否支持经 DS 执行 Fast BSS Transition（FT over DS）</translation>
+    </message>
+    <message>
+        <source>Indicates support for Neighbor Report</source>
+        <translation>指示是否支持 Neighbor Report</translation>
+    </message>
+    <message>
+        <source>Indicates support for Protected Management Frames (PMF)</source>
+        <translation>指示是否支持受保护的管理帧（Management Frame Protection Capable，MFPC）</translation>
+    </message>
+    <message>
+        <source>Indicates that a Random Table is present when the value is 1</source>
+        <translation>值为 1 时表示包含 Random Table</translation>
+    </message>
+    <message>
+        <source>Indicates that Protected Management Frames (PMF) are required</source>
+        <translation>指示是否要求受保护的管理帧（Management Frame Protection Required，MFPR）</translation>
+    </message>
+    <message>
+        <source>Indicates that the AP identified by this BSSID supports the same security provisioning as used by the STA in its current association</source>
+        <translation>指示此 BSSID 对应的 AP 是否支持当前 STA 关联所用的相同安全配置</translation>
+    </message>
+    <message>
+        <source>Indicates that the AP intends to end the association soon</source>
+        <translation>指示 AP 即将解除关联（Disassociation Imminent）</translation>
+    </message>
+    <message>
+        <source>Indicates that the sender expects a response to this EAPOL-Key message</source>
+        <translation>指示发送方是否要求应答此 EAPOL-Key 消息（Key ACK）</translation>
+    </message>
+    <message>
+        <source>indicates the AP indicated by this BSSID has the same authenticator as the AP sending the report</source>
+        <translation>指示此 BSSID 对应的 AP 与发送报告的 AP 是否使用同一个认证器</translation>
+    </message>
+    <message>
         <source>Indicates the identity of an ESS or IBSS</source>
         <translation>标识该 ESS 或 IBSS</translation>
+    </message>
+    <message>
+        <source>Indicates the maximum duration (in TU) of the CFP that may be generated by this PCF</source>
+        <translation>此 PCF 可产生的 CFP 最长时长，以 TU 为单位</translation>
+    </message>
+    <message>
+        <source>Indicates the maximum time (in TU) remaining in the present CFP</source>
+        <translation>当前 CFP 最多剩余的时长，以 TU 为单位</translation>
+    </message>
+    <message>
+        <source>Indicates the number of Auth Key Management suite selectors that are contained in the Auth Key Management Suite List</source>
+        <translation>Auth Key Management Suite List 中的 AKM 套件选择器数量</translation>
+    </message>
+    <message>
+        <source>Indicates the number of beacon intervals between successive DTIMs</source>
+        <translation>相邻 DTIM 相隔的 Beacon 间隔数</translation>
+    </message>
+    <message>
+        <source>Indicates the number of DTIM intervals between the start of CFPs</source>
+        <translation>相邻 CFP 开始之间的 DTIM 间隔数</translation>
+    </message>
+    <message>
+        <source>Indicates the number of pairwise cipher suite selectors that are contained in the Pairwise Cipher Suite List</source>
+        <translation>Pairwise Cipher Suite List 中的成对密码套件选择器数量</translation>
+    </message>
+    <message>
+        <source>Indicates the number of pairwise cipher suite selectors that are contained in the Unicast Cipher Suite List</source>
+        <translation>Unicast Cipher Suite List 中的成对密码套件选择器数量</translation>
+    </message>
+    <message>
+        <source>Indicates the number of PMKID  selectors that are contained in the PMKID Suite List</source>
+        <translation>PMKID Suite List 中的 PMKID 数量</translation>
+    </message>
+    <message>
+        <source>Indicates the time interval that shall be used for DFS owner recovery</source>
+        <translation>DFS Owner 恢复使用的时间间隔</translation>
+    </message>
+    <message>
+        <source>Indicates the total number of sets within the hopping patterns</source>
+        <translation>跳频模式中的集合总数</translation>
     </message>
     <message>
         <source>Indicates the type of the message</source>
         <translation>指示消息的类型</translation>
     </message>
     <message>
+        <source>Indicates the version number of the RSNA protocol</source>
+        <translation>RSNA 协议的版本号</translation>
+    </message>
+    <message>
+        <source>Indicates the WMM AP is currently supporting unscheduled automatic power save delivery</source>
+        <translation>指示 WMM AP 当前是否支持非调度自动省电交付（U-APSD）</translation>
+    </message>
+    <message>
+        <source>Indicates whether non-Greenfield (GF) devices are present</source>
+        <translation>指示是否存在 Non Greenfield（GF）设备</translation>
+    </message>
+    <message>
+        <source>Indicates whether the AP identified by this BSSID is reachable by the STA that requested the neighbor report</source>
+        <translation>指示请求 Neighbor Report 的 STA 能否到达此 BSSID 标识的 AP</translation>
+    </message>
+    <message>
+        <source>Indicates whether the BSS Transition Management Request includes a preferred candidate list</source>
+        <translation>指示 BSS Transition Management Request 是否包含首选候选列表（Preferred Candidate List Included）</translation>
+    </message>
+    <message>
+        <source>Indicates whether the EAPOL-Key message carries a message integrity code</source>
+        <translation>指示 EAPOL-Key 消息是否带有消息完整性码（Key MIC）</translation>
+    </message>
+    <message>
+        <source>Indicates whether the frame body is protected using a cryptographic mechanism</source>
+        <translation>指示帧体是否使用密码机制保护（Protected flag）</translation>
+    </message>
+    <message>
+        <source>Indicates whether the Key Data field is encrypted</source>
+        <translation>指示 Key Data 字段是否已加密（Encrypted Key Data）</translation>
+    </message>
+    <message>
+        <source>Indicates whether the Link ID subfield is present in the Common Info field</source>
+        <translation>指示 Common Info 字段中是否包含 Link ID 子字段</translation>
+    </message>
+    <message>
+        <source>Indicates whether the receiver is asked to install the key</source>
+        <translation>指示是否请求接收方安装密钥（Install）</translation>
+    </message>
+    <message>
         <source>Indicates whether the router operates as Stub Network Auto-Configuring (SNAC) router</source>
         <translation>指示该路由器是否以 SNAC Router 模式运行</translation>
+    </message>
+    <message>
+        <source>Indicates whether this EAPOL-Key message is for a pairwise or group key</source>
+        <translation>指示此 EAPOL-Key 消息对应成对密钥还是组密钥</translation>
     </message>
     <message>
         <source>Indicates whether to prefer this router over other default routers</source>
         <translation>指示是否优先使用此路由器</translation>
     </message>
     <message>
+        <source>Information Element Identity</source>
+        <translation>信息元素标识符（IEI）</translation>
+    </message>
+    <message>
+        <source>Inter Frame Space before this frame in microseconds, calculated from PHY data</source>
+        <translation>此帧之前的帧间间隔（IFS），以微秒为单位，按 PHY 数据计算</translation>
+    </message>
+    <message>
+        <source>Interval between Beacon transmissions in time units (TU)</source>
+        <translation>两个 Beacon 发送时刻之间的标称间隔，以 TU 为单位</translation>
+    </message>
+    <message>
+        <source>Interval between the start of two consecutive quiet time periods</source>
+        <translation>两个连续静默时段的起点之间的间隔</translation>
+    </message>
+    <message>
+        <source>Interval between the start of two consecutive quite time periods, in TUs</source>
+        <translation>两个连续静默时段的起点之间的间隔，以 TU 为单位</translation>
+    </message>
+    <message>
+        <source>IP Address Type Availability information for IPv4</source>
+        <translation>IPv4 地址类型的可用性信息</translation>
+    </message>
+    <message>
+        <source>IP Address Type Availability information for IPv6</source>
+        <translation>IPv6 地址类型的可用性信息</translation>
+    </message>
+    <message>
+        <source>IPv4 Differentiated Services Code Point (DSCP) Field</source>
+        <translation>IPv4 的区分服务代码点（DSCP）字段</translation>
+    </message>
+    <message>
+        <source>IPv4 Protocol</source>
+        <translation>IPv4 协议类型</translation>
+    </message>
+    <message>
         <source>IPv6 (Jumbo) Payload Length</source>
         <translation>IPv6 巨型有效载荷的长度</translation>
+    </message>
+    <message>
+        <source>IPv6 Flow Label</source>
+        <translation>IPv6 流标签（Flow Label）</translation>
     </message>
     <message>
         <source>Is non-authenticated data acceptable?</source>
@@ -10166,12 +10918,28 @@ Shift+单击：在空行添加禁用的断点；
         <translation>指示服务器是否为该域的权威服务器</translation>
     </message>
     <message>
+        <source>ISO 3166-1 Alpha-2 Country Code</source>
+        <translation>ISO 3166-1 Alpha-2 两字母国家或地区代码</translation>
+    </message>
+    <message>
+        <source>It is a vector of single octet values that indicate the random sequence to be followed during a hopping sequence</source>
+        <translation>由单字节值组成的列表，指定跳频时所用的随机序列</translation>
+    </message>
+    <message>
+        <source>Item type of vendor-specific data</source>
+        <translation>厂商自定义数据的项目类型</translation>
+    </message>
+    <message>
         <source>Largest packet number the peer is acknowledging in this packet</source>
         <translation>对端在此包中确认收到的最大包编号</translation>
     </message>
     <message>
         <source>Latency Spin Bit</source>
         <translation>Latency Spin Bit，用于观察往返时延</translation>
+    </message>
+    <message>
+        <source>Length in bytes of the encapsulated 802.1X authentication data</source>
+        <translation>封装的 802.1X 认证数据长度，以字节为单位</translation>
     </message>
     <message>
         <source>Length in octets including this header and the data</source>
@@ -10206,6 +10974,10 @@ Shift+单击：在空行添加禁用的断点；
         <translation>握手消息的长度</translation>
     </message>
     <message>
+        <source>Length of header including version, pad, length and data fields</source>
+        <translation>首部总长度，包含版本、填充、长度和数据字段</translation>
+    </message>
+    <message>
         <source>Length of hello extensions</source>
         <translation>Hello 消息中扩展部分的总长度</translation>
     </message>
@@ -10218,12 +10990,20 @@ Shift+单击：在空行添加禁用的断点；
         <translation>记录末尾的填充长度</translation>
     </message>
     <message>
+        <source>Length of PLMN List value contents</source>
+        <translation>PLMN 列表值的内容长度</translation>
+    </message>
+    <message>
         <source>Length of server name list</source>
         <translation>服务器名称列表的长度</translation>
     </message>
     <message>
         <source>Length of server name string</source>
         <translation>服务器名称字符串的长度</translation>
+    </message>
+    <message>
+        <source>Length of tag</source>
+        <translation>信息元素的长度</translation>
     </message>
     <message>
         <source>Length of the ALPN Extension</source>
@@ -10238,12 +11018,28 @@ Shift+单击：在空行添加禁用的断点；
         <translation>TLS 记录的数据长度</translation>
     </message>
     <message>
+        <source>Length of TPC Report element (always 2)</source>
+        <translation>TPC Report 元素的长度，固定为 2</translation>
+    </message>
+    <message>
+        <source>Length of vendor-specified data</source>
+        <translation>厂商自定义数据的长度</translation>
+    </message>
+    <message>
         <source>List of certificates</source>
         <translation>证书列表</translation>
     </message>
     <message>
         <source>List of cipher suites supported by client</source>
         <translation>客户端支持的密码套件列表</translation>
+    </message>
+    <message>
+        <source>Load Measurement Duration</source>
+        <translation>负载测量持续时间</translation>
+    </message>
+    <message>
+        <source>Location Configuration Information</source>
+        <translation>位置配置信息（LCI）</translation>
     </message>
     <message>
         <source>Logarithmically encoded power of 2 scale factor</source>
@@ -10258,6 +11054,22 @@ Shift+单击：在空行添加禁用的断点；
         <translation>Loss Event Bit，用于测量丢包并定位其来源</translation>
     </message>
     <message>
+        <source>LSBs of group ID</source>
+        <translation>组 ID 的最低有效位</translation>
+    </message>
+    <message>
+        <source>MAC address identifying the multi-link device (MLD)</source>
+        <translation>MAC 地址，用于标识整个多链路设备（MLD）</translation>
+    </message>
+    <message>
+        <source>MAC address of current AP</source>
+        <translation>当前 AP 的 MAC 地址</translation>
+    </message>
+    <message>
+        <source>MAC address of requested STA</source>
+        <translation>请求涉及的 STA 的 MAC 地址</translation>
+    </message>
+    <message>
         <source>MAC Frame control</source>
         <translation>MAC 帧控制字段</translation>
     </message>
@@ -10266,8 +11078,144 @@ Shift+单击：在空行添加禁用的断点；
         <translation>MAC 协议版本</translation>
     </message>
     <message>
+        <source>Management action category</source>
+        <translation>管理操作的类别</translation>
+    </message>
+    <message>
+        <source>Management action code</source>
+        <translation>管理帧的 Action Code</translation>
+    </message>
+    <message>
+        <source>Management action dialog token</source>
+        <translation>用于关联管理操作请求和响应的 Dialog Token</translation>
+    </message>
+    <message>
+        <source>Management action followup dialog token</source>
+        <translation>管理操作中用于关联后续消息的 Follow-up Dialog Token</translation>
+    </message>
+    <message>
+        <source>Management action FTM LMR TOA Error</source>
+        <translation>FTM LMR 管理操作中的到达时间（TOA）误差</translation>
+    </message>
+    <message>
+        <source>Management action FTM LMR TOD Error</source>
+        <translation>FTM LMR 管理操作中的离开时间（TOD）误差</translation>
+    </message>
+    <message>
+        <source>Management action FTM TOA</source>
+        <translation>FTM 管理操作中的到达时间（TOA）</translation>
+    </message>
+    <message>
+        <source>Management action FTM TOD</source>
+        <translation>FTM 管理操作中的离开时间（TOD）</translation>
+    </message>
+    <message>
+        <source>Management action FTM TOD Error</source>
+        <translation>FTM 管理操作中的离开时间（TOD）误差</translation>
+    </message>
+    <message>
+        <source>Management notification setup response status code</source>
+        <translation>管理通知设置响应的状态码</translation>
+    </message>
+    <message>
+        <source>Max antennae station can support when compressed Beamforming feedback required</source>
+        <translation>需要压缩波束成形反馈时站点最多支持的天线数</translation>
+    </message>
+    <message>
+        <source>Max antennae station can support when CSI feedback required</source>
+        <translation>需要 CSI 反馈时站点最多支持的天线数</translation>
+    </message>
+    <message>
+        <source>Max antennae station can support when uncompressed Beamforming feedback required</source>
+        <translation>需要未压缩波束成形反馈时站点最多支持的天线数</translation>
+    </message>
+    <message>
+        <source>Maximal Error at Previous TS of receive antenna port</source>
+        <translation>接收天线端口上一时间戳（TS）的最大误差</translation>
+    </message>
+    <message>
+        <source>Maximal Error at Previous TS of transmit antenna port</source>
+        <translation>发送天线端口上一时间戳（TS）的最大误差</translation>
+    </message>
+    <message>
+        <source>Maximum number of rows of CSI explicit feedback</source>
+        <translation>显式 CSI 反馈矩阵的最大行数</translation>
+    </message>
+    <message>
+        <source>Maximum number of space time streams for which channel dimensions can be simultaneously estimated</source>
+        <translation>可同时估计信道维度的最大空时流数量</translation>
+    </message>
+    <message>
         <source>Maximum version supported by client [legacy_version if supported_versions ext is present]</source>
         <translation>客户端支持的最高版本，存在 supported_versions 扩展时，此字段为 legacy_version</translation>
+    </message>
+    <message>
+        <source>MCS index</source>
+        <translation>调制与编码方案索引（MCS Index）</translation>
+    </message>
+    <message>
+        <source>MCS index information present</source>
+        <translation>指示 MCS 索引是否可用</translation>
+    </message>
+    <message>
+        <source>Measurement Pilot Interval Fixed Field (in TUs)</source>
+        <translation>Measurement Pilot 的间隔，以 TU 为单位</translation>
+    </message>
+    <message>
+        <source>Mesh action code(Marvell)</source>
+        <translation>Marvell Mesh 操作代码</translation>
+    </message>
+    <message>
+        <source>Mesh Configuration Authentication Protocol</source>
+        <translation>Mesh Configuration 中的认证协议</translation>
+    </message>
+    <message>
+        <source>Mesh Configuration Capability</source>
+        <translation>Mesh Configuration 中的 Mesh 能力</translation>
+    </message>
+    <message>
+        <source>Mesh Configuration Congestion Control</source>
+        <translation>Mesh Configuration 中的拥塞控制方式</translation>
+    </message>
+    <message>
+        <source>Mesh Configuration Formation Info</source>
+        <translation>Mesh Configuration 中的网络形成信息</translation>
+    </message>
+    <message>
+        <source>Mesh Configuration Path Selection Metric</source>
+        <translation>Mesh Configuration 中的路径选择度量</translation>
+    </message>
+    <message>
+        <source>Mesh Configuration Path Selection Protocol</source>
+        <translation>Mesh Configuration 中的路径选择协议</translation>
+    </message>
+    <message>
+        <source>Mesh Configuration Synchronization Method</source>
+        <translation>Mesh Configuration 中的同步方法</translation>
+    </message>
+    <message>
+        <source>Mesh Peering Management Local Link ID</source>
+        <translation>Mesh Peering Management 的本地链路 ID</translation>
+    </message>
+    <message>
+        <source>Mesh Peering Management Peer Link ID</source>
+        <translation>Mesh Peering Management 的对端链路 ID</translation>
+    </message>
+    <message>
+        <source>Message number within the four-way EAPOL-Key handshake</source>
+        <translation>EAPOL-Key 四次握手中的消息编号</translation>
+    </message>
+    <message>
+        <source>MFB sequence identifier</source>
+        <translation>MFB 序列标识符</translation>
+    </message>
+    <message>
+        <source>Minimal grouping used for explicit feedback reports</source>
+        <translation>显式反馈报告使用的最小分组规模</translation>
+    </message>
+    <message>
+        <source>Modulation and Coding Scheme index</source>
+        <translation>调制与编码方案索引（MCS Index）</translation>
     </message>
     <message>
         <source>More data flag</source>
@@ -10276,6 +11224,18 @@ Shift+单击：在空行添加禁用的断点；
     <message>
         <source>More Fragments flag</source>
         <translation>More Fragments，指示后续是否还有分片</translation>
+    </message>
+    <message>
+        <source>More Power Save Multi-Poll (PSMP)</source>
+        <translation>指示是否还有后续的 Power Save Multi-Poll（PSMP）</translation>
+    </message>
+    <message>
+        <source>MPDU is part of an A-MPDU</source>
+        <translation>此 MPDU 属于一个 A-MPDU</translation>
+    </message>
+    <message>
+        <source>MRQ sequence number</source>
+        <translation>MRQ 序列号</translation>
     </message>
     <message>
         <source>Multiply segment window size by this for scaled window size</source>
@@ -10287,6 +11247,14 @@ Shift+单击：在空行添加禁用的断点；
     </message>
     <message>
         <source>Must be Zero</source>
+        <translation>必须为 0</translation>
+    </message>
+    <message>
+        <source>Must be zero</source>
+        <translation>必须为 0</translation>
+    </message>
+    <message>
+        <source>Must Be Zero</source>
         <translation>必须为 0</translation>
     </message>
     <message>
@@ -10306,8 +11274,16 @@ Shift+单击：在空行添加禁用的断点；
         <translation>ND Proxy，RFC 4389 定义的实验性邻居发现代理</translation>
     </message>
     <message>
+        <source>New_PCP_Address</source>
+        <translation>New_PCP_Address，表示新 PCP 的地址</translation>
+    </message>
+    <message>
         <source>No corresponding response frame was seen</source>
         <translation>捕获中未看到对应的响应帧</translation>
+    </message>
+    <message>
+        <source>Non-zero Dialog Token identifies request/report transaction</source>
+        <translation>非零的 Dialog Token 用于关联请求和报告</translation>
     </message>
     <message>
         <source>Number of additional records in packet</source>
@@ -10322,6 +11298,30 @@ Shift+单击：在空行添加禁用的断点；
         <translation>此消息中的权威记录数量</translation>
     </message>
     <message>
+        <source>Number of beacon intervals until the AP disassociates the STA</source>
+        <translation>距离 AP 解除 STA 关联还剩多少个 Beacon 间隔</translation>
+    </message>
+    <message>
+        <source>Number of beacon periods between TIM frame transmissions</source>
+        <translation>相邻 TIM 帧发送之间的 Beacon 周期数</translation>
+    </message>
+    <message>
+        <source>Number of Columns Less One</source>
+        <translation>列数减 1</translation>
+    </message>
+    <message>
+        <source>Number of data retries a transmitted frame used</source>
+        <translation>发送此数据帧时的重传次数</translation>
+    </message>
+    <message>
+        <source>Number of DTIMs until the next contention-free period (CFP)</source>
+        <translation>下一个 CFP 开始前的 DTIM 数量</translation>
+    </message>
+    <message>
+        <source>Number of extension spatial streams information present</source>
+        <translation>指示扩展空间流数量（Ness）是否可用</translation>
+    </message>
+    <message>
         <source>Number of frames lost between this frame and the preceding one on the same interface</source>
         <translation>此帧与同一接口上前一帧之间丢失的帧数</translation>
     </message>
@@ -10332,6 +11332,30 @@ Shift+单击：在空行添加禁用的断点；
     <message>
         <source>Number of queries in packet</source>
         <translation>此消息中的查询数量</translation>
+    </message>
+    <message>
+        <source>Number of Repetitions, 65535 indicates repeat until cancellation</source>
+        <translation>重复次数，65535 表示持续重复直至取消</translation>
+    </message>
+    <message>
+        <source>Number of requested quiet time periods</source>
+        <translation>请求的静默时段数量</translation>
+    </message>
+    <message>
+        <source>Number of Rows Less One</source>
+        <translation>行数减 1</translation>
+    </message>
+    <message>
+        <source>Number of Space Time Block Code streams</source>
+        <translation>空时分组编码（STBC）流的数量</translation>
+    </message>
+    <message>
+        <source>Number of Space-time streams</source>
+        <translation>空时流的数量</translation>
+    </message>
+    <message>
+        <source>Number of spatial streams</source>
+        <translation>空间流的数量（NSS）</translation>
     </message>
     <message>
         <source>Number of times this exact TCP segment has appeared in the capture within the duplicate detection window (1 = first occurrence, &gt;1 = capture-level duplicate)</source>
@@ -10350,8 +11374,36 @@ Shift+单击：在空行添加禁用的断点；
         <translation>运行此进程的账户数字 ID</translation>
     </message>
     <message>
+        <source>Octets</source>
+        <translation>以字节为单位</translation>
+    </message>
+    <message>
+        <source>Offset of the first quiet period from the TBTT in TUs</source>
+        <translation>第一个静默时段相对于 TBTT 的偏移量，以 TU 为单位</translation>
+    </message>
+    <message>
+        <source>Offset of the start of the first quiet time period</source>
+        <translation>第一个静默时段开始的偏移量</translation>
+    </message>
+    <message>
+        <source>OLD_BSSID</source>
+        <translation>OLD_BSSID，表示切换前的 BSSID</translation>
+    </message>
+    <message>
+        <source>One bit per modulation</source>
+        <translation>每种调制方式占一位</translation>
+    </message>
+    <message>
         <source>Operation code</source>
         <translation>操作代码（Opcode）</translation>
+    </message>
+    <message>
+        <source>Operator Friendly Name Language Code</source>
+        <translation>运营商显示名称所用的语言代码</translation>
+    </message>
+    <message>
+        <source>Operator Friendly Name Length</source>
+        <translation>运营商显示名称的长度</translation>
     </message>
     <message>
         <source>Option 12: Host Name</source>
@@ -10410,12 +11462,20 @@ Shift+单击：在空行添加禁用的断点；
         <translation>分块传输的消息体末尾可选的尾部字段</translation>
     </message>
     <message>
+        <source>OUI of vendor specific IE</source>
+        <translation>厂商自定义 IE 中的组织唯一标识符（OUI）</translation>
+    </message>
+    <message>
         <source>Overlapping fragments contained conflicting data</source>
         <translation>重叠的分片包含彼此冲突的数据</translation>
     </message>
     <message>
         <source>Overlapping segments contained conflicting data</source>
         <translation>重叠的段包含彼此冲突的数据</translation>
+    </message>
+    <message>
+        <source>Overrides the previously stored EDCAL parameters</source>
+        <translation>覆盖此前保存的 EDCAL 参数</translation>
     </message>
     <message>
         <source>Packet Number field length (protected using header protection)</source>
@@ -10426,20 +11486,56 @@ Shift+单击：在空行添加禁用的断点；
         <translation>Pad1 填充选项</translation>
     </message>
     <message>
+        <source>Padding</source>
+        <translation>对齐用的填充</translation>
+    </message>
+    <message>
         <source>PadN Option</source>
         <translation>PadN 填充选项</translation>
+    </message>
+    <message>
+        <source>Part 1 (bit63)</source>
+        <translation>第 1 部分（bit 63）</translation>
     </message>
     <message>
         <source>Payload is encrypted application data</source>
         <translation>有效载荷是加密后的应用数据</translation>
     </message>
     <message>
+        <source>PMK identifiers included in the RSN element</source>
+        <translation>RSN 元素携带的 PMK 标识符（PMKID）列表</translation>
+    </message>
+    <message>
+        <source>Portion of the TIM bitmap indicating which associated stations have buffered traffic</source>
+        <translation>TIM 位图的一部分，指示 AP 为哪些已关联站点缓存了流量</translation>
+    </message>
+    <message>
         <source>Power management status</source>
         <translation>指示发送方的电源管理状态</translation>
     </message>
     <message>
+        <source>Power Save Multi-Poll (PSMP) Sequence Duration</source>
+        <translation>Power Save Multi-Poll（PSMP）序列的时长</translation>
+    </message>
+    <message>
+        <source>Pre-Association Message Xchange BSSID Independent (PAME-BI)</source>
+        <translation>指示关联前消息交换是否独立于 BSSID（PAME-BI）</translation>
+    </message>
+    <message>
+        <source>Previous TS of receive antenna port</source>
+        <translation>接收天线端口的上一时间戳（TS）</translation>
+    </message>
+    <message>
+        <source>Previous TS of transmit antenna port</source>
+        <translation>发送天线端口的上一时间戳（TS）</translation>
+    </message>
+    <message>
         <source>Process associated with the packet, from the pcapng epb_processid_threadid option and the process information in the file</source>
         <translation>此包关联的进程，来自 pcapng 的 epb_processid_threadid 选项和文件中的进程信息</translation>
+    </message>
+    <message>
+        <source>Protected Public Action Code</source>
+        <translation>Protected Public Action Code，表示受保护的公共操作类型</translation>
     </message>
     <message>
         <source>Protocol to be used for connection</source>
@@ -10450,8 +11546,32 @@ Shift+单击：在空行添加禁用的断点；
         <translation>此帧承载的协议</translation>
     </message>
     <message>
+        <source>ProtoPort Tuple - IP Protocol</source>
+        <translation>ProtoPort 元组中的 IP 协议</translation>
+    </message>
+    <message>
+        <source>ProtoPort Tuple - Port Number</source>
+        <translation>ProtoPort 元组中的端口号</translation>
+    </message>
+    <message>
+        <source>ProtoPort Tuple - Status</source>
+        <translation>ProtoPort 元组的状态</translation>
+    </message>
+    <message>
+        <source>Public Action Code</source>
+        <translation>Public Action Code，表示公共操作类型</translation>
+    </message>
+    <message>
+        <source>QoS Ack</source>
+        <translation>QoS Ack，指示 QoS 确认能力</translation>
+    </message>
+    <message>
         <source>QU flag</source>
         <translation>QU 标志位，指示是否请求单播应答</translation>
+    </message>
+    <message>
+        <source>Queried HS 2.0 Element Subtype</source>
+        <translation>查询所请求的 Hotspot 2.0 元素子类型</translation>
     </message>
     <message>
         <source>Query Class</source>
@@ -10474,12 +11594,100 @@ Shift+单击：在空行添加禁用的断点；
         <translation>此次查询请求的记录类型</translation>
     </message>
     <message>
+        <source>Quiet Period Duration in units of 32us</source>
+        <translation>静默时段的长度，以 32 微秒为单位</translation>
+    </message>
+    <message>
+        <source>Quiet Time Periods Response suptype to which request subtype corresponds</source>
+        <translation>与此请求子类型对应的 Quiet Time Periods Response 子类型</translation>
+    </message>
+    <message>
         <source>Random values used for deriving keys</source>
         <translation>用于派生密钥的随机值</translation>
     </message>
     <message>
+        <source>Reason for unsolicited notification</source>
+        <translation>主动发出此通知的原因</translation>
+    </message>
+    <message>
         <source>Reassembling error due to illegal segments</source>
         <translation>存在无效数据段，导致重组失败</translation>
+    </message>
+    <message>
+        <source>Receive Power Indicator (RPI) 0 Density</source>
+        <translation>接收功率指示（RPI）等级 0 的密度</translation>
+    </message>
+    <message>
+        <source>Receive Power Indicator (RPI) 1 Density</source>
+        <translation>接收功率指示（RPI）等级 1 的密度</translation>
+    </message>
+    <message>
+        <source>Receive Power Indicator (RPI) 2 Density</source>
+        <translation>接收功率指示（RPI）等级 2 的密度</translation>
+    </message>
+    <message>
+        <source>Receive Power Indicator (RPI) 3 Density</source>
+        <translation>接收功率指示（RPI）等级 3 的密度</translation>
+    </message>
+    <message>
+        <source>Receive Power Indicator (RPI) 4 Density</source>
+        <translation>接收功率指示（RPI）等级 4 的密度</translation>
+    </message>
+    <message>
+        <source>Receive Power Indicator (RPI) 5 Density</source>
+        <translation>接收功率指示（RPI）等级 5 的密度</translation>
+    </message>
+    <message>
+        <source>Receive Power Indicator (RPI) 6 Density</source>
+        <translation>接收功率指示（RPI）等级 6 的密度</translation>
+    </message>
+    <message>
+        <source>Receive Power Indicator (RPI) 7 Density</source>
+        <translation>接收功率指示（RPI）等级 7 的密度</translation>
+    </message>
+    <message>
+        <source>Received channel power indicator</source>
+        <translation>接收信道功率指示（RCPI）</translation>
+    </message>
+    <message>
+        <source>Receiver can return explicit CSI feedback</source>
+        <translation>接收端可返回显式 CSI 反馈</translation>
+    </message>
+    <message>
+        <source>Receiver can return explicit uncompressed Beamforming Feedback Matrix</source>
+        <translation>接收端可返回显式、未压缩的波束成形反馈矩阵</translation>
+    </message>
+    <message>
+        <source>Receiver Organizationally Unique Identifier</source>
+        <translation>接收方的组织唯一标识符（OUI）</translation>
+    </message>
+    <message>
+        <source>Receiver Organizationally Unique Identifier (resolved)</source>
+        <translation>接收方的组织唯一标识符（OUI，已解析）</translation>
+    </message>
+    <message>
+        <source>Receiving Station Hardware Address</source>
+        <translation>接收站点的硬件地址（RA）</translation>
+    </message>
+    <message>
+        <source>Receiving Station Hardware Address (resolved)</source>
+        <translation>接收站点的硬件地址（RA，已解析）</translation>
+    </message>
+    <message>
+        <source>Recommended MFB</source>
+        <translation>建议的 MFB</translation>
+    </message>
+    <message>
+        <source>Recommended NUM_STS</source>
+        <translation>建议的 NUM_STS</translation>
+    </message>
+    <message>
+        <source>Recommended Transmit Channel Width</source>
+        <translation>建议的发送信道宽度</translation>
+    </message>
+    <message>
+        <source>Recommended VHT-MCS</source>
+        <translation>建议的 VHT-MCS</translation>
     </message>
     <message>
         <source>Record layer version</source>
@@ -10498,12 +11706,28 @@ Shift+单击：在空行添加禁用的断点；
         <translation>其余低位</translation>
     </message>
     <message>
+        <source>Reported noise power relative to 1 mW</source>
+        <translation>抓包设备报告的噪声功率，以 dBm 为单位</translation>
+    </message>
+    <message>
+        <source>Reported received signal power relative to 1 mW</source>
+        <translation>抓包设备报告的接收信号功率，以 dBm 为单位</translation>
+    </message>
+    <message>
         <source>Reserved bit (must be zero; RFC 791)</source>
         <translation>保留位，按 RFC 791 必须为 0</translation>
     </message>
     <message>
         <source>Reserved bits (protected using header protection)</source>
         <translation>使用首部保护（Header Protection）保护的保留位</translation>
+    </message>
+    <message>
+        <source>Reserved Field</source>
+        <translation>保留字段</translation>
+    </message>
+    <message>
+        <source>Reserved present flag (Must be zero)</source>
+        <translation>保留的存在标志位，必须为 0</translation>
     </message>
     <message>
         <source>Response Class</source>
@@ -10534,24 +11758,84 @@ Shift+单击：在空行添加禁用的断点；
         <translation>PTR-RR 更新的结果代码</translation>
     </message>
     <message>
+        <source>Result reported in the BSS Transition Management Response</source>
+        <translation>BSS Transition Management Response 报告的处理结果</translation>
+    </message>
+    <message>
         <source>Retransmission flag</source>
         <translation>指示该帧是否为重传帧</translation>
+    </message>
+    <message>
+        <source>RF noise power at the antenna expressed as decibels from a fixed, arbitrary value</source>
+        <translation>天线处的射频噪声功率，以相对固定参考值的 dB 表示</translation>
     </message>
     <message>
         <source>RF noise power at the antenna expressed as decibels from one milliwatt</source>
         <translation>天线处的射频噪声功率，以 dBm 为单位</translation>
     </message>
     <message>
+        <source>RF signal power at the antenna expressed as decibels from a fixed, arbitrary value</source>
+        <translation>天线处的射频信号功率，以相对固定参考值的 dB 表示</translation>
+    </message>
+    <message>
         <source>RF signal power at the antenna expressed as decibels from one milliwatt</source>
         <translation>天线处的射频信号功率，以 dBm 为单位</translation>
+    </message>
+    <message>
+        <source>Roaming Consortium OI</source>
+        <translation>漫游联盟的组织标识符（OI）</translation>
+    </message>
+    <message>
+        <source>Roaming Consortium OI Length</source>
+        <translation>漫游联盟组织标识符（OI）的长度</translation>
+    </message>
+    <message>
+        <source>Root Announcement Flags</source>
+        <translation>Root Announcement 的标志位</translation>
+    </message>
+    <message>
+        <source>Root Announcement Interval</source>
+        <translation>Root Announcement 的发送间隔</translation>
+    </message>
+    <message>
+        <source>Root Mesh STA Address</source>
+        <translation>根 Mesh STA 的地址</translation>
+    </message>
+    <message>
+        <source>Root Mesh STA Sequence Number</source>
+        <translation>根 Mesh STA 的序列号</translation>
+    </message>
+    <message>
+        <source>Route Lifetime</source>
+        <translation>路由有效期</translation>
+    </message>
+    <message>
+        <source>Route Metric</source>
+        <translation>路由度量值</translation>
     </message>
     <message>
         <source>Router Alert Option</source>
         <translation>Router Alert 路由器警告选项</translation>
     </message>
     <message>
+        <source>RSN Capability information</source>
+        <translation>RSN 能力信息</translation>
+    </message>
+    <message>
+        <source>SA, DA, BSSID, RA or TA Hardware Address</source>
+        <translation>SA、DA、BSSID、RA 或 TA 的硬件地址</translation>
+    </message>
+    <message>
+        <source>SA, DA, BSSID, RA or TA Hardware Address (resolved)</source>
+        <translation>SA、DA、BSSID、RA 或 TA 的硬件地址（已解析）</translation>
+    </message>
+    <message>
         <source>SATNET stream identifier</source>
         <translation>SATNET 流标识符</translation>
+    </message>
+    <message>
+        <source>Schedule Info field</source>
+        <translation>Schedule Info 调度信息字段</translation>
     </message>
     <message>
         <source>Security flag (RFC 3514)</source>
@@ -10574,6 +11858,14 @@ Shift+单击：在空行添加禁用的断点；
         <translation>指示帧是否在 CFP 期间发送或接收</translation>
     </message>
     <message>
+        <source>Sent/Received guard interval</source>
+        <translation>发送或接收所用的保护间隔（GI）</translation>
+    </message>
+    <message>
+        <source>Sent/Received guard interval information present</source>
+        <translation>指示发送或接收所用的保护间隔（GI）信息是否可用</translation>
+    </message>
+    <message>
         <source>Sent/Received with fragmentation</source>
         <translation>指示帧是否以分片形式发送或接收</translation>
     </message>
@@ -10594,6 +11886,38 @@ Shift+单击：在空行添加禁用的断点；
         <translation>序列号（小端字节序）</translation>
     </message>
     <message>
+        <source>Service Specific peer-to-peer operation</source>
+        <translation>特定服务的对等通信操作</translation>
+    </message>
+    <message>
+        <source>Set to the duration of the quiet interval</source>
+        <translation>Quiet Interval 的时长</translation>
+    </message>
+    <message>
+        <source>Set to the individual IEEE MAC address of the STA that is the currently known DFS Owner in the IBSS</source>
+        <translation>当前已知的 IBSS DFS Owner 的单播 IEEE MAC 地址</translation>
+    </message>
+    <message>
+        <source>Set to the number of beacon intervals between the start of regularly scheduled quiet intervals</source>
+        <translation>两个定期 Quiet Interval 的起点之间相隔的 Beacon 间隔数</translation>
+    </message>
+    <message>
+        <source>Set to the number of TBTTs until the beacon interval during which the next quiet interval shall start</source>
+        <translation>到下一个 Quiet Interval 开始所在 Beacon 间隔还剩多少个 TBTT</translation>
+    </message>
+    <message>
+        <source>Set to the number of TBTTs until the STA sending the Channel Switch Announcement element switches to the new channel or shall be set to 0</source>
+        <translation>发送 Channel Switch Announcement 的 STA 切换到新信道前还剩多少个 TBTT，0 表示可在发送后切换</translation>
+    </message>
+    <message>
+        <source>Set to the number of the channel to which the STA is moving</source>
+        <translation>STA 即将切换到的信道编号</translation>
+    </message>
+    <message>
+        <source>Set to the offset of the start of the quiet interval from the TBTT</source>
+        <translation>Quiet Interval 起点相对于 TBTT 的偏移量</translation>
+    </message>
+    <message>
         <source>Several tails were found when defragmenting the packet</source>
         <translation>重组数据包时发现多个末尾分片</translation>
     </message>
@@ -10606,12 +11930,40 @@ Shift+单击：在空行添加禁用的断点；
         <translation>日志公钥的 SHA-256 哈希值</translation>
     </message>
     <message>
+        <source>Short Guard Interval Nsym disambiguation</source>
+        <translation>Short GI 下用于消除 OFDM 符号数 Nsym 歧义的标志</translation>
+    </message>
+    <message>
+        <source>Short guard interval Nsym disambiguation information present</source>
+        <translation>指示 Short GI 的 Nsym 消歧信息是否可用</translation>
+    </message>
+    <message>
         <source>Short name of the process, typically that of its executable</source>
         <translation>进程简称，通常为可执行文件名</translation>
     </message>
     <message>
+        <source>Short/Long guard interval</source>
+        <translation>长或短保护间隔（GI）</translation>
+    </message>
+    <message>
+        <source>Short/Long guard interval information present</source>
+        <translation>指示长或短保护间隔（GI）信息是否可用</translation>
+    </message>
+    <message>
         <source>Should always be 0</source>
         <translation>应始终为 0</translation>
+    </message>
+    <message>
+        <source>Signal quality (unitless measure)</source>
+        <translation>信号质量，无量纲</translation>
+    </message>
+    <message>
+        <source>Signal strength, as percentage of maximum RSSI</source>
+        <translation>信号强度，以最大 RSSI 的百分比表示</translation>
+    </message>
+    <message>
+        <source>Signals support for radio measurements in a device</source>
+        <translation>表明设备支持的无线电测量能力</translation>
     </message>
     <message>
         <source>Size of the QUIC packet</source>
@@ -10666,6 +12018,14 @@ Shift+单击：在空行添加禁用的断点；
         <translation>源 IPv6 主机名</translation>
     </message>
     <message>
+        <source>Source MAC address</source>
+        <translation>源 MAC 地址</translation>
+    </message>
+    <message>
+        <source>Source MAC address matched by the TCLAS classifier</source>
+        <translation>TCLAS 分类器用于匹配的源 MAC 地址</translation>
+    </message>
+    <message>
         <source>Source or Destination Address Multicast Flags</source>
         <translation>源或目的地址的组播标志位</translation>
     </message>
@@ -10718,12 +12078,184 @@ Shift+单击：在空行添加禁用的断点；
         <translation>源进程的命令名</translation>
     </message>
     <message>
+        <source>Source Sequence Number</source>
+        <translation>源序列号</translation>
+    </message>
+    <message>
+        <source>Space Time Block Coding flag</source>
+        <translation>标志位，指示是否使用空时分组编码（STBC）</translation>
+    </message>
+    <message>
+        <source>Space Time Block Coding information present</source>
+        <translation>指示空时分组编码（STBC）信息是否可用</translation>
+    </message>
+    <message>
+        <source>Space Time Block Coding streams information present</source>
+        <translation>指示 STBC 流数量是否可用</translation>
+    </message>
+    <message>
+        <source>Spatial Multiplexing (SM) Mode</source>
+        <translation>空间复用（SM）模式</translation>
+    </message>
+    <message>
+        <source>Spatial Multiplexing (SM) Power Save</source>
+        <translation>空间复用（SM）的省电设置</translation>
+    </message>
+    <message>
+        <source>Specified peer-to-peer operation for which participating HE STAs might transmit frames during the quiet time period</source>
+        <translation>指定允许参与的 HE STA 在静默时段内发送帧的对等通信操作</translation>
+    </message>
+    <message>
+        <source>Specifies a bitmap where bits that are set to 1 identify a subset of the classifier parameters</source>
+        <translation>位图中置为 1 的位标识所选的分类器参数</translation>
+    </message>
+    <message>
+        <source>Specifies a reset to the radiotap namespace</source>
+        <translation>指示切回 Radiotap 命名空间</translation>
+    </message>
+    <message>
+        <source>Specifies if the A-MPDU status field is present</source>
+        <translation>指示是否包含 A-MPDU 状态字段</translation>
+    </message>
+    <message>
+        <source>Specifies if the antenna number field is present</source>
+        <translation>指示是否包含天线编号字段</translation>
+    </message>
+    <message>
+        <source>Specifies if the antenna signal strength in dBm is present</source>
+        <translation>指示是否包含以 dBm 为单位的天线信号强度</translation>
+    </message>
+    <message>
+        <source>Specifies if the data retries field is present</source>
+        <translation>指示是否包含数据重传次数</translation>
+    </message>
+    <message>
+        <source>Specifies if the extended channel info field is present</source>
+        <translation>指示是否包含扩展信道信息</translation>
+    </message>
+    <message>
+        <source>Specifies if the FCS field is present</source>
+        <translation>指示是否包含 FCS 字段</translation>
+    </message>
+    <message>
+        <source>Specifies if the HE field is present</source>
+        <translation>指示是否包含 HE 字段</translation>
+    </message>
+    <message>
+        <source>Specifies if the HE-MU field is present</source>
+        <translation>指示是否包含 HE-MU 字段</translation>
+    </message>
+    <message>
+        <source>Specifies if the hop set and pattern is present for frequency hopping radios</source>
+        <translation>指示是否包含跳频无线电使用的跳频集合和模式</translation>
+    </message>
+    <message>
+        <source>Specifies if the MCS field is present</source>
+        <translation>指示是否包含 MCS 字段</translation>
+    </message>
+    <message>
+        <source>Specifies if the Radiotap Flags field is present</source>
+        <translation>指示是否包含 Radiotap Flags 字段</translation>
+    </message>
+    <message>
+        <source>Specifies if the RF noise power at antenna field is present</source>
+        <translation>指示是否包含天线处的射频噪声功率字段</translation>
+    </message>
+    <message>
+        <source>Specifies if the RF noise power at antenna in dB field is present</source>
+        <translation>指示是否包含以 dB 为单位的天线射频噪声功率字段</translation>
+    </message>
+    <message>
+        <source>Specifies if the RF signal power at antenna in dB field is present</source>
+        <translation>指示是否包含以 dB 为单位的天线射频信号功率字段</translation>
+    </message>
+    <message>
+        <source>Specifies if the RX flags field is present</source>
+        <translation>指示是否包含 RX Flags 字段</translation>
+    </message>
+    <message>
+        <source>Specifies if the signal quality field is present</source>
+        <translation>指示是否包含信号质量字段</translation>
+    </message>
+    <message>
+        <source>Specifies if the Time Synchronization Function Timer field is present</source>
+        <translation>指示是否包含 TSFT 字段</translation>
+    </message>
+    <message>
+        <source>Specifies if the timestamp field is present</source>
+        <translation>指示是否包含时间戳字段</translation>
+    </message>
+    <message>
+        <source>Specifies if the transmit power (in dBm) field is present</source>
+        <translation>指示是否包含以 dBm 为单位的发送功率字段</translation>
+    </message>
+    <message>
+        <source>Specifies if the transmit power distance from max power (in dB) field is present</source>
+        <translation>指示是否包含以 dB 为单位的发送功率与最大功率之间的差值</translation>
+    </message>
+    <message>
+        <source>Specifies if the transmit power distance from max power field is present</source>
+        <translation>指示是否包含发送功率与最大功率之间的差值</translation>
+    </message>
+    <message>
+        <source>Specifies if the transmit/receive frequency field is present</source>
+        <translation>指示是否包含发送或接收频率字段</translation>
+    </message>
+    <message>
+        <source>Specifies if the transmit/receive rate field is present</source>
+        <translation>指示是否包含发送或接收速率字段</translation>
+    </message>
+    <message>
+        <source>Specifies if the TX flags field is present</source>
+        <translation>指示是否包含 TX Flags 字段</translation>
+    </message>
+    <message>
+        <source>Specifies if the VHT field is present</source>
+        <translation>指示是否包含 VHT 字段</translation>
+    </message>
+    <message>
+        <source>Specifies if there are any extensions to the header present</source>
+        <translation>指示首部是否还有后续的存在位图</translation>
+    </message>
+    <message>
+        <source>Specifies if this frame has a bad frame check sequence</source>
+        <translation>指示此帧的 FCS 是否有误</translation>
+    </message>
+    <message>
         <source>Specifies if this is a locally administered or globally unique (IEEE assigned) address</source>
         <translation>指示该地址是本地管理地址，还是由 IEEE 分配的全局唯一地址</translation>
     </message>
     <message>
         <source>Specifies if this is an individual (unicast) or group (broadcast/multicast) address</source>
         <translation>指示该地址是单播地址，还是组地址（广播或组播）</translation>
+    </message>
+    <message>
+        <source>Specifies switch to TLV fields</source>
+        <translation>指示切换到 TLV 字段</translation>
+    </message>
+    <message>
+        <source>Specifies that the next bitmap is in a vendor namespace</source>
+        <translation>指示下一张位图属于厂商命名空间</translation>
+    </message>
+    <message>
+        <source>Specifies the type of classifier parameters</source>
+        <translation>指定分类器参数的类型</translation>
+    </message>
+    <message>
+        <source>Specifies whether or not the 0-Length PSDU field is present</source>
+        <translation>指示是否包含 0-Length PSDU 字段</translation>
+    </message>
+    <message>
+        <source>Specifies whether or not the L-SIG field is present</source>
+        <translation>指示是否包含 L-SIG 字段</translation>
+    </message>
+    <message>
+        <source>Speed at which this frame was sent/received</source>
+        <translation>此帧发送或接收时的 PHY 速率</translation>
+    </message>
+    <message>
+        <source>Speed this frame was sent/received at</source>
+        <translation>此帧发送或接收时的速率</translation>
     </message>
     <message>
         <source>Square Signal Bit (used to measure and locate the source of packet loss)</source>
@@ -10734,8 +12266,100 @@ Shift+单击：在空行添加禁用的断点；
         <translation>SSLv2 握手消息类型</translation>
     </message>
     <message>
+        <source>STA Organizationally Unique Identifier</source>
+        <translation>STA 地址的组织唯一标识符（OUI）</translation>
+    </message>
+    <message>
+        <source>STA Organizationally Unique Identifier (resolved)</source>
+        <translation>STA 地址的组织唯一标识符（OUI，已解析）</translation>
+    </message>
+    <message>
+        <source>STA_Address</source>
+        <translation>STA_Address，表示站点地址</translation>
+    </message>
+    <message>
         <source>Static/dynamic bandwidth negotiation</source>
         <translation>指示使用静态还是动态带宽协商</translation>
+    </message>
+    <message>
+        <source>Station can apply TxBF using compressed beamforming feedback matrix</source>
+        <translation>站点可利用压缩的波束成形反馈矩阵进行 TxBF</translation>
+    </message>
+    <message>
+        <source>Station can apply TxBF using CSI explicit feedback</source>
+        <translation>站点可利用显式 CSI 反馈进行 TxBF</translation>
+    </message>
+    <message>
+        <source>Station can apply TxBF using uncompressed beamforming feedback matrix</source>
+        <translation>站点可利用未压缩的波束成形反馈矩阵进行 TxBF</translation>
+    </message>
+    <message>
+        <source>Station can compress and use compressed Beamforming Feedback Matrix</source>
+        <translation>站点能够压缩并使用压缩的波束成形反馈矩阵</translation>
+    </message>
+    <message>
+        <source>Station Hardware Address</source>
+        <translation>站点（STA）的硬件地址</translation>
+    </message>
+    <message>
+        <source>Station Hardware Address (resolved)</source>
+        <translation>站点（STA）的硬件地址（已解析）</translation>
+    </message>
+    <message>
+        <source>Station ID</source>
+        <translation>站点标识符（STA ID）</translation>
+    </message>
+    <message>
+        <source>Status Indication</source>
+        <translation>Status Indication，表示测距状态</translation>
+    </message>
+    <message>
+        <source>Status of requested event</source>
+        <translation>所请求操作的状态</translation>
+    </message>
+    <message>
+        <source>Status of requested Resource</source>
+        <translation>所请求资源的状态</translation>
+    </message>
+    <message>
+        <source>Status of the requested operation</source>
+        <translation>所请求操作的状态</translation>
+    </message>
+    <message>
+        <source>Target AP MAC address</source>
+        <translation>目标 AP 的 MAC 地址</translation>
+    </message>
+    <message>
+        <source>Target Only Flag</source>
+        <translation>Target Only Flag，指示是否仅允许目标站点响应</translation>
+    </message>
+    <message>
+        <source>TCLAS Processing</source>
+        <translation>TCLAS 处理能力</translation>
+    </message>
+    <message>
+        <source>TFS Request Subelement Data</source>
+        <translation>TFS Request 子元素的数据</translation>
+    </message>
+    <message>
+        <source>TFS Request Subelement ID</source>
+        <translation>TFS Request 子元素的 ID</translation>
+    </message>
+    <message>
+        <source>TFS Request Subelement Length</source>
+        <translation>TFS Request 子元素的长度</translation>
+    </message>
+    <message>
+        <source>TFS Response Subelement Data</source>
+        <translation>TFS Response 子元素的数据</translation>
+    </message>
+    <message>
+        <source>TFS Response Subelement ID</source>
+        <translation>TFS Response 子元素的 ID</translation>
+    </message>
+    <message>
+        <source>TFS Response Subelement Length</source>
+        <translation>TFS Response 子元素的长度</translation>
     </message>
     <message>
         <source>The completeness of the conversation capture</source>
@@ -10748,6 +12372,10 @@ Shift+单击：在空行添加禁用的断点；
     <message>
         <source>The description for this interface</source>
         <translation>捕获接口的说明</translation>
+    </message>
+    <message>
+        <source>The Element ID used to indicate an extended element</source>
+        <translation>标识扩展信息元素的 Element ID</translation>
     </message>
     <message>
         <source>The expected IP checksum field as calculated from the IP datagram</source>
@@ -10802,12 +12430,28 @@ Shift+单击：在空行添加禁用的断点；
         <translation>此路由器用作默认路由器的有效期</translation>
     </message>
     <message>
+        <source>The list of elements extensions that are to be included in the responding STA Probe Response frame</source>
+        <translation>响应 STA 应在 Probe Response 帧中包含的扩展信息元素列表</translation>
+    </message>
+    <message>
+        <source>The list of elements that are to be included in the responding STA Probe Response frame</source>
+        <translation>响应 STA 应在 Probe Response 帧中包含的信息元素列表</translation>
+    </message>
+    <message>
         <source>The Maximum Transmission Unit of the next-hop link</source>
         <translation>下一跳链路的最大传输单元（MTU）</translation>
     </message>
     <message>
         <source>The most significant bit (0x80) of the first octet is set to 1 for long headers and 0 for short headers.</source>
         <translation>首字节的最高位（0x80），长首部为 1，短首部为 0</translation>
+    </message>
+    <message>
+        <source>The nominal maximum transmit power with which the STA is capable of transmitting in the current channel</source>
+        <translation>STA 在当前信道可使用的标称最大发送功率</translation>
+    </message>
+    <message>
+        <source>The nominal minimum transmit power with which the STA is capable of transmitting in the current channel</source>
+        <translation>STA 在当前信道可使用的标称最小发送功率</translation>
     </message>
     <message>
         <source>The number of the file section this frame is in</source>
@@ -10826,6 +12470,10 @@ Shift+单击：在空行添加禁用的断点；
         <translation>未在此段中结束的 PDU 在所指帧中完成重组</translation>
     </message>
     <message>
+        <source>The quiet time period request subtype to which this response corresponds</source>
+        <translation>此响应对应的 Quiet Time Period 请求子类型</translation>
+    </message>
+    <message>
         <source>The reassembled payload</source>
         <translation>重组后的有效载荷</translation>
     </message>
@@ -10840,6 +12488,10 @@ Shift+单击：在空行添加禁用的断点；
     <message>
         <source>The size of this PDU</source>
         <translation>此 PDU 的大小</translation>
+    </message>
+    <message>
+        <source>The SSID in this BSS is interpreted using UTF-8 encoding</source>
+        <translation>此 BSS 的 SSID 按 UTF-8 编码解释</translation>
     </message>
     <message>
         <source>The time between retransmitted Neighbor Solicitation messages</source>
@@ -10868,6 +12520,10 @@ Shift+单击：在空行添加禁用的断点；
     <message>
         <source>The window size value from the TCP header</source>
         <translation>TCP 首部中的窗口大小原始值</translation>
+    </message>
+    <message>
+        <source>This 802.11 packet is reassembled in this frame</source>
+        <translation>此 802.11 数据包在所指帧中完成重组</translation>
     </message>
     <message>
         <source>This frame has some of the TCP analysis flags set</source>
@@ -10924,6 +12580,10 @@ Shift+单击：在空行添加禁用的断点；
     <message>
         <source>This is the last frame of the PDU starting in this segment</source>
         <translation>从此段开始的 PDU 的最后一帧</translation>
+    </message>
+    <message>
+        <source>This is the last part of an A-MPDU</source>
+        <translation>此帧是该 A-MPDU 的最后一个部分</translation>
     </message>
     <message>
         <source>This packet is a response to the packet with this number</source>
@@ -10986,8 +12646,136 @@ Shift+单击：在空行添加禁用的断点；
         <translation>从发出请求起经过的时间</translation>
     </message>
     <message>
+        <source>Timing Synchronization Function timestamp</source>
+        <translation>时间同步功能（TSF）的时间戳</translation>
+    </message>
+    <message>
+        <source>TKIP Extended Initialization Vector</source>
+        <translation>TKIP 扩展初始化向量（Extended IV）</translation>
+    </message>
+    <message>
         <source>To DS flag</source>
         <translation>指示该帧是否发往 DS（To DS）</translation>
+    </message>
+    <message>
+        <source>Total duration of the aggregate in microseconds, including any preamble or plcp header and multiple MPDUs. Calculated from the total subframe lengths, modulation and other phy data, assumes no excess padding.</source>
+        <translation>聚合帧的总时长，以微秒为单位，包含前导码或 PLCP 首部及多个 MPDU，按子帧总长度、调制方式及其他 PHY 数据计算，假定没有额外填充</translation>
+    </message>
+    <message>
+        <source>Total duration of the frame in microseconds, including any preamble or plcp header. Calculated from the frame length, modulation and other phy data.</source>
+        <translation>此帧的总时长，以微秒为单位，包含前导码或 PLCP 首部，按帧长度、调制方式及其他 PHY 数据计算</translation>
+    </message>
+    <message>
+        <source>TPC Link Margin field is reserved in a Beacon or Probe Response frame</source>
+        <translation>TPC Link Margin 字段在 Beacon 或 Probe Response 帧中为保留字段</translation>
+    </message>
+    <message>
+        <source>Traffic Identifier (TID)</source>
+        <translation>流量标识符（TID）</translation>
+    </message>
+    <message>
+        <source>Traffic Identifier (TID) for which a Basic BlockAck frame is requested</source>
+        <translation>请求 Basic BlockAck 的流量标识符（TID）</translation>
+    </message>
+    <message>
+        <source>Traffic Stream (TS) Info</source>
+        <translation>流量流（TS）信息</translation>
+    </message>
+    <message>
+        <source>Traffic Stream (TS) Info Access Policy</source>
+        <translation>流量流（TS）的接入策略</translation>
+    </message>
+    <message>
+        <source>Traffic Stream (TS) Info Ack Policy</source>
+        <translation>流量流（TS）的确认策略</translation>
+    </message>
+    <message>
+        <source>Traffic Stream (TS) Info Automatic Power-Save Delivery (APSD)</source>
+        <translation>流量流（TS）的自动省电交付（APSD）</translation>
+    </message>
+    <message>
+        <source>Traffic Stream (TS) Info Direction</source>
+        <translation>流量流（TS）的方向</translation>
+    </message>
+    <message>
+        <source>Traffic Stream (TS) Info field</source>
+        <translation>流量流（TS）信息字段</translation>
+    </message>
+    <message>
+        <source>Traffic Stream (TS) Info Power Save Behavior (PSB)</source>
+        <translation>流量流（TS）的省电行为（PSB）</translation>
+    </message>
+    <message>
+        <source>Traffic Stream (TS) Info Schedule</source>
+        <translation>流量流（TS）的调度设置</translation>
+    </message>
+    <message>
+        <source>Traffic Stream (TS) Info Traffic Type</source>
+        <translation>流量流（TS）的流量类型</translation>
+    </message>
+    <message>
+        <source>Traffic Stream (TS) Info User Priority</source>
+        <translation>流量流（TS）的用户优先级</translation>
+    </message>
+    <message>
+        <source>Traffic Stream (TS) Info User Priority (UP)</source>
+        <translation>流量流（TS）的用户优先级（UP）</translation>
+    </message>
+    <message>
+        <source>Traffic Stream ID (TSID) Info TSID</source>
+        <translation>流量流标识符（TSID）</translation>
+    </message>
+    <message>
+        <source>Traffic Stream Info ID (TID)</source>
+        <translation>流量标识符（TID）</translation>
+    </message>
+    <message>
+        <source>Transmission failed due to excessive retries</source>
+        <translation>重试次数过多导致发送失败</translation>
+    </message>
+    <message>
+        <source>Transmission shall not expect an ACK frame</source>
+        <translation>发送此帧时不等待 ACK</translation>
+    </message>
+    <message>
+        <source>Transmission used CTS-to-self protection</source>
+        <translation>发送时使用 CTS-to-self 保护</translation>
+    </message>
+    <message>
+        <source>Transmission used RTS/CTS handshake</source>
+        <translation>发送时使用 RTS/CTS 握手</translation>
+    </message>
+    <message>
+        <source>Transmit Opportunity (TXOP) Request</source>
+        <translation>发送机会（TXOP）请求</translation>
+    </message>
+    <message>
+        <source>Transmit power at the antenna port expressed as decibels from one milliwatt</source>
+        <translation>天线端口的发送功率，以 dBm 为单位</translation>
+    </message>
+    <message>
+        <source>Transmit power expressed as decibels from max power set at factory calibration (0 is max power)</source>
+        <translation>发送功率相对于出厂校准最大功率的差值，以 dB 为单位，0 表示最大功率</translation>
+    </message>
+    <message>
+        <source>Transmit power expressed as unitless distance from max power set at factory calibration (0 is max power)</source>
+        <translation>发送功率相对于出厂校准最大功率的无量纲差值，0 表示最大功率</translation>
+    </message>
+    <message>
+        <source>Transmitter Organizationally Unique Identifier</source>
+        <translation>发送方的组织唯一标识符（OUI）</translation>
+    </message>
+    <message>
+        <source>Transmitter Organizationally Unique Identifier (resolved)</source>
+        <translation>发送方的组织唯一标识符（OUI，已解析）</translation>
+    </message>
+    <message>
+        <source>Transmitting Station Hardware Address</source>
+        <translation>发送站点的硬件地址（TA）</translation>
+    </message>
+    <message>
+        <source>Transmitting Station Hardware Address (resolved)</source>
+        <translation>发送站点的硬件地址（TA，已解析）</translation>
     </message>
     <message>
         <source>true if HTTP notification</source>
@@ -11002,8 +12790,56 @@ Shift+单击：在空行添加禁用的断点；
         <translation>此消息为 HTTP 响应时为真</translation>
     </message>
     <message>
+        <source>TSF Offset in TU units</source>
+        <translation>TSF 偏移量，以 TU 为单位</translation>
+    </message>
+    <message>
+        <source>TSF timer value reported by the transmitting station</source>
+        <translation>发送站点报告的 TSF 计时器值</translation>
+    </message>
+    <message>
+        <source>TXOP_PS_NOT_ALLOWED information present</source>
+        <translation>指示 TXOP_PS_NOT_ALLOWED 信息是否可用</translation>
+    </message>
+    <message>
+        <source>Type and subtype combined (as bytes (for Control Frame Extension subtypes) or nibbles)</source>
+        <translation>合并表示帧类型和子类型，通常各占半字节，Control Frame Extension 子类型按字节表示</translation>
+    </message>
+    <message>
+        <source>Type of FEC</source>
+        <translation>前向纠错（FEC）的类型</translation>
+    </message>
+    <message>
         <source>Type of handshake message</source>
         <translation>握手消息的类型</translation>
+    </message>
+    <message>
+        <source>Type of Quiet Time Period Element</source>
+        <translation>Quiet Time Period 元素的类型</translation>
+    </message>
+    <message>
+        <source>Type of zero-length PSDU</source>
+        <translation>零长度 PSDU 的类型</translation>
+    </message>
+    <message>
+        <source>Unauthenticated emergency service accessible</source>
+        <translation>指示未认证时是否可以访问紧急服务（UESA）</translation>
+    </message>
+    <message>
+        <source>Unknown Target HWMP Sequence Number Flag</source>
+        <translation>Unknown Target HWMP Sequence Number Flag，指示目标的 HWMP 序列号未知</translation>
+    </message>
+    <message>
+        <source>Unknown/undecoded Symbol Proprietary Data</source>
+        <translation>未知或尚未解析的 Symbol 专有数据</translation>
+    </message>
+    <message>
+        <source>Unknown/undecoded Vendor Specific Data</source>
+        <translation>未知或尚未解析的厂商自定义数据</translation>
+    </message>
+    <message>
+        <source>Unprotected WNM Check Beacon</source>
+        <translation>不受保护的 WNM Check Beacon 操作</translation>
     </message>
     <message>
         <source>Unused, must be zero</source>
@@ -11014,12 +12850,84 @@ Shift+单击：在空行添加禁用的断点；
         <translation>用于检测 ICMPv6 消息及 IPv6 首部部分字段是否损坏</translation>
     </message>
     <message>
+        <source>User Data Header Length</source>
+        <translation>用户数据首部的长度</translation>
+    </message>
+    <message>
         <source>UUID of the executable image of the process</source>
         <translation>进程可执行文件的 UUID</translation>
     </message>
     <message>
+        <source>Value in microseconds of the MAC's Time Synchronization Function timer when the first bit of the MPDU arrived at the MAC.</source>
+        <translation>MPDU 的第一个比特到达 MAC 时的 TSF 计时器值，以微秒为单位</translation>
+    </message>
+    <message>
         <source>Value of sending machine's timestamp clock</source>
         <translation>发送方时间戳时钟的值</translation>
+    </message>
+    <message>
+        <source>Value that allows the mitigation requirements to be satisfied in the current channel</source>
+        <translation>为满足当前信道功率限制要求而使用的值</translation>
+    </message>
+    <message>
+        <source>Variant of the Multi-Link element</source>
+        <translation>Multi-Link 元素的类型</translation>
+    </message>
+    <message>
+        <source>Vendor Specific A-MPDU Parameters</source>
+        <translation>厂商自定义 A-MPDU 参数</translation>
+    </message>
+    <message>
+        <source>Vendor Specific Action Type (Marvell)</source>
+        <translation>Marvell 厂商自定义操作类型</translation>
+    </message>
+    <message>
+        <source>Vendor Specific Antenna Selection (ASEL) Capabilities</source>
+        <translation>厂商自定义天线选择（ASEL）能力</translation>
+    </message>
+    <message>
+        <source>Vendor Specific HT Capabilities information</source>
+        <translation>厂商自定义 HT 能力信息</translation>
+    </message>
+    <message>
+        <source>Vendor Specific HT Extended Capability information</source>
+        <translation>厂商自定义 HT 扩展能力信息</translation>
+    </message>
+    <message>
+        <source>Vendor Specific HT Type</source>
+        <translation>厂商自定义 HT 类型</translation>
+    </message>
+    <message>
+        <source>Vendor Specific Rx Supported Modulation and Coding Scheme Set</source>
+        <translation>厂商自定义的接收端调制与编码方案（Rx MCS）集合</translation>
+    </message>
+    <message>
+        <source>Vendor Specific Transmit Beam Forming (TxBF) Capabilities</source>
+        <translation>厂商自定义发送波束成形（TxBF）能力</translation>
+    </message>
+    <message>
+        <source>Vendor-specified data</source>
+        <translation>厂商自定义数据</translation>
+    </message>
+    <message>
+        <source>Vendor-specified sub namespace</source>
+        <translation>厂商定义的子命名空间</translation>
+    </message>
+    <message>
+        <source>Venue Name Language Code</source>
+        <translation>场所名称所用的语言代码</translation>
+    </message>
+    <message>
+        <source>Version of radiotap header format</source>
+        <translation>Radiotap 首部格式版本</translation>
+    </message>
+    <message>
+        <source>VHT Capabilities information</source>
+        <translation>VHT 能力信息</translation>
+    </message>
+    <message>
+        <source>VHT-MCS feedback request</source>
+        <translation>VHT-MCS 反馈请求</translation>
     </message>
     <message>
         <source>VLAN ID</source>
@@ -11032,6 +12940,14 @@ Shift+单击：在空行添加禁用的断点；
     <message>
         <source>VLAN Trailer</source>
         <translation>VLAN 封装的尾部数据</translation>
+    </message>
+    <message>
+        <source>Was Delayed Block Ack until 802.11-2016</source>
+        <translation>802.11-2016 之前此位用于 Delayed Block Ack</translation>
+    </message>
+    <message>
+        <source>Was Immediate Block Ack until 802.11-2016</source>
+        <translation>802.11-2016 之前此位用于 Immediate Block Ack</translation>
     </message>
     <message>
         <source>Was the reply data authenticated by the server?</source>
@@ -11060,6 +12976,10 @@ Shift+单击：在空行添加禁用的断点；
     <message>
         <source>When set, it indicates that the sender is a router</source>
         <translation>置位表示发送方是路由器</translation>
+    </message>
+    <message>
+        <source>When Status Indication is 3, the Value field contains a duration in units of seconds</source>
+        <translation>Status Indication 为 3 时，Value 表示以秒为单位的时长</translation>
     </message>
     <message>
         <source>Whether a router may forward an IP datagram whose destination address is drawn from the allocated special-purpose address block</source>
@@ -11096,6 +13016,14 @@ Shift+单击：在空行添加禁用的断点；
     <message>
         <source>Which previous segment is this an ACK for</source>
         <translation>此 ACK 所确认的较早 TCP 段</translation>
+    </message>
+    <message>
+        <source>WNM-Sleep Mode Action Type</source>
+        <translation>WNM-Sleep Mode 操作的类型</translation>
+    </message>
+    <message>
+        <source>Word from present flags bitmask</source>
+        <translation>存在位图中的一个字</translation>
     </message>
     <message>
         <source>Z flag</source>

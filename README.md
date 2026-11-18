@@ -24,6 +24,10 @@ and 802.11 LG/IG bits and common frame, VLAN, Radiotap, IPv4/IPv6, TCP, UDP,
 ICMP, DNS, DHCP, HTTP, TLS and QUIC fields. Field names and display-filter
 identifiers remain in English.
 
+Wireless descriptions include Beacon and association fields, neighbor reports
+and BSS transition, RSN and EAPOL-Key, 802.11r Fast BSS Transition, 802.11be
+Multi-Link, Radiotap, and 802.11 radio information.
+
 ### 5.1.7
 
 Open **Wireless → Roaming Analyzer** for a station's BSSID transition history,

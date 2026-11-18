@@ -1874,7 +1874,7 @@ void proto_register_ieee80211_radio(void)
 
     {&hf_wlan_radio_signal_dbm,
      {"Signal strength (dBm)", "wlan_radio.signal_dbm", FT_INT8, BASE_DEC|BASE_UNIT_STRING, UNS(&units_dbm), 0,
-      NULL, HFILL }},
+      "Reported received signal power relative to 1 mW", HFILL }},
 
     {&hf_wlan_radio_noise_percent,
      {"Noise level (percentage)", "wlan_radio.noise_percentage", FT_UINT32, BASE_DEC|BASE_UNIT_STRING, UNS(&units_percent), 0,
@@ -1886,11 +1886,11 @@ void proto_register_ieee80211_radio(void)
 
     {&hf_wlan_radio_noise_dbm,
      {"Noise level (dBm)", "wlan_radio.noise_dbm", FT_INT8, BASE_DEC|BASE_UNIT_STRING, UNS(&units_dbm), 0,
-      NULL, HFILL }},
+      "Reported noise power relative to 1 mW", HFILL }},
 
     {&hf_wlan_radio_snr,
      {"Signal/noise ratio (dB)", "wlan_radio.snr", FT_INT32, BASE_DEC|BASE_UNIT_STRING, UNS(&units_decibels), 0,
-      NULL, HFILL }},
+      "Difference between the reported signal and noise levels in decibels", HFILL }},
 
     {&hf_wlan_radio_timestamp,
      {"TSF timestamp", "wlan_radio.timestamp", FT_UINT64, BASE_DEC, NULL, 0,

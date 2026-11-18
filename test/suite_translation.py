@@ -136,14 +136,25 @@ def test_packet_field_status_descriptions(cmd_tshark, base_env):
         'frame.cap_len': ('Capture Length', '捕获文件实际保存的帧长度'),
         'tcp.seq_raw': ('Sequence Number (raw)', 'TCP 首部中的原始序列号'),
         'dns.qry.name': ('Name', '此次查询的域名'),
+        'wlan.fixed.beacon': ('Beacon Interval', '两个 Beacon 发送时刻之间的标称间隔，以 TU 为单位'),
+        'wlan.rsn.capabilities.mfpc': ('Management Frame Protection Capable',
+                                       '指示是否支持受保护的管理帧（Management Frame Protection Capable，MFPC）'),
+        'wlan.mobility_domain.mdid': ('Mobility Domain Identifier', '标识用于 802.11r Fast BSS Transition（FT）的移动域'),
+        'wlan.eht.multi_link.common_info.mld_mac_address': ('MLD MAC Address', 'MAC 地址，用于标识整个多链路设备（MLD）'),
+        'wlan_rsna_eapol.keydes.key_info.key_mic': ('Key MIC', '指示 EAPOL-Key 消息是否带有消息完整性码（Key MIC）'),
+        'radiotap.present.flags': ('Flags', '指示是否包含 Radiotap Flags 字段'),
+        'wlan_radio.signal_dbm': ('Signal strength (dBm)', '抓包设备报告的接收信号功率，以 dBm 为单位'),
     }
     catalog = {message.findtext('source'): translation.text for context, message, translation in messages()
                if context == 'PacketFieldDescription'}
     fields = subprocess.check_output((cmd_tshark, '-G', 'fields'), env=base_env, encoding='utf-8')
-    actual = {parts[2]: (parts[1], catalog.get(parts[7]))
-              for line in fields.splitlines() if len(parts := line.split('\t')) == 8
-              and parts[0] == 'F' and parts[2] in expected}
+    registrations = [parts for line in fields.splitlines() if len(parts := line.split('\t')) == 8 and parts[0] == 'F']
+    actual = {parts[2]: (parts[1], catalog.get(parts[7])) for parts in registrations if parts[2] in expected}
     assert actual == expected
+    wireless_protocols = {'wlan', 'wlan_radio', 'wlan_aggregate', 'radiotap', 'wlan_rsna_eapol'}
+    wireless_descriptions = {parts[7] for parts in registrations if parts[4] in wireless_protocols
+                             and parts[7] not in ('', 'Expert_Item')}
+    assert not wireless_descriptions - catalog.keys()
 
 
 def test_preference_terminology():
