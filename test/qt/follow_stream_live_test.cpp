@@ -84,7 +84,8 @@ void run()
     check(dialog != nullptr, "live Follow dialog opens");
     if (!dialog) { QCoreApplication::exit(1); return; }
     auto *text = dialog->findChild<QPlainTextEdit *>("teStreamContent");
-    check(text && text->toPlainText().contains(protocol.toUpper() + "-0-CLIENT"), "initial stream is collected");
+    check(text && waitUntil([&] { return text->toPlainText().contains(protocol.toUpper() + "-0-CLIENT"); }),
+          "initial stream is collected");
     check(rescans == 1 && retaps == 0, "initial Follow still uses exactly one scan");
     const int scans_before = rescans;
     if (qEnvironmentVariableIntValue("WS_LIVE_LIMIT_TEST")) {
@@ -172,7 +173,8 @@ void run()
     check(waitUntil([&] { return capture->count > before_close_batch; }), "capture receives data with the stream window closed");
     dialog = openStream(proto, 0);
     text = dialog->findChild<QPlainTextEdit *>("teStreamContent");
-    check(text->toPlainText().contains("AFTER-CLOSE"), "reopened window includes traffic received after closing");
+    check(waitUntil([&] { return text->toPlainText().contains("AFTER-CLOSE"); }),
+          "reopened window includes traffic received after closing");
 
     auto *charset = dialog->findChild<QComboBox *>("cbCharset");
     charset->setCurrentIndex(charset->findText("UTF-8"));
