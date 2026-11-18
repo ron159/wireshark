@@ -16,6 +16,7 @@
 
 #include "app/application_flavor.h"
 #include "epan/prefs.h"
+#include "wsutil/filesystem.h"
 #ifdef Q_OS_WIN
 #include "wsutil/file_util.h"
 #endif
@@ -59,9 +60,10 @@ std::optional<Platform> currentPlatform()
         return Platform::MacOSArm64;
     }
 #elif defined(Q_OS_LINUX) && defined(__x86_64__)
+    // --version reports the updater before a QCoreApplication exists.
     if (QSysInfo::productType() == QStringLiteral("ubuntu")
         && QSysInfo::productVersion() == QStringLiteral("24.04")
-        && QCoreApplication::applicationFilePath() == QStringLiteral("/usr/bin/wireshark")) {
+        && QString::fromUtf8(get_progfile_dir()) == QStringLiteral("/usr/bin")) {
         return Platform::UbuntuAmd64;
     }
 #endif
