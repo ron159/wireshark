@@ -3400,7 +3400,7 @@ prefs_register_modules(void)
 
     prefs_register_bool_preference(gui_module, "update.enabled",
                                    "Check for updates",
-                                   "Check for updates (Windows and macOS only)",
+                                   "Automatically check for software updates on supported platforms",
                                    &prefs.gui_update_enabled);
 
     prefs_register_enum_preference(gui_module, "update.channel",

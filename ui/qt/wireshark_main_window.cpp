@@ -554,6 +554,7 @@ WiresharkMainWindow::WiresharkMainWindow(QWidget *parent) :
             SoftwareUpdate::instance()->performUIUpdate();
         });
     } else {
+        main_ui_->actionHelpCheckUpdates->setEnabled(false);
         main_ui_->actionHelpCheckUpdates->setToolTip(tr("Software update checking is not available on this platform."));
     }
 

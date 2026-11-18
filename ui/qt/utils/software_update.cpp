@@ -11,10 +11,12 @@
 
 #include "ui/qt/utils/software_update.h"
 #include "ui/qt/utils/software_update_backend.h"
+#include "ui/qt/utils/software_update_backend_github.h"
 
 #include "app/application_flavor.h"
 #include "epan/prefs.h"
 
+#include "ui/qt/main_application.h"
 #include "ui/qt/utils/workspace_state.h"
 
 #include <QUrl>
@@ -22,9 +24,10 @@
 #include <QNetworkReply>
 #include <QNetworkRequest>
 #include <QXmlStreamReader>
-#include <QJsonDocument>
-#include <QJsonObject>
+#include <QThread>
 #include <QTimer>
+
+#include <limits>
 
 /**
  * AppCast URL override for testing purposes.
@@ -51,10 +54,21 @@
 
 static const QString SPARKLE_NS = QStringLiteral("http://www.andymatuschak.org/xml-namespaces/sparkle");
 
+static SoftwareUpdateBackend *createUpdateBackend()
+{
+    if (supportsGitHubUpdates()) {
+        return createGitHubUpdateBackend();
+    }
+#if defined(Q_OS_WIN) || defined(Q_OS_MACOS)
+    if (application_flavor_is_wireshark()) {
+        return nullptr;
+    }
+#endif
+    return SoftwareUpdateBackend::create();
+}
+
 void ShutdownEvent::accept() {
     accepted_ = true;
-    rejected_ = false;
-    reason_.clear();
 }
 
 void ShutdownEvent::reject(const QString& reason) {
@@ -79,7 +93,7 @@ SoftwareUpdate::SoftwareUpdate(QObject *parent)
     : QObject(parent),
     updateCheckTimer_(new QTimer(this)),
     networkAccessManager_(new QNetworkAccessManager(this)),
-    backend_(SoftwareUpdateBackend::create())
+    backend_(createUpdateBackend())
 {
     connect(networkAccessManager_, &QNetworkAccessManager::finished,
             this, &SoftwareUpdate::onNetworkReplyFinished);
@@ -123,7 +137,22 @@ void SoftwareUpdate::init(bool runWithoutSilentCheck)
     backend_->init(appcastUrl, runWithoutSilentCheck);
 
     /** Start the automatic update check if enabled in preferences */
-    if (prefs.gui_update_enabled && !runWithoutSilentCheck) {
+    if (supportsGitHubUpdates()) {
+        const auto applyPreferences = [this]() {
+            if (prefs.gui_update_enabled) {
+                startAutoCheck();
+            } else {
+                stopAutoCheck();
+            }
+        };
+        connect(mainApp, &MainApplication::preferencesChanged, this, applyPreferences);
+        applyPreferences();
+        QTimer::singleShot(5000, this, [this]() {
+            if (isAutoCheckEnabled()) {
+                checkForUpdates();
+            }
+        });
+    } else if (prefs.gui_update_enabled && !runWithoutSilentCheck) {
         startAutoCheck(prefs.gui_update_interval);
     }
 }
@@ -131,13 +160,24 @@ void SoftwareUpdate::init(bool runWithoutSilentCheck)
 QString SoftwareUpdate::info()
 {
     /* Called while building the feature list, possibly before the application object exists */
-    QScopedPointer<SoftwareUpdateBackend> backend(SoftwareUpdateBackend::create());
+    if (supportsGitHubUpdates()) {
+        return QStringLiteral("GitHub Releases");
+    }
+    QScopedPointer<SoftwareUpdateBackend> backend(createUpdateBackend());
     return backend ? backend->info() : QString();
 }
 
 bool SoftwareUpdate::plattformSupported()
 {
-    return instance()->backend_ != nullptr;
+    return instance()->backend_ != nullptr && !WorkspaceState::isPortableApplication();
+}
+
+ShutdownEvent SoftwareUpdate::requestShutdown()
+{
+    ShutdownEvent event;
+    const auto connection = QThread::currentThread() == thread() ? Qt::DirectConnection : Qt::BlockingQueuedConnection;
+    QMetaObject::invokeMethod(this, [this, &event]() { emit appShutdownRequested(&event); }, connection);
+    return event;
 }
 
 QUrl SoftwareUpdate::updateUrl() const
@@ -212,10 +252,11 @@ void SoftwareUpdate::startAutoCheck(int intervalSeconds)
         return;
     }
     if (intervalSeconds <= 0) {
-        intervalSeconds = prefs.gui_update_interval;
+        intervalSeconds = static_cast<int>(qBound(1u, prefs.gui_update_interval,
+            static_cast<unsigned>(std::numeric_limits<int>::max() / 1000)));
     }
     updateMutex_.lock();
-    auto msec = intervalSeconds * 1000;
+    auto msec = qMin(intervalSeconds, std::numeric_limits<int>::max() / 1000) * 1000;
 #if defined(UPDATE_TEST) && defined(TIMEOUT_OVERRIDE)
     qDebug() << "Overriding auto check interval to" << TIMEOUT_OVERRIDE << "milliseconds for testing purposes.";
     msec = TIMEOUT_OVERRIDE;

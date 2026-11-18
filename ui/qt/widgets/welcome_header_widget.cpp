@@ -14,6 +14,7 @@
 #include <epan/prefs.h>
 
 #include <ui/qt/main_application.h>
+#include <ui/qt/utils/github_release.h>
 #include <ui/qt/utils/software_update.h>
 #include <ui/qt/utils/theme_manager.h>
 
@@ -77,6 +78,9 @@ WelcomeHeaderWidget::WelcomeHeaderWidget(QWidget *parent) :
         connect(header_ui_->updateDownload, &QPushButton::clicked, this, []() {
                 SoftwareUpdate::instance()->performUIUpdate();
             });
+        connect(header_ui_->updateReleaseNotes, &QPushButton::clicked, this, [this]() {
+                QDesktopServices::openUrl(QUrl(release_notes_));
+            });
 
         // Add the skip button
         connect(header_ui_->updateDismiss, &QToolButton::clicked, this, [this]() {
@@ -130,12 +134,6 @@ void WelcomeHeaderWidget::updateSoftwareUpdateInfo()
     header_ui_->updateDownload->setAccessibleName(tr("Download update %1").arg(new_version_));
     header_ui_->updateDownload->setAccessibleDescription(
         tr("Starts the download process for update %1").arg(new_version_));
-
-
-
-    connect(header_ui_->updateReleaseNotes, &QPushButton::clicked, this, [this]() {
-            QDesktopServices::openUrl(QUrl(release_notes_));
-        });
 }
 
 void WelcomeHeaderWidget::setAvailableUpdateVersion(QString newVersion, QString releaseNotes)
@@ -143,7 +141,9 @@ void WelcomeHeaderWidget::setAvailableUpdateVersion(QString newVersion, QString 
     new_version_ = newVersion;
 
     QUrl url(releaseNotes, QUrl::StrictMode);
-    if (!url.isValid()
+    if (application_flavor_is_wireshark() && GitHubRelease::isReleasePage(url)) {
+        release_notes_ = releaseNotes;
+    } else if (!url.isValid()
         || url.scheme() != QStringLiteral("https")
         || (!url.host().endsWith(QStringLiteral(".wireshark.org"))
             && !url.host().endsWith(QStringLiteral(".stratoshark.org")))) {

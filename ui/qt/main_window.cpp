@@ -83,7 +83,7 @@ MainWindow::MainWindow(QWidget *parent) :
             } else {
                 shutdownEvent->reject(tr("Please close the current file before updating."));
             }
-        }, Qt::BlockingQueuedConnection);
+        });
     }
 
     // Tell the interface manager when a capture is active; it propagates that to

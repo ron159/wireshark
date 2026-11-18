@@ -143,6 +143,9 @@ public:
      */
     static bool plattformSupported();
 
+    /** Ask the main window on the GUI thread whether it is safe to install. */
+    ShutdownEvent requestShutdown();
+
 /**** Utility functions for manipulating the automatic update check through the UI ****/
 
 /**

@@ -98,10 +98,7 @@ private:
         SoftwareUpdate *su = SoftwareUpdate::instance();
         emit su->updateEngaged();
 
-        ShutdownEvent shutdownEvent;
-        emit su->appShutdownRequested(&shutdownEvent);
-
-        return shutdownEvent.isAccepted();
+        return su->requestShutdown().isAccepted();
     }
 
     /**

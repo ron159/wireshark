@@ -25614,8 +25614,8 @@ Relevant only when "TCP port" is the same as "TLS port", but normally should be 
         <translation>检查更新</translation>
     </message>
     <message>
-        <source>Check for updates (Windows and macOS only)</source>
-        <translation>检查更新（仅限 Windows 和 macOS）</translation>
+        <source>Automatically check for software updates on supported platforms</source>
+        <translation>在受支持的平台上自动检查软件更新</translation>
     </message>
     <message>
         <source>Check sequence numbers of ESP frames</source>
@@ -42992,6 +42992,113 @@ PHY 速率：%5 Mb/s</translation>
     <message>
         <source>Channel %1 (band unknown)</source>
         <translation>信道 %1（频段未知）</translation>
+    </message>
+</context>
+<context>
+    <name>GitHubUpdateBackend</name>
+    <message>
+        <source>Software Update</source>
+        <translation>软件更新</translation>
+    </message>
+    <message>
+        <source>GitHub returned invalid release information.</source>
+        <translation>GitHub 返回了无效的发布信息。</translation>
+    </message>
+    <message>
+        <source>Wireshark %1 is up to date.</source>
+        <translation>Wireshark %1 已是最新版本。</translation>
+    </message>
+    <message>
+        <source>Wireshark %1 does not have a verified installer for this platform.</source>
+        <translation>Wireshark %1 没有适用于此平台的可验证安装包。</translation>
+    </message>
+    <message>
+        <source>Wireshark %1 is available on GitHub. You are running %2.</source>
+        <translation>GitHub 上已发布 Wireshark %1。当前运行版本为 %2。</translation>
+    </message>
+    <message>
+        <source>Download and Install</source>
+        <translation>下载并安装</translation>
+    </message>
+    <message>
+        <source>Release Notes</source>
+        <translation>版本说明</translation>
+    </message>
+    <message>
+        <source>Could not create a temporary directory for the update.</source>
+        <translation>无法为更新创建临时目录。</translation>
+    </message>
+    <message>
+        <source>Downloading Wireshark %1…</source>
+        <translation>正在下载 Wireshark %1…</translation>
+    </message>
+    <message>
+        <source>Cancel</source>
+        <translation>取消</translation>
+    </message>
+    <message>
+        <source>The update download was redirected to an unexpected server.</source>
+        <translation>更新下载已被重定向到非预期的服务器。</translation>
+    </message>
+    <message>
+        <source>The update is larger than the size published by GitHub.</source>
+        <translation>更新大小超过 GitHub 公布的大小。</translation>
+    </message>
+    <message>
+        <source>The update does not match the size and SHA-256 checksum published by GitHub.</source>
+        <translation>更新的大小或 SHA-256 校验和与 GitHub 公布的信息不符。</translation>
+    </message>
+    <message>
+        <source>Please close the current capture before updating.</source>
+        <translation>请先关闭当前抓包，再更新。</translation>
+    </message>
+    <message>
+        <source>Windows could not start the Wireshark installer.</source>
+        <translation>Windows 无法启动 Wireshark 安装程序。</translation>
+    </message>
+    <message>
+        <source>Could not extract the update. %1</source>
+        <translation>无法解压更新。%1</translation>
+    </message>
+    <message>
+        <source>The downloaded application does not match the selected Wireshark release.</source>
+        <translation>下载的应用与所选 Wireshark 版本不符。</translation>
+    </message>
+    <message>
+        <source>Could not verify the application bundle. %1</source>
+        <translation>无法验证应用程序包。%1</translation>
+    </message>
+    <message>
+        <source>Wireshark cannot replace this application in place. Quit Wireshark, then move the downloaded application to Applications.</source>
+        <translation>Wireshark 无法在当前位置替换应用。请退出 Wireshark，再将下载的应用移到「应用程序」。</translation>
+    </message>
+    <message>
+        <source>Another Wireshark update is already in progress.</source>
+        <translation>已有 Wireshark 更新正在进行。</translation>
+    </message>
+    <message>
+        <source>Wireshark %1 was installed. Reopen Wireshark to use it.</source>
+        <translation>已安装 Wireshark %1。请重新打开 Wireshark 以使用新版本。</translation>
+    </message>
+    <message>
+        <source>The Ubuntu update does not contain the expected packages.</source>
+        <translation>Ubuntu 更新缺少预期的软件包。</translation>
+    </message>
+    <message>
+        <source>Administrator authentication is unavailable. Follow the package installation instructions in BUILD-INFO.txt.</source>
+        <translation>无法进行管理员身份验证。请按照 BUILD-INFO.txt 中的说明安装。</translation>
+    </message>
+    <message>
+        <source>Installing Wireshark %1…</source>
+        <translation>正在安装 Wireshark %1…</translation>
+    </message>
+    <message>
+        <source>Could not install the Ubuntu update. %1</source>
+        <translation>无法安装 Ubuntu 更新。%1</translation>
+    </message>
+    <message>
+        <source>Open Download Folder</source>
+        <translation>打开下载文件夹</translation>
     </message>
 </context>
 </TS>

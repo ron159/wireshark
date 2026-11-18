@@ -328,20 +328,19 @@ compiler and many supporting libraries. For more information, see the Developer�
 
 === Updating Wireshark
 
-By default, Wireshark on Windows and macOS will check for new versions and notify you when they are available.
-If you have the _Check for updates_ preference disabled or if you run Wireshark in an isolated environment you should subscribe to the _wireshark-announce_ mailing list to be notified of new versions.
-See <<ChIntroMailingLists>> for details on subscribing to this list.
+Wireshark checks the https://github.com/ron159/wireshark/releases[project's GitHub Releases] at startup and periodically on Windows x64, macOS 15 or later on Apple Silicon, and Ubuntu 24.04 x86_64 when installed from the Debian packages.
+When a compatible update is available, the welcome page offers the download and release notes.
+Use menu:Help[Check for Updates...] to check manually.
+Wireshark verifies the size and SHA-256 checksum published by GitHub before installing an update.
 
-New versions of Wireshark are usually released every four to six weeks.
-Updating Wireshark is done the same way as installing it.
-Simply download and run the installer on Windows, or download and drag the application on macOS.
-A reboot is usually not required and all your personal settings will remain unchanged.
+Windows opens the installer and may prompt for administrator permissions.
+On macOS, Wireshark replaces its application bundle when its location allows it.
+On Ubuntu, the update uses the system package manager and may prompt for administrator authentication.
+If in-place installation is unavailable, Wireshark can open the verified package in the file manager.
 
-We offer two update channels, _Stable_ and _Development_.
-The Stable channel is the default, and only installs packages from stable (even-numbered) release branches.
-The Development channel installs development and release candidate packages when they are available, and stable releases otherwise.
-To configure your release channel, go to menu:Preferences[Advanced] and search for “update.channel”.
-See <<ChCustPreferencesSection>> for details.
+To change automatic checks, go to menu:Preferences[Advanced] and search for “update.enabled” or “update.interval”.
+The default _Stable_ channel checks the latest GitHub release.
+Use “update.channel” to select _Development_, which also checks published prereleases with numeric version tags.
 
 // End of WSUG ChapterBuildInstall
 

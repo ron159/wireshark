@@ -485,6 +485,8 @@ set(WIRESHARK_UTILS_SRCS
 	utils/rtp_audio_routing.cpp
 	utils/rtp_audio_silence_generator.cpp
 	utils/software_update.cpp
+	utils/github_release.cpp
+	utils/software_update_backend_github.cpp
 	${WIRESHARK_SOFTWARE_UPDATE_PLATFORM_SRC}
 	utils/stock_icon.cpp
 	utils/theme_manager.cpp

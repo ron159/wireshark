@@ -1,3 +1,10 @@
+wireshark (5.1.9) UNRELEASED; urgency=low
+
+  * Check GitHub Releases automatically and from the Help menu. Verify
+    downloaded installers and install the update on supported platforms.
+
+ -- ron <ron159@users.noreply.github.com>  Wed, 18 Nov 2026 15:21:00 +0800
+
 wireshark (5.1.8) UNRELEASED; urgency=low
 
   * Translate selected packet-field descriptions in the Simplified Chinese
