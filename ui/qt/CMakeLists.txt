@@ -884,6 +884,7 @@ set(WIRESHARK_QT_UI_SRCS
 )
 
 list(APPEND WIRESHARK_QT_HEADERS
+	packet_field_description_strings.h
 	preference_translation_strings.h
 	preference_translation_extra.h
 	qtbase_translation_fallback.h

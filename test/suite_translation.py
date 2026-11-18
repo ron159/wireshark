@@ -128,6 +128,24 @@ def test_protocol_metadata_stays_english(cmd_tshark, base_env):
     assert actual == expected
 
 
+def test_packet_field_status_descriptions(cmd_tshark, base_env):
+    import subprocess
+
+    expected = {
+        'eth.src.lg': ('LG bit', '指示该地址是本地管理地址，还是由 IEEE 分配的全局唯一地址'),
+        'frame.cap_len': ('Capture Length', '捕获文件实际保存的帧长度'),
+        'tcp.seq_raw': ('Sequence Number (raw)', 'TCP 首部中的原始序列号'),
+        'dns.qry.name': ('Name', '此次查询的域名'),
+    }
+    catalog = {message.findtext('source'): translation.text for context, message, translation in messages()
+               if context == 'PacketFieldDescription'}
+    fields = subprocess.check_output((cmd_tshark, '-G', 'fields'), env=base_env, encoding='utf-8')
+    actual = {parts[2]: (parts[1], catalog.get(parts[7]))
+              for line in fields.splitlines() if len(parts := line.split('\t')) == 8
+              and parts[0] == 'F' and parts[2] in expected}
+    assert actual == expected
+
+
 def test_preference_terminology():
     catalog = {message.findtext('source'): translation.text or ''
                for context, message, translation in messages() if context == 'Preferences'}

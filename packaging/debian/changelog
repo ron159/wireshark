@@ -1,3 +1,10 @@
+wireshark (5.1.8) UNRELEASED; urgency=low
+
+  * Translate selected packet-field descriptions in the Simplified Chinese
+    status bar while preserving field names and display-filter identifiers.
+
+ -- ron <ron159@users.noreply.github.com>  Wed, 18 Nov 2026 12:58:27 +0800
+
 wireshark (5.1.7) UNRELEASED; urgency=low
 
   * Add independent roaming and wireless health windows, live analysis,

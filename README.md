@@ -16,6 +16,14 @@ target, and packets without that field show an empty cell.
 
 ## Downloads and continuous builds
 
+### 5.1.8
+
+In the Simplified Chinese interface, selecting a field in Packet Details shows
+its Chinese description in the status bar when available. This includes Ethernet
+and 802.11 LG/IG bits and common frame, VLAN, Radiotap, IPv4/IPv6, TCP, UDP,
+ICMP, DNS, DHCP, HTTP, TLS and QUIC fields. Field names and display-filter
+identifiers remain in English.
+
 ### 5.1.7
 
 Open **Wireless → Roaming Analyzer** for a station's BSSID transition history,

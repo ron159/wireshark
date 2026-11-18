@@ -35,6 +35,7 @@
 
 #include <QAction>
 #include <QActionGroup>
+#include <QCoreApplication>
 #include <QHBoxLayout>
 #include <QSplitter>
 #include <QToolButton>
@@ -345,22 +346,23 @@ void MainStatusBar::selectedFieldChanged(FieldInformation * finfo)
         if (hInfo.abbreviation == "frame.tag") {
             field_info *fi = finfo->fieldInfo();
             const char *rule_name = fi ? fvalue_get_string(fi->value) : nullptr;
-            QString comment_str;
             if (rule_name) {
                 for (const GSList *r = tag_rules_get_list(); r; r = g_slist_next(r)) {
                     const tag_rule_t *rule = (const tag_rule_t *)r->data;
                     if (strcmp(rule->rule_name, rule_name) == 0) {
                         if (rule->comment && rule->comment[0])
-                            comment_str = QString::fromUtf8(rule->comment);
+                            item_info = QString::fromUtf8(rule->comment);
                         break;
                     }
                 }
             }
-            item_info.append(comment_str.isEmpty() ? hInfo.description : comment_str);
-        } else if (hInfo.description.length() > 0) {
-            item_info.append(hInfo.description);
-        } else {
-            item_info.append(hInfo.name);
+        }
+        if (item_info.isEmpty()) {
+            if (hInfo.description.isEmpty()) {
+                item_info = hInfo.name;
+            } else {
+                item_info = QCoreApplication::translate("PacketFieldDescription", hInfo.description.toUtf8().constData());
+            }
         }
     }
 

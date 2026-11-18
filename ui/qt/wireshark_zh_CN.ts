@@ -9564,6 +9564,1545 @@ Shift+单击：在空行添加禁用的断点；
     </message>
 </context>
 <context>
+    <name>PacketFieldDescription</name>
+    <message>
+        <source>(Encrypted) payload of a packet</source>
+        <translation>数据包的有效载荷，可能已加密</translation>
+    </message>
+    <message>
+        <source>1-RTT protected payload</source>
+        <translation>受 1-RTT 密钥保护的有效载荷</translation>
+    </message>
+    <message>
+        <source>A frame that is part of this capture-level duplicate group</source>
+        <translation>属于这组捕获级重复的一个帧编号</translation>
+    </message>
+    <message>
+        <source>A name/value HTTP cookie pair</source>
+        <translation>HTTP Cookie 中的一组名称和值</translation>
+    </message>
+    <message>
+        <source>A sequence number to aid in matching Echo Replies to this Echo Request</source>
+        <translation>用于匹配 Echo Request 和对应 Echo Reply 的序列号</translation>
+    </message>
+    <message>
+        <source>Absolute time when this frame was captured, in Coordinated Universal Time (UTC)</source>
+        <translation>捕获此帧的协调世界时（UTC）</translation>
+    </message>
+    <message>
+        <source>Absolute time when this frame was captured, in Epoch time (also known as Unix time)</source>
+        <translation>捕获此帧时的 Unix 时间戳</translation>
+    </message>
+    <message>
+        <source>Absolute time when this frame was captured, in local time</source>
+        <translation>捕获此帧的本地时间</translation>
+    </message>
+    <message>
+        <source>Action for unrecognized option type</source>
+        <translation>遇到无法识别的选项类型时要执行的操作</translation>
+    </message>
+    <message>
+        <source>Address Organizationally Unique Identifier</source>
+        <translation>地址的组织唯一标识符（OUI）</translation>
+    </message>
+    <message>
+        <source>Address Organizationally Unique Identifier (resolved)</source>
+        <translation>地址的组织唯一标识符（OUI，已解析）</translation>
+    </message>
+    <message>
+        <source>Alert message description</source>
+        <translation>TLS 警报消息的说明</translation>
+    </message>
+    <message>
+        <source>Alert message level</source>
+        <translation>TLS 警报消息的级别</translation>
+    </message>
+    <message>
+        <source>All frame numbers in this capture-level duplicate group</source>
+        <translation>这组捕获级重复对应的所有帧编号</translation>
+    </message>
+    <message>
+        <source>Always set to value 23, actual content type is known after decryption</source>
+        <translation>此字段固定为 23，实际内容类型在解密后确定</translation>
+    </message>
+    <message>
+        <source>An identifier to aid in matching with Request and Reply</source>
+        <translation>用于匹配请求和应答的标识符</translation>
+    </message>
+    <message>
+        <source>At least one tagging rule matched this frame</source>
+        <translation>此帧匹配至少一条标记规则</translation>
+    </message>
+    <message>
+        <source>Basic Service Set ID</source>
+        <translation>基本服务集标识符（BSSID）</translation>
+    </message>
+    <message>
+        <source>Basic Service Set ID (resolved)</source>
+        <translation>基本服务集标识符（BSSID，已解析）</translation>
+    </message>
+    <message>
+        <source>BSS Id Organizationally Unique Identifier</source>
+        <translation>BSSID 的组织唯一标识符（OUI）</translation>
+    </message>
+    <message>
+        <source>BSS Id Organizationally Unique Identifier (resolved)</source>
+        <translation>BSSID 的组织唯一标识符（OUI，已解析）</translation>
+    </message>
+    <message>
+        <source>Cache flush flag</source>
+        <translation>Cache flush 标志位，指示是否刷新缓存中的对应记录</translation>
+    </message>
+    <message>
+        <source>Can the server do recursive queries?</source>
+        <translation>指示服务器是否支持递归查询</translation>
+    </message>
+    <message>
+        <source>Canonical Format Identifier</source>
+        <translation>CFI，指示地址采用的格式</translation>
+    </message>
+    <message>
+        <source>Capability information</source>
+        <translation>设备的能力信息</translation>
+    </message>
+    <message>
+        <source>Channel frequency in megahertz that this frame was sent/received on</source>
+        <translation>发送或接收此帧所用的信道频率，以 MHz 为单位</translation>
+    </message>
+    <message>
+        <source>Character encoding (ASCII, EBCDIC...)</source>
+        <translation>字符编码（ASCII、EBCDIC 等）</translation>
+    </message>
+    <message>
+        <source>Client Machine Identifier (UUID)</source>
+        <translation>客户端设备标识符（UUID）</translation>
+    </message>
+    <message>
+        <source>Command line of the process, its arguments separated by spaces</source>
+        <translation>进程的命令行，各参数以空格分隔</translation>
+    </message>
+    <message>
+        <source>Confirmation of ECH acceptance in a HelloRetryRequest</source>
+        <translation>HelloRetryRequest 中表示接受 ECH 的确认信息</translation>
+    </message>
+    <message>
+        <source>Connection identifier within this capture file</source>
+        <translation>此捕获文件内的连接标识</translation>
+    </message>
+    <message>
+        <source>Conversation has a FIN packet</source>
+        <translation>此会话包含 FIN 数据包</translation>
+    </message>
+    <message>
+        <source>Conversation has a RST packet</source>
+        <translation>此会话包含 RST 数据包</translation>
+    </message>
+    <message>
+        <source>Conversation has a SYN packet</source>
+        <translation>此会话包含 SYN 数据包</translation>
+    </message>
+    <message>
+        <source>Conversation has a SYN-ACK packet</source>
+        <translation>此会话包含 SYN-ACK 数据包</translation>
+    </message>
+    <message>
+        <source>Conversation has an ACK packet</source>
+        <translation>此会话包含 ACK 数据包</translation>
+    </message>
+    <message>
+        <source>Conversation has payload DATA</source>
+        <translation>此会话包含有效载荷（DATA）</translation>
+    </message>
+    <message>
+        <source>Data offset in 32-bit words</source>
+        <translation>数据偏移，以 32 比特字为单位</translation>
+    </message>
+    <message>
+        <source>Data privacy</source>
+        <translation>指示是否要求数据保密</translation>
+    </message>
+    <message>
+        <source>Data-frame DS-traversal status</source>
+        <translation>指示数据帧经过 DS 的方向</translation>
+    </message>
+    <message>
+        <source>Decoded packet number</source>
+        <translation>解码后的数据包编号</translation>
+    </message>
+    <message>
+        <source>Defragmentation error due to illegal fragments</source>
+        <translation>存在无效分片，导致重组失败</translation>
+    </message>
+    <message>
+        <source>Depends on the message type.  It is used to create an additional level of message granularity</source>
+        <translation>含义取决于消息类型，用于进一步区分同一类型的消息</translation>
+    </message>
+    <message>
+        <source>Descriptions are recommendations from IEEE standard 802.1D-2004</source>
+        <translation>各优先级说明采用 IEEE 802.1D-2004 的建议</translation>
+    </message>
+    <message>
+        <source>Destination Address Multicast Flags</source>
+        <translation>目的地址的组播标志位</translation>
+    </message>
+    <message>
+        <source>Destination Address Multicast Scope</source>
+        <translation>目的地址的组播范围</translation>
+    </message>
+    <message>
+        <source>Destination Address Network Prefix Multicast Flag</source>
+        <translation>指示目的组播地址是否基于网络前缀（Network Prefix）</translation>
+    </message>
+    <message>
+        <source>Destination Address Rendezvous Point (RP) Multicast Flag</source>
+        <translation>指示目的组播地址是否内嵌 Rendezvous Point（RP）</translation>
+    </message>
+    <message>
+        <source>Destination Address Reserved Multicast Flag</source>
+        <translation>目的地址的保留组播标志位</translation>
+    </message>
+    <message>
+        <source>Destination Address Special-Purpose Allocation</source>
+        <translation>目的地址所属的特殊用途地址分配</translation>
+    </message>
+    <message>
+        <source>Destination Address Transient Multicast Flag</source>
+        <translation>指示目的地址是否为临时组播地址（Transient）</translation>
+    </message>
+    <message>
+        <source>Destination Hardware Address</source>
+        <translation>目的硬件地址</translation>
+    </message>
+    <message>
+        <source>Destination Hardware Address (resolved)</source>
+        <translation>目的硬件地址（已解析）</translation>
+    </message>
+    <message>
+        <source>Destination IPv6 Address</source>
+        <translation>目的 IPv6 地址</translation>
+    </message>
+    <message>
+        <source>Destination IPv6 Address Space</source>
+        <translation>目的 IPv6 地址所属的地址空间</translation>
+    </message>
+    <message>
+        <source>Destination IPv6 Host</source>
+        <translation>目的 IPv6 主机名</translation>
+    </message>
+    <message>
+        <source>Destination Organizationally Unique Identifier</source>
+        <translation>目的地址的组织唯一标识符（OUI）</translation>
+    </message>
+    <message>
+        <source>Destination Organizationally Unique Identifier (resolved)</source>
+        <translation>目的地址的组织唯一标识符（OUI，已解析）</translation>
+    </message>
+    <message>
+        <source>Destination process command name</source>
+        <translation>目的进程的命令名</translation>
+    </message>
+    <message>
+        <source>Details at: https://www.wireshark.org/docs/wsug_html_chunked/ChAdvChecksums.html</source>
+        <translation>校验和详情见 https://www.wireshark.org/docs/wsug_html_chunked/ChAdvChecksums.html</translation>
+    </message>
+    <message>
+        <source>DHCP/BOOTP option length</source>
+        <translation>DHCP/BOOTP 选项的长度</translation>
+    </message>
+    <message>
+        <source>DHCP/BOOTP option type</source>
+        <translation>DHCP/BOOTP 选项的类型</translation>
+    </message>
+    <message>
+        <source>DHCP/BOOTP option value</source>
+        <translation>DHCP/BOOTP 选项的值</translation>
+    </message>
+    <message>
+        <source>Did we receive multiple responses to a query?</source>
+        <translation>指示同一次查询是否收到多个响应</translation>
+    </message>
+    <message>
+        <source>DNSSEC OK</source>
+        <translation>DNSSEC OK，指示是否接受 DNSSEC 记录</translation>
+    </message>
+    <message>
+        <source>Do query recursively?</source>
+        <translation>指示是否请求递归查询</translation>
+    </message>
+    <message>
+        <source>Drop Eligible Indicator</source>
+        <translation>DEI，指示发生拥塞时是否可优先丢弃该帧</translation>
+    </message>
+    <message>
+        <source>Duplicate SACK Left Edge</source>
+        <translation>重复 SACK 块的左边界</translation>
+    </message>
+    <message>
+        <source>Duplicate SACK Right Edge</source>
+        <translation>重复 SACK 块的右边界</translation>
+    </message>
+    <message>
+        <source>Echoed timestamp from remote machine</source>
+        <translation>对端回显的时间戳</translation>
+    </message>
+    <message>
+        <source>Ethernet checksum</source>
+        <translation>Ethernet 帧的校验和</translation>
+    </message>
+    <message>
+        <source>Ethernet Padding</source>
+        <translation>Ethernet 帧的填充数据</translation>
+    </message>
+    <message>
+        <source>Ethernet Trailer or Checksum</source>
+        <translation>Ethernet 帧的尾部数据或校验和</translation>
+    </message>
+    <message>
+        <source>Ethertype</source>
+        <translation>EtherType，标识封装的协议</translation>
+    </message>
+    <message>
+        <source>Fragment contained data past end of packet</source>
+        <translation>分片的数据超出了数据包末尾</translation>
+    </message>
+    <message>
+        <source>Fragment Identification</source>
+        <translation>用于关联同一原始数据报的分片标识</translation>
+    </message>
+    <message>
+        <source>Fragment Offset</source>
+        <translation>分片相对原始数据报的偏移量</translation>
+    </message>
+    <message>
+        <source>Fragment overlaps with other fragments</source>
+        <translation>此分片与其他分片重叠</translation>
+    </message>
+    <message>
+        <source>Frame Check Sequence (FCS)</source>
+        <translation>用于检验帧完整性的帧校验序列（FCS）</translation>
+    </message>
+    <message>
+        <source>Frame has padding between 802.11 header and payload</source>
+        <translation>指示 802.11 帧头和有效载荷之间是否存在填充</translation>
+    </message>
+    <message>
+        <source>Frame includes FCS at end</source>
+        <translation>指示帧末尾是否包含 FCS</translation>
+    </message>
+    <message>
+        <source>Frame is ignored by the dissectors</source>
+        <translation>协议解析器会忽略此帧</translation>
+    </message>
+    <message>
+        <source>Frame is marked in the GUI</source>
+        <translation>此帧已在界面中标记</translation>
+    </message>
+    <message>
+        <source>Frame length on the wire</source>
+        <translation>此帧在线路上的原始长度</translation>
+    </message>
+    <message>
+        <source>Frame length stored into the capture file</source>
+        <translation>捕获文件实际保存的帧长度</translation>
+    </message>
+    <message>
+        <source>Frame received with bad FCS</source>
+        <translation>指示接收到的帧是否存在 FCS 校验错误</translation>
+    </message>
+    <message>
+        <source>Frame Sent/Received with HT short Guard Interval</source>
+        <translation>指示帧是否使用 HT 的短保护间隔（Short GI）发送或接收</translation>
+    </message>
+    <message>
+        <source>Frame subtype</source>
+        <translation>帧子类型</translation>
+    </message>
+    <message>
+        <source>Frame type</source>
+        <translation>帧类型</translation>
+    </message>
+    <message>
+        <source>From DS flag</source>
+        <translation>指示该帧是否来自 DS（From DS）</translation>
+    </message>
+    <message>
+        <source>Full path of the executable image of the process</source>
+        <translation>进程可执行文件的完整路径</translation>
+    </message>
+    <message>
+        <source>Handshake protocol message</source>
+        <translation>握手协议消息</translation>
+    </message>
+    <message>
+        <source>Header length in 32-bit words</source>
+        <translation>IP 首部长度，以 32 比特字为单位</translation>
+    </message>
+    <message>
+        <source>Hello extension</source>
+        <translation>Hello 消息的扩展</translation>
+    </message>
+    <message>
+        <source>Hello Extension data</source>
+        <translation>Hello 扩展的数据</translation>
+    </message>
+    <message>
+        <source>Hello extension type</source>
+        <translation>Hello 消息中的扩展类型</translation>
+    </message>
+    <message>
+        <source>How long it took for the SYN to ACK handshake (iRTT)</source>
+        <translation>从握手的 SYN 到 ACK 的时间（iRTT）</translation>
+    </message>
+    <message>
+        <source>How long time has passed until the last frame of this PDU</source>
+        <translation>截至此 PDU 最后一帧所经过的时间</translation>
+    </message>
+    <message>
+        <source>How long time it took to ACK the segment (RTT)</source>
+        <translation>从发送此段到收到 ACK 的时间（RTT）</translation>
+    </message>
+    <message>
+        <source>How long transmission was delayed before this segment was retransmitted (RTO)</source>
+        <translation>此段重传前经过的时间（RTO）</translation>
+    </message>
+    <message>
+        <source>How many bytes are now in flight for this connection</source>
+        <translation>此连接已发送但尚未确认的字节数</translation>
+    </message>
+    <message>
+        <source>How many bytes have been sent since the last PSH flag</source>
+        <translation>上一个 PSH 标志位之后已发送的字节数</translation>
+    </message>
+    <message>
+        <source>HT Control present/strictly ordered flag</source>
+        <translation>指示是否携带 HT Control 字段，或是否要求严格按序传送</translation>
+    </message>
+    <message>
+        <source>HTTP Authorization header</source>
+        <translation>HTTP Authorization 首部</translation>
+    </message>
+    <message>
+        <source>HTTP Content-Encoding header</source>
+        <translation>HTTP Content-Encoding 首部</translation>
+    </message>
+    <message>
+        <source>HTTP Content-Length header</source>
+        <translation>HTTP Content-Length 首部</translation>
+    </message>
+    <message>
+        <source>HTTP Content-Type header</source>
+        <translation>HTTP Content-Type 首部</translation>
+    </message>
+    <message>
+        <source>HTTP Proxy Connect Hostname</source>
+        <translation>HTTP CONNECT 指定的代理连接目标主机名</translation>
+    </message>
+    <message>
+        <source>HTTP Proxy Connect Port</source>
+        <translation>HTTP CONNECT 指定的代理连接目标端口</translation>
+    </message>
+    <message>
+        <source>HTTP Proxy-Authenticate header</source>
+        <translation>HTTP Proxy-Authenticate 首部</translation>
+    </message>
+    <message>
+        <source>HTTP Proxy-Authorization header</source>
+        <translation>HTTP Proxy-Authorization 首部</translation>
+    </message>
+    <message>
+        <source>HTTP Request HTTP-Version</source>
+        <translation>请求使用的 HTTP 版本</translation>
+    </message>
+    <message>
+        <source>HTTP Request Method</source>
+        <translation>HTTP 请求采用的方法</translation>
+    </message>
+    <message>
+        <source>HTTP Request-URI</source>
+        <translation>HTTP 请求的 URI</translation>
+    </message>
+    <message>
+        <source>HTTP Request-URI Path</source>
+        <translation>HTTP 请求 URI 的路径部分</translation>
+    </message>
+    <message>
+        <source>HTTP Request-URI Query</source>
+        <translation>HTTP 请求 URI 的查询字符串</translation>
+    </message>
+    <message>
+        <source>HTTP Request-URI Query Parameter</source>
+        <translation>HTTP 请求 URI 中的查询参数</translation>
+    </message>
+    <message>
+        <source>HTTP Response HTTP-Version</source>
+        <translation>响应使用的 HTTP 版本</translation>
+    </message>
+    <message>
+        <source>HTTP Response Reason Phrase</source>
+        <translation>HTTP 响应中的原因短语</translation>
+    </message>
+    <message>
+        <source>HTTP Response Status Code</source>
+        <translation>HTTP 响应的状态码</translation>
+    </message>
+    <message>
+        <source>HTTP Response Status Code Description</source>
+        <translation>HTTP 响应状态码的说明</translation>
+    </message>
+    <message>
+        <source>HTTP Transfer-Encoding header</source>
+        <translation>HTTP Transfer-Encoding 首部</translation>
+    </message>
+    <message>
+        <source>HTTP Upgrade header</source>
+        <translation>HTTP Upgrade 首部</translation>
+    </message>
+    <message>
+        <source>HTTP User-Agent header</source>
+        <translation>HTTP User-Agent 首部</translation>
+    </message>
+    <message>
+        <source>HTTP WWW-Authenticate header</source>
+        <translation>HTTP WWW-Authenticate 首部</translation>
+    </message>
+    <message>
+        <source>IANA assigned private enterprise number (PEN)</source>
+        <translation>由 IANA 分配的私有企业编号（PEN）</translation>
+    </message>
+    <message>
+        <source>IBSS participation</source>
+        <translation>指示是否参与 IBSS</translation>
+    </message>
+    <message>
+        <source>Identification of transaction</source>
+        <translation>用于匹配 DNS 请求和响应的事务标识</translation>
+    </message>
+    <message>
+        <source>Identifier (big endian representation)</source>
+        <translation>标识符（大端字节序）</translation>
+    </message>
+    <message>
+        <source>Identifier (little endian representation)</source>
+        <translation>标识符（小端字节序）</translation>
+    </message>
+    <message>
+        <source>Identifier of the parent of the process</source>
+        <translation>父进程 ID</translation>
+    </message>
+    <message>
+        <source>Identifier of the process associated with the packet; 0 if not available</source>
+        <translation>此包关联的进程 ID，无法获取时为 0</translation>
+    </message>
+    <message>
+        <source>Identifier of the thread associated with the packet; 0 if not available</source>
+        <translation>此包关联的线程 ID，无法获取时为 0</translation>
+    </message>
+    <message>
+        <source>Identifies the octet offset within the invoking packet where the error was detected</source>
+        <translation>出错位置在触发此消息的包中的字节偏移量</translation>
+    </message>
+    <message>
+        <source>Identifies the SSL session, allowing later resumption</source>
+        <translation>标识 SSL 会话，以供后续恢复</translation>
+    </message>
+    <message>
+        <source>If true, name is binary encoded</source>
+        <translation>置位表示名称采用二进制编码</translation>
+    </message>
+    <message>
+        <source>If true, server insists on doing DDNS update</source>
+        <translation>置位表示服务器坚持自行执行 DDNS 更新</translation>
+    </message>
+    <message>
+        <source>If true, server should do DDNS update</source>
+        <translation>置位时服务器应执行 DDNS 更新</translation>
+    </message>
+    <message>
+        <source>If true, server should not do any DDNS updates</source>
+        <translation>置位时服务器不应执行 DDNS 更新</translation>
+    </message>
+    <message>
+        <source>Indicates the identity of an ESS or IBSS</source>
+        <translation>标识该 ESS 或 IBSS</translation>
+    </message>
+    <message>
+        <source>Indicates the type of the message</source>
+        <translation>指示消息的类型</translation>
+    </message>
+    <message>
+        <source>Indicates whether the router operates as Stub Network Auto-Configuring (SNAC) router</source>
+        <translation>指示该路由器是否以 SNAC Router 模式运行</translation>
+    </message>
+    <message>
+        <source>Indicates whether to prefer this router over other default routers</source>
+        <translation>指示是否优先使用此路由器</translation>
+    </message>
+    <message>
+        <source>IPv6 (Jumbo) Payload Length</source>
+        <translation>IPv6 巨型有效载荷的长度</translation>
+    </message>
+    <message>
+        <source>Is non-authenticated data acceptable?</source>
+        <translation>指示是否接受未经验证的数据</translation>
+    </message>
+    <message>
+        <source>Is the message a response?</source>
+        <translation>指示该消息是否为响应</translation>
+    </message>
+    <message>
+        <source>Is the message truncated?</source>
+        <translation>指示消息是否被截断</translation>
+    </message>
+    <message>
+        <source>Is the name considered unique?</source>
+        <translation>指示该名称是否被视为唯一</translation>
+    </message>
+    <message>
+        <source>Is the responder authoritative for the name, but not yet verified the uniqueness?</source>
+        <translation>指示响应方是否为该名称的权威服务器，且其唯一性尚未验证</translation>
+    </message>
+    <message>
+        <source>Is the server is an authority for the domain?</source>
+        <translation>指示服务器是否为该域的权威服务器</translation>
+    </message>
+    <message>
+        <source>Largest packet number the peer is acknowledging in this packet</source>
+        <translation>对端在此包中确认收到的最大包编号</translation>
+    </message>
+    <message>
+        <source>Latency Spin Bit</source>
+        <translation>Latency Spin Bit，用于观察往返时延</translation>
+    </message>
+    <message>
+        <source>Length in octets including this header and the data</source>
+        <translation>UDP 首部和数据的总长度，以字节为单位</translation>
+    </message>
+    <message>
+        <source>Length of a hello extension</source>
+        <translation>一个 Hello 扩展的长度</translation>
+    </message>
+    <message>
+        <source>Length of ALPN string</source>
+        <translation>ALPN 字符串的长度</translation>
+    </message>
+    <message>
+        <source>Length of certificate</source>
+        <translation>单张证书的长度</translation>
+    </message>
+    <message>
+        <source>Length of certificates field</source>
+        <translation>证书列表字段的长度</translation>
+    </message>
+    <message>
+        <source>Length of cipher suites field</source>
+        <translation>密码套件列表字段的长度</translation>
+    </message>
+    <message>
+        <source>Length of DNS-over-TCP request or response</source>
+        <translation>DNS-over-TCP 请求或响应的长度</translation>
+    </message>
+    <message>
+        <source>Length of handshake message</source>
+        <translation>握手消息的长度</translation>
+    </message>
+    <message>
+        <source>Length of hello extensions</source>
+        <translation>Hello 消息中扩展部分的总长度</translation>
+    </message>
+    <message>
+        <source>Length of Packet Number and Payload fields</source>
+        <translation>Packet Number 和 Payload 两个字段的总长度</translation>
+    </message>
+    <message>
+        <source>Length of padding at end of record</source>
+        <translation>记录末尾的填充长度</translation>
+    </message>
+    <message>
+        <source>Length of server name list</source>
+        <translation>服务器名称列表的长度</translation>
+    </message>
+    <message>
+        <source>Length of server name string</source>
+        <translation>服务器名称字符串的长度</translation>
+    </message>
+    <message>
+        <source>Length of the ALPN Extension</source>
+        <translation>ALPN 扩展的长度</translation>
+    </message>
+    <message>
+        <source>Length of this TCP option in bytes (including kind and length fields)</source>
+        <translation>此 TCP 选项的字节数，包括类型和长度字段</translation>
+    </message>
+    <message>
+        <source>Length of TLS record data</source>
+        <translation>TLS 记录的数据长度</translation>
+    </message>
+    <message>
+        <source>List of certificates</source>
+        <translation>证书列表</translation>
+    </message>
+    <message>
+        <source>List of cipher suites supported by client</source>
+        <translation>客户端支持的密码套件列表</translation>
+    </message>
+    <message>
+        <source>Logarithmically encoded power of 2 scale factor</source>
+        <translation>以 2 为底的指数，用来表示窗口缩放系数</translation>
+    </message>
+    <message>
+        <source>Long Header Packet Type</source>
+        <translation>采用长首部的数据包类型</translation>
+    </message>
+    <message>
+        <source>Loss Event Bit (used to measure and locate the source of packet loss)</source>
+        <translation>Loss Event Bit，用于测量丢包并定位其来源</translation>
+    </message>
+    <message>
+        <source>MAC Frame control</source>
+        <translation>MAC 帧控制字段</translation>
+    </message>
+    <message>
+        <source>MAC Protocol version</source>
+        <translation>MAC 协议版本</translation>
+    </message>
+    <message>
+        <source>Maximum version supported by client [legacy_version if supported_versions ext is present]</source>
+        <translation>客户端支持的最高版本，存在 supported_versions 扩展时，此字段为 legacy_version</translation>
+    </message>
+    <message>
+        <source>More data flag</source>
+        <translation>More Data，指示发送方是否还有待发送的数据</translation>
+    </message>
+    <message>
+        <source>More Fragments flag</source>
+        <translation>More Fragments，指示后续是否还有分片</translation>
+    </message>
+    <message>
+        <source>Multiply segment window size by this for scaled window size</source>
+        <translation>将数据段的窗口值乘以此系数得到缩放后的窗口大小</translation>
+    </message>
+    <message>
+        <source>Must be 1</source>
+        <translation>必须为 1</translation>
+    </message>
+    <message>
+        <source>Must be Zero</source>
+        <translation>必须为 0</translation>
+    </message>
+    <message>
+        <source>Name of a matching tagging rule</source>
+        <translation>匹配的标记规则名称</translation>
+    </message>
+    <message>
+        <source>Name of the user account the process runs as</source>
+        <translation>运行此进程的账户名称</translation>
+    </message>
+    <message>
+        <source>Name to register via DDNS</source>
+        <translation>通过 DDNS 注册的名称</translation>
+    </message>
+    <message>
+        <source>Neighbor Discovery Proxy (Experimental - RFC4389)</source>
+        <translation>ND Proxy，RFC 4389 定义的实验性邻居发现代理</translation>
+    </message>
+    <message>
+        <source>No corresponding response frame was seen</source>
+        <translation>捕获中未看到对应的响应帧</translation>
+    </message>
+    <message>
+        <source>Number of additional records in packet</source>
+        <translation>此消息中的附加记录数量</translation>
+    </message>
+    <message>
+        <source>Number of answers in packet</source>
+        <translation>此消息中的应答记录数量</translation>
+    </message>
+    <message>
+        <source>Number of authoritative records in packet</source>
+        <translation>此消息中的权威记录数量</translation>
+    </message>
+    <message>
+        <source>Number of frames lost between this frame and the preceding one on the same interface</source>
+        <translation>此帧与同一接口上前一帧之间丢失的帧数</translation>
+    </message>
+    <message>
+        <source>Number of prerequisites in packet</source>
+        <translation>此消息中的先决条件数量</translation>
+    </message>
+    <message>
+        <source>Number of queries in packet</source>
+        <translation>此消息中的查询数量</translation>
+    </message>
+    <message>
+        <source>Number of times this exact TCP segment has appeared in the capture within the duplicate detection window (1 = first occurrence, &gt;1 = capture-level duplicate)</source>
+        <translation>在检测窗口内捕获到相同 TCP 段的次数（1 为首次出现，大于 1 表示捕获级重复）</translation>
+    </message>
+    <message>
+        <source>Number of updates records in packet</source>
+        <translation>此消息中的更新记录数量</translation>
+    </message>
+    <message>
+        <source>Number of zones in packet</source>
+        <translation>此消息中的区域数量</translation>
+    </message>
+    <message>
+        <source>Numeric identifier of the user account the process runs as</source>
+        <translation>运行此进程的账户数字 ID</translation>
+    </message>
+    <message>
+        <source>Operation code</source>
+        <translation>操作代码（Opcode）</translation>
+    </message>
+    <message>
+        <source>Option 12: Host Name</source>
+        <translation>选项 12，主机名</translation>
+    </message>
+    <message>
+        <source>Option 15: Domain Name</source>
+        <translation>选项 15，域名</translation>
+    </message>
+    <message>
+        <source>Option 1: Subnet Mask</source>
+        <translation>选项 1，子网掩码</translation>
+    </message>
+    <message>
+        <source>Option 3: Router</source>
+        <translation>选项 3，路由器地址</translation>
+    </message>
+    <message>
+        <source>Option 51: IP Address Lease Time</source>
+        <translation>选项 51，IP 地址租期</translation>
+    </message>
+    <message>
+        <source>Option 53: DHCP option</source>
+        <translation>选项 53，DHCP 消息类型</translation>
+    </message>
+    <message>
+        <source>Option 54: DHCP Server Identifier</source>
+        <translation>选项 54，DHCP 服务器标识符</translation>
+    </message>
+    <message>
+        <source>Option 57: Maximum DHCP Message Size</source>
+        <translation>选项 57，DHCP 消息的最大长度</translation>
+    </message>
+    <message>
+        <source>Option 58: Renewal Time Value</source>
+        <translation>选项 58，租约续租时间</translation>
+    </message>
+    <message>
+        <source>Option 59: Rebinding Time Value</source>
+        <translation>选项 59，租约重新绑定时间</translation>
+    </message>
+    <message>
+        <source>Option 6: Domain Name Server</source>
+        <translation>选项 6，DNS 服务器地址</translation>
+    </message>
+    <message>
+        <source>Option length in octets</source>
+        <translation>选项长度，以字节为单位</translation>
+    </message>
+    <message>
+        <source>Option type</source>
+        <translation>选项类型</translation>
+    </message>
+    <message>
+        <source>Optional trailer in a chunked body</source>
+        <translation>分块传输的消息体末尾可选的尾部字段</translation>
+    </message>
+    <message>
+        <source>Overlapping fragments contained conflicting data</source>
+        <translation>重叠的分片包含彼此冲突的数据</translation>
+    </message>
+    <message>
+        <source>Overlapping segments contained conflicting data</source>
+        <translation>重叠的段包含彼此冲突的数据</translation>
+    </message>
+    <message>
+        <source>Packet Number field length (protected using header protection)</source>
+        <translation>Packet Number 字段的长度（受 Header Protection 保护）</translation>
+    </message>
+    <message>
+        <source>Pad1 Option</source>
+        <translation>Pad1 填充选项</translation>
+    </message>
+    <message>
+        <source>PadN Option</source>
+        <translation>PadN 填充选项</translation>
+    </message>
+    <message>
+        <source>Payload is encrypted application data</source>
+        <translation>有效载荷是加密后的应用数据</translation>
+    </message>
+    <message>
+        <source>Power management status</source>
+        <translation>指示发送方的电源管理状态</translation>
+    </message>
+    <message>
+        <source>Process associated with the packet, from the pcapng epb_processid_threadid option and the process information in the file</source>
+        <translation>此包关联的进程，来自 pcapng 的 epb_processid_threadid 选项和文件中的进程信息</translation>
+    </message>
+    <message>
+        <source>Protocol to be used for connection</source>
+        <translation>此连接将使用的协议</translation>
+    </message>
+    <message>
+        <source>Protocols carried by this frame</source>
+        <translation>此帧承载的协议</translation>
+    </message>
+    <message>
+        <source>QU flag</source>
+        <translation>QU 标志位，指示是否请求单播应答</translation>
+    </message>
+    <message>
+        <source>Query Class</source>
+        <translation>此次查询请求的记录类别</translation>
+    </message>
+    <message>
+        <source>Query Label Count</source>
+        <translation>查询名称中的标签数量</translation>
+    </message>
+    <message>
+        <source>Query Name</source>
+        <translation>此次查询的域名</translation>
+    </message>
+    <message>
+        <source>Query Name Len</source>
+        <translation>查询名称的长度</translation>
+    </message>
+    <message>
+        <source>Query Type</source>
+        <translation>此次查询请求的记录类型</translation>
+    </message>
+    <message>
+        <source>Random values used for deriving keys</source>
+        <translation>用于派生密钥的随机值</translation>
+    </message>
+    <message>
+        <source>Reassembling error due to illegal segments</source>
+        <translation>存在无效数据段，导致重组失败</translation>
+    </message>
+    <message>
+        <source>Record layer version</source>
+        <translation>TLS 记录层版本</translation>
+    </message>
+    <message>
+        <source>Relative packet number in this TCP stream</source>
+        <translation>此 TCP 流内的数据包相对编号</translation>
+    </message>
+    <message>
+        <source>Relative packet number in this UDP stream</source>
+        <translation>此 UDP 流内的数据包相对编号</translation>
+    </message>
+    <message>
+        <source>Remaining low-order bits</source>
+        <translation>其余低位</translation>
+    </message>
+    <message>
+        <source>Reserved bit (must be zero; RFC 791)</source>
+        <translation>保留位，按 RFC 791 必须为 0</translation>
+    </message>
+    <message>
+        <source>Reserved bits (protected using header protection)</source>
+        <translation>使用首部保护（Header Protection）保护的保留位</translation>
+    </message>
+    <message>
+        <source>Response Class</source>
+        <translation>响应记录的类别</translation>
+    </message>
+    <message>
+        <source>Response Length</source>
+        <translation>响应记录数据的长度</translation>
+    </message>
+    <message>
+        <source>Response Name</source>
+        <translation>响应记录的名称</translation>
+    </message>
+    <message>
+        <source>Response TTL</source>
+        <translation>响应记录在缓存中可保留的时长（TTL）</translation>
+    </message>
+    <message>
+        <source>Response Type</source>
+        <translation>响应记录的类型</translation>
+    </message>
+    <message>
+        <source>Result code of A-RR update</source>
+        <translation>A-RR 更新的结果代码</translation>
+    </message>
+    <message>
+        <source>Result code of PTR-RR update</source>
+        <translation>PTR-RR 更新的结果代码</translation>
+    </message>
+    <message>
+        <source>Retransmission flag</source>
+        <translation>指示该帧是否为重传帧</translation>
+    </message>
+    <message>
+        <source>RF noise power at the antenna expressed as decibels from one milliwatt</source>
+        <translation>天线处的射频噪声功率，以 dBm 为单位</translation>
+    </message>
+    <message>
+        <source>RF signal power at the antenna expressed as decibels from one milliwatt</source>
+        <translation>天线处的射频信号功率，以 dBm 为单位</translation>
+    </message>
+    <message>
+        <source>Router Alert Option</source>
+        <translation>Router Alert 路由器警告选项</translation>
+    </message>
+    <message>
+        <source>SATNET stream identifier</source>
+        <translation>SATNET 流标识符</translation>
+    </message>
+    <message>
+        <source>Security flag (RFC 3514)</source>
+        <translation>RFC 3514 定义的 Security flag</translation>
+    </message>
+    <message>
+        <source>Segment contained data past end of the pdu</source>
+        <translation>此段的数据超出了 PDU 末尾</translation>
+    </message>
+    <message>
+        <source>Segment overlaps with other segments</source>
+        <translation>此段与其他段重叠</translation>
+    </message>
+    <message>
+        <source>Selects the packet protection keys to use (protected using header protection)</source>
+        <translation>选择用于包保护的密钥（受 Header Protection 保护）</translation>
+    </message>
+    <message>
+        <source>Sent/Received during CFP</source>
+        <translation>指示帧是否在 CFP 期间发送或接收</translation>
+    </message>
+    <message>
+        <source>Sent/Received with fragmentation</source>
+        <translation>指示帧是否以分片形式发送或接收</translation>
+    </message>
+    <message>
+        <source>Sent/Received with short preamble</source>
+        <translation>指示帧是否使用短前导码发送或接收</translation>
+    </message>
+    <message>
+        <source>Sent/Received with WEP encryption</source>
+        <translation>指示帧是否使用 WEP 加密发送或接收</translation>
+    </message>
+    <message>
+        <source>Sequence Number (big endian representation)</source>
+        <translation>序列号（大端字节序）</translation>
+    </message>
+    <message>
+        <source>Sequence Number (little endian representation)</source>
+        <translation>序列号（小端字节序）</translation>
+    </message>
+    <message>
+        <source>Several tails were found when defragmenting the packet</source>
+        <translation>重组数据包时发现多个末尾分片</translation>
+    </message>
+    <message>
+        <source>Several tails were found when reassembling the pdu</source>
+        <translation>重组 PDU 时发现多个末尾段</translation>
+    </message>
+    <message>
+        <source>SHA-256 hash of log's public key</source>
+        <translation>日志公钥的 SHA-256 哈希值</translation>
+    </message>
+    <message>
+        <source>Short name of the process, typically that of its executable</source>
+        <translation>进程简称，通常为可执行文件名</translation>
+    </message>
+    <message>
+        <source>Should always be 0</source>
+        <translation>应始终为 0</translation>
+    </message>
+    <message>
+        <source>Size of the QUIC packet</source>
+        <translation>QUIC 数据包的大小</translation>
+    </message>
+    <message>
+        <source>Source Address Multicast Flags</source>
+        <translation>源地址的组播标志位</translation>
+    </message>
+    <message>
+        <source>Source Address Multicast Scope</source>
+        <translation>源地址的组播范围</translation>
+    </message>
+    <message>
+        <source>Source Address Network Prefix Multicast Flag</source>
+        <translation>指示源组播地址是否基于网络前缀（Network Prefix）</translation>
+    </message>
+    <message>
+        <source>Source Address Rendezvous Point (RP) Multicast Flag</source>
+        <translation>指示源组播地址是否内嵌 Rendezvous Point（RP）</translation>
+    </message>
+    <message>
+        <source>Source Address Reserved Multicast Flag</source>
+        <translation>源地址的保留组播标志位</translation>
+    </message>
+    <message>
+        <source>Source Address Special-Purpose Allocation</source>
+        <translation>源地址所属的特殊用途地址分配</translation>
+    </message>
+    <message>
+        <source>Source Address Transient Multicast Flag</source>
+        <translation>指示源地址是否为临时组播地址（Transient）</translation>
+    </message>
+    <message>
+        <source>Source Hardware Address</source>
+        <translation>源硬件地址</translation>
+    </message>
+    <message>
+        <source>Source Hardware Address (resolved)</source>
+        <translation>源硬件地址（已解析）</translation>
+    </message>
+    <message>
+        <source>Source IPv6 Address</source>
+        <translation>源 IPv6 地址</translation>
+    </message>
+    <message>
+        <source>Source IPv6 Address Space</source>
+        <translation>源 IPv6 地址所属的地址空间</translation>
+    </message>
+    <message>
+        <source>Source IPv6 Host</source>
+        <translation>源 IPv6 主机名</translation>
+    </message>
+    <message>
+        <source>Source or Destination Address Multicast Flags</source>
+        <translation>源或目的地址的组播标志位</translation>
+    </message>
+    <message>
+        <source>Source or Destination Address Multicast Scope</source>
+        <translation>源或目的地址的组播范围</translation>
+    </message>
+    <message>
+        <source>Source or Destination Address Network Prefix Multicast Flag</source>
+        <translation>指示源或目的组播地址是否基于网络前缀（Network Prefix）</translation>
+    </message>
+    <message>
+        <source>Source or Destination Address Rendezvous Point (RP) Multicast Flag</source>
+        <translation>指示源或目的组播地址是否内嵌 Rendezvous Point（RP）</translation>
+    </message>
+    <message>
+        <source>Source or Destination Address Reserved Multicast Flag</source>
+        <translation>源或目的地址的保留组播标志位</translation>
+    </message>
+    <message>
+        <source>Source or Destination Address Space</source>
+        <translation>源或目的地址所属的地址空间</translation>
+    </message>
+    <message>
+        <source>Source or Destination Address Special-Purpose Allocation</source>
+        <translation>源或目的地址所属的特殊用途地址分配</translation>
+    </message>
+    <message>
+        <source>Source or Destination Address Transient Multicast Flag</source>
+        <translation>指示源或目的地址是否为临时组播地址（Transient）</translation>
+    </message>
+    <message>
+        <source>Source or Destination Hardware Address</source>
+        <translation>源或目的硬件地址</translation>
+    </message>
+    <message>
+        <source>Source or Destination Hardware Address (resolved)</source>
+        <translation>源或目的硬件地址（已解析）</translation>
+    </message>
+    <message>
+        <source>Source Organizationally Unique Identifier</source>
+        <translation>源地址的组织唯一标识符（OUI）</translation>
+    </message>
+    <message>
+        <source>Source Organizationally Unique Identifier (resolved)</source>
+        <translation>源地址的组织唯一标识符（OUI，已解析）</translation>
+    </message>
+    <message>
+        <source>Source process command name</source>
+        <translation>源进程的命令名</translation>
+    </message>
+    <message>
+        <source>Specifies if this is a locally administered or globally unique (IEEE assigned) address</source>
+        <translation>指示该地址是本地管理地址，还是由 IEEE 分配的全局唯一地址</translation>
+    </message>
+    <message>
+        <source>Specifies if this is an individual (unicast) or group (broadcast/multicast) address</source>
+        <translation>指示该地址是单播地址，还是组地址（广播或组播）</translation>
+    </message>
+    <message>
+        <source>Square Signal Bit (used to measure and locate the source of packet loss)</source>
+        <translation>Square Signal Bit，用于测量丢包并定位其来源</translation>
+    </message>
+    <message>
+        <source>SSLv2 handshake message type</source>
+        <translation>SSLv2 握手消息类型</translation>
+    </message>
+    <message>
+        <source>Static/dynamic bandwidth negotiation</source>
+        <translation>指示使用静态还是动态带宽协商</translation>
+    </message>
+    <message>
+        <source>The completeness of the conversation capture</source>
+        <translation>捕获中此 TCP 会话的完整程度</translation>
+    </message>
+    <message>
+        <source>The default value that should be placed in the Hop Count field of the IP header for outgoing IP packets</source>
+        <translation>发出 IP 数据包时 IP 首部跳数限制字段使用的默认值</translation>
+    </message>
+    <message>
+        <source>The description for this interface</source>
+        <translation>捕获接口的说明</translation>
+    </message>
+    <message>
+        <source>The expected IP checksum field as calculated from the IP datagram</source>
+        <translation>根据 IP 数据报计算的预期校验和</translation>
+    </message>
+    <message>
+        <source>The expected TCP checksum field as calculated from the TCP segment</source>
+        <translation>根据 TCP 段计算的预期校验和</translation>
+    </message>
+    <message>
+        <source>The expected UDP checksum field as calculated from the UDP packet</source>
+        <translation>根据 UDP 数据包计算的预期校验和</translation>
+    </message>
+    <message>
+        <source>The frame matched the coloring rule with this name</source>
+        <translation>此帧匹配的着色规则名称</translation>
+    </message>
+    <message>
+        <source>The frame matched this coloring rule string</source>
+        <translation>此帧匹配的着色规则表达式</translation>
+    </message>
+    <message>
+        <source>The frame number of the corresponding request</source>
+        <translation>对应请求的帧编号</translation>
+    </message>
+    <message>
+        <source>The frame number of the corresponding response</source>
+        <translation>对应响应的帧编号</translation>
+    </message>
+    <message>
+        <source>The friendly name for this interface</source>
+        <translation>捕获接口的显示名称</translation>
+    </message>
+    <message>
+        <source>The full requested URI (including host name)</source>
+        <translation>完整的请求 URI，包含主机名</translation>
+    </message>
+    <message>
+        <source>The handshake message is fully reassembled in this frame</source>
+        <translation>握手消息在所指帧中完成重组</translation>
+    </message>
+    <message>
+        <source>The length of the original datagram</source>
+        <translation>原始数据报的长度</translation>
+    </message>
+    <message>
+        <source>The length of the original datagram (length * 4)</source>
+        <translation>原始数据报的字节数（长度字段值乘以 4）</translation>
+    </message>
+    <message>
+        <source>The lifetime associated with the default router</source>
+        <translation>此路由器用作默认路由器的有效期</translation>
+    </message>
+    <message>
+        <source>The Maximum Transmission Unit of the next-hop link</source>
+        <translation>下一跳链路的最大传输单元（MTU）</translation>
+    </message>
+    <message>
+        <source>The most significant bit (0x80) of the first octet is set to 1 for long headers and 0 for short headers.</source>
+        <translation>首字节的最高位（0x80），长首部为 1，短首部为 0</translation>
+    </message>
+    <message>
+        <source>The number of the file section this frame is in</source>
+        <translation>此帧所在的文件段编号</translation>
+    </message>
+    <message>
+        <source>The payload of a single TLS segment</source>
+        <translation>单个 TLS 段的有效载荷</translation>
+    </message>
+    <message>
+        <source>The payload of multiple reassembled TLS segments</source>
+        <translation>多个已重组的 TLS 段的有效载荷</translation>
+    </message>
+    <message>
+        <source>The PDU that doesn't end in this segment is reassembled in this frame</source>
+        <translation>未在此段中结束的 PDU 在所指帧中完成重组</translation>
+    </message>
+    <message>
+        <source>The reassembled payload</source>
+        <translation>重组后的有效载荷</translation>
+    </message>
+    <message>
+        <source>The response to this DNS query is in this frame</source>
+        <translation>此 DNS 查询的响应出现在所指帧中</translation>
+    </message>
+    <message>
+        <source>The scaled window size (if scaling has been used)</source>
+        <translation>窗口大小（使用缩放时为换算后的值）</translation>
+    </message>
+    <message>
+        <source>The size of this PDU</source>
+        <translation>此 PDU 的大小</translation>
+    </message>
+    <message>
+        <source>The time between retransmitted Neighbor Solicitation messages</source>
+        <translation>重传 Neighbor Solicitation 消息之间的时间间隔</translation>
+    </message>
+    <message>
+        <source>The time between the Query and the Response</source>
+        <translation>从发送查询到收到响应的时间</translation>
+    </message>
+    <message>
+        <source>The time between the request and the response, in ms.</source>
+        <translation>请求与响应之间的时间差，以毫秒为单位</translation>
+    </message>
+    <message>
+        <source>The time that a node assumes a neighbor is reachable after having received a reachability confirmation</source>
+        <translation>收到可达性确认后，认为该邻居仍可达的时长</translation>
+    </message>
+    <message>
+        <source>The total length of the reassembled payload</source>
+        <translation>重组后的有效载荷总长度</translation>
+    </message>
+    <message>
+        <source>The window size scaling factor (-1 when unknown, -2 when no scaling is used)</source>
+        <translation>窗口缩放系数，未知时为 -1，未使用缩放时为 -2</translation>
+    </message>
+    <message>
+        <source>The window size value from the TCP header</source>
+        <translation>TCP 首部中的窗口大小原始值</translation>
+    </message>
+    <message>
+        <source>This frame has some of the TCP analysis flags set</source>
+        <translation>此帧设置了部分 TCP 分析标志位</translation>
+    </message>
+    <message>
+        <source>This frame has some of the TCP analysis shown</source>
+        <translation>此帧包含 TCP 分析结果</translation>
+    </message>
+    <message>
+        <source>This frame is a suspected wireless retransmission</source>
+        <translation>此帧疑似为无线重传帧</translation>
+    </message>
+    <message>
+        <source>This frame is a Time Reference frame</source>
+        <translation>此帧用作时间参考</translation>
+    </message>
+    <message>
+        <source>This IPv4 packet is reassembled in this frame</source>
+        <translation>此 IPv4 数据包在所指帧中完成重组</translation>
+    </message>
+    <message>
+        <source>This IPv6 packet is reassembled in this frame</source>
+        <translation>此 IPv6 数据包在所指帧中完成重组</translation>
+    </message>
+    <message>
+        <source>This is a continuation to the PDU in frame #</source>
+        <translation>这是所指帧内 PDU 的后续数据</translation>
+    </message>
+    <message>
+        <source>This is a duplicate ACK</source>
+        <translation>这是一个重复的 ACK</translation>
+    </message>
+    <message>
+        <source>This is a duplicate to the ACK in frame #</source>
+        <translation>此 ACK 与所指帧中的 ACK 重复</translation>
+    </message>
+    <message>
+        <source>This is a response to the DNS query in this frame</source>
+        <translation>这是对所指帧中 DNS 查询的响应</translation>
+    </message>
+    <message>
+        <source>This is a retransmission of frame #</source>
+        <translation>此帧是所指帧的重传</translation>
+    </message>
+    <message>
+        <source>This is duplicate ACK number #</source>
+        <translation>这是第几个重复的 ACK</translation>
+    </message>
+    <message>
+        <source>This is the frame we measure the RTO from</source>
+        <translation>用于测量 RTO 的起始帧</translation>
+    </message>
+    <message>
+        <source>This is the last frame of the PDU starting in this segment</source>
+        <translation>从此段开始的 PDU 的最后一帧</translation>
+    </message>
+    <message>
+        <source>This packet is a response to the packet with this number</source>
+        <translation>此包是对所指数据包的响应</translation>
+    </message>
+    <message>
+        <source>This packet will be responded in the packet with this number</source>
+        <translation>此包的响应在所指数据包中</translation>
+    </message>
+    <message>
+        <source>This shows the raw value of the acknowledgment number</source>
+        <translation>TCP 首部中的原始确认号</translation>
+    </message>
+    <message>
+        <source>This shows the raw value of the sequence number</source>
+        <translation>TCP 首部中的原始序列号</translation>
+    </message>
+    <message>
+        <source>This TCP option's kind</source>
+        <translation>此 TCP 选项的类型</translation>
+    </message>
+    <message>
+        <source>Three reserved bits (must be zero)</source>
+        <translation>三个保留位，必须为 0</translation>
+    </message>
+    <message>
+        <source>Time at which the process started</source>
+        <translation>进程开始运行的时间</translation>
+    </message>
+    <message>
+        <source>Time delta from previous frame in this TCP stream</source>
+        <translation>与此 TCP 流上一帧的时间差</translation>
+    </message>
+    <message>
+        <source>Time delta from previous frame in this UDP stream</source>
+        <translation>与此 UDP 流上一帧的时间差</translation>
+    </message>
+    <message>
+        <source>Time relative to first frame in this TCP stream</source>
+        <translation>相对于此 TCP 流第一帧的时间</translation>
+    </message>
+    <message>
+        <source>Time relative to first frame in this UDP stream</source>
+        <translation>相对于此 UDP 流第一帧的时间</translation>
+    </message>
+    <message>
+        <source>Time relative to the capture start</source>
+        <translation>从捕获开始经过的时间</translation>
+    </message>
+    <message>
+        <source>Time relative to time reference or first frame</source>
+        <translation>相对于时间参考帧或首帧的时间</translation>
+    </message>
+    <message>
+        <source>Time shift applied to this packet</source>
+        <translation>应用于此数据包的时间偏移</translation>
+    </message>
+    <message>
+        <source>Time since the request was sent</source>
+        <translation>从发出请求起经过的时间</translation>
+    </message>
+    <message>
+        <source>To DS flag</source>
+        <translation>指示该帧是否发往 DS（To DS）</translation>
+    </message>
+    <message>
+        <source>true if HTTP notification</source>
+        <translation>此消息为 HTTP 通知时为真</translation>
+    </message>
+    <message>
+        <source>true if HTTP request</source>
+        <translation>此消息为 HTTP 请求时为真</translation>
+    </message>
+    <message>
+        <source>true if HTTP response</source>
+        <translation>此消息为 HTTP 响应时为真</translation>
+    </message>
+    <message>
+        <source>Type of handshake message</source>
+        <translation>握手消息的类型</translation>
+    </message>
+    <message>
+        <source>Unused, must be zero</source>
+        <translation>未使用，必须为 0</translation>
+    </message>
+    <message>
+        <source>Used to detect data corruption in the ICMPv6 message and parts of the IPv6 header</source>
+        <translation>用于检测 ICMPv6 消息及 IPv6 首部部分字段是否损坏</translation>
+    </message>
+    <message>
+        <source>UUID of the executable image of the process</source>
+        <translation>进程可执行文件的 UUID</translation>
+    </message>
+    <message>
+        <source>Value of sending machine's timestamp clock</source>
+        <translation>发送方时间戳时钟的值</translation>
+    </message>
+    <message>
+        <source>VLAN ID</source>
+        <translation>VLAN 标识符（VLAN ID）</translation>
+    </message>
+    <message>
+        <source>VLAN ID Name</source>
+        <translation>VLAN ID 对应的名称</translation>
+    </message>
+    <message>
+        <source>VLAN Trailer</source>
+        <translation>VLAN 封装的尾部数据</translation>
+    </message>
+    <message>
+        <source>Was the reply data authenticated by the server?</source>
+        <translation>指示服务器是否已验证响应数据的真实性</translation>
+    </message>
+    <message>
+        <source>When set, it indicate that the router sending this Router Advertisement is also functioning as a Mobile IPv6 home agent on this link</source>
+        <translation>置位表示发送此 Router Advertisement 的路由器也是本链路的 Mobile IPv6 Home Agent</translation>
+    </message>
+    <message>
+        <source>When set, it indicates that addresses are available via DHCPv6</source>
+        <translation>置位表示可以通过 DHCPv6 获取地址</translation>
+    </message>
+    <message>
+        <source>When set, it indicates that other configuration information is available via DHCPv6</source>
+        <translation>置位表示可以通过 DHCPv6 获取其他配置信息</translation>
+    </message>
+    <message>
+        <source>When set, it indicates that the advertisement should override an existing cache entry and update the cached link-layer address</source>
+        <translation>置位表示此通告应覆盖已有的缓存条目，并更新缓存中的链路层地址</translation>
+    </message>
+    <message>
+        <source>When set, it indicates that the advertisement was sent in response to a Neighbor Solicitation from the Destination address</source>
+        <translation>置位表示此通告是对来自目的地址的 Neighbor Solicitation 的响应</translation>
+    </message>
+    <message>
+        <source>When set, it indicates that the sender is a router</source>
+        <translation>置位表示发送方是路由器</translation>
+    </message>
+    <message>
+        <source>Whether a router may forward an IP datagram whose destination address is drawn from the allocated special-purpose address block</source>
+        <translation>指示路由器能否转发目的地址属于该特殊用途地址块的 IP 数据报</translation>
+    </message>
+    <message>
+        <source>Whether an address from the allocated special-purpose address block is valid when used as the destination address of an IP datagram</source>
+        <translation>指示该特殊用途地址块内的地址能否用作 IP 数据报的目的地址</translation>
+    </message>
+    <message>
+        <source>Whether an address from the allocated special-purpose address block is valid when used as the source address of an IP datagram</source>
+        <translation>指示该特殊用途地址块内的地址能否用作 IP 数据报的源地址</translation>
+    </message>
+    <message>
+        <source>Whether an IP datagram whose destination address is drawn from the allocated special-purpose address block is forwardable beyond a specified administrative domain</source>
+        <translation>指示目的地址属于该特殊用途地址块的 IP 数据报能否转发到指定管理域以外</translation>
+    </message>
+    <message>
+        <source>Whether the custom block will be written or not</source>
+        <translation>指示是否写入自定义块</translation>
+    </message>
+    <message>
+        <source>Whether the custom option will be written or not</source>
+        <translation>指示是否写入自定义选项</translation>
+    </message>
+    <message>
+        <source>Whether the option data may change en-route</source>
+        <translation>指示选项数据是否可能在传输途中变化</translation>
+    </message>
+    <message>
+        <source>Whether the special-purpose address block is reserved by IP itself</source>
+        <translation>指示该特殊用途地址块是否由 IP 协议本身保留</translation>
+    </message>
+    <message>
+        <source>Which previous segment is this an ACK for</source>
+        <translation>此 ACK 所确认的较早 TCP 段</translation>
+    </message>
+    <message>
+        <source>Z flag</source>
+        <translation>Z 标志位</translation>
+    </message>
+</context>
+<context>
     <name>PacketFormatBlankGroupBox</name>
     <message>
         <source>The selected format has no options</source>
